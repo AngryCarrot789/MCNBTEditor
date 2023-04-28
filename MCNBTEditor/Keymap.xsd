@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="KeyMap" type="KeyMapType"/>
+    <xs:complexType name="KeyStrokeType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="Key"/>
+                <xs:attribute type="xs:string" name="KeyCode"/>
+                <xs:attribute type="xs:string" name="Mods"/>
+                <xs:attribute type="xs:string" name="IsRelease"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="MouseStrokeType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="Mods"/>
+                <xs:attribute type="xs:string" name="Button"/>
+                <xs:attribute type="xs:int" name="ClickCount"/>
+                <xs:attribute type="xs:int" name="WheelDelta"/>
+                <xs:attribute type="xs:int" name="CustomParam"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="ShortcutType">
+        <xs:sequence>
+            <xs:element type="Shortcut.ContextType" name="Shortcut.Context" minOccurs="0"/>
+            <xs:element type="KeyStrokeType" name="KeyStroke" minOccurs="0"/>
+            <xs:element type="MouseStrokeType" name="MouseStroke" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute type="xs:string" name="Name"/>
+        <xs:attribute type="xs:string" name="ActionId"/>
+        <xs:attribute type="xs:string" name="Global"/>
+        <xs:attribute type="xs:string" name="Inherit"/>
+        <xs:attribute type="xs:string" name="Description"/>
+        <xs:attribute type="xs:string" name="DisplayName"/>
+    </xs:complexType>
+    <xs:complexType name="GroupType">
+        <xs:sequence>
+            <xs:element type="GroupType" name="Group" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element type="ShortcutType" name="Shortcut" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute type="xs:string" name="Name"/>
+        <xs:attribute type="xs:string" name="Global"/>
+        <xs:attribute type="xs:string" name="Inherit"/>
+        <xs:attribute type="xs:string" name="Description"/>
+        <xs:attribute type="xs:string" name="DisplayName"/>
+    </xs:complexType>
+    <xs:complexType name="Shortcut.ContextType">
+        <xs:sequence>
+            <xs:element type="FlagType" name="Flag"/>
+            <xs:element type="FlagsType" name="Flags"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FlagType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="Key"/>
+                <xs:attribute type="xs:string" name="Value"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="FlagsType">
+
+    </xs:complexType>
+    <xs:complexType name="KeyMapType">
+        <xs:sequence>
+            <xs:element type="GroupType" name="Group" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element type="ShortcutType" name="Shortcut" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

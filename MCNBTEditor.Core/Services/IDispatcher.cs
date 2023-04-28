@@ -1,0 +1,20 @@
+using System;
+using System.Threading.Tasks;
+
+namespace MCNBTEditor.Core.Services {
+    public interface IDispatcher {
+        bool IsOnOwnerThread { get; }
+
+        void Invoke(Action action);
+        void InvokeLater(Action action, bool background = false);
+
+        T Invoke<T>(Func<T> function);
+        T InvokeLater<T>(Func<T> function, bool background = false);
+
+        Task InvokeAsync(Action action);
+        Task InvokeLaterAsync(Action action, bool background = false);
+
+        Task<T> InvokeAsync<T>(Func<T> function);
+        Task<T> InvokeLaterAsync<T>(Func<T> function, bool background = false);
+    }
+}

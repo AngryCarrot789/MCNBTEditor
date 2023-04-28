@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ionic.Zlib.Core" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="REghZy.Streams">
+      <HintPath>..\..\REghZy\DLL\REghZy.Streams.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

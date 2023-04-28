@@ -1,0 +1,56 @@
+﻿<!DOCTYPE KeyMap SYSTEM "Keymap.xsd">
+<KeyMap>
+    <Group Name="Application">
+        <Group Name="Views">
+            <Shortcut Name="CloseWindowShortcut" ActionId="actions.views.windows.CloseViewAction" Inherit="true">
+                <KeyStroke Key="Escape"/>
+            </Shortcut>
+        </Group>
+        <Group Name="TabbedControl">
+            <Shortcut Name="CloseTabShortcut" ActionId="actions.tabs.CloseTabAction">
+                <MouseStroke Button="Middle"/>
+            </Shortcut>
+        </Group>
+        <Group Name="EditorView">
+            <Group Name="NBTTag">
+                <Shortcut Name="CopyNameShortcut" DisplayName="Copy Name" ActionId="actions.nbt.copy.name">
+                    <KeyStroke Mods="CTRL+SHIFT" Key="C"/>
+                </Shortcut>
+                <Shortcut Name="CopyValueShortcut" DisplayName="Copy Value" ActionId="actions.nbt.copy.primitive_value">
+                    <KeyStroke Mods="CTRL" Key="C"/>
+                </Shortcut>
+                <Shortcut Name="RenameShortcut1" DisplayName="Rename">
+                    <KeyStroke Mods="CTRL" Key="R"/>
+                </Shortcut>
+                <Shortcut Name="RenameShortcut2" DisplayName="Rename">
+                    <KeyStroke Key="F2"/>
+                </Shortcut>
+                <Shortcut Name="RemoveFromParent" DisplayName="Remove tag">
+                    <KeyStroke Key="Delete"/>
+                </Shortcut>
+                <Shortcut Name="Save" DisplayName="Save">
+                    <KeyStroke Mods="CTRL" Key="S"/>
+                </Shortcut>
+                <Shortcut Name="SaveAs" DisplayName="Save as...">
+                    <KeyStroke Mods="CTRL+SHIFT" Key="S"/>
+                </Shortcut>
+                <Shortcut Name="CopyFilePath" DisplayName="Copy file path">
+                    <KeyStroke Mods="CTRL+ALT+SHIFT" Key="C"/>
+                </Shortcut>
+                <Shortcut Name="OpenInExplorer" DisplayName="Show in Explorer">
+                    <KeyStroke Mods="CTRL+SHIFT" Key="O"/>
+                </Shortcut>
+            </Group>
+            <Shortcut Name="FindShortcut" DisplayName="Find..." ActionId="actions.nbt.find" Inherit="true">
+                <KeyStroke Mods="CTRL" Key="F"/>
+            </Shortcut>
+            <Shortcut Name="FindShortcutGlobal" DisplayName="Find..." ActionId="actions.nbt.find" Inherit="true">
+                <Shortcut.Context>
+                    <Flag Key="IsGlobalFind" Value="True"/>
+                    <Flags>ok no</Flags>
+                </Shortcut.Context>
+                <KeyStroke Mods="CTRL+SHIFT" Key="F"/>
+            </Shortcut>
+        </Group>
+    </Group>
+</KeyMap>

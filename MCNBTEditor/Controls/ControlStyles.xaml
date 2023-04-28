@@ -1,0 +1,172 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:MCNBTEditor.Controls"
+                    xmlns:ap="clr-namespace:MCNBTEditor.Controls.Helpers"
+                    xmlns:acs="clr-namespace:MCNBTEditor.AdvancedContextService"
+                    xmlns:nbt="clr-namespace:MCNBTEditor.Core.Explorer.NBT;assembly=MCNBTEditor.Core"
+                    xmlns:inlines="clr-namespace:MCNBTEditor.NBT.UI.Inlines"
+                    xmlns:ui="clr-namespace:MCNBTEditor.NBT.UI"
+                    xmlns:regions="clr-namespace:MCNBTEditor.Core.Explorer.Regions;assembly=MCNBTEditor.Core"
+                    xmlns:converters="clr-namespace:MCNBTEditor.Converters">
+    <Style TargetType="{x:Type Run}" x:Key="NBTTagNameRunStyle">
+        <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Static}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="{x:Type Run}" x:Key="NBTTagValueRunStyle">
+        <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Deeper}"/>
+    </Style>
+
+    <inlines:NBTCollectionInlineHeaderConverter x:Key="NBTCollectionInlinesNameConverter" TagNameRunStyle="{StaticResource NBTTagNameRunStyle}" TagDataRunStyle="{StaticResource NBTTagValueRunStyle}"/>
+    <inlines:NBTArrayInlineHeaderConverter      x:Key="NBTArrayInlinesNameConverter"      TagNameRunStyle="{StaticResource NBTTagNameRunStyle}" TagDataRunStyle="{StaticResource NBTTagValueRunStyle}"/>
+    <inlines:NBTPrimitiveInlineHeaderConverter  x:Key="NBTPrimitiveInlinesNameConverter"  TagNameRunStyle="{StaticResource NBTTagNameRunStyle}" TagDataRunStyle="{StaticResource NBTTagValueRunStyle}"/>
+    <converters:InvertBoolConverter x:Key="InvertBoolConverter"/>
+
+    <ui:TagIconConverter x:Key="TagIconConverter"
+                         TagByte="/MCNBTEditor;component/Resources/Icons/FileIcon-TagByte8.png"
+                         TagShort="/MCNBTEditor;component/Resources/Icons/FileIcon-TagShort16.png"
+                         TagInt="/MCNBTEditor;component/Resources/Icons/FileIcon-TagInt32.png"
+                         TagLong="/MCNBTEditor;component/Resources/Icons/FileIcon-TagLong64.png"
+                         TagFloat="/MCNBTEditor;component/Resources/Icons/FileIcon-TagFloat32.png"
+                         TagDouble="/MCNBTEditor;component/Resources/Icons/FileIcon-TagDouble64.png"
+                         TagString="/MCNBTEditor;component/Resources/Icons/FileIcon-TagString.png"
+                         TagList="/MCNBTEditor;component/Resources/Icons/icons8-bulleted-list-48.png"
+                         TagCompoundClosed="/MCNBTEditor;component/Resources/Icons/icons8-closed-box-48.png"
+                         TagCompoundOpenEmpty="/MCNBTEditor;component/Resources/Icons/icons8-empty-box-48.png"
+                         TagCompoundOpenFull="/MCNBTEditor;component/Resources/Icons/icons8-open-box-48.png"/>
+
+    <Style TargetType="{x:Type controls:IconTextPair}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:IconTextPair}">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}">
+                        <ContentPresenter Width="{TemplateBinding IconWidth}" Height="{TemplateBinding IconHeight}" Content="{TemplateBinding Icon}" HorizontalAlignment="Left"/>
+                        <TextBlock Text="{TemplateBinding Text}" Margin="4 0 0 0" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <HierarchicalDataTemplate x:Key="TreeTagCompoundTemplate" DataType="{x:Type nbt:TagCompoundViewModel}" ItemsSource="{Binding Children}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image x:Name="Img" Width="16" Height="16"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Children.Count"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+        <HierarchicalDataTemplate.Triggers>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsEmpty}" Value="True"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsExpanded}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="Img" Property="Source" Value="/MCNBTEditor;component/Resources/Icons/icons8-empty-box-48.png"/>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsEmpty}" Value="False"/>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsExpanded}" Value="True"/>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="Img" Property="Source" Value="/MCNBTEditor;component/Resources/Icons/icons8-open-box-48.png"/>
+            </MultiDataTrigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type TreeViewItem}}, Path=IsExpanded}" Value="False">
+                <Setter TargetName="Img" Property="Source" Value="/MCNBTEditor;component/Resources/Icons/icons8-closed-box-48.png"/>
+            </DataTrigger>
+        </HierarchicalDataTemplate.Triggers>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate x:Key="TreeRegionFileTemplate" DataType="{x:Type regions:RegionFileViewModel}" ItemsSource="{Binding Children}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}" IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
+            <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/FileIcon-Region.png"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Children.Count"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate x:Key="TreeTagListTemplate" DataType="{x:Type nbt:TagListViewModel}" ItemsSource="{Binding Children}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/icons8-bulleted-list-48.png"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Children.Count"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate x:Key="TreeTagArrayTemplate" DataType="{x:Type nbt:BaseTagArrayViewModel}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTArrayInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Data"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate x:Key="TreeTagPrimitive" DataType="{x:Type nbt:TagPrimitiveViewModel}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTPrimitiveInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Data"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
+    <ui:ExtendedTreeItemTemplateSelector x:Key="ExtendedTreeItemSelector">
+        <ui:ExtendedTreeItemTemplateSelector.RegionFile>
+            <StaticResource ResourceKey="TreeRegionFileTemplate"/>
+        </ui:ExtendedTreeItemTemplateSelector.RegionFile>
+        <ui:ExtendedTreeItemTemplateSelector.TagCompound>
+            <StaticResource ResourceKey="TreeTagCompoundTemplate"/>
+        </ui:ExtendedTreeItemTemplateSelector.TagCompound>
+        <ui:ExtendedTreeItemTemplateSelector.TagList>
+            <StaticResource ResourceKey="TreeTagListTemplate"/>
+        </ui:ExtendedTreeItemTemplateSelector.TagList>
+        <ui:ExtendedTreeItemTemplateSelector.TagArray>
+            <StaticResource ResourceKey="TreeTagArrayTemplate"/>
+        </ui:ExtendedTreeItemTemplateSelector.TagArray>
+        <ui:ExtendedTreeItemTemplateSelector.TagPrimitive>
+            <StaticResource ResourceKey="TreeTagPrimitive"/>
+        </ui:ExtendedTreeItemTemplateSelector.TagPrimitive>
+    </ui:ExtendedTreeItemTemplateSelector>
+
+    <ui:ExtendedListItemTemplateSelector x:Key="NBTListItemSelector">
+        <ui:ExtendedListItemTemplateSelector.TagCompound>
+            <StaticResource ResourceKey="TreeTagCompoundTemplate"/>
+        </ui:ExtendedListItemTemplateSelector.TagCompound>
+        <ui:ExtendedListItemTemplateSelector.TagList>
+            <StaticResource ResourceKey="TreeTagListTemplate"/>
+        </ui:ExtendedListItemTemplateSelector.TagList>
+        <ui:ExtendedListItemTemplateSelector.TagArray>
+            <StaticResource ResourceKey="TreeTagArrayTemplate"/>
+        </ui:ExtendedListItemTemplateSelector.TagArray>
+        <ui:ExtendedListItemTemplateSelector.TagPrimitive>
+            <StaticResource ResourceKey="TreeTagPrimitive"/>
+        </ui:ExtendedListItemTemplateSelector.TagPrimitive>
+    </ui:ExtendedListItemTemplateSelector>
+</ResourceDictionary>

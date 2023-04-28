@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCNBTEditor", "MCNBTEditor\MCNBTEditor.csproj", "{74668146-4188-4112-9652-BF0D651E826C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCNBTEditor.Core", "MCNBTEditor.Core\MCNBTEditor.Core.csproj", "{122D752D-1D97-4AB0-AFA2-6165B2058640}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74668146-4188-4112-9652-BF0D651E826C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74668146-4188-4112-9652-BF0D651E826C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74668146-4188-4112-9652-BF0D651E826C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74668146-4188-4112-9652-BF0D651E826C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{122D752D-1D97-4AB0-AFA2-6165B2058640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122D752D-1D97-4AB0-AFA2-6165B2058640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122D752D-1D97-4AB0-AFA2-6165B2058640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122D752D-1D97-4AB0-AFA2-6165B2058640}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB16DE9E-EEAB-4E2B-917C-3E936712AEDE}
+	EndGlobalSection
+EndGlobal
