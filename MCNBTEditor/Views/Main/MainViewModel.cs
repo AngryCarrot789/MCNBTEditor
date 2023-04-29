@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,6 +20,7 @@ namespace MCNBTEditor.Views.Main {
 
         private BaseTreeItemViewModel currentFolderItem;
         private BaseTreeItemViewModel seletedTreeItem;
+        private BaseTreeItemViewModel primaryListSelectedItem;
 
         /// <summary>
         /// The current item being used for the folder preview
@@ -36,6 +39,11 @@ namespace MCNBTEditor.Views.Main {
         }
 
         public IEnumerable<BaseTreeItemViewModel> SelectedFolderItems => this.ListView.SelectedItems;
+
+        public BaseTreeItemViewModel PrimaryListSelectedItem {
+            get => this.primaryListSelectedItem;
+            set => this.RaisePropertyChanged(ref this.primaryListSelectedItem, value);
+        }
 
         public bool SortTagCompoundByDefault {
             get => IoC.SortTagCompoundByDefault;
@@ -63,12 +71,52 @@ namespace MCNBTEditor.Views.Main {
         public IExtendedTree TreeView { get; }
         public IExtendedList ListView { get; }
 
+        public AsyncRelayCommand<BaseTreeItemViewModel> UseItemCommand { get; }
+
         public MainViewModel(IExtendedTree tree, IExtendedList list) {
             this.TreeView = tree;
             this.ListView = list;
+            tree.SelectionChanged += this.TreeOnSelectionChanged;
+            list.SelectionChanged += this.ListOnSelectionChanged;
             this.Root = new RootTreeItemViewModel();
             this.CreateDatFileCommand = new RelayCommand(() => this.Root.AddItem(new TagDataFileViewModel("New Dat File.dat")));
             this.OpenFileCommand = new AsyncRelayCommand(this.OpenFileAction);
+            this.UseItemCommand = new AsyncRelayCommand<BaseTreeItemViewModel>(this.UseItemAction);
+        }
+
+        public async Task UseItemAction(BaseTreeItemViewModel item) {
+            if ((this.SelectedTreeItem == item || this.PrimaryListSelectedItem == item)) {
+                if (item.CanHoldChildren) {
+                    this.TreeView.ExpandHierarchyFromRoot(item.GetParentChain(false), true);
+                    this.CurrentFolderItem = item;
+                }
+                else {
+                    // edit
+                }
+            }
+
+            if (item.CanHoldChildren && item.Children.Count > 0) {
+                await this.TreeView.RepeatExpandHierarchyFromRootAsync(item.GetParentChain(false));
+            }
+            else {
+                // edit
+            }
+        }
+
+        private void TreeOnSelectionChanged(BaseTreeItemViewModel oldItem, BaseTreeItemViewModel newItem) {
+            this.SelectedTreeItem = newItem;
+            if (newItem.CanHoldChildren) {
+                this.CurrentFolderItem = newItem;
+                this.PrimaryListSelectedItem = newItem.GetFirstChild<BaseTreeItemViewModel>();
+            }
+            else {
+                this.CurrentFolderItem = newItem.ParentItem ?? this.Root;
+                this.PrimaryListSelectedItem = newItem;
+            }
+        }
+
+        private void ListOnSelectionChanged(IEnumerable<BaseTreeItemViewModel> oldItems, IEnumerable<BaseTreeItemViewModel> newItems) {
+
         }
 
         public async Task OpenFileAction() {
@@ -100,89 +148,98 @@ namespace MCNBTEditor.Views.Main {
             bool isLoadingMultiple = endIndex > 0;
             List<BaseTreeItemViewModel> added = new List<BaseTreeItemViewModel>();
             using (MessageDialogs.ItemAlreadyExistsDialog.Use()) {
-                MessageDialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = isLoadingMultiple;
-                if (!isLoadingMultiple) {
-                    MessageDialogs.ItemAlreadyExistsDialog.RemoveButtonAt(3);
-                }
-
-                for (int i = 0; i <= endIndex; i++) {
-                    string path = paths[i];
-                    if (checkAlreadyAdded) {
-                        BaseTreeItemViewModel found = this.Root.FindChild(x => x is IHaveFilePath j && j.FilePath == path);
-                        if (found != null) {
-                            string result = await MessageDialogs.ItemAlreadyExistsDialog.ShowAsync("Item already added", path + " was already added. Do you want to replace it with the new file?");
-                            if (result == null) {
-                                foreach (BaseTreeItemViewModel item in added) {
-                                    if (item is IDisposable disposable) {
-                                        try {
-                                            disposable.Dispose();
-                                        }
-                                        catch { /* ignored */ }
-                                    }
-
-                                    this.Root.RemoveItem(item);
-                                }
-
-                                return;
-                            }
-                            else if (result == "replace") {
-                                this.Root.RemoveItem(found);
-                            }
-                            else if (result == "ignore") {
-                                continue;
-                            }
-                        }
+                using (MessageDialogs.UnknownFileFormatDialog.Use()) {
+                    if (isLoadingMultiple) {
+                        MessageDialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = true;
+                        MessageDialogs.UnknownFileFormatDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = true;
+                    }
+                    else {
+                        MessageDialogs.ItemAlreadyExistsDialog.RemoveButtonById("cancel");
+                        MessageDialogs.UnknownFileFormatDialog.RemoveButtonById("ignore");
+                        MessageDialogs.UnknownFileFormatDialog.RemoveButtonById("cancel");
+                        MessageDialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = false;
+                        MessageDialogs.UnknownFileFormatDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = false;
                     }
 
-                    string extension = Path.GetExtension(path);
-                    switch (extension) {
-                        case ".mca": {
-                            RegionFileViewModel vm = new RegionFileViewModel() {
-                                FilePath = path,
-                                IsBigEndian = this.IsBigEndianDefault
-                            };
+                    for (int i = 0; i <= endIndex; i++) {
+                        string path = paths[i];
+                        if (checkAlreadyAdded) {
+                            BaseTreeItemViewModel found = this.Root.FindChild(x => x is IHaveFilePath j && j.FilePath == path);
+                            if (found != null) {
+                                string result = await MessageDialogs.ItemAlreadyExistsDialog.ShowAsync("Item already added", path + " was already added. Do you want to replace it with the new file?");
+                                if (result != null && result != "cancel") {
+                                    if (result == "replace") {
+                                        this.Root.RemoveItem(found);
+                                    }
+                                    else if (result == "ignore") {
+                                        continue;
+                                    }
+                                }
+                                else {
+                                    foreach (BaseTreeItemViewModel item in added) {
+                                        if (item is IDisposable disposable) {
+                                            try {
+                                                disposable.Dispose();
+                                            }
+                                            catch { /* ignored */ }
+                                        }
 
-                            added.Add(vm);
-                            this.Root.AddItem(vm); // add before loading to see the entry counter + the IsLoading property working ;)
-                            try {
-                                await vm.RefreshAction();
+                                        this.Root.RemoveItem(item);
+                                    }
+
+                                    return;
+                                }
                             }
-                            catch (Exception e) {
-                                this.Root.RemoveItem(vm);
+                        }
+
+                        string extension = Path.GetExtension(path);
+                        switch (extension) {
+                            case ".mca": {
+                                RegionFileViewModel vm = new RegionFileViewModel() {
+                                    FilePath = path,
+                                    IsBigEndian = this.IsBigEndianDefault
+                                };
+
+                                added.Add(vm);
+                                this.Root.AddItem(vm); // add before loading to see the entry counter + the IsLoading property working ;)
                                 try {
-                                    vm.Dispose();
+                                    await vm.RefreshAction();
                                 }
-                                catch {
-                                    /* ignored */
+                                catch (Exception e) {
+                                    this.Root.RemoveItem(vm);
+                                    try {
+                                        vm.Dispose();
+                                    }
+                                    catch { /* ignored */ }
+
+                                    await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
                                 }
 
-                                await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                                break;
                             }
+                            case ".dat": {
+                                TagDataFileViewModel file = new TagDataFileViewModel(Path.GetFileName(path)) {
+                                    IsCompressed = this.IsCompressedDefault,
+                                    IsBigEndian = this.IsBigEndianDefault,
+                                    FilePath = path
+                                };
 
-                            break;
-                        }
-                        case ".dat": {
-                            TagDataFileViewModel file = new TagDataFileViewModel(Path.GetFileName(path)) {
-                                IsCompressed = this.IsCompressedDefault,
-                                IsBigEndian = this.IsBigEndianDefault,
-                                FilePath = path
-                            };
+                                added.Add(file);
+                                this.Root.AddItem(file);
+                                try {
+                                    await file.RefreshAction();
+                                }
+                                catch (Exception e) {
+                                    this.Root.RemoveItem(file);
+                                    await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                                }
 
-                            added.Add(file);
-                            this.Root.AddItem(file);
-                            try {
-                                await file.RefreshAction();
+                                break;
                             }
-                            catch (Exception e) {
-                                this.Root.RemoveItem(file);
-                                await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                            default: {
+                                await MessageDialogs.UnknownFileFormatDialog.ShowAsync("Unknown file format", $"Unknown file extension: {extension}");
+                                break;
                             }
-
-                            break;
-                        }
-                        default: {
-                            await MessageDialogs.UnknownFileFormatDialog.ShowAsync("Unknown file format", $"Unknown file extension: {extension}");
-                            break;
                         }
                     }
                 }
@@ -191,8 +248,9 @@ namespace MCNBTEditor.Views.Main {
 
         public async Task NavigateToPath(string path) {
             List<BaseTreeItemViewModel> list = await this.Root.ResolvePathAction(path);
-            if (list != null) {
+            if (list != null && list.Count > 0) {
                 await this.TreeView.RepeatExpandHierarchyFromRootAsync(list);
+                this.CurrentFolderItem = list[list.Count - 1];
             }
         }
     }

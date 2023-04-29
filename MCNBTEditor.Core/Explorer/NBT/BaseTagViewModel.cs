@@ -50,7 +50,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             }, () => !string.IsNullOrEmpty(this.Name));
             this.CopyBinaryToClipboardCommand = new AsyncRelayCommand(async () => {
                 if (IoC.Clipboard == null) {
-                    await IoC.MessageDialogs.ShowMessageAsync("No clipboard", "Clipboard is unavailable. Cannot copy the NBT to the clipboard");
+                    await Task.Run(() => IoC.MessageDialogs.ShowMessageAsync("No clipboard", "Clipboard is unavailable. Cannot copy the NBT to the clipboard"));
                 }
                 else {
                     using (MemoryStream stream = new MemoryStream()) {

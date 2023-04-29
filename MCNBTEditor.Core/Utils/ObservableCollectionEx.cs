@@ -55,6 +55,18 @@ namespace MCNBTEditor.Core.Utils {
             return false;
         }
 
+        public int FindIndexOf(Predicate<T> matchFunction) {
+            IList<T> list = this.Items;
+            for (int i = 0; i < list.Count; i++) {
+                T value = this.Items[i];
+                if (matchFunction(value)) {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
         public void AddRange(IEnumerable<T> collection) {
             this.InsertRange(this.Count, collection);
         }
@@ -181,18 +193,11 @@ namespace MCNBTEditor.Core.Utils {
 
         public bool RemoveFirst(Predicate<T> canRemove) {
             this.CheckReentrancy();
-            IList<T> list = this.Items;
-            for (int i = 0; i < list.Count; i++) {
-                T value = this.Items[i];
-                if (!canRemove(value)) {
-                    continue;
-                }
-
-                this.RemoveAt(i);
-                return true;
-            }
-
-            return false;
+            int index = this.FindIndexOf(canRemove);
+            if (index == -1)
+                return false;
+            this.RemoveAt(index);
+            return true;
         }
 
         public void OrderByCollection(IEnumerable<T> enumerable) {

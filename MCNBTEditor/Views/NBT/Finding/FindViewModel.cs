@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MCNBTEditor.Core;
@@ -110,6 +111,8 @@ namespace MCNBTEditor.Views.NBT.Finding {
         }
 
         public ObservableCollection<NBTMatchResult> FoundItems { get; }
+        private readonly List<NBTMatchResult> queuedResults;
+        private int callbackFlag;
 
         public IdleEventService IdleEventService { get; }
 
@@ -127,20 +130,12 @@ namespace MCNBTEditor.Views.NBT.Finding {
             this.IdleEventService = new IdleEventService();
             this.IdleEventService.MinimumTimeSinceInput = TimeSpan.FromMilliseconds(200);
             this.IdleEventService.OnIdle += this.OnTickSearch;
-        }
-
-        public void StopActiveSearch(bool clearResults) {
-            this.StopTaskAndWait(clearResults);
-            this.IsSearchActive = false;
-            if (clearResults) {
-                this.FoundItems.Clear();
-            }
+            this.queuedResults = new List<NBTMatchResult>();
         }
 
         private void OnInputChanged() {
             if (string.IsNullOrEmpty(this.SearchForNameText) && string.IsNullOrEmpty(this.searchForValueText)) {
-                this.StopTaskAndWait(true);
-                this.FoundItems.Clear();
+                this.StopTask();
                 this.IdleEventService.CanFireNextTick = false;
                 this.IsSearchTermEmpty = true;
                 this.IsSearchActive = false;
@@ -151,21 +146,14 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private void StopTaskAndWait(bool clearItemQueue = true) {
+        private void StopTask() {
             if (this.searchTask != null) {
                 this.stopTask = true;
-                this.searchTask.Wait();
-            }
-
-            if (clearItemQueue) {
-                // lock (this.queuedItemsToAdd) {
-                //     this.queuedItemsToAdd.Clear();
-                // }
             }
         }
 
         public void OnTickSearch() {
-            this.StopTaskAndWait();
+            this.StopTask();
             if (string.IsNullOrEmpty(this.SearchForNameText) && string.IsNullOrEmpty(this.SearchForValueText)) {
                 this.IsSearchTermEmpty = true;
                 this.IsSearchActive = false;
@@ -184,16 +172,22 @@ namespace MCNBTEditor.Views.NBT.Finding {
             if (this.isValueSearchingWholeWord) vf |= FindFlags.Words;
             if (this.isValueCaseSentsitive) vf |= FindFlags.Cases;
 
-            this.stopTask = false;
             string searchName = string.IsNullOrEmpty(this.SearchForNameText) ? null : this.SearchForNameText;
             string searchValue = string.IsNullOrEmpty(this.SearchForValueText) ? null : this.SearchForValueText;
             this.IsSearchActive = true;
-            this.searchTask = Task.Run(() => this.TaskMain(searchName, searchValue, nf, vf));
+            Task oldTask = this.searchTask;
+            this.searchTask = Task.Run(async () => {
+                if (oldTask != null && !oldTask.IsCompleted) {
+                    await oldTask;
+                }
+
+                this.stopTask = false;
+                await this.TaskMain(searchName, searchValue, nf, vf);
+            });
         }
 
         // nf = name flags, vf = value flags
         private async Task TaskMain(string searchName, string searchValue, FindFlags nf, FindFlags vf) {
-            // cheap way of avoid concurrent modification in most cases
             try {
                 await this.FindItems(this.Root.Children.ToList(), searchName, searchValue, nf, vf);
             }
@@ -209,19 +203,19 @@ namespace MCNBTEditor.Views.NBT.Finding {
         private async Task FindItems(List<BaseTreeItemViewModel> items, string searchName, string searchValue, FindFlags nf, FindFlags vf) {
             foreach (BaseTreeItemViewModel child in items) {
                 bool isMatched = false;
-                List<TextRange> nameMatchesNormal = new List<TextRange>();
-                List<TextRange> valueMatchesNormal = new List<TextRange>();
                 if (this.stopTask) {
                     return;
                 }
 
+                List<TextRange> nameMatches = new List<TextRange>();
+                List<TextRange> valueMatches = new List<TextRange>();
                 if (searchName != null) {
                     if (child is BaseTagCollectionViewModel childCollection) {
                         if (!string.IsNullOrEmpty(childCollection.Name) && this.includeCollectionNameMatches) {
-                            isMatched = AcceptName(searchName, childCollection, nf, nameMatchesNormal);
+                            isMatched = AcceptName(searchName, childCollection, nf, nameMatches);
                         }
                     }
-                    else if (child is BaseTagViewModel tag && !string.IsNullOrEmpty(tag.Name) && AcceptName(searchName, tag, nf, nameMatchesNormal)) {
+                    else if (child is BaseTagViewModel tag && !string.IsNullOrEmpty(tag.Name) && AcceptName(searchName, tag, nf, nameMatches)) {
                         isMatched = true;
                     }
                 }
@@ -229,15 +223,15 @@ namespace MCNBTEditor.Views.NBT.Finding {
                 string foundValue = null;
                 if (searchValue != null) {
                     if (child is TagPrimitiveViewModel || child is BaseTagArrayViewModel) {
-                        isMatched = AcceptValue(searchValue, (BaseTagViewModel) child, vf, valueMatchesNormal, out foundValue);
+                        isMatched = AcceptValue(searchValue, (BaseTagViewModel) child, vf, valueMatches, out foundValue);
                     }
                 }
 
-                if (isMatched && (nameMatchesNormal.Count > 0 || valueMatchesNormal.Count > 0)) {
-                    await this.AddItemAsync(new NBTMatchResult((BaseTagViewModel) child, searchName, searchValue, foundValue, nameMatchesNormal, valueMatchesNormal));
+                if (isMatched && (nameMatches.Count > 0 || valueMatches.Count > 0)) {
+                    await this.AddItemAsync(new NBTMatchResult((BaseTagViewModel) child, searchName, searchValue, foundValue, nameMatches, valueMatches));
                 }
 
-                await this.FindItems(child.Children.ToList(), null, searchValue, nf, vf);
+                await this.FindItems(child.Children.ToList(), searchName, searchValue, nf, vf);
             }
         }
 
@@ -251,7 +245,7 @@ namespace MCNBTEditor.Views.NBT.Finding {
 
         public void Dispose() {
             this.IdleEventService?.Dispose();
-            this.StopTaskAndWait(true);
+            this.StopTask();
         }
 
         private static bool AcceptName(string pattern, BaseTagViewModel nbt, FindFlags flags, List<TextRange> matches) {
@@ -288,9 +282,10 @@ namespace MCNBTEditor.Views.NBT.Finding {
                     foundValue = data != null && data.Length > 0 ? string.Join(",", data) : "";
                     break;
                 }
-                default:
+                default: {
                     foundValue = null;
                     return false;
+                }
             }
 
             if (flags.IsRegex()) {

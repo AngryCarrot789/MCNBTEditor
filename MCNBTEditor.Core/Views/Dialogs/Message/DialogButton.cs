@@ -65,5 +65,14 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 IsEnabled = this.IsEnabled, ToolTip = this.ToolTip
             };
         }
+
+        public void UpdateState() {
+            if (this.Dialog.IsAlwaysUseNextResultChecked || this.Dialog.IsAlwaysUseNextResultForCurrentQueueChecked) {
+                this.IsEnabled = this.CanUseAsAutomaticResult;
+            }
+            else {
+                this.IsEnabled = true;
+            }
+        }
     }
 }

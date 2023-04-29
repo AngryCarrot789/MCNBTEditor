@@ -39,8 +39,8 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             return list;
         }
 
-        protected override void OnChildrenChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            base.OnChildrenChanged(sender, e);
+        protected override void OnChildListModified(object sender, NotifyCollectionChangedEventArgs e) {
+            base.OnChildListModified(sender, e);
             this.TargetType = this.FirstTag?.NBTType ?? NBTType.End;
         }
     }

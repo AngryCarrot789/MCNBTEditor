@@ -10,6 +10,16 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
     /// A helper view model for managing message dialogs that can have multiple buttons
     /// </summary>
     public class MessageDialog : BaseDialogViewModel {
+        private string titlebar;
+        private string header;
+        private string message;
+        private bool showAlwaysUseNextResultOption;
+        private bool isAlwaysUseNextResultChecked;
+        private bool canShowAlwaysUseNextResultForCurrentQueueOption;
+        private bool isAlwaysUseNextResultForCurrentQueueChecked;
+        private string automaticResult;
+        private bool allowNullButtonActionForAutoResult;
+        private string defaultResult;
         private readonly ObservableCollectionEx<DialogButton> buttons;
 
         /// <summary>
@@ -20,27 +30,23 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         /// be cloned (via <see cref="Clone"/>) and then furtuer modified
         /// </para>
         /// </summary>
-        public bool IsReadOnly { get; set; }
+        public bool IsReadOnly { get; private set; }
 
-        private string titlebar;
         public string Titlebar {
             get => this.titlebar;
             set => this.RaisePropertyChanged(ref this.titlebar, value);
         }
 
-        private string header;
         public string Header {
             get => this.header;
             set => this.RaisePropertyChanged(ref this.header, value);
         }
 
-        private string message;
         public string Message {
             get => this.message;
             set => this.RaisePropertyChanged(ref this.message, value);
         }
 
-        private bool showAlwaysUseNextResultOption;
         public bool ShowAlwaysUseNextResultOption {
             get => this.showAlwaysUseNextResultOption;
             set {
@@ -52,7 +58,6 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             }
         }
 
-        private bool isAlwaysUseNextResultChecked;
         public bool IsAlwaysUseNextResultChecked { // dialog will show "Always use this option"
             get => this.isAlwaysUseNextResultChecked;
             set {
@@ -62,10 +67,13 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 if (!this.isAlwaysUseNextResultChecked && this.IsAlwaysUseNextResultForCurrentQueueChecked) {
                     this.IsAlwaysUseNextResultForCurrentQueueChecked = false;
                 }
+
+                foreach (DialogButton button in this.Buttons) {
+                    button.UpdateState();
+                }
             }
         }
 
-        private bool canShowAlwaysUseNextResultForCurrentQueueOption;
         public bool CanShowAlwaysUseNextResultForCurrentQueueOption {
             get => this.canShowAlwaysUseNextResultForCurrentQueueOption;
             set {
@@ -77,21 +85,46 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             }
         }
 
-        private bool isAlwaysUseNextResultForCurrentQueueChecked;
         public bool IsAlwaysUseNextResultForCurrentQueueChecked {
             get => this.isAlwaysUseNextResultForCurrentQueueChecked;
             set {
                 this.EnsureNotReadOnly();
                 this.RaisePropertyChanged(ref this.isAlwaysUseNextResultForCurrentQueueChecked, value && this.CanShowAlwaysUseNextResultForCurrentQueueOption);
+
+                foreach (DialogButton button in this.Buttons) {
+                    button.UpdateState();
+                }
             }
         }
 
-        private string automaticResult;
         public string AutomaticResult {
             get => this.automaticResult;
             set {
                 this.EnsureNotReadOnly();
                 this.RaisePropertyChanged(ref this.automaticResult, value);
+            }
+        }
+
+        // There is literally no point in this... not really at least
+        // /// <summary>
+        // /// Whether or not to allow the automatic result to be set when a button's action is null
+        // /// </summary>
+        // public bool AllowNullButtonActionForAutoResult {
+        //     get => this.allowNullButtonActionForAutoResult;
+        //     set {
+        //         this.EnsureNotReadOnly();
+        //         this.allowNullButtonActionForAutoResult = value;
+        //     }
+        // }
+
+        /// <summary>
+        /// This dialog's default result, which is the result used if the dialog closed without a button (e.g. clicking esc or some dodgy Win32 usage)
+        /// </summary>
+        public string DefaultResult {
+            get => this.defaultResult;
+            set {
+                this.EnsureNotReadOnly();
+                this.RaisePropertyChanged(ref this.defaultResult, value);
             }
         }
 
@@ -147,13 +180,16 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 return this.AutomaticResult;
             }
 
-            string output = null;
+            string output;
             bool? result = await IoC.MessageDialogs.ShowDialogAsync(this);
-            if (result == true && this.lastClickedButton?.ActionType != null) {
+            if (result == true && this.lastClickedButton != null) {
                 output = this.lastClickedButton.ActionType;
-                if (this.IsAlwaysUseNextResultChecked) {
+                if (output != null && this.IsAlwaysUseNextResultChecked) { // (output != null || this.AllowNullButtonActionForAutoResult)
                     this.AutomaticResult = output;
                 }
+            }
+            else {
+                output = this.DefaultResult;
             }
 
             this.lastClickedButton = null;
@@ -163,10 +199,6 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         public async Task OnButtonClicked(DialogButton button) {
             this.lastClickedButton = button;
             await this.Dialog.CloseDialogAsync(button?.ActionType != null);
-        }
-
-        public DialogButton AddButton(string msg, string actionType, bool canUseAsAutoResult) {
-            return this.InsertButton(this.buttons.Count, msg, actionType, canUseAsAutoResult);
         }
 
         public DialogButton InsertButton(int index, string msg, string actionType, bool canUseAsAutoResult) {
@@ -182,11 +214,8 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             return this.InsertButton(index, msg, actionType, canUseAsAutoResult);
         }
 
-        public DialogButton RemoveButtonAt(int index) {
-            this.EnsureNotReadOnly();
-            DialogButton button = this.buttons[index];
-            this.buttons.RemoveAt(index);
-            return button;
+        public DialogButton AddButton(string msg, string actionType, bool canUseAsAutoResult) {
+            return this.InsertButton(this.buttons.Count, msg, actionType, canUseAsAutoResult);
         }
 
         public void AddButton(DialogButton button) {
@@ -208,6 +237,28 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
 
         public DialogButton GetButtonAt(int index) {
             return this.buttons[index];
+        }
+
+        public DialogButton GetButtonById(string id) {
+            return this.buttons.First(x => x.ActionType != null && x.ActionType == id);
+        }
+
+        public DialogButton RemoveButtonAt(int index) {
+            this.EnsureNotReadOnly();
+            DialogButton button = this.buttons[index];
+            this.buttons.RemoveAt(index);
+            return button;
+        }
+
+        public DialogButton RemoveButtonById(string id) {
+            int index = this.buttons.FindIndexOf(x => x.ActionType == id);
+            if (index == -1) {
+                return null;
+            }
+
+            DialogButton button = this.buttons[index];
+            this.buttons.RemoveAt(index);
+            return button;
         }
 
         /// <summary>
@@ -261,6 +312,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             private readonly bool oldAlwaysUseNextResult;
             private readonly bool oldShowAlwaysUseNextResult;
             private readonly bool oldCanShowAlwaysUseNextResultForQueue;
+            private readonly string oldDefaultResult;
             private readonly bool isReadOnly;
 
             public MessageDialog Dialog { get; }
@@ -278,6 +330,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 this.oldCanShowAlwaysUseNextResultForQueue = this.Dialog.CanShowAlwaysUseNextResultForCurrentQueueOption;
                 this.oldButtons = dialog.Buttons.ToList();
                 this.oldAutoResult = dialog.AutomaticResult;
+                this.oldDefaultResult = dialog.DefaultResult;
             }
 
             /// <summary>
@@ -290,13 +343,24 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
 
                 this.Dialog.buttons.ClearAndAddRange(this.oldButtons);
                 if (this.Dialog.IsAlwaysUseNextResultForCurrentQueueChecked) {
+                    // We are only applying data for the current queue, and that queue is
+                    // finished now, so, revert the data
                     this.Dialog.IsAlwaysUseNextResultForCurrentQueueChecked = false; // this should always be false when the usage instance is created
                     this.Dialog.AutomaticResult = this.oldAutoResult;
+                }
+                else {
+                    // here we handle the case where we are saving results globally for this
+                    // dialog; "save these results" is checked, but
+                    // "save for current queue only" is not checked
+                    // -------------------------------------------------------
+                    // nothing needs to be handled here
+                    // -------------------------------------------------------
                 }
 
                 this.Dialog.ShowAlwaysUseNextResultOption = this.oldShowAlwaysUseNextResult;
                 this.Dialog.CanShowAlwaysUseNextResultForCurrentQueueOption = this.oldCanShowAlwaysUseNextResultForQueue;
                 this.Dialog.IsAlwaysUseNextResultChecked = this.oldAlwaysUseNextResult;
+                this.Dialog.DefaultResult = this.oldDefaultResult;
             }
         }
     }

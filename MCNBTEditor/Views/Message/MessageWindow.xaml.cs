@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Views.Message {
     /// <summary>
     /// Interaction logic for MessageWindow.xaml
     /// </summary>
     public partial class MessageWindow : BaseDialog {
+        public static string DODGY_PRIMARY_SELECTION; // lol this is so bad
+
         public MessageWindow() {
             this.InitializeComponent();
             this.Loaded += (sender, args) => {
@@ -21,6 +25,15 @@ namespace MCNBTEditor.Views.Message {
                 if (width > actualWidth) {
                     this.Width = width;
                 }
+
+                if (DODGY_PRIMARY_SELECTION != null && this.DataContext is MessageDialog dialog) {
+                    DialogButton button = dialog.GetButtonById(DODGY_PRIMARY_SELECTION);
+                    DODGY_PRIMARY_SELECTION = null;
+                    if (button != null && this.ButtonBarList.ItemContainerGenerator.ContainerFromItem(button) is Button btn) {
+                        btn.Focus();
+                    }
+                }
+
                 // else {
                 //     width = actualWidth;
                 // }

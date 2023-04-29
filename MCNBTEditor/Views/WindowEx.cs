@@ -107,7 +107,7 @@ namespace MCNBTEditor.Views {
             return Task.FromResult(true);
         }
 
-        [ActionRegistration("actions.views.CloseViewAction")]
+        [ActionRegistration("actions.views.windows.CloseViewAction")]
         private class CloseViewAction : AnAction {
             public CloseViewAction() : base(() => "Close window", () => "Closes the current window") {
 

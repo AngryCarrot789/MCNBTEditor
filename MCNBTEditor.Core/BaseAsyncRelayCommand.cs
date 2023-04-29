@@ -47,7 +47,7 @@ namespace MCNBTEditor.Core {
         /// because this function just calls that
         /// </summary>
         /// <param name="parameter">The parameter passed to this command</param>
-        public override async void Execute(object parameter) {
+        public sealed override async void Execute(object parameter) {
             await this.ExecuteAsync(parameter);
         }
 

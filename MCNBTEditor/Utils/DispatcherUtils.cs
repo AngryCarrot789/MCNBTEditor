@@ -25,6 +25,16 @@ namespace MCNBTEditor.Utils {
             return Task.FromResult<TResult>(default);
         }
 
+        public static Task<TResult> InvokeAsync<TResult>(Func<Task<TResult>> function) {
+            Application app = Application.Current;
+            Dispatcher dispatcher;
+            if (app != null && (dispatcher = app.Dispatcher) != null) {
+                return InvokeAsync(dispatcher, function);
+            }
+
+            return Task.FromResult<TResult>(default);
+        }
+
         public static Task InvokeAsync(Dispatcher dispatcher, Action action) {
             if (dispatcher.CheckAccess()) {
                 action();
@@ -42,13 +52,12 @@ namespace MCNBTEditor.Utils {
             return dispatcher.InvokeAsync(function).Task;
         }
 
-        public static async Task<TResult> InvokeAsync<TResult>(Dispatcher dispatcher, Func<Task<TResult>> function) {
+        public static Task<TResult> InvokeAsync<TResult>(Dispatcher dispatcher, Func<Task<TResult>> function) {
             if (dispatcher.CheckAccess()) {
-                return await function();
+                return function();
             }
 
-            Task<TResult> task = await dispatcher.InvokeAsync(function);
-            return await task;
+            return dispatcher.Invoke(function);
         }
     }
 }

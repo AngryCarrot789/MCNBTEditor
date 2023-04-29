@@ -11,7 +11,7 @@
                   xmlns:h="clr-namespace:MCNBTEditor.Controls.Helpers"
                   xmlns:ui="clr-namespace:MCNBTEditor.NBT.UI"
                   mc:Ignorable="d"
-                  Title="MainWindow" Height="600" Width="700"
+                  Title="MainWindow" Height="500" Width="800"
                   Style="{StaticResource CustomWindowStyleEx}"
                   d:DataContext="{d:DesignInstance local:MainViewModel}"
                   Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
@@ -38,6 +38,7 @@
                         <Separator Style="{StaticResource MenuItemSeparator}"/>
                         <MenuItem IsCheckable="True" Header="Is Reading Compressed" IsChecked="{Binding IsCompressedDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading compressed and uncompressed NBT files (may be ignored for some files, e.g. region files)"/>
                         <MenuItem IsCheckable="True" Header="Is Reading Big-Endian" IsChecked="{Binding IsBigEndianDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading binary data in the big-endian and little-endian format. By default, minecraft saves using big-endian because that's what java's DataInputStream and DataOutputStream appear to use"/>
+                        <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
                     </MenuItem>
                 </Menu>
                 <c:ExtendedTreeView Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
@@ -46,6 +47,7 @@
                     ItemsSource="{Binding Path=Root.Children, Mode=OneTime}"
                     ItemTemplateSelector="{StaticResource ExtendedTreeItemSelector}"
                     ItemContainerStyle="{StaticResource TreeViewItemStretchedContent}"
+                    UseItemCommand="{Binding UseItemCommand, Mode=OneTime}"
                     x:Name="MainTreeView"
                     fg:UIFocusGroup.FocusGroupPath="Application/EditorView/NBTTag"
                     Drop="MainTreeView_Drop" AllowDrop="True"
@@ -74,17 +76,21 @@
                     </Border>
                     <c:ExtendedListBox x:Name="MainListBox" Margin="0,22,0,0"
                                        BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"
-                                       SelectedItem="{Binding SelectedTreeItem, UpdateSourceTrigger=PropertyChanged}"
-                                       ItemTemplateSelector="{StaticResource NBTListItemSelector}"
+                                       SelectedItem="{Binding PrimaryListSelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                                       UseItemCommand="{Binding UseItemCommand, Mode=OneTime}"
+                                       ItemTemplateSelector="{StaticResource ExtendedListItemSelector}"
                                        BorderThickness="0 1 0 0"
                                        Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"
                                        SelectionMode="Extended"
                                        fg:UIFocusGroup.UsageID="List"
-                                       fg:UIFocusGroup.FocusGroupPath="Application/NBT">
+                                       fg:UIFocusGroup.FocusGroupPath="Application/EditorView/NBTTag"
+                                       ScrollViewer.CanContentScroll="True"
+                                       VirtualizingStackPanel.IsVirtualizing="True"
+                                       VirtualizingStackPanel.VirtualizationMode="Recycling">
                         <ListBox.ItemsSource>
                             <MultiBinding Converter="{StaticResource FallbackConverter}">
-                                <Binding Path="CurrentFolderItem" UpdateSourceTrigger="PropertyChanged"/>
-                                <Binding Path="Root"/>
+                                <Binding Path="CurrentFolderItem.Children" UpdateSourceTrigger="PropertyChanged"/>
+                                <Binding Path="Root.Children" Mode="OneTime"/>
                             </MultiBinding>
                         </ListBox.ItemsSource>
                         <c:ExtendedListBox.Style>

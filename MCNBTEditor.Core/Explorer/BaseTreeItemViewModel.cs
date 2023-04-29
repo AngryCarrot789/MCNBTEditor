@@ -15,7 +15,8 @@ namespace MCNBTEditor.Core.Explorer {
 
         /// <summary>
         /// A reference to the internal children collection. Only modify in exceptional circumstances
-        /// where the functions provided in <see cref="BaseTreeItemViewModel"/> are not enough
+        /// where the functions provided in <see cref="BaseTreeItemViewModel"/> are not enough! You will have to use reflection
+        /// to set the <see cref="IsValid"/> property, and potentially more in the future
         /// </summary>
         protected ObservableCollectionEx<BaseTreeItemViewModel> InternalChildren => this.children;
 
@@ -24,7 +25,13 @@ namespace MCNBTEditor.Core.Explorer {
         private BaseTreeItemViewModel parentItem;
         public BaseTreeItemViewModel ParentItem {
             get => this.parentItem;
-            protected set => this.RaisePropertyChanged(ref this.parentItem, value);
+            private set => this.RaisePropertyChanged(ref this.parentItem, value);
+        }
+
+        private bool isValid;
+        public bool IsValid {
+            get => this.isValid;
+            private set => this.RaisePropertyChanged(ref this.isValid, value);
         }
 
         /// <summary>
@@ -43,6 +50,11 @@ namespace MCNBTEditor.Core.Explorer {
         /// Whether this item is empty, as in, has no children. This will not throw even if <see cref="CanHoldChildren"/> is false
         /// </summary>
         public bool IsEmpty => this.children.Count < 1;
+
+        /// <summary>
+        /// The number of children in this item
+        /// </summary>
+        public int ChildrenCount => this.children.Count;
 
         /// <summary>
         /// Whether or not this item has a parent or not (aka "IsNotRoot")
@@ -64,15 +76,15 @@ namespace MCNBTEditor.Core.Explorer {
         protected BaseTreeItemViewModel() {
             this.children = new ObservableCollectionEx<BaseTreeItemViewModel>();
             this.Children = new ReadOnlyObservableCollection<BaseTreeItemViewModel>(this.children);
-            this.children.CollectionChanged += this.OnChildrenChanged;
+            this.children.CollectionChanged += this.OnChildListModified;
         }
 
-        public List<BaseTreeItemViewModel> GetParentChain() {
+        public List<BaseTreeItemViewModel> GetParentChain(bool includeRoot = true) {
             List<BaseTreeItemViewModel> list = new List<BaseTreeItemViewModel>();
             BaseTreeItemViewModel item = this;
             do {
                 list.Add(item);
-            } while ((item = item.ParentItem) != null);
+            } while ((item = item.ParentItem) != null && (includeRoot || !item.IsRoot));
             list.Reverse();
             return list;
         }
@@ -92,7 +104,8 @@ namespace MCNBTEditor.Core.Explorer {
             return this.GetParentAndNameChain().Select(x => x.Item2);
         }
 
-        protected virtual void OnChildrenChanged(object sender, NotifyCollectionChangedEventArgs e) {
+        protected virtual void OnChildListModified(object sender, NotifyCollectionChangedEventArgs e) {
+            this.RaisePropertyChanged(nameof(this.ChildrenCount));
             this.RaisePropertyChanged(nameof(this.IsEmpty));
         }
 
@@ -228,7 +241,10 @@ namespace MCNBTEditor.Core.Explorer {
         }
 
         protected virtual void EnsureChild(BaseTreeItemViewModel child, bool valid) {
-            child?.SetParent(valid ? this : null);
+            if (child != null) {
+                child.SetParent(valid ? this : null);
+                child.IsValid = valid;
+            }
         }
 
         protected virtual void EnsureChildren(IEnumerable<BaseTreeItemViewModel> childList, bool valid) {
@@ -257,24 +273,18 @@ namespace MCNBTEditor.Core.Explorer {
             BaseTreeItemViewModel item = this;
             List<BaseTreeItemViewModel> list = new List<BaseTreeItemViewModel>();
             while ((i = path.IndexOf('/', j)) >= 0) {
-                if (i == 0) // skip root
-                    continue;
-
-                // // Allows root to be skipped... could also check if it's the first skip
-                // if (string.IsNullOrEmpty(name = path.JSubstring(j, i))) {
-                //     continue;
-                // }
-
-                name = path.JSubstring(j, i);
-                item = await item.GetChildByName(name);
-                if (item == null) {
-                    throw new Exception(GetNameErrorMessage(name, j == 0 ? "<root>" : path.Substring(0, j - 1)));
-                }
-                else if (item is BaseTagCollectionViewModel) {
-                    list.Add(item);
-                }
-                else {
-                    throw new Exception($"Expected collection at '{(j == 0 ? "<root>" : path.Substring(0, i))}', but got {(item is BaseTagViewModel tag ? tag.NBTType.ToString() : item.ToString())}");
+                if (i != 0) { // skip root
+                    name = path.JSubstring(j, i);
+                    item = await item.GetChildByName(name);
+                    if (item == null) {
+                        throw new Exception(GetNameErrorMessage(name, j == 0 ? "<root>" : path.Substring(0, j - 1)));
+                    }
+                    else if (item is BaseTagCollectionViewModel) {
+                        list.Add(item);
+                    }
+                    else {
+                        throw new Exception($"Expected collection at '{(j == 0 ? "<root>" : path.Substring(0, i))}', but got {(item is BaseTagViewModel tag ? tag.NBTType.ToString() : item.ToString())}");
+                    }
                 }
 
                 j = i + 1;

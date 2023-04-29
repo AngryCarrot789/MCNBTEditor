@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using MCNBTEditor.Core.Views.Dialogs.Message;
@@ -6,41 +7,51 @@ using MCNBTEditor.Views.FilePicking;
 
 namespace MCNBTEditor.Views.Message {
     public class MessageDialogService : IMessageDialogService {
-        public Task ShowMessageAsync(string caption, string message) {
-            void Action() {
-                MessageBox.Show(FolderPicker.GetCurrentActiveWindow(), message, caption);
-            }
-
-            return DispatcherUtils.InvokeAsync(Action);
+        public async Task ShowMessageAsync(string caption, string message) {
+            await DispatcherUtils.InvokeAsync(() => MessageDialogs.OkDialog.ShowAsync(caption, message));
         }
 
         public Task ShowMessageAsync(string message) {
             return this.ShowMessageAsync("Information", message);
         }
 
-        public Task<MsgDialogResult> ShowDialogAsync(string caption, string message, MsgDialogType type, MsgDialogResult defaultResult) {
-            MsgDialogResult Action() {
-                switch (MessageBox.Show(FolderPicker.GetCurrentActiveWindow(), message, caption, (MessageBoxButton) type, MessageBoxImage.Information, (MessageBoxResult) defaultResult)) {
-                    case MessageBoxResult.OK: return MsgDialogResult.OK;
-                    case MessageBoxResult.Cancel: return MsgDialogResult.Cancel;
-                    case MessageBoxResult.Yes: return MsgDialogResult.Yes;
-                    case MessageBoxResult.No: return MsgDialogResult.No;
-                    default: return MsgDialogResult.Cancel;
-                }
+        public async Task<MsgDialogResult> ShowDialogAsync(string caption, string message, MsgDialogType type, MsgDialogResult defaultResult = MsgDialogResult.None) {
+            MessageDialog dialog;
+            switch (type) {
+                case MsgDialogType.OK:          dialog = MessageDialogs.OkDialog; break;
+                case MsgDialogType.OKCancel:    dialog = MessageDialogs.OkCancelDialog; break;
+                case MsgDialogType.YesNo:       dialog = MessageDialogs.YesNoDialog; break;
+                case MsgDialogType.YesNoCancel: dialog = MessageDialogs.YesNoCancelDialog; break;
+                default: throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
-            return DispatcherUtils.InvokeAsync(Action);
+            string id;
+            switch (defaultResult) {
+                case MsgDialogResult.None:   id = null; break;
+                case MsgDialogResult.OK:     id = "ok"; break;
+                case MsgDialogResult.Yes:    id = "yes"; break;
+                case MsgDialogResult.No:     id = "no"; break;
+                case MsgDialogResult.Cancel: id = "cancel"; break;
+                default: throw new ArgumentOutOfRangeException(nameof(defaultResult), defaultResult, null);
+            }
+
+            MessageWindow.DODGY_PRIMARY_SELECTION = id;
+            string clickedId = await dialog.ShowAsync(caption, message);
+            switch (clickedId) {
+                case "cancel": return MsgDialogResult.Cancel;
+                case "ok": return MsgDialogResult.OK;
+                case "yes": return MsgDialogResult.Yes;
+                case "no": return MsgDialogResult.No;
+                default: return MsgDialogResult.None;
+            }
         }
 
-        public Task<bool> ShowYesNoDialogAsync(string caption, string message, bool defaultResult = true) {
-            bool Action() {
-                switch (MessageBox.Show(FolderPicker.GetCurrentActiveWindow(), message, caption, MessageBoxButton.YesNo, MessageBoxImage.Information, defaultResult ? MessageBoxResult.Yes : MessageBoxResult.No)) {
-                    case MessageBoxResult.Yes: return true;
-                    default: return false;
-                }
-            }
-
-            return DispatcherUtils.InvokeAsync(Action);
+        public async Task<bool> ShowYesNoDialogAsync(string caption, string message, bool defaultResult = true) {
+            MessageDialog dialog = MessageDialogs.YesNoDialog;
+            string id = defaultResult ? "yes" : "no";
+            MessageWindow.DODGY_PRIMARY_SELECTION = id;
+            string clickedId = await dialog.ShowAsync(caption, message);
+            return clickedId == "yes";
         }
 
         public async Task<bool?> ShowDialogAsync(MessageDialog dialog) {

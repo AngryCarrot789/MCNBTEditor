@@ -55,8 +55,8 @@ namespace MCNBTEditor.Core.Explorer.Regions {
         public RegionFileViewModel() {
             this.RemoveFromParentCommand = new RelayCommand(() => this.RemoveFromParentItem(), () => this.RemoveFromParentItem(true));
             this.RefreshCommand = new AsyncRelayCommand(this.RefreshAction, () => File.Exists(this.FilePath));
-            this.SaveFileCommand = new AsyncRelayCommand(async () => await IoC.MessageDialogs.ShowMessageAsync("TODO", "Coming soon..>"), () => false);
-            this.SaveFileAsCommand = new AsyncRelayCommand(async () => await IoC.MessageDialogs.ShowMessageAsync("TODO", "Coming soon..>"), () => false);
+            this.SaveFileCommand = new AsyncRelayCommand(async () => await IoC.MessageDialogs.ShowMessageAsync("TODO", "Coming soon..."), () => false);
+            this.SaveFileAsCommand = new AsyncRelayCommand(async () => await IoC.MessageDialogs.ShowMessageAsync("TODO", "Coming soon..."), () => false);
             this.ShowInExplorerCommand = new AsyncRelayCommand(this.OpenInExplorerAction, () => IoC.ExplorerService != null && File.Exists(this.FilePath));
             this.DeleteFileCommand = new AsyncRelayCommand(this.DeleteFileAction, () => File.Exists(this.FilePath));
             this.CopyFilePathToClipboardCommand = new RelayCommand(() => {

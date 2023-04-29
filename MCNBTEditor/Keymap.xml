@@ -2,7 +2,7 @@
 <KeyMap>
     <Group Name="Application">
         <Group Name="Views">
-            <Shortcut Name="CloseWindowShortcut" ActionId="actions.views.windows.CloseViewAction" Inherit="true">
+            <Shortcut Name="CloseWindowShortcut" ActionId="actions.views.windows.CloseViewAction" Global="true">
                 <KeyStroke Key="Escape"/>
             </Shortcut>
         </Group>

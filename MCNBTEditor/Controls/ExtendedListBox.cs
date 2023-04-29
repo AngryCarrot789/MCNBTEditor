@@ -69,11 +69,12 @@ namespace MCNBTEditor.Controls {
                 if (this.SelectedItem is BaseTreeItemViewModel file) {
                     if (this.ItemContainerGenerator.ContainerFromItem(file) is ListBoxItem item) {
                         if (item.IsMouseOver) {
-                            if (this.UseItemCommand is BaseAsyncRelayCommand asyncCommand) {
+                            ICommand cmd = this.UseItemCommand;
+                            if (cmd is BaseAsyncRelayCommand asyncCommand) {
                                 await asyncCommand.ExecuteAsync(file);
                             }
-                            else {
-                                this.UseItemCommand.Execute(file);
+                            else if (cmd != null) {
+                                cmd.Execute(file);
                             }
                         }
                     }
@@ -94,11 +95,12 @@ namespace MCNBTEditor.Controls {
             try {
                 if (this.IsFocused) {
                     if (this.SelectedItem is BaseTreeItemViewModel file) {
-                        if (this.UseItemCommand is BaseAsyncRelayCommand asyncCommand) {
+                        ICommand cmd = this.UseItemCommand;
+                        if (cmd is BaseAsyncRelayCommand asyncCommand) {
                             await asyncCommand.ExecuteAsync(file);
                         }
-                        else {
-                            this.UseItemCommand.Execute(file);
+                        else if (cmd != null) {
+                            cmd.Execute(file);
                         }
                     }
                 }

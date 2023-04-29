@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.NBT;
+using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Core.Explorer.NBT {
     public abstract class BaseTagCollectionViewModel : BaseTagViewModel, IHaveChildren {
@@ -51,13 +52,13 @@ namespace MCNBTEditor.Core.Explorer.NBT {
 
         public async Task PasteBinaryTagAction() {
             if (IoC.Clipboard == null) {
-                await IoC.MessageDialogs.ShowMessageAsync("Clipboard unavailable", "Clipboard is unavailable. Cannot paste");
+                await MessageDialogs.ClipboardUnavailableDialog.ShowAsync("Clipboard unavailable", "Clipboard is unavailable. Cannot paste");
                 return;
             }
 
             byte[] bytes = IoC.Clipboard.GetBinaryTag("TAG_NBT");
             if (bytes == null || bytes.Length < 1) {
-                await IoC.MessageDialogs.ShowMessageAsync("Invalid clipboard", "Clipboard did not contain a copied tag");
+                await MessageDialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Clipboard did not contain a copied tag");
                 return;
             }
 
@@ -69,12 +70,12 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                     result = NBTBase.ReadTag(CompressedStreamTools.CreateInput(stream), 0, out tagName, out nbt);
                 }
                 catch (Exception e) {
-                    await IoC.MessageDialogs.ShowMessageAsync("Invalid clipboard", "Failed to read NBT from clipboard: " + e.Message);
+                    await MessageDialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Failed to read NBT from clipboard: " + e.Message);
                     return;
                 }
 
                 if (!result) {
-                    await IoC.MessageDialogs.ShowMessageAsync("Invalid clipboard", "Clipboard did not contain a valid tag? That's weird...");
+                    await MessageDialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Clipboard did not contain a valid tag? That's weird...");
                     return;
                 }
 

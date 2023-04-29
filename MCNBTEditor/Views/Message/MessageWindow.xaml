@@ -13,7 +13,7 @@
         MinWidth="250"
         MinHeight="120"
         Width="400"
-        Height="150" 
+        Height="175"
         Style="{StaticResource CustomWindowStyleEx}"
         WindowStyle="ToolWindow" 
         ResizeMode="CanResize" 
@@ -31,9 +31,7 @@
                 Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" Padding="10,0">
             <DockPanel>
                 <ItemsControl DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0,5">
-                    <CheckBox Visibility="{Binding ShowAlwaysUseNextResultOption, Converter={StaticResource BoolToVisConverter}, UpdateSourceTrigger=PropertyChanged}" 
-                              IsChecked="{Binding IsAlwaysUseNextResultChecked, UpdateSourceTrigger=PropertyChanged}" 
-                              Margin="0,0,0,2">
+                    <CheckBox IsEnabled="{Binding ShowAlwaysUseNextResultOption}" IsChecked="{Binding IsAlwaysUseNextResultChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,2">
                         <TextBlock TextWrapping="Wrap" Text="Always use this option" TextAlignment="Center"/>
                     </CheckBox>
                     <!-- 
@@ -58,7 +56,8 @@
                 <ItemsControl DockPanel.Dock="Right" ItemsSource="{Binding Buttons, Mode=OneTime}" 
                               VerticalAlignment="Center" HorizontalAlignment="Right" 
                               VerticalContentAlignment="Stretch" 
-                              Height="23" Margin="0,10">
+                              Height="23" Margin="0,10"
+                              x:Name="ButtonBarList">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Horizontal"/>

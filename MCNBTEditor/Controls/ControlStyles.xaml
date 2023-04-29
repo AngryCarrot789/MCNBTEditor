@@ -48,6 +48,20 @@
         </Setter>
     </Style>
 
+    <HierarchicalDataTemplate x:Key="TreeRegionFileTemplate" DataType="{x:Type regions:RegionFileViewModel}" ItemsSource="{Binding Children}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}" IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
+            <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/FileIcon-Region.png"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Children.Count"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </HierarchicalDataTemplate>
+
     <HierarchicalDataTemplate x:Key="TreeTagCompoundTemplate" DataType="{x:Type nbt:TagCompoundViewModel}" ItemsSource="{Binding Children}">
         <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
             <Image x:Name="Img" Width="16" Height="16"/>
@@ -79,20 +93,6 @@
                 <Setter TargetName="Img" Property="Source" Value="/MCNBTEditor;component/Resources/Icons/icons8-closed-box-48.png"/>
             </DataTrigger>
         </HierarchicalDataTemplate.Triggers>
-    </HierarchicalDataTemplate>
-
-    <HierarchicalDataTemplate x:Key="TreeRegionFileTemplate" DataType="{x:Type regions:RegionFileViewModel}" ItemsSource="{Binding Children}">
-        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}" IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
-            <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/FileIcon-Region.png"/>
-            <TextBlock Margin="4 0 0 0">
-                <ap:TextBlockHelper.BindableInlines>
-                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
-                        <Binding Path="Name"/>
-                        <Binding Path="Children.Count"/>
-                    </MultiBinding>
-                </ap:TextBlockHelper.BindableInlines>
-            </TextBlock>
-        </StackPanel>
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="TreeTagListTemplate" DataType="{x:Type nbt:TagListViewModel}" ItemsSource="{Binding Children}">
@@ -137,6 +137,87 @@
         </StackPanel>
     </HierarchicalDataTemplate>
 
+    <!-- List entries -->
+
+    <DataTemplate x:Key="ListRegionFileTemplate" DataType="{x:Type regions:RegionFileViewModel}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}"
+                    IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
+            <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/FileIcon-Region.png"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Children.Count"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ListTagCompoundTemplate" DataType="{x:Type nbt:TagCompoundViewModel}">
+        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image x:Name="Img" Width="16" Height="16"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Children.Count"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                <Setter TargetName="Img" Property="Source" Value="/MCNBTEditor;component/Resources/Icons/icons8-empty-box-48.png"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsEmpty}" Value="False">
+                <Setter TargetName="Img" Property="Source" Value="/MCNBTEditor;component/Resources/Icons/icons8-closed-box-48.png"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ListTagListTemplate" DataType="{x:Type nbt:TagListViewModel}">
+        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/icons8-bulleted-list-48.png"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTCollectionInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Children.Count"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ListTagArrayTemplate" DataType="{x:Type nbt:BaseTagArrayViewModel}">
+        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTArrayInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Data"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ListTagPrimitive" DataType="{x:Type nbt:TagPrimitiveViewModel}">
+        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <TextBlock Margin="4 0 0 0">
+                <ap:TextBlockHelper.BindableInlines>
+                    <MultiBinding Converter="{StaticResource NBTPrimitiveInlinesNameConverter}">
+                        <Binding Path="Name"/>
+                        <Binding Path="Data"/>
+                    </MultiBinding>
+                </ap:TextBlockHelper.BindableInlines>
+            </TextBlock>
+        </StackPanel>
+    </DataTemplate>
+
     <ui:ExtendedTreeItemTemplateSelector x:Key="ExtendedTreeItemSelector">
         <ui:ExtendedTreeItemTemplateSelector.RegionFile>
             <StaticResource ResourceKey="TreeRegionFileTemplate"/>
@@ -155,18 +236,21 @@
         </ui:ExtendedTreeItemTemplateSelector.TagPrimitive>
     </ui:ExtendedTreeItemTemplateSelector>
 
-    <ui:ExtendedListItemTemplateSelector x:Key="NBTListItemSelector">
+    <ui:ExtendedListItemTemplateSelector x:Key="ExtendedListItemSelector">
+        <ui:ExtendedListItemTemplateSelector.RegionFile>
+            <StaticResource ResourceKey="ListRegionFileTemplate"/>
+        </ui:ExtendedListItemTemplateSelector.RegionFile>
         <ui:ExtendedListItemTemplateSelector.TagCompound>
-            <StaticResource ResourceKey="TreeTagCompoundTemplate"/>
+            <StaticResource ResourceKey="ListTagCompoundTemplate"/>
         </ui:ExtendedListItemTemplateSelector.TagCompound>
         <ui:ExtendedListItemTemplateSelector.TagList>
-            <StaticResource ResourceKey="TreeTagListTemplate"/>
+            <StaticResource ResourceKey="ListTagListTemplate"/>
         </ui:ExtendedListItemTemplateSelector.TagList>
         <ui:ExtendedListItemTemplateSelector.TagArray>
-            <StaticResource ResourceKey="TreeTagArrayTemplate"/>
+            <StaticResource ResourceKey="ListTagArrayTemplate"/>
         </ui:ExtendedListItemTemplateSelector.TagArray>
         <ui:ExtendedListItemTemplateSelector.TagPrimitive>
-            <StaticResource ResourceKey="TreeTagPrimitive"/>
+            <StaticResource ResourceKey="ListTagPrimitive"/>
         </ui:ExtendedListItemTemplateSelector.TagPrimitive>
     </ui:ExtendedListItemTemplateSelector>
 </ResourceDictionary>

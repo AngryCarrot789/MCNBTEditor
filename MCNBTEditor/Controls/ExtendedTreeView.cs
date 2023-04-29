@@ -228,7 +228,9 @@ namespace MCNBTEditor.Controls {
             // return BaseViewModel.GetInternalData<bool>(nbt, nameof(TreeViewItem.IsExpanded));
         }
 
-        public async Task<bool> RepeatExpandHierarchyFromRootAsync(IEnumerable<BaseTreeItemViewModel> items, bool select) {
+        public async Task<bool> RepeatExpandHierarchyFromRootAsync(IEnumerable<BaseTreeItemViewModel> items) {
+            // TODO: optimise this!!!!
+
             List<BaseTreeItemViewModel> list = items as List<BaseTreeItemViewModel> ?? items.ToList();
             bool result = false;
             for (int i = 0; i < list.Count; i++) {
@@ -238,16 +240,16 @@ namespace MCNBTEditor.Controls {
             return result;
         }
 
-        public async Task ExpandItemHierarchy(BaseTreeItemViewModel item) {
+        public Task ExpandItemSubTree(BaseTreeItemViewModel item) {
             DependencyObject container = ContainerFromItemRecursive(this.ItemContainerGenerator, item);
             if (container is TreeViewItem treeItem) {
                 this.ExpandSubtree(treeItem);
             }
+
+            return Task.CompletedTask;
         }
 
         public bool ExpandHierarchyFromRoot(IEnumerable<BaseTreeItemViewModel> items, bool select) {
-            // return await this.ExpandAsync(items, select);
-
             ItemContainerGenerator root = this.ItemContainerGenerator;
             TreeViewItem lastItem = null;
             using (IEnumerator<BaseTreeItemViewModel> enumerator = items.GetEnumerator()) {
