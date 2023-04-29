@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using MCNBTEditor.Core.Explorer;
-using MCNBTEditor.Views.Main;
 
 namespace MCNBTEditor.NBT.UI {
     public class ListFallbackSourceConverter : IMultiValueConverter {

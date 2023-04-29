@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace MCNBTEditor.Core.Explorer {
     public class RootTreeItemViewModel : BaseTreeItemViewModel, IHaveTreePath, IHaveChildren {
         public override bool CanHoldChildren => true;

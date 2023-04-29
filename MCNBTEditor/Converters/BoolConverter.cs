@@ -66,12 +66,22 @@ namespace MCNBTEditor.Converters {
     public class BoolToVisibilityConverter : BoolConverter {
         public new Visibility TrueValue {
             get => (Visibility) base.TrueValue;
-            set => base.TrueValue = value;
+            set => base.TrueValue = NullToVisibilityConverter.Box(value);
         }
 
         public new Visibility FalseValue {
             get => (Visibility) base.FalseValue;
-            set => base.FalseValue = value;
+            set => base.FalseValue = NullToVisibilityConverter.Box(value);
+        }
+
+        public new Visibility UnsetValue { // get will throw by default... cast to base type to set
+            get => base.UnsetValue is Visibility v ? v : Visibility.Collapsed;
+            set => base.UnsetValue = NullToVisibilityConverter.Box(value);
+        }
+
+        public new Visibility NonBoolValue { // get will throw by default... cast to base type to set
+            get => base.NonBoolValue is Visibility v ? v : Visibility.Collapsed;
+            set => base.NonBoolValue = NullToVisibilityConverter.Box(value);
         }
 
         public BoolToVisibilityConverter() {

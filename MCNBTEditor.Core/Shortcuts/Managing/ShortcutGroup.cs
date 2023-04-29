@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using MCNBTEditor.Core.Shortcuts.Inputs;
-using MCNBTEditor.Core.Shortcuts.Serialization;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Core.Shortcuts.Managing {

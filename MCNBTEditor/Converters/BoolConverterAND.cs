@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using MCNBTEditor.Core.Utils;
 
-namespace MCNBTEditor.Views.Message {
+namespace MCNBTEditor.Converters {
     public class BoolConverterAND : IMultiValueConverter {
         public bool EmptyArrayBool { get; set; } = false;
 

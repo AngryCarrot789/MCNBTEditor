@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using System.Windows;
-using MCNBTEditor.Core.Views.Dialogs;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 using MCNBTEditor.Utils;
 using MCNBTEditor.Views.FilePicking;

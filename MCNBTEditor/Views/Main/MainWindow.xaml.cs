@@ -13,9 +13,7 @@ namespace MCNBTEditor.Views.Main {
         private async void MainTreeView_Drop(object sender, DragEventArgs e) {
             if (this.DataContext is MainViewModel mvm) {
                 if (e.Data.GetData(DataFormats.FileDrop) is string[] files) {
-                    foreach (string file in files) {
-                        await mvm.LoadFileAction(file);
-                    }
+                    await mvm.LoadFilesAction(files, true);
                 }
             }
         }

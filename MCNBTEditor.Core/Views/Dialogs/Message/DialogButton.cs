@@ -1,9 +1,13 @@
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace MCNBTEditor.Core.Views.Dialogs.Message {
-    public class DialogButton : BaseDialogButton {
+    public class DialogButton : BaseViewModel {
+        /// <summary>
+        /// The dialog that owns this button
+        /// </summary>
+        public MessageDialog Dialog { get; }
+
         /// <summary>
         /// A command that fires when this dialog is clicked
         /// </summary>
@@ -14,11 +18,16 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         /// </summary>
         public string ActionType { get; }
 
-        private bool canUseAsAutomaticResult = true;
+        private string text;
+        public string Text {
+            get => this.text;
+            set => this.RaisePropertyChanged(ref this.text, value);
+        }
 
-        public bool CanUseAsAutomaticResult {
-            get => this.canUseAsAutomaticResult;
-            set => this.RaisePropertyChanged(ref this.canUseAsAutomaticResult, value);
+        private string toolTip;
+        public string ToolTip {
+            get => this.toolTip;
+            set => this.RaisePropertyChanged(ref this.toolTip, value);
         }
 
         public bool IsEnabled {
@@ -29,7 +38,15 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             }
         }
 
-        public DialogButton(MessageDialog dialog, string actionType, string text, bool canUseAsAutomaticResult) : base(dialog, text) {
+        private bool canUseAsAutomaticResult;
+        public bool CanUseAsAutomaticResult {
+            get => this.canUseAsAutomaticResult;
+            set => this.RaisePropertyChanged(ref this.canUseAsAutomaticResult, value);
+        }
+
+        public DialogButton(MessageDialog dialog, string actionType, string text, bool canUseAsAutomaticResult) {
+            this.Dialog = dialog ?? throw new ArgumentNullException(nameof(dialog));
+            this.text = text ?? "";
             this.ActionType = actionType;
             this.Command = new AsyncRelayCommand(this.OnClickedAction);
             this.canUseAsAutomaticResult = canUseAsAutomaticResult;
@@ -41,6 +58,12 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             }
 
             return Task.CompletedTask;
+        }
+
+        public virtual DialogButton Clone(MessageDialog dialog) {
+            return new DialogButton(dialog, this.ActionType, this.Text, this.CanUseAsAutomaticResult) {
+                IsEnabled = this.IsEnabled, ToolTip = this.ToolTip
+            };
         }
     }
 }

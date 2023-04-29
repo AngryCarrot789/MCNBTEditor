@@ -85,6 +85,9 @@
     <Compile Include="Controls\HighlightableTextBlock.cs" />
     <Compile Include="Controls\IconTextPair.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
+    <Compile Include="Converters\BoolConverterAND.cs" />
+    <Compile Include="Converters\ChainValueConverter.cs" />
+    <Compile Include="Converters\EmptyStringToBoolConverter.cs" />
     <Compile Include="Converters\EnumConverter.cs" />
     <Compile Include="Converters\NullConverter.cs" />
     <Compile Include="Converters\SingletonValueConverter.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Views\Message\MessageWindow.xaml.cs">
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Message\ThingyConverter.cs" />
     <Compile Include="Views\NBT\Finding\FindFlags.cs" />
     <Compile Include="Views\NBT\Finding\FindNBTWindow.xaml.cs">
       <DependentUpon>FindNBTWindow.xaml</DependentUpon>

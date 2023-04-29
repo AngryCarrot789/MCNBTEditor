@@ -69,7 +69,9 @@ namespace MCNBTEditor {
             string debugPath = @"C:\Users\kettl\Desktop\TheRareCarrot.dat";
             if (window.DataContext is MainViewModel mvm && File.Exists(debugPath)) {
                 // mvm.LoadFile(@"C:\Users\kettl\Desktop\TheRareCarrot.dat");
-                await mvm.LoadFileAction(debugPath);
+                await mvm.LoadFilesAction(new string[1] {
+                    debugPath
+                }, true);
             }
         }
     }

@@ -126,10 +126,10 @@ namespace MCNBTEditor.Core.Utils {
         public void ClearAndAddRange(IEnumerable<T> enumerable) {
             if (enumerable == null)
                 throw new ArgumentNullException(nameof(enumerable));
-            this.CheckReentrancy();
             if (this.UseRangeActions) {
+                this.CheckReentrancy();
                 this.Items.Clear();
-                this.InsertRangeInternal(0, enumerable);
+                this.InsertRangeInternalNonRanged(0, enumerable);
             }
             else {
                 this.ClearItems();

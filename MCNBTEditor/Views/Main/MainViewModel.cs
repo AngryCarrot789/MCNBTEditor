@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using MCNBTEditor.Core;
 using MCNBTEditor.Core.Explorer;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Explorer.Regions;
-using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Utils;
+using MCNBTEditor.Core.Views.Dialogs.Message;
 using MCNBTEditor.Views.FilePicking;
 using Microsoft.Win32;
 
@@ -91,72 +87,104 @@ namespace MCNBTEditor.Views.Main {
                     }
                 }
 
-                foreach (string file in ofd.FileNames) {
-                    if (!existing.Contains(file)) {
-                        await this.LoadFileAction(file, false);
-                    }
-                }
+                await this.LoadFilesAction(ofd.FileNames, false);
             }
         }
 
-        public async Task LoadFileAction(string path, bool checkAlreadyAdded = true) {
-            if (checkAlreadyAdded) {
-                BaseTreeItemViewModel found = this.Root.FindChild(x => x is IHaveFilePath j && j.FilePath == path);
-                if (found != null) {
-                    bool result = await IoC.MessageDialogs.ShowYesNoDialogAsync("Item already added", path + " was already added. Do you want to replace it with the new file?");
-                    if (result) {
-                        this.Root.RemoveItem(found);
-                    }
-                    else {
-                        return;
-                    }
-                }
+        public async Task LoadFilesAction(string[] paths, bool checkAlreadyAdded) {
+            int endIndex = paths.Length - 1;
+            if (endIndex < 0) {
+                return;
             }
 
-            string extension = Path.GetExtension(path);
-            switch (extension) {
-                case ".mca": {
-                    RegionFileViewModel vm = new RegionFileViewModel() {
-                        FilePath = path,
-                        IsBigEndian = this.IsBigEndianDefault
-                    };
+            bool isLoadingMultiple = endIndex > 0;
+            List<BaseTreeItemViewModel> added = new List<BaseTreeItemViewModel>();
+            using (MessageDialogs.ItemAlreadyExistsDialog.Use()) {
+                MessageDialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = isLoadingMultiple;
+                if (!isLoadingMultiple) {
+                    MessageDialogs.ItemAlreadyExistsDialog.RemoveButtonAt(3);
+                }
 
-                    this.Root.AddItem(vm); // add before loading to see the entry counter + the IsLoading property working ;)
-                    try {
-                        await vm.RefreshAction();
-                    }
-                    catch (Exception e) {
-                        this.Root.RemoveItem(vm);
-                        try {
-                            vm.Dispose();
+                for (int i = 0; i <= endIndex; i++) {
+                    string path = paths[i];
+                    if (checkAlreadyAdded) {
+                        BaseTreeItemViewModel found = this.Root.FindChild(x => x is IHaveFilePath j && j.FilePath == path);
+                        if (found != null) {
+                            string result = await MessageDialogs.ItemAlreadyExistsDialog.ShowAsync("Item already added", path + " was already added. Do you want to replace it with the new file?");
+                            if (result == null) {
+                                foreach (BaseTreeItemViewModel item in added) {
+                                    if (item is IDisposable disposable) {
+                                        try {
+                                            disposable.Dispose();
+                                        }
+                                        catch { /* ignored */ }
+                                    }
+
+                                    this.Root.RemoveItem(item);
+                                }
+
+                                return;
+                            }
+                            else if (result == "replace") {
+                                this.Root.RemoveItem(found);
+                            }
+                            else if (result == "ignore") {
+                                continue;
+                            }
                         }
-                        catch { /* ignored */ }
-                        await IoC.MessageDialogs.ShowMessageAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
                     }
 
-                    break;
-                }
-                case ".dat": {
-                    TagDataFileViewModel file = new TagDataFileViewModel(Path.GetFileName(path)) {
-                        IsCompressed = this.IsCompressedDefault,
-                        IsBigEndian = this.IsBigEndianDefault,
-                        FilePath = path
-                    };
+                    string extension = Path.GetExtension(path);
+                    switch (extension) {
+                        case ".mca": {
+                            RegionFileViewModel vm = new RegionFileViewModel() {
+                                FilePath = path,
+                                IsBigEndian = this.IsBigEndianDefault
+                            };
 
-                    this.Root.AddItem(file);
-                    try {
-                        await file.RefreshAction();
-                    }
-                    catch (Exception e) {
-                        this.Root.RemoveItem(file);
-                        await IoC.MessageDialogs.ShowMessageAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
-                    }
+                            added.Add(vm);
+                            this.Root.AddItem(vm); // add before loading to see the entry counter + the IsLoading property working ;)
+                            try {
+                                await vm.RefreshAction();
+                            }
+                            catch (Exception e) {
+                                this.Root.RemoveItem(vm);
+                                try {
+                                    vm.Dispose();
+                                }
+                                catch {
+                                    /* ignored */
+                                }
 
-                    break;
-                }
-                default: {
-                    await IoC.MessageDialogs.ShowMessageAsync("Unknown file format", $"Unknown file extension: {extension}");
-                    break;
+                                await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                            }
+
+                            break;
+                        }
+                        case ".dat": {
+                            TagDataFileViewModel file = new TagDataFileViewModel(Path.GetFileName(path)) {
+                                IsCompressed = this.IsCompressedDefault,
+                                IsBigEndian = this.IsBigEndianDefault,
+                                FilePath = path
+                            };
+
+                            added.Add(file);
+                            this.Root.AddItem(file);
+                            try {
+                                await file.RefreshAction();
+                            }
+                            catch (Exception e) {
+                                this.Root.RemoveItem(file);
+                                await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                            }
+
+                            break;
+                        }
+                        default: {
+                            await MessageDialogs.UnknownFileFormatDialog.ShowAsync("Unknown file format", $"Unknown file extension: {extension}");
+                            break;
+                        }
+                    }
                 }
             }
         }

@@ -12,6 +12,7 @@ namespace MCNBTEditor.Core {
             get => this.isEnabled;
             set {
                 this.isEnabled = value;
+                this.RaiseCanExecuteChanged();
             }
         }
 
