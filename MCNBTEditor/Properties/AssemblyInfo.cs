@@ -6,7 +6,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MCNBTEditor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A Minecraft NBT editor, targeted at mainly version 1.6.4")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MCNBTEditor")]

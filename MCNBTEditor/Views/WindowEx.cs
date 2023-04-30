@@ -107,7 +107,7 @@ namespace MCNBTEditor.Views {
 
         protected override void OnPreviewKeyDown(KeyEventArgs e) {
             base.OnPreviewKeyDown(e);
-            if (this.CanCloseWithEscapeKey) {
+            if (e.Key == Key.Escape && this.CanCloseWithEscapeKey) {
                 e.Handled = true;
                 this.Close();
             }

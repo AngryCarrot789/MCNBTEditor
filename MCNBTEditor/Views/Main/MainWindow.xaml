@@ -18,7 +18,8 @@
                   TitlebarBrush="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
                   BorderBrush="DodgerBlue"
                   fg:UIFocusGroup.IsGlobalShortcutFocusTarget="True"
-                  fg:UIFocusGroup.FocusGroupPath="Application/EditorView">
+                  fg:UIFocusGroup.FocusGroupPath="Application/EditorView"
+                  CanCloseWithEscapeKey="False">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibleOrCollapsed" TrueValue="Visible" FalseValue="Collapsed"/>
         <ui:ListFallbackSourceConverter x:Key="FallbackConverter"/>
