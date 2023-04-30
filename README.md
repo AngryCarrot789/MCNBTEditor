@@ -3,6 +3,9 @@ An NBT and Region File editor for minecraft (still WIP), made using MVVM
 
 This is a remake of an app I previously made called MCNBTViewer, but there was so much code to convert and fix that I just gave up and restarted the entire project
 
+## Preview
+![](3k0xdGweuD.png)
+
 ## Building/Compiling
 
 To build this project, you need to download and compile a stream utility class I wrote called REghZy.Streams (found at https://github.com/AngryCarrot789/REghZyUtilsCS/tree/master/REghZy.Streams). I'm using this
