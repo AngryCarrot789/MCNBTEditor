@@ -2,10 +2,25 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.NBT;
+using MCNBTEditor.Core.Views.Dialogs.UserInputs;
 
 namespace MCNBTEditor.Core.Explorer.NBT {
     public class TagCompoundViewModel : BaseTagCollectionViewModel {
+        public InputValidator NameValidator { get; }
+
         public TagCompoundViewModel(string name = null) : base(name, NBTType.Compound) {
+            this.NameValidator = InputValidator.FromFunc(input => {
+                if (string.IsNullOrEmpty(input)) {
+                    return "Input cannot be an empty string";
+                }
+
+                BaseTagViewModel first = this.FindChildTagByName(input);
+                if (first != null) {
+                    return "A tag already exists with that name: " + first;
+                }
+
+                return null;
+            });
         }
 
         public override async Task PasteBinaryTagDataAction(string name, NBTBase nbt) {

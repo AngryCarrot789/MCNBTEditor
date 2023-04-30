@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace MCNBTEditor.Core.AdvancedContextService {
+namespace MCNBTEditor.Core.Shortcuts {
     public static class ShortcutUtils {
         public static string[] ToFull(string parent, params string[] children) {
             string[] array = new string[children.Length];

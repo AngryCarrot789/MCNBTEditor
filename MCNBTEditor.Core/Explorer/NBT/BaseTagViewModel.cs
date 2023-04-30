@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.NBT;
+using MCNBTEditor.Core.Shortcuts;
 using MCNBTEditor.Core.Utils;
 using MCNBTEditor.Core.Views.Dialogs.UserInputs;
 
@@ -26,7 +27,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
 
         public BaseTagCollectionViewModel ParentTag => this.ParentItem as BaseTagCollectionViewModel;
 
-        public NBTType NBTType { get; }
+        public NBTType TagType { get; }
 
         protected string name;
         public string Name {
@@ -43,7 +44,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
 
         protected BaseTagViewModel(string name, NBTType type) {
             this.Name = name;
-            this.NBTType = type;
+            this.TagType = type;
             this.RemoveFromParentCommand = new RelayCommand(() => this.RemoveFromParentItem(false), () => this.RemoveFromParentItem(true));
             this.CopyNameCommand = new AsyncRelayCommand(async () => {
                 await ClipboardUtils.SetClipboardOrShowErrorDialog(this.Name ?? "");
@@ -124,15 +125,20 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                 return;
             }
 
-            string newName = await IoC.UserInput.ShowSingleInputDialog("Rename tag", "Input a new name for this element", this.Name ?? "", InputValidator.FromFunc(input => {
+            InputValidator validator = InputValidator.FromFunc(input => {
+                if (string.IsNullOrEmpty(input)) {
+                    return "Input cannot be an empty string";
+                }
+
                 BaseTagViewModel first = compound.FindChildTagByName(input);
                 if (first != null) {
                     return "A tag already exists with that name: " + first;
                 }
 
                 return null;
-            }));
+            });
 
+            string newName = await IoC.TagEditorService.EditTagNameAsync($"Rename NBTTag{this.TagType}", "Input a new name for this element", validator, this.Name ?? "");
             if (newName != null) {
                 this.Name = newName;
             }
@@ -146,7 +152,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
         }
 
         public override string ToString() {
-            return $"{this.GetType()} ({this.NBTType.ToString()})";
+            return $"{this.GetType()} ({this.TagType})";
         }
 
         public virtual void OnRemovedFromParent() {
@@ -181,10 +187,15 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                 list.Add(SeparatorEntry.Instance);
             }
 
-            list.Add(new ShortcutCommandContextEntry(new List<string>{"Application/EditorView/NBTTag/RenameShortcut1", "Application/EditorView/NBTTag/RenameShortcut2"}, this.RenameCommand));
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyNameShortcut", this.CopyNameCommand));
-            if (this is TagPrimitiveViewModel primitive) {
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyValueShortcut", primitive.CopyValueCommand));
+            if (this is TagPrimitiveViewModel p2) {
+                list.Add(new CommandContextEntry("Edit Value", p2.EditGeneralCommand));
+                list.Add(new ShortcutCommandContextEntry(ShortcutUtils.ToFull("Application/EditorView/NBTTag", "RenameShortcut1", "RenameShortcut2"), this.RenameCommand));
+                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyNameShortcut", this.CopyNameCommand));
+                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyValueShortcut", p2.CopyValueCommand));
+            }
+            else {
+                list.Add(new ShortcutCommandContextEntry(ShortcutUtils.ToFull("Application/EditorView/NBTTag", "RenameShortcut1", "RenameShortcut2"), this.RenameCommand));
+                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyNameShortcut", this.CopyNameCommand));
             }
 
             list.Add(new CommandContextEntry("Copy (Binary)", this.CopyBinaryToClipboardCommand));

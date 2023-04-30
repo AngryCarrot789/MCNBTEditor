@@ -68,7 +68,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                     this.IsAlwaysUseNextResultForCurrentQueueChecked = false;
                 }
 
-                foreach (DialogButton button in this.Buttons) {
+                foreach (DialogButton button in this.buttons) {
                     button.UpdateState();
                 }
             }
@@ -126,6 +126,12 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 this.EnsureNotReadOnly();
                 this.RaisePropertyChanged(ref this.defaultResult, value);
             }
+        }
+
+        private string preFocusedActionId;
+        public string PreFocusedActionId {
+            get => this.preFocusedActionId;
+            set => this.RaisePropertyChanged(ref this.preFocusedActionId, value);
         }
 
         /// <summary>
@@ -267,14 +273,17 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         /// <returns></returns>
         public virtual MessageDialog Clone() {
             MessageDialog dialog = new MessageDialog() {
-                Titlebar = this.Titlebar,
-                Header = this.Header,
-                Message = this.Message,
-                AutomaticResult = this.AutomaticResult,
+                titlebar = this.titlebar,
+                header = this.header,
+                message = this.message,
+                automaticResult = this.automaticResult,
+                ShowAlwaysUseNextResultOption = this.ShowAlwaysUseNextResultOption,
                 IsAlwaysUseNextResultChecked = this.IsAlwaysUseNextResultChecked,
-                ShowAlwaysUseNextResultOption = this.ShowAlwaysUseNextResultOption
+                preFocusedActionId = this.preFocusedActionId,
+                defaultResult = this.defaultResult
             };
-            foreach (DialogButton button in this.Buttons)
+
+            foreach (DialogButton button in this.buttons)
                 dialog.buttons.Add(button.Clone(dialog));
             return dialog;
         }
@@ -313,6 +322,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             private readonly bool oldShowAlwaysUseNextResult;
             private readonly bool oldCanShowAlwaysUseNextResultForQueue;
             private readonly string oldDefaultResult;
+            private readonly string oldPreFocusedActionId;
             private readonly bool isReadOnly;
 
             public MessageDialog Dialog { get; }
@@ -331,6 +341,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 this.oldButtons = dialog.Buttons.ToList();
                 this.oldAutoResult = dialog.AutomaticResult;
                 this.oldDefaultResult = dialog.DefaultResult;
+                this.oldPreFocusedActionId = dialog.PreFocusedActionId;
             }
 
             /// <summary>
@@ -361,6 +372,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 this.Dialog.CanShowAlwaysUseNextResultForCurrentQueueOption = this.oldCanShowAlwaysUseNextResultForQueue;
                 this.Dialog.IsAlwaysUseNextResultChecked = this.oldAlwaysUseNextResult;
                 this.Dialog.DefaultResult = this.oldDefaultResult;
+                this.Dialog.PreFocusedActionId = this.oldPreFocusedActionId;
             }
         }
     }

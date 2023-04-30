@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MCNBTEditor.Views.NBT.Editor {
     /// <summary>
@@ -19,6 +20,12 @@ namespace MCNBTEditor.Views.NBT.Editor {
     public partial class TagPrimitiveEditorWindow : BaseDialog {
         public TagPrimitiveEditorWindow() {
             InitializeComponent();
+            this.ContentRendered += this.TagPrimitiveEditorWindow_ContentRendered;
+        }
+
+        private void TagPrimitiveEditorWindow_ContentRendered(object sender, EventArgs e) {
+            this.SizeToContent = SizeToContent.Manual;
+            this.Height = Math.Ceiling(this.Height + 2);
         }
     }
 }

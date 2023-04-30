@@ -14,4 +14,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Finding" />
+  </ItemGroup>
+
 </Project>

@@ -51,7 +51,7 @@
     <DataTemplate x:Key="FindTemplateArrayTemplate" DataType="{x:Type f:NBTMatchResult}">
         <DockPanel Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
             <TextBlock Text="{Binding NBT, Converter={StaticResource NBTPathConverter}}" DockPanel.Dock="Right" FontStyle="Italic"/>
-            <Image Source="{Binding NBT.NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <Image Source="{Binding NBT.TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0" FontFamily="Consolas">
                 <ap:TextBlockHelper.BindableInlines>
                     <MultiBinding Converter="{StaticResource InlinesTagNameValueConverter}">
@@ -68,7 +68,7 @@
     <DataTemplate x:Key="FindTemplatePrimitive" DataType="{x:Type f:NBTMatchResult}">
         <DockPanel Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
             <TextBlock Text="{Binding NBT, Converter={StaticResource NBTPathConverter}}" DockPanel.Dock="Right" FontStyle="Italic"/>
-            <Image Source="{Binding NBT.NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <Image Source="{Binding NBT.TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0" FontFamily="Consolas">
                 <ap:TextBlockHelper.BindableInlines>
                     <MultiBinding Converter="{StaticResource InlinesTagNameValueConverter}">

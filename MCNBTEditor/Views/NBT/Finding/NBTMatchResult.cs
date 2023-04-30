@@ -43,7 +43,7 @@ namespace MCNBTEditor.Views.NBT.Finding {
         }
 
         private async Task NavigateToItemAction() {
-            await IoC.TreeView.RepeatExpandHierarchyFromRootAsync(this.NBT.GetParentTagChain());
+            await IoC.TreeView.RepeatExpandHierarchyFromRootAsync(this.NBT.GetParentChain(false));
         }
 
         public void GetContext(List<IContextEntry> list) {

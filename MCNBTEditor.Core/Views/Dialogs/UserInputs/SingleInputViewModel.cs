@@ -2,7 +2,7 @@
 using MCNBTEditor.Core.Views.ViewModels;
 
 namespace MCNBTEditor.Core.Views.Dialogs.UserInputs {
-    public class SingleInputViewModel : BaseConfirmableDialogViewModel, IErrorInfoHandler {
+    public class SingleInputViewModel : BaseConfirmableDialogViewModel {
         private string title;
         public string Title {
             get => this.title;
@@ -25,10 +25,6 @@ namespace MCNBTEditor.Core.Views.Dialogs.UserInputs {
 
         public SingleInputViewModel() {
 
-        }
-
-        public void OnErrorsUpdated(Dictionary<string, object> errors) {
-            this.ConfirmCommand.IsEnabled = errors.Count < 1;
         }
     }
 }

@@ -78,7 +78,9 @@
                 </ToggleButton>
             </Grid>
         </Border>
-        <TextBox Text="{Binding SearchForValueText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="-1,63,78,0" Height="28" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" Padding="5,3" VerticalContentAlignment="Center"
+        <TextBox Text="{Binding SearchForValueText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="-1,63,78,0" Height="28" 
+                 BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" 
+                 Padding="5,3" VerticalContentAlignment="Center"
                  tap:TextHinting.ShowWhenFocused="True" Tag="Input the value of the Tag here (array element separated with commas)"
                  Style="{DynamicResource HintedTextBox}"/>
         <Border Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0 1 0 1" Margin="0,63,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Width="78">
@@ -115,28 +117,37 @@
                 </ToggleButton>
             </Grid>
         </Border>
-        <!--  -->
-        <Grid Margin="0,91,0,0" >
-            <TextBlock Text="Enter a tag name and/or value to start a search" 
-                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" 
-                       Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" TextWrapping="Wrap"
-                       Visibility="{Binding IsSearchTermEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisible}}"/>
-            <ListBox ItemsSource="{Binding FoundItems}"
-                     Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"
-                     BorderThickness="0"
-                     ItemTemplateSelector="{StaticResource FindResultSelector}"
-                     HorizontalContentAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     ScrollViewer.CanContentScroll="False"
-                     Visibility="{Binding IsSearchTermEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsed}}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                        <Setter Property="helpers:AttachedInteractivity.DoubleClickCommand" Value="{Binding NavigateToItemCommand}">
+        <DockPanel Margin="0,91,0,0">
+            <Border Visibility="{Binding IsSearchActive, Converter={StaticResource BoolToVisible}}" DockPanel.Dock="Bottom" Height="24" Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,1,0,0">
+                <Grid>
+                    <ProgressBar IsIndeterminate="True" VerticalAlignment="Stretch" Margin="0,0,75,0"
+                                 BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,0,1,0"
+                                 Background="Transparent"/>
+                    <Button Command="{Binding StopSearchCommand, Mode=OneTime}" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="75" BorderThickness="0"/>
+                </Grid>
+            </Border>
+            <Grid>
+                <TextBlock Text="Enter a tag name and/or value to start a search" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" 
+                           Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" TextWrapping="Wrap"
+                           Visibility="{Binding IsSearchTermEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisible}}"/>
+                <ListBox ItemsSource="{Binding FoundItems}"
+                         Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"
+                         BorderThickness="0"
+                         ItemTemplateSelector="{StaticResource FindResultSelector}"
+                         HorizontalContentAlignment="Stretch"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.CanContentScroll="False"
+                         Visibility="{Binding IsSearchTermEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsed}}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                            <Setter Property="helpers:AttachedInteractivity.DoubleClickCommand" Value="{Binding NavigateToItemCommand}">
 
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </Grid>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Grid>
+        </DockPanel>
     </Grid>
 </views:BaseWindow>

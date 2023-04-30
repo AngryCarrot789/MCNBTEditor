@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 namespace MCNBTEditor.Core.Views.Dialogs.Message {
     public interface IMessageDialogService {
         Task ShowMessageAsync(string caption, string message);
+        Task ShowMessageExAsync(string title, string header, string message);
 
         Task ShowMessageAsync(string message);
 

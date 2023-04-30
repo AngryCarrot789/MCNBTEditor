@@ -28,7 +28,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
 
         protected BaseTagCollectionViewModel(string name, NBTType type) : base(name, type) {
             this.SortByTypeCommand = new RelayCommand(() => {
-                List<BaseTagViewModel> list = this.ChildTags.OrderByDescending((a) => a.NBTType).ToList();
+                List<BaseTagViewModel> list = this.ChildTags.OrderByDescending((a) => a.TagType).ToList();
                 this.ApplySort(list);
             });
 
@@ -40,7 +40,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             this.SortByBothCommand = new RelayCommand(() => {
                 List<BaseTagViewModel> list = new List<BaseTagViewModel>(this.ChildTags);
                 list.Sort((a, b) => {
-                    int cmp = a.NBTType.Compare4(b.NBTType);
+                    int cmp = a.TagType.Compare4(b.TagType);
                     return cmp != 0 ? cmp : string.Compare(a.Name ?? "", b.Name ?? "", StringComparison.CurrentCulture);
                 });
 
@@ -52,13 +52,13 @@ namespace MCNBTEditor.Core.Explorer.NBT {
 
         public async Task PasteBinaryTagAction() {
             if (IoC.Clipboard == null) {
-                await MessageDialogs.ClipboardUnavailableDialog.ShowAsync("Clipboard unavailable", "Clipboard is unavailable. Cannot paste");
+                await Dialogs.ClipboardUnavailableDialog.ShowAsync("Clipboard unavailable", "Clipboard is unavailable. Cannot paste");
                 return;
             }
 
             byte[] bytes = IoC.Clipboard.GetBinaryTag("TAG_NBT");
             if (bytes == null || bytes.Length < 1) {
-                await MessageDialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Clipboard did not contain a copied tag");
+                await Dialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Clipboard did not contain a copied tag");
                 return;
             }
 
@@ -70,12 +70,12 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                     result = NBTBase.ReadTag(CompressedStreamTools.CreateInput(stream), 0, out tagName, out nbt);
                 }
                 catch (Exception e) {
-                    await MessageDialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Failed to read NBT from clipboard: " + e.Message);
+                    await Dialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Failed to read NBT from clipboard: " + e.Message);
                     return;
                 }
 
                 if (!result) {
-                    await MessageDialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Clipboard did not contain a valid tag? That's weird...");
+                    await Dialogs.InvalidClipboardDataDialog.ShowAsync("Invalid clipboard", "Clipboard did not contain a valid tag? That's weird...");
                     return;
                 }
 

@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 namespace MCNBTEditor.Core.Explorer {
     public interface IExtendedTree {
         BaseTreeItemViewModel GetSelectedItem();
+
         bool IsItemExpanded(BaseTreeItemViewModel item);
 
         void SetExpanded(BaseTreeItemViewModel nbt);
+
         bool IsExpanded(BaseTreeItemViewModel nbt);
 
         /// <summary>
@@ -21,8 +23,12 @@ namespace MCNBTEditor.Core.Explorer {
         /// <param name="items"></param>
         /// <returns></returns>
         Task<bool> RepeatExpandHierarchyFromRootAsync(IEnumerable<BaseTreeItemViewModel> items);
+
         Task ExpandItemSubTree(BaseTreeItemViewModel item);
+
         bool ExpandHierarchyFromRoot(IEnumerable<BaseTreeItemViewModel> items, bool select = true);
+
+        Task<bool> MainExpandHierarchy(IEnumerable<int> items);
 
         event SelectionChangedEventHandler<BaseTreeItemViewModel> SelectionChanged;
     }

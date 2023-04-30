@@ -13,6 +13,8 @@ using MCNBTEditor.Utils;
 using MCNBTEditor.Views.FilePicking;
 using MCNBTEditor.Views.Main;
 using MCNBTEditor.Views.Message;
+using MCNBTEditor.Views.NBT.Editor;
+using MCNBTEditor.Views.NBT.Selector;
 using MCNBTEditor.Views.UserInputs;
 
 namespace MCNBTEditor {
@@ -31,6 +33,8 @@ namespace MCNBTEditor {
             IoC.Clipboard = new ClipboardService();
             IoC.FilePicker = new FilePickDialogService();
             IoC.UserInput = new UserInputDialogService();
+            IoC.ItemSelectorService = new SelectorService();
+            IoC.TagEditorService = new TagEditorService();
             IoC.ExplorerService = new WinExplorerService();
             IoC.KeyboardDialogs = new KeyboardDialogService();
             IoC.MouseDialogs = new MouseDialogService();

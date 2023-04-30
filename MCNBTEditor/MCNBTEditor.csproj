@@ -77,6 +77,7 @@
     <Compile Include="Controls\ExtendedListBox.cs" />
     <Compile Include="Controls\ExtendedTreeView.cs" />
     <Compile Include="Controls\FileMenu\SaveMenuItem.cs" />
+    <Compile Include="Controls\FocusHelper.cs" />
     <Compile Include="Controls\Helpers\ActionControlHelper.cs" />
     <Compile Include="Controls\Helpers\AttachedInteractivity.cs" />
     <Compile Include="Controls\Helpers\ScrollViewerHelper.cs" />
@@ -164,6 +165,10 @@
       <DependentUpon>MessageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Message\ThingyConverter.cs" />
+    <Compile Include="Views\NBT\Editor\TagEditorService.cs" />
+    <Compile Include="Views\NBT\Editor\TagPrimitiveEditorWindow.xaml.cs">
+      <DependentUpon>TagPrimitiveEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NBT\Finding\FindFlags.cs" />
     <Compile Include="Views\NBT\Finding\FindNBTWindow.xaml.cs">
       <DependentUpon>FindNBTWindow.xaml</DependentUpon>
@@ -175,6 +180,11 @@
     <Compile Include="Views\NBT\Finding\Inlines\HighlightingInlinesConverter.cs" />
     <Compile Include="Views\NBT\Finding\Inlines\InlineHelper.cs" />
     <Compile Include="Views\NBT\Finding\NBTMatchResult.cs" />
+    <Compile Include="Views\NBT\Selector\ItemSelectorViewModel.cs" />
+    <Compile Include="Views\NBT\Selector\ListSelectorWindow.xaml.cs">
+      <DependentUpon>ListSelectorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NBT\Selector\SelectorService.cs" />
     <Compile Include="Views\UserInputs\DoubleUserInputWindow.xaml.cs">
       <DependentUpon>DoubleUserInputWindow.xaml</DependentUpon>
     </Compile>
@@ -252,6 +262,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NBT\Editor\TagPrimitiveEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NBT\Finding\FindNBTWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -259,6 +273,10 @@
     <Page Include="Views\NBT\Finding\NBTFindingStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NBT\Selector\ListSelectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserInputs\DoubleUserInputWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -321,5 +339,6 @@
       <Name>MCNBTEditor.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

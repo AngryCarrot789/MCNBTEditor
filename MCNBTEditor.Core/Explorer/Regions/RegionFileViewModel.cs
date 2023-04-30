@@ -9,7 +9,7 @@ using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Regions;
 
 namespace MCNBTEditor.Core.Explorer.Regions {
-    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IContextProvider, IDisposable {
+    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IHaveTreePath, IContextProvider, IDisposable {
         private string filePath;
         public string FilePath {
             get => this.filePath;
@@ -51,6 +51,8 @@ namespace MCNBTEditor.Core.Explorer.Regions {
         public AsyncRelayCommand ShowInExplorerCommand { get; }
         public AsyncRelayCommand DeleteFileCommand { get; }
         public ICommand RemoveFromParentCommand { get; }
+
+        public string TreePathPartName => this.Name;
 
         public RegionFileViewModel() {
             this.RemoveFromParentCommand = new RelayCommand(() => this.RemoveFromParentItem(), () => this.RemoveFromParentItem(true));

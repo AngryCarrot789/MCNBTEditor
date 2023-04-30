@@ -1,6 +1,7 @@
 using System;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Explorer;
+using MCNBTEditor.Core.Explorer.Dialog;
 using MCNBTEditor.Core.Services;
 using MCNBTEditor.Core.Shortcuts.Dialogs;
 using MCNBTEditor.Core.Shortcuts.Managing;
@@ -21,6 +22,8 @@ namespace MCNBTEditor.Core {
         public static IMessageDialogService MessageDialogs { get; set; }
         public static IFilePickDialogService FilePicker { get; set; }
         public static IUserInputDialogService UserInput { get; set; }
+        public static IItemSelectorService ItemSelectorService { get; set; }
+        public static ITagEditorService TagEditorService { get; set; }
         public static IExplorerService ExplorerService { get; set; }
         public static IKeyboardDialogService KeyboardDialogs { get; set; }
         public static IMouseDialogService MouseDialogs { get; set; }

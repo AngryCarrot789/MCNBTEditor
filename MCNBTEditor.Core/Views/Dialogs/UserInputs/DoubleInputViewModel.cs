@@ -2,7 +2,7 @@
 using MCNBTEditor.Core.Views.ViewModels;
 
 namespace MCNBTEditor.Core.Views.Dialogs.UserInputs {
-    public class DoubleInputViewModel : BaseConfirmableDialogViewModel, IErrorInfoHandler {
+    public class DoubleInputViewModel : BaseConfirmableDialogViewModel {
         private string title;
         private string msgA;
         private string msgB;
@@ -39,10 +39,6 @@ namespace MCNBTEditor.Core.Views.Dialogs.UserInputs {
 
         public DoubleInputViewModel() {
 
-        }
-
-        public void OnErrorsUpdated(Dictionary<string, object> errors) {
-            this.ConfirmCommand.IsEnabled = errors.Count < 1;
         }
     }
 }

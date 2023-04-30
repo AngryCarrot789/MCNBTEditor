@@ -79,7 +79,7 @@ namespace MCNBTEditor.Views.Main {
             tree.SelectionChanged += this.TreeOnSelectionChanged;
             list.SelectionChanged += this.ListOnSelectionChanged;
             this.Root = new RootTreeItemViewModel();
-            this.CreateDatFileCommand = new RelayCommand(() => this.Root.AddItem(new TagDataFileViewModel("New Dat File.dat")));
+            this.CreateDatFileCommand = new RelayCommand(() => this.Root.AddItem(new TagDataFileViewModel($"New {this.Root.ChildrenCount + 1}.dat")));
             this.OpenFileCommand = new AsyncRelayCommand(this.OpenFileAction);
             this.UseItemCommand = new AsyncRelayCommand<BaseTreeItemViewModel>(this.UseItemAction);
         }
@@ -105,6 +105,10 @@ namespace MCNBTEditor.Views.Main {
 
         private void TreeOnSelectionChanged(BaseTreeItemViewModel oldItem, BaseTreeItemViewModel newItem) {
             this.SelectedTreeItem = newItem;
+            if (newItem == null) {
+                newItem = this.Root;
+            }
+
             if (newItem.CanHoldChildren) {
                 this.CurrentFolderItem = newItem;
                 this.PrimaryListSelectedItem = newItem.GetFirstChild<BaseTreeItemViewModel>();
@@ -147,18 +151,17 @@ namespace MCNBTEditor.Views.Main {
 
             bool isLoadingMultiple = endIndex > 0;
             List<BaseTreeItemViewModel> added = new List<BaseTreeItemViewModel>();
-            using (MessageDialogs.ItemAlreadyExistsDialog.Use()) {
-                using (MessageDialogs.UnknownFileFormatDialog.Use()) {
+            using (Dialogs.ItemAlreadyExistsDialog.Use()) {
+                using (Dialogs.UnknownFileFormatDialog.Use()) {
                     if (isLoadingMultiple) {
-                        MessageDialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = true;
-                        MessageDialogs.UnknownFileFormatDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = true;
+                        Dialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = true;
+                        Dialogs.UnknownFileFormatDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = true;
                     }
                     else {
-                        MessageDialogs.ItemAlreadyExistsDialog.RemoveButtonById("cancel");
-                        MessageDialogs.UnknownFileFormatDialog.RemoveButtonById("ignore");
-                        MessageDialogs.UnknownFileFormatDialog.RemoveButtonById("cancel");
-                        MessageDialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = false;
-                        MessageDialogs.UnknownFileFormatDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = false;
+                        Dialogs.ItemAlreadyExistsDialog.RemoveButtonById("cancel");
+                        Dialogs.UnknownFileFormatDialog.RemoveButtonById("cancel");
+                        Dialogs.ItemAlreadyExistsDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = false;
+                        Dialogs.UnknownFileFormatDialog.CanShowAlwaysUseNextResultForCurrentQueueOption = false;
                     }
 
                     for (int i = 0; i <= endIndex; i++) {
@@ -166,7 +169,7 @@ namespace MCNBTEditor.Views.Main {
                         if (checkAlreadyAdded) {
                             BaseTreeItemViewModel found = this.Root.FindChild(x => x is IHaveFilePath j && j.FilePath == path);
                             if (found != null) {
-                                string result = await MessageDialogs.ItemAlreadyExistsDialog.ShowAsync("Item already added", path + " was already added. Do you want to replace it with the new file?");
+                                string result = await Dialogs.ItemAlreadyExistsDialog.ShowAsync("Item already added", path + " was already added. Do you want to replace it with the new file?");
                                 if (result != null && result != "cancel") {
                                     if (result == "replace") {
                                         this.Root.RemoveItem(found);
@@ -212,7 +215,7 @@ namespace MCNBTEditor.Views.Main {
                                     }
                                     catch { /* ignored */ }
 
-                                    await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                                    await Dialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
                                 }
 
                                 break;
@@ -231,13 +234,13 @@ namespace MCNBTEditor.Views.Main {
                                 }
                                 catch (Exception e) {
                                     this.Root.RemoveItem(file);
-                                    await MessageDialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                                    await Dialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
                                 }
 
                                 break;
                             }
                             default: {
-                                await MessageDialogs.UnknownFileFormatDialog.ShowAsync("Unknown file format", $"Unknown file extension: {extension}");
+                                await Dialogs.UnknownFileFormatDialog.ShowAsync("Unknown file format", $"Unknown file extension: {extension}");
                                 break;
                             }
                         }
@@ -247,7 +250,7 @@ namespace MCNBTEditor.Views.Main {
         }
 
         public async Task NavigateToPath(string path) {
-            List<BaseTreeItemViewModel> list = await this.Root.ResolvePathAction(path);
+            List<BaseTreeItemViewModel> list = await BaseTreeItemViewModel.ResolvePathAction(this.Root, path);
             if (list != null && list.Count > 0) {
                 await this.TreeView.RepeatExpandHierarchyFromRootAsync(list);
                 this.CurrentFolderItem = list[list.Count - 1];

@@ -348,9 +348,19 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
         /// </summary>
         /// <returns>The mouse stroke event outcome. True = Handled/Cancelled, False = Ignored/Continue</returns>
         public virtual async Task<bool> OnShortcutActivated(GroupedShortcut shortcut) {
-            if (string.IsNullOrWhiteSpace(shortcut.ActionId) || this.CurrentDataContext == null)
-                return false;
             IDataContext context = this.CurrentDataContext;
+            if (context != null) {
+                foreach (object obj in context.Context) {
+                    if (obj is IShortcutHandler handler && await handler.OnShortcutActivated(this, shortcut)) {
+                        return true;
+                    }
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(shortcut.ActionId) || this.CurrentDataContext == null) {
+                return false;
+            }
+
             if (shortcut.ActionContext != null) {
                 DataContext newCtx = new DataContext();
                 newCtx.Merge(context);

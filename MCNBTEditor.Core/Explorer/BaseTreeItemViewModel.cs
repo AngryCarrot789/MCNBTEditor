@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.Explorer.NBT;
@@ -85,6 +86,19 @@ namespace MCNBTEditor.Core.Explorer {
             do {
                 list.Add(item);
             } while ((item = item.ParentItem) != null && (includeRoot || !item.IsRoot));
+            list.Reverse();
+            return list;
+        }
+
+        public List<int> GetParentChainIndices() {
+            List<int> list = new List<int>();
+            BaseTreeItemViewModel item = this;
+            BaseTreeItemViewModel parent = item.parentItem;
+            while (parent != null) {
+                list.Add(parent.IndexOf(item));
+                parent = (item = parent).parentItem;
+            }
+
             list.Reverse();
             return list;
         }
@@ -257,81 +271,80 @@ namespace MCNBTEditor.Core.Explorer {
             this.ParentItem = parent;
         }
 
-        public async Task<List<BaseTreeItemViewModel>> ResolvePathAction(string path) {
-            try {
-                return await this.ResolvePath(path);
-            }
-            catch (Exception e) {
-                await IoC.MessageDialogs.ShowMessageAsync("Invalid path", e.Message ?? "Failed to resolve path: " + path);
-                return null;
-            }
-        }
-
-        public async Task<List<BaseTreeItemViewModel>> ResolvePath(string path) {
-            int i, j = 0;
-            string name;
-            BaseTreeItemViewModel item = this;
+        public static async Task<List<BaseTreeItemViewModel>> ResolvePathAction(BaseTreeItemViewModel root, string path, bool canUserSelectInvalidReferences = true) {
+            int index, lastIndex = 0;
+            BaseTreeItemViewModel item = root;
             List<BaseTreeItemViewModel> list = new List<BaseTreeItemViewModel>();
-            while ((i = path.IndexOf('/', j)) >= 0) {
-                if (i != 0) { // skip root
-                    name = path.JSubstring(j, i);
-                    item = await item.GetChildByName(name);
+            while ((index = path.IndexOf('/', lastIndex)) >= 0) {
+                if (index != 0) { // skip root
+                    item = await item.GetChildAction(path, lastIndex, index, canUserSelectInvalidReferences);
                     if (item == null) {
-                        throw new Exception(GetNameErrorMessage(name, j == 0 ? "<root>" : path.Substring(0, j - 1)));
+                        return null;
                     }
-                    else if (item is BaseTagCollectionViewModel) {
+                    else if (item.CanHoldChildren) {
                         list.Add(item);
                     }
                     else {
-                        throw new Exception($"Expected collection at '{(j == 0 ? "<root>" : path.Substring(0, i))}', but got {(item is BaseTagViewModel tag ? tag.NBTType.ToString() : item.ToString())}");
+                        await IoC.MessageDialogs.ShowMessageAsync("Invalid path", $"Item at path '{path.Substring(0, index)}' cannot hold children (It is of type {(item is BaseTagViewModel tag ? tag.ToString() : item.ToString())})");
                     }
                 }
 
-                j = i + 1;
+                lastIndex = index + 1;
             }
 
-            item = await item.GetChildByName(name = path.Substring(j));
+            item = await item.GetChildAction(path, lastIndex, path.Length, canUserSelectInvalidReferences);
             if (item == null) {
-                throw new Exception(GetNameErrorMessage(name, j == 0 ? "<root>" : path.Substring(0, j - 1)));
+                return null;
             }
 
             list.Add(item);
             return list;
         }
 
-        public async Task<BaseTreeItemViewModel> GetChildByName(string name) {
-            if (string.IsNullOrEmpty(name)) {
+        public async Task<BaseTreeItemViewModel> GetChildAction(string path, int beginIndex, int endIndex, bool canShowUi) {
+            string name = path.JSubstring(beginIndex, endIndex);
+            if (this.children.Count < 1) {
+                if (canShowUi) {
+                    await IoC.MessageDialogs.ShowMessageAsync("No children available", $"The child at {path.Substring(0, endIndex)} does not contain any children");
+                }
+
                 return null;
             }
 
-            List<BaseTreeItemViewModel> ambiguous = new List<BaseTreeItemViewModel>();
-            foreach (BaseTreeItemViewModel child in this.InternalChildren) {
+            if (string.IsNullOrEmpty(name)) {
+                return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Invalid element in path", $"The path {path.Substring(0, endIndex)} contains an element with an empty name. Select a suitable item to use instead:");
+            }
+
+            List<BaseTreeItemViewModel> items = new List<BaseTreeItemViewModel>();
+            foreach (BaseTreeItemViewModel child in this.children) {
                 if (child is IHaveTreePath pathable && pathable.TreePathPartName == name) {
-                    ambiguous.Add(child);
+                    items.Add(child);
                 }
             }
 
-            if (ambiguous.Count < 1) {
+            if (items.Count < 1) {
                 // finally try to parse the index. the above checks just in case a tag was actually named [3] for example
                 if (name[0] == '[' && name[name.Length - 1] == ']') {
-                    if (int.TryParse(name.Substring(1, name.Length - 2), out int index) && index >= 0 && index < this.InternalChildren.Count) {
-                        return this.InternalChildren[index];
+                    if (int.TryParse(name.Substring(1, name.Length - 2), out int index) && index >= 0 && index < this.children.Count) {
+                        return this.children[index];
+                    }
+                    else {
+                        return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Invalid array element in path", $"{path.Substring(0, endIndex)} is an invalid array. Select a suitable item to use instead:");
                     }
                 }
                 else if (name == UnknownPathElementName) {
-                    // TODO: Show GUI to let the user select the right child
-                    await IoC.MessageDialogs.ShowMessageAsync("Invalid path", "Path contains an unknown element");
+                    return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Unknown element in path", $"Path contains an unknown element in {path.Substring(0, beginIndex)}. Select a suitable item to use instead:");
+                }
+                else {
+                    return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "No such item in path", $"Unknown child at path: {path.Substring(0, endIndex)}. Select a suitable item to use instead:");
                 }
             }
-            else if (ambiguous.Count == 1) {
-                return ambiguous[0];
+            else if (items.Count == 1) {
+                return items[0];
             }
             else {
-                // TODO: Show GUI to let the user select one
-                await IoC.MessageDialogs.ShowMessageAsync("Ambiguous path", $"There are {ambiguous.Count} children with the name '{name}'");
+                return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(items, "Ambiguous path elements", $"There are {items.Count} children with the name '{name}'. Select which one to use:");
             }
-
-            return null;
         }
 
         public static string GetNameErrorMessage(string name, string path) {

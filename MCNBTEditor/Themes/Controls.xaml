@@ -430,14 +430,9 @@
         </Style.Triggers>
     </Style>
 
-    <Grid x:Key="__WINDOW__MAXIMIZED__VALUE__" Width="14" Height="14">
-        <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="3,0,0,3" />
-        <Rectangle StrokeThickness="2" Fill="{DynamicResource Window.Static.Border}" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0,4,4,0" />
-    </Grid>
-
     <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
-        <Setter Property="Background" Value="{DynamicResource Window.Static.Background}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Window.Static.Border}" />
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Deep.3.Background.Static}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Deep.3.Border.Static}" />
         <Setter Property="Foreground" Value="{DynamicResource Window.Static.Foreground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
@@ -446,7 +441,8 @@
                 <!-- In order to have a window shadow, GlassFrameThickness needs to be non-zero which is annoying -->
                 <!-- because the glass frame causes this weird flickering white border when resizing :( -->
                 <!-- Seems like it's the best idea to just put Top to 1 and the rest on 0, because you'll probably notice it less -->
-                <WindowChrome CaptionHeight="26" ResizeBorderThickness="6" CornerRadius="0" GlassFrameThickness="1 0 0 0" NonClientFrameEdges="None" UseAeroCaptionButtons="False" />
+                <WindowChrome CaptionHeight="26" ResizeBorderThickness="6" CornerRadius="0" GlassFrameThickness="1 0 0 0" 
+                              NonClientFrameEdges="None" UseAeroCaptionButtons="False" />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -465,11 +461,26 @@
                                             <Rectangle Width="10" VerticalAlignment="Center" Margin="1 -24 0 0" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
                                         </Button>
 
-                                        <Button x:Name="btnRestore" Background="Transparent" BorderBrush="Transparent" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
-                                            <Grid Width="12" Height="12">
-                                                <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
-                                            </Grid>
-                                        </Button>
+                                        <Grid x:Name="ThingButtons">
+                                            <Button x:Name="btnRestore" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
+                                                <Grid Width="12" Height="12">
+                                                    <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="3,0,0,3" />
+                                                    <Rectangle StrokeThickness="2" Fill="{DynamicResource Window.Static.Border}" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0,4,4,0" />
+                                                </Grid>
+                                            </Button>
+
+                                            <Button x:Name="btnMaximize" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
+                                                <Grid Width="12" Height="12">
+                                                    <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
+                                                </Grid>
+                                            </Button>
+
+                                            <Button x:Name="btnWtfEvenLolol" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event" Content="^"/>
+                                        </Grid>
+
                                         <Button x:Name="btnClose" Background="Transparent" BorderBrush="Transparent" Template="{DynamicResource CloseWindowButton}" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="CloseWindow_Event">
                                             <Grid Margin="0 1 0 0">
                                                 <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
@@ -494,36 +505,35 @@
                             <Setter Property="Visibility" TargetName="WindowResizeGrip" Value="Visible"/>
                         </MultiTrigger>
                         <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="btnRestore" Property="Content" Value="{StaticResource __WINDOW__MAXIMIZED__VALUE__}"/>
+                            <Setter TargetName="btnRestore" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnMaximize" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnWtfEvenLolol" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Normal">
-                            <Setter TargetName="btnRestore" Property="Content">
-                                <Setter.Value>
-                                    <Grid Width="12" Height="12">
-                                        <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
-                                    </Grid>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="btnRestore" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnMaximize" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnWtfEvenLolol" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Minimized">
-                            <Setter TargetName="btnRestore" Property="Content">
-                                <Setter.Value>
-                                    <TextBlock Text="^"/>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="btnRestore" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnMaximize" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnWtfEvenLolol" Property="Visibility" Value="Visible"/>
                         </Trigger>
 
                         <Trigger Property="ResizeMode" Value="NoResize">
-                            <Setter TargetName="btnRestore" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnMinimize" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="CanMinimize">
-                            <Setter TargetName="btnRestore" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnMinimize" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
-                            <Setter TargetName="btnRestore" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnMinimize" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="WindowStyle" Value="ToolWindow">
-                            <Setter TargetName="btnRestore" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="btnMinimize" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -562,11 +572,26 @@
                                             <Rectangle Width="10" VerticalAlignment="Center" Margin="1 -24 0 0" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
                                         </Button>
 
-                                        <Button x:Name="btnRestore" Background="Transparent" BorderBrush="Transparent" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
-                                            <Grid Width="12" Height="12">
-                                                <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
-                                            </Grid>
-                                        </Button>
+                                        <Grid x:Name="ThingButtons">
+                                            <Button x:Name="btnRestore" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
+                                                <Grid Width="12" Height="12">
+                                                    <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="3,0,0,3" />
+                                                    <Rectangle StrokeThickness="2" Fill="{DynamicResource Window.Static.Border}" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0,4,4,0" />
+                                                </Grid>
+                                            </Button>
+
+                                            <Button x:Name="btnMaximize" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
+                                                <Grid Width="12" Height="12">
+                                                    <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
+                                                </Grid>
+                                            </Button>
+
+                                            <Button x:Name="btnWtfEvenLolol" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                                    WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event" Content="^"/>
+                                        </Grid>
+
                                         <Button x:Name="btnClose" Background="Transparent" BorderBrush="Transparent" Template="{DynamicResource CloseWindowButton}" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="CloseWindow_Event">
                                             <Grid Margin="0 1 0 0">
                                                 <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
@@ -591,50 +616,41 @@
                             <Setter Property="Visibility" TargetName="WindowResizeGrip" Value="Visible"/>
                         </MultiTrigger>
                         <Trigger Property="WindowState" Value="Maximized">
-                            <Setter TargetName="btnRestore" Property="Content" Value="{StaticResource __WINDOW__MAXIMIZED__VALUE__}"/>
+                            <Setter TargetName="btnRestore" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnMaximize" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnWtfEvenLolol" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Normal">
-                            <Setter TargetName="btnRestore" Property="Content">
-                                <Setter.Value>
-                                    <Grid Width="12" Height="12">
-                                        <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
-                                    </Grid>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="btnRestore" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnMaximize" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnWtfEvenLolol" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Minimized">
-                            <Setter TargetName="btnRestore" Property="Content">
-                                <Setter.Value>
-                                    <TextBlock Text="^"/>
-                                </Setter.Value>
-                            </Setter>
+                            <Setter TargetName="btnRestore" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnMaximize" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnWtfEvenLolol" Property="Visibility" Value="Visible"/>
                         </Trigger>
 
                         <Trigger Property="ResizeMode" Value="NoResize">
-                            <Setter TargetName="btnRestore" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="btnMinimize" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="CanMinimize">
-                            <Setter TargetName="btnRestore" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnMinimize" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
-                            <Setter TargetName="btnRestore" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="btnMinimize" Property="Visibility" Value="Visible"/>
                         </Trigger>
                         <Trigger Property="WindowStyle" Value="ToolWindow">
-                            <Setter TargetName="btnRestore" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ThingButtons" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="btnMinimize" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="WindowState" Value="Maximized">
-                <Setter Property="BorderThickness" Value="8" />
-            </Trigger>
-            <Trigger Property="WindowState" Value="Normal">
-                <Setter Property="BorderThickness" Value="1" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <ControlTemplate x:Key="CloseWindowButton" TargetType="{x:Type Button}">

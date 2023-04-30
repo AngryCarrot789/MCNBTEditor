@@ -4,7 +4,7 @@ using MCNBTEditor.Utils;
 
 namespace MCNBTEditor.Views.UserInputs {
     public class UserInputDialogService : IUserInputDialogService {
-        public async Task<string> ShowSingleInputDialog(string title = "Input a value", string message = "Input a new valid", string def = null, InputValidator validator = null) {
+        public async Task<string> ShowSingleInputDialogAsync(string title = "Input a value", string message = "Input a new valid", string def = null, InputValidator validator = null) {
             SingleInputViewModel vm = new SingleInputViewModel() {
                 Title = title,
                 Message = message,
@@ -12,10 +12,10 @@ namespace MCNBTEditor.Views.UserInputs {
                 ValidateInput = validator
             };
 
-            return await this.ShowSingleInputDialog(vm) ? vm.Input ?? "" : null;
+            return await this.ShowSingleInputDialogAsync(vm) ? vm.Input ?? "" : null;
         }
 
-        public Task<bool> ShowSingleInputDialog(SingleInputViewModel viewModel) {
+        public bool ShowSingleInputDialog(SingleInputViewModel viewModel) {
             SingleUserInputWindow window = new SingleUserInputWindow {
                 DataContext = viewModel
             };
@@ -25,10 +25,14 @@ namespace MCNBTEditor.Views.UserInputs {
                 window.InputValidationRule.Validator = viewModel.ValidateInput;
             }
 
-            return DispatcherUtils.InvokeAsync(window.Dispatcher, () => window.ShowDialog() == true);
+            return window.ShowDialog() == true;
         }
 
-        public Task<bool> ShowDoubleInputDialog(DoubleInputViewModel viewModel) {
+        public Task<bool> ShowSingleInputDialogAsync(SingleInputViewModel viewModel) {
+            return DispatcherUtils.InvokeAsync(() => this.ShowSingleInputDialog(viewModel));
+        }
+
+        public bool ShowDoubleInputDialog(DoubleInputViewModel viewModel) {
             DoubleUserInputWindow window = new DoubleUserInputWindow {
                 DataContext = viewModel
             };
@@ -38,7 +42,11 @@ namespace MCNBTEditor.Views.UserInputs {
                 window.InputValidationRuleA.Validator = viewModel.ValidateInputA;
             if (viewModel.ValidateInputB != null && window.InputValidationRuleB != null)
                 window.InputValidationRuleB.Validator = viewModel.ValidateInputB;
-            return DispatcherUtils.InvokeAsync(window.Dispatcher, () => window.ShowDialog() == true);
+            return window.ShowDialog() == true;
+        }
+
+        public Task<bool> ShowDoubleInputDialogAsync(DoubleInputViewModel viewModel) {
+            return DispatcherUtils.InvokeAsync(() => this.ShowDoubleInputDialog(viewModel));
         }
     }
 }

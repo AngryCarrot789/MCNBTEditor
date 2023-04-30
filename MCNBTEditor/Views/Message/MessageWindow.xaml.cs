@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Views.Message {
@@ -30,7 +31,9 @@ namespace MCNBTEditor.Views.Message {
                     DialogButton button = dialog.GetButtonById(DODGY_PRIMARY_SELECTION);
                     DODGY_PRIMARY_SELECTION = null;
                     if (button != null && this.ButtonBarList.ItemContainerGenerator.ContainerFromItem(button) is Button btn) {
-                        btn.Focus();
+                        btn.Dispatcher.InvokeAsync(() => {
+                            btn.Focus();
+                        }, DispatcherPriority.Background);
                     }
                 }
 

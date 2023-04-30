@@ -1,7 +1,9 @@
 using System;
 using System.ComponentModel;
+using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Utils;
@@ -12,7 +14,7 @@ namespace MCNBTEditor.Views {
     /// </summary>
     public class WindowEx : Window {
         public static readonly DependencyProperty TitlebarBrushProperty = DependencyProperty.Register("TitlebarBrush", typeof(Brush), typeof(WindowEx), new PropertyMetadata());
-        public static readonly DependencyProperty CanCloseWithActionProperty = DependencyProperty.Register("CanCloseWithAction", typeof(bool), typeof(WindowEx), new PropertyMetadata(true));
+        public static readonly DependencyProperty CanCloseWithEscapeKeyProperty = DependencyProperty.Register("CanCloseWithEscapeKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(true));
 
         [Category("Brush")]
         public Brush TitlebarBrush {
@@ -20,9 +22,9 @@ namespace MCNBTEditor.Views {
             set => this.SetValue(TitlebarBrushProperty, value);
         }
 
-        public bool CanCloseWithAction {
-            get => (bool) this.GetValue(CanCloseWithActionProperty);
-            set => this.SetValue(CanCloseWithActionProperty, value);
+        public bool CanCloseWithEscapeKey {
+            get => (bool) this.GetValue(CanCloseWithEscapeKeyProperty);
+            set => this.SetValue(CanCloseWithEscapeKeyProperty, value);
         }
 
         private bool isInRegularClosingHandler;
@@ -70,13 +72,9 @@ namespace MCNBTEditor.Views {
         /// Closes the window
         /// </summary>
         /// <returns>Whether the window was closed or not</returns>
-        public async Task<bool> CloseAsync() {
-            if (this.Dispatcher.CheckAccess()) {
-                return await this.CloseAsyncInternal();
-            }
-            else {
-                return await await this.Dispatcher.InvokeAsync(this.CloseAsyncInternal);
-            }
+        public Task<bool> CloseAsync() {
+            // return await await Task.Run(async () => await DispatcherUtils.InvokeAsync(this.Dispatcher, this.CloseAsyncInternal));
+            return DispatcherUtils.Invoke(this.Dispatcher, this.CloseAsyncInternal);
         }
 
         private async Task<bool> CloseAsyncInternal() {
@@ -87,7 +85,7 @@ namespace MCNBTEditor.Views {
 
                 try {
                     this.isHandlingAsyncClose = true;
-                    this.Close();
+                    await DispatcherUtils.InvokeAsync(this.Dispatcher, this.Close);
                     return true;
                 }
                 finally {
@@ -107,6 +105,14 @@ namespace MCNBTEditor.Views {
             return Task.FromResult(true);
         }
 
+        protected override void OnPreviewKeyDown(KeyEventArgs e) {
+            base.OnPreviewKeyDown(e);
+            if (this.CanCloseWithEscapeKey) {
+                e.Handled = true;
+                this.Close();
+            }
+        }
+
         [ActionRegistration("actions.views.windows.CloseViewAction")]
         private class CloseViewAction : AnAction {
             public CloseViewAction() : base(() => "Close window", () => "Closes the current window") {
@@ -114,7 +120,7 @@ namespace MCNBTEditor.Views {
             }
 
             public override async Task<bool> ExecuteAsync(AnActionEventArgs e) {
-                if (e.DataContext.TryGetContext(out WindowEx w) && w.CanCloseWithAction) {
+                if (e.DataContext.TryGetContext(out WindowEx w) && w.CanCloseWithEscapeKey) {
                     await w.CloseAsync();
                     return true;
                 }

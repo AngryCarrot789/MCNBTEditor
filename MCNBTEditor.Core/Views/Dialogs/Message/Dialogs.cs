@@ -1,5 +1,8 @@
 namespace MCNBTEditor.Core.Views.Dialogs.Message {
-    public class MessageDialogs {
+    /// <summary>
+    /// A static class that contains some of the general message dialogs
+    /// </summary>
+    public static class Dialogs {
         public static readonly MessageDialog OkDialog;
         public static readonly MessageDialog OkCancelDialog;
         public static readonly MessageDialog YesNoDialog;
@@ -11,24 +14,25 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         public static readonly MessageDialog ClipboardUnavailableDialog;
         public static readonly MessageDialog InvalidClipboardDataDialog;
         public static readonly MessageDialog InvalidPathDialog;
+        public static readonly MessageDialog RemoveDatFileWhenDeletingDialog;
 
-        static MessageDialogs() {
-            YesNoCancelDialog = new MessageDialog();
+        static Dialogs() {
+            YesNoCancelDialog = new MessageDialog {PreFocusedActionId = "yes"};
             YesNoCancelDialog.AddButton("Yes", "yes", true);
             YesNoCancelDialog.AddButton("No", "no", true);
             YesNoCancelDialog.AddButton("Cancel", "cancel", false);
             YesNoCancelDialog.MarkReadOnly();
 
-            YesNoDialog = new MessageDialog();
+            YesNoDialog = new MessageDialog {PreFocusedActionId = "yes"};
             YesNoDialog.AddButton("Yes", "yes", true);
             YesNoDialog.AddButton("No", "no", true);
             YesNoDialog.MarkReadOnly();
 
-            OkDialog = new MessageDialog();
+            OkDialog = new MessageDialog{PreFocusedActionId = "ok"};
             OkDialog.AddButton("OK", "ok", true);
             OkDialog.MarkReadOnly();
 
-            OkCancelDialog = new MessageDialog();
+            OkCancelDialog = new MessageDialog{PreFocusedActionId = "ok"};
             OkCancelDialog.AddButton("OK", "ok", true);
             OkCancelDialog.AddButton("Cancel", "cancel", false);
             OkCancelDialog.MarkReadOnly();
@@ -41,15 +45,14 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             InvalidClipboardDataDialog.ShowAlwaysUseNextResultOption = true;
             InvalidClipboardDataDialog.MarkReadOnly();
 
-            ItemAlreadyExistsDialog = new MessageDialog {ShowAlwaysUseNextResultOption = true};
+            ItemAlreadyExistsDialog = new MessageDialog {ShowAlwaysUseNextResultOption = true, PreFocusedActionId = "replace"};
             ItemAlreadyExistsDialog.AddButton("Replace", "replace", true).ToolTip = "Replace the existing item with the new item";
             ItemAlreadyExistsDialog.AddButton("Add anyway", "keep", true).ToolTip = "Keeps the existing item and adds the new item, resulting in 2 items with the same file path";
             ItemAlreadyExistsDialog.AddButton("Ignore", "ignore", true).ToolTip = "Ignores the file, leaving the existing item as-is";
             ItemAlreadyExistsDialog.AddButton("Cancel", "cancel", false).ToolTip = "Stop adding files and remove all files that have been added";
 
-            UnknownFileFormatDialog = new MessageDialog {ShowAlwaysUseNextResultOption = true};
+            UnknownFileFormatDialog = new MessageDialog {ShowAlwaysUseNextResultOption = true, PreFocusedActionId = "ok"};
             UnknownFileFormatDialog.AddButton("OK", "ok", true);
-            UnknownFileFormatDialog.AddButton("Ignore", "ignore", true);
             UnknownFileFormatDialog.AddButton("Cancel", "cancel", false);
 
             OpenFileFailureDialog = OkDialog.Clone();
@@ -59,6 +62,12 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             InvalidPathDialog = OkDialog.Clone();
             InvalidPathDialog.ShowAlwaysUseNextResultOption = true;
             InvalidPathDialog.MarkReadOnly();
+
+            RemoveDatFileWhenDeletingDialog = new MessageDialog();
+            RemoveDatFileWhenDeletingDialog.ShowAlwaysUseNextResultOption = true;
+            RemoveDatFileWhenDeletingDialog.AddButton("Yes", "yes", false);
+            RemoveDatFileWhenDeletingDialog.AddButton("No", "no", false);
+            RemoveDatFileWhenDeletingDialog.MarkReadOnly();
         }
     }
 }

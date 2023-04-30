@@ -111,7 +111,7 @@
 
     <HierarchicalDataTemplate x:Key="TreeTagArrayTemplate" DataType="{x:Type nbt:BaseTagArrayViewModel}">
         <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
-            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
                     <MultiBinding Converter="{StaticResource NBTArrayInlinesNameConverter}">
@@ -125,7 +125,7 @@
 
     <HierarchicalDataTemplate x:Key="TreeTagPrimitive" DataType="{x:Type nbt:TagPrimitiveViewModel}">
         <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
-            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
                     <MultiBinding Converter="{StaticResource NBTPrimitiveInlinesNameConverter}">
@@ -192,7 +192,7 @@
 
     <DataTemplate x:Key="ListTagArrayTemplate" DataType="{x:Type nbt:BaseTagArrayViewModel}">
         <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
-            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
                     <MultiBinding Converter="{StaticResource NBTArrayInlinesNameConverter}">
@@ -206,7 +206,7 @@
 
     <DataTemplate x:Key="ListTagPrimitive" DataType="{x:Type nbt:TagPrimitiveViewModel}">
         <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
-            <Image Source="{Binding NBTType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
+            <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
                     <MultiBinding Converter="{StaticResource NBTPrimitiveInlinesNameConverter}">
@@ -253,4 +253,18 @@
             <StaticResource ResourceKey="ListTagPrimitive"/>
         </ui:ExtendedListItemTemplateSelector.TagPrimitive>
     </ui:ExtendedListItemTemplateSelector>
+
+    <Style TargetType="{x:Type controls:ExtendedListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource ExtendedListItemSelector}"/>
+        <Setter Property="SelectionMode" Value="Extended"/>
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"/>
+    </Style>
+
+    <Style TargetType="{x:Type controls:ExtendedTreeView}" BasedOn="{StaticResource {x:Type TreeView}}">
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource ExtendedTreeItemSelector}"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource TreeViewItemStretchedContent}"/>
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"/>
+    </Style>
 </ResourceDictionary>

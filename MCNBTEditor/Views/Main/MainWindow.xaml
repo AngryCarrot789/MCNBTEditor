@@ -67,35 +67,24 @@
                     <Grid.Resources>
                         <ui:PathNavigationGeneratorConveter x:Key="PathNavigationGenerator" AcceptItemForPath="True"/>
                     </Grid.Resources>
-
-                    <!--
-                    <c:PathViewer Height="20" SelectedItem="{Binding Explorer.ExplorerList.CurrentFolder, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" FontFamily="Consolas" Padding="5" Margin="0,3,0,0"/>
-                    -->
                     <Border Height="22" VerticalAlignment="Top" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,0,0,0">
                         <TextBlock FontFamily="Consolas" h:TextBlockHelper.BindableInlines="{Binding CurrentFolderItem, Converter={StaticResource PathNavigationGenerator}}"/>
                     </Border>
                     <c:ExtendedListBox x:Name="MainListBox" Margin="0,22,0,0"
-                                       BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"
                                        SelectedItem="{Binding PrimaryListSelectedItem, UpdateSourceTrigger=PropertyChanged}"
                                        UseItemCommand="{Binding UseItemCommand, Mode=OneTime}"
-                                       ItemTemplateSelector="{StaticResource ExtendedListItemSelector}"
                                        BorderThickness="0 1 0 0"
-                                       Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"
-                                       SelectionMode="Extended"
                                        fg:UIFocusGroup.UsageID="List"
                                        fg:UIFocusGroup.FocusGroupPath="Application/EditorView/NBTTag"
                                        ScrollViewer.CanContentScroll="True"
                                        VirtualizingStackPanel.IsVirtualizing="True"
                                        VirtualizingStackPanel.VirtualizationMode="Recycling">
-                        <ListBox.ItemsSource>
+                        <ItemsControl.ItemsSource>
                             <MultiBinding Converter="{StaticResource FallbackConverter}">
                                 <Binding Path="CurrentFolderItem.Children" UpdateSourceTrigger="PropertyChanged"/>
                                 <Binding Path="Root.Children" Mode="OneTime"/>
                             </MultiBinding>
-                        </ListBox.ItemsSource>
-                        <c:ExtendedListBox.Style>
-                            <Style TargetType="{x:Type c:ExtendedListBox}" BasedOn="{StaticResource {x:Type ListBox}}"/>
-                        </c:ExtendedListBox.Style>
+                        </ItemsControl.ItemsSource>
                     </c:ExtendedListBox>
                 </Grid>
             </Border>

@@ -13,6 +13,7 @@ using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Timing;
 using MCNBTEditor.Core.Utils;
 using MCNBTEditor.Core.Views.Windows;
+using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Views.NBT.Finding {
     public class FindViewModel : BaseWindowViewModel, IDisposable {
@@ -110,6 +111,8 @@ namespace MCNBTEditor.Views.NBT.Finding {
             set => this.RaisePropertyChanged(ref this.isSearchActive, value);
         }
 
+        public ICommand StopSearchCommand { get; }
+
         public ObservableCollection<NBTMatchResult> FoundItems { get; }
         private readonly List<NBTMatchResult> queuedResults;
         private int callbackFlag;
@@ -131,6 +134,7 @@ namespace MCNBTEditor.Views.NBT.Finding {
             this.IdleEventService.MinimumTimeSinceInput = TimeSpan.FromMilliseconds(200);
             this.IdleEventService.OnIdle += this.OnTickSearch;
             this.queuedResults = new List<NBTMatchResult>();
+            this.StopSearchCommand = new RelayCommand(() => this.StopTask(), () => this.IsSearchActive);
         }
 
         private void OnInputChanged() {
@@ -189,18 +193,42 @@ namespace MCNBTEditor.Views.NBT.Finding {
         // nf = name flags, vf = value flags
         private async Task TaskMain(string searchName, string searchValue, FindFlags nf, FindFlags vf) {
             try {
-                await this.FindItems(this.Root.Children.ToList(), searchName, searchValue, nf, vf);
+                // Using non-async is much faster... however, adding items to the GUI via the dispatcher call must be done on
+                // background priority because the search function is too fast to the point where it would lag the UI
+
+                // But... the async version is slower due to the async overhead, and as a result of that, it can get away with
+                // adding items on normal dispatcher priority (not background), because the async version is just slow enough
+                // And adding items on background priority in the async version makes it waaay slower than non-async
+
+                // Which technically means, async is faster than non-async in this case (when non-async uses background and async uses normal)
+                await this.FindItemsAsync(this.Root.Children.ToList(), searchName, searchValue, nf, vf);
             }
             catch (Exception e) {
-                Debug.WriteLine(e.ToString());
-                await IoC.MessageDialogs.ShowMessageAsync("Search error", $"An error occurred while searching all files: {e.Message}");
+                await this.HandleTaskMainError(e);
             }
             finally {
                 this.IsSearchActive = false;
             }
         }
 
-        private async Task FindItems(List<BaseTreeItemViewModel> items, string searchName, string searchValue, FindFlags nf, FindFlags vf) {
+        private async Task HandleTaskMainError(Exception e) {
+            string etos = e.ToString();
+            Debug.WriteLine(etos);
+            string msg;
+            if (e is InvalidOperationException) {
+                msg = "This is possibly due to items being modified during a search (added/removed tag, sorting, etc). " +
+                    "\nThe search feature uses multithreading so that the UI doesn't freeze up, but as a result of this, " +
+                    "it opens the possibility of errors when it scans something just as it's being modified." +
+                    "\n\nFull Exception: " + etos;
+            }
+            else {
+                msg = "Full exception: " + etos;
+            }
+
+            await Dialogs.OkDialog.ShowAsync(e.GetType().Name, "An error occurred while searching all files", msg);
+        }
+
+        private async Task FindItemsAsync(List<BaseTreeItemViewModel> items, string searchName, string searchValue, FindFlags nf, FindFlags vf) {
             foreach (BaseTreeItemViewModel child in items) {
                 bool isMatched = false;
                 if (this.stopTask) {
@@ -231,7 +259,44 @@ namespace MCNBTEditor.Views.NBT.Finding {
                     await this.AddItemAsync(new NBTMatchResult((BaseTagViewModel) child, searchName, searchValue, foundValue, nameMatches, valueMatches));
                 }
 
-                await this.FindItems(child.Children.ToList(), searchName, searchValue, nf, vf);
+                await this.FindItemsAsync(child.Children.ToList(), searchName, searchValue, nf, vf);
+            }
+        }
+
+        private void FindItems(List<BaseTreeItemViewModel> items, string searchName, string searchValue, FindFlags nf, FindFlags vf) {
+            foreach (BaseTreeItemViewModel child in items) {
+                bool isMatched = false;
+                if (this.stopTask) {
+                    return;
+                }
+
+                List<TextRange> nameMatches = new List<TextRange>();
+                List<TextRange> valueMatches = new List<TextRange>();
+                if (searchName != null) {
+                    if (child is BaseTagCollectionViewModel childCollection) {
+                        if (!string.IsNullOrEmpty(childCollection.Name) && this.includeCollectionNameMatches) {
+                            isMatched = AcceptName(searchName, childCollection, nf, nameMatches);
+                        }
+                    }
+                    else if (child is BaseTagViewModel tag && !string.IsNullOrEmpty(tag.Name) && AcceptName(searchName, tag, nf, nameMatches)) {
+                        isMatched = true;
+                    }
+                }
+
+                string foundValue = null;
+                if (searchValue != null) {
+                    if (child is TagPrimitiveViewModel || child is BaseTagArrayViewModel) {
+                        isMatched = AcceptValue(searchValue, (BaseTagViewModel) child, vf, valueMatches, out foundValue);
+                    }
+                }
+
+                if (isMatched && (nameMatches.Count > 0 || valueMatches.Count > 0)) {
+                    NBTMatchResult result = new NBTMatchResult((BaseTagViewModel) child, searchName, searchValue, foundValue, nameMatches, valueMatches);
+                    IoC.Dispatcher.InvokeLater(() => this.FoundItems.Add(result), true);
+                    // await this.AddemAsync(new NBTMatchResult((BaseTagViewModel) child, searchName, searchValue, foundValue, nameMatches, valueMatches));
+                }
+
+                this.FindItems(child.Children.ToList(), searchName, searchValue, nf, vf);
             }
         }
 

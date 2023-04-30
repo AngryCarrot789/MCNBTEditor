@@ -18,9 +18,13 @@ namespace MCNBTEditor.Core.Explorer.NBT {
         }
 
         public ICommand CopyValueCommand { get; }
+        public ICommand EditValueCommand { get; }
+        public ICommand EditGeneralCommand { get; }
 
         private TagPrimitiveViewModel(string name, NBTType type, string data) : base(name, type) {
-            this.CopyValueCommand = new RelayCommand(async () => await this.CopyValueAction());
+            this.CopyValueCommand = new AsyncRelayCommand(this.CopyValueAction);
+            this.EditValueCommand = new AsyncRelayCommand(this.EditValueAction);
+            this.EditGeneralCommand = new AsyncRelayCommand(this.EditPrimitiveTagAction);
             this.data = data;
         }
 
@@ -30,14 +34,22 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             }
         }
 
-        private async Task CopyValueAction() {
+        public async Task CopyValueAction() {
             if (this.Data != null) {
                 await ClipboardUtils.SetClipboardOrShowErrorDialog(this.Data);
             }
         }
 
+        public async Task EditValueAction() {
+            await IoC.TagEditorService.EditPrimitiveValueAsync($"Edit NBTTag{this.TagType}", "Edit this tag's value", this.TagType, this.Data);
+        }
+
+        public async Task EditPrimitiveTagAction() {
+            await IoC.TagEditorService.EditPrimitiveTagAsync($"Edit NBTTag{this.TagType}", "Edit this tag", this);
+        }
+
         public override NBTBase ToNBT() {
-            switch (this.NBTType) {
+            switch (this.TagType) {
                 case NBTType.End:    return new NBTTagEnd();
                 case NBTType.Byte:   return new NBTTagByte(byte.Parse(this.data));
                 case NBTType.Short:  return new NBTTagShort(short.Parse(this.data));
@@ -46,12 +58,12 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                 case NBTType.Float:  return new NBTTagFloat(float.Parse(this.data));
                 case NBTType.Double: return new NBTTagDouble(double.Parse(this.data));
                 case NBTType.String: return new NBTTagString(this.data);
-                default: throw new Exception($"This primitive tag has an invalid type: {this.NBTType}. Current class = {this.GetType()}");
+                default: throw new Exception($"This primitive tag has an invalid type: {this.TagType}. Current class = {this.GetType()}");
             }
         }
 
         public override BaseTagViewModel Clone() {
-            return new TagPrimitiveViewModel(this.Name, this.NBTType, this.data);
+            return new TagPrimitiveViewModel(this.Name, this.TagType, this.data);
         }
     }
 }

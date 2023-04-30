@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Utils;
 using MCNBTEditor.Core.Views.Dialogs;
+using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Core.Explorer.NBT {
     public class TagDataFileViewModel : TagCompoundViewModel, IHaveFilePath {
@@ -92,7 +93,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                 }
             }
 
-            if (canRemove && await IoC.MessageDialogs.ShowYesNoDialogAsync("Remove dat file?", "Do you want to also remove the DAT file from the list?")) {
+            if (canRemove && "yes" == await Dialogs.RemoveDatFileWhenDeletingDialog.ShowAsync("Remove dat file?", "Do you want to also remove the DAT file from the list?")) {
                 this.RemoveFromParentItem(false); // removes from root
             }
         }

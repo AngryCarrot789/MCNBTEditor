@@ -1,5 +1,4 @@
-﻿<!DOCTYPE KeyMap SYSTEM "Keymap.xsd">
-<KeyMap>
+﻿<KeyMap>
     <Group Name="Application">
         <Group Name="Views">
             <Shortcut Name="CloseWindowShortcut" ActionId="actions.views.windows.CloseViewAction" Global="true">

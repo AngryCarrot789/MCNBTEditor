@@ -14,7 +14,12 @@ namespace MCNBTEditor.Utils {
         }
 
         public void Invoke(Action action) {
-            this.dispatcher.Invoke(action);
+            if (this.dispatcher.CheckAccess()) {
+                action();
+            }
+            else {
+                this.dispatcher.Invoke(action);
+            }
         }
 
         public void InvokeLater(Action action, bool background = false) {
@@ -22,6 +27,8 @@ namespace MCNBTEditor.Utils {
         }
 
         public T Invoke<T>(Func<T> function) {
+            if (this.dispatcher.CheckAccess())
+                return function();
             return this.dispatcher.Invoke(function);
         }
 

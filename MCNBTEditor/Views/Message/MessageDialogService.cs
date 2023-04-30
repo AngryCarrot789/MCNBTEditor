@@ -7,8 +7,18 @@ using MCNBTEditor.Views.FilePicking;
 
 namespace MCNBTEditor.Views.Message {
     public class MessageDialogService : IMessageDialogService {
-        public async Task ShowMessageAsync(string caption, string message) {
-            await DispatcherUtils.InvokeAsync(() => MessageDialogs.OkDialog.ShowAsync(caption, message));
+        public Task ShowMessageAsync(string caption, string message) {
+            return DispatcherUtils.Invoke(() => {
+                MessageWindow.DODGY_PRIMARY_SELECTION = "ok";
+                return Dialogs.OkDialog.ShowAsync(caption, message);
+            });
+        }
+
+        public Task ShowMessageExAsync(string title, string header, string message) {
+            return DispatcherUtils.Invoke(() => {
+                MessageWindow.DODGY_PRIMARY_SELECTION = "ok";
+                return Dialogs.OkDialog.ShowAsync(title, header, message);
+            });
         }
 
         public Task ShowMessageAsync(string message) {
@@ -18,10 +28,10 @@ namespace MCNBTEditor.Views.Message {
         public async Task<MsgDialogResult> ShowDialogAsync(string caption, string message, MsgDialogType type, MsgDialogResult defaultResult = MsgDialogResult.None) {
             MessageDialog dialog;
             switch (type) {
-                case MsgDialogType.OK:          dialog = MessageDialogs.OkDialog; break;
-                case MsgDialogType.OKCancel:    dialog = MessageDialogs.OkCancelDialog; break;
-                case MsgDialogType.YesNo:       dialog = MessageDialogs.YesNoDialog; break;
-                case MsgDialogType.YesNoCancel: dialog = MessageDialogs.YesNoCancelDialog; break;
+                case MsgDialogType.OK:          dialog = Dialogs.OkDialog; break;
+                case MsgDialogType.OKCancel:    dialog = Dialogs.OkCancelDialog; break;
+                case MsgDialogType.YesNo:       dialog = Dialogs.YesNoDialog; break;
+                case MsgDialogType.YesNoCancel: dialog = Dialogs.YesNoCancelDialog; break;
                 default: throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
 
@@ -47,22 +57,30 @@ namespace MCNBTEditor.Views.Message {
         }
 
         public async Task<bool> ShowYesNoDialogAsync(string caption, string message, bool defaultResult = true) {
-            MessageDialog dialog = MessageDialogs.YesNoDialog;
+            MessageDialog dialog = Dialogs.YesNoDialog;
             string id = defaultResult ? "yes" : "no";
             MessageWindow.DODGY_PRIMARY_SELECTION = id;
             string clickedId = await dialog.ShowAsync(caption, message);
             return clickedId == "yes";
         }
 
-        public async Task<bool?> ShowDialogAsync(MessageDialog dialog) {
+        public bool? ShowDialogMainThread(MessageDialog dialog) {
             MessageWindow window = new MessageWindow {
                 DataContext = dialog
             };
 
+            if (MessageWindow.DODGY_PRIMARY_SELECTION == null) {
+                MessageWindow.DODGY_PRIMARY_SELECTION = dialog.PreFocusedActionId;
+            }
+
             dialog.Dialog = window;
-            bool? result = await window.ShowDialogAsync();
+            bool? result = window.ShowDialog();
             dialog.Dialog = null;
             return result;
+        }
+
+        public Task<bool?> ShowDialogAsync(MessageDialog dialog) {
+            return DispatcherUtils.InvokeAsync(() => this.ShowDialogMainThread(dialog));
         }
     }
 }
