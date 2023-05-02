@@ -6,7 +6,7 @@ namespace MCNBTEditor.Views.UserInputs {
     /// Interaction logic for SingleUserInputWindow.xaml
     /// </summary>
     public partial class SingleUserInputWindow : BaseDialog {
-        public SingleInputValidationRule InputValidationRule => (SingleInputValidationRule) this.Resources["ValidatorInput"];
+        public SimpleInputValidationRule InputValidationRule => (SimpleInputValidationRule) this.Resources["ValidatorInput"];
 
         public SingleUserInputWindow() {
             this.InitializeComponent();

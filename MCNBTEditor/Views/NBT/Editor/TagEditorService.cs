@@ -51,7 +51,7 @@ namespace MCNBTEditor.Views.NBT.Editor {
                 Message = message,
                 TagType = tag.TagType,
                 Value = tag.Data,
-                NameValidator = parent?.NameValidator,
+                NameValidator = parent?.CreateNameValidatorForEdit(tag),
                 Name = tag.Name
             };
 
@@ -70,12 +70,20 @@ namespace MCNBTEditor.Views.NBT.Editor {
             return DispatcherUtils.InvokeAsync(() => this.ShowEditor(model));
         }
 
-        public bool ShowEditor(TagPrimitiveEditorViewModel model) {
+        public bool ShowEditor(TagPrimitiveEditorViewModel vm) {
             TagPrimitiveEditorWindow window = new TagPrimitiveEditorWindow {
-                DataContext = model
+                DataContext = vm
             };
 
-            model.Dialog = window;
+            vm.Dialog = window;
+            if (vm.NameValidator != null && window.NameValidationRule != null) {
+                window.NameValidationRule.Validator = vm.NameValidator;
+            }
+
+            if (vm.ValueValidator != null && window.ValueValidationRule != null) {
+                window.ValueValidationRule.Validator = vm.ValueValidator;
+            }
+
             return window.ShowDialog() == true;
         }
     }

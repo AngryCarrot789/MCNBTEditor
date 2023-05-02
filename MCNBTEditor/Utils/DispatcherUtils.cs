@@ -5,6 +5,16 @@ using System.Windows.Threading;
 
 namespace MCNBTEditor.Utils {
     public static class DispatcherUtils {
+        public static async Task Test() {
+            await Task.CompletedTask.ContinueWith((t) => {
+
+            });
+
+            await Task.CompletedTask;
+            await Task.Delay(1000);
+            await Task.CompletedTask;
+        }
+
         public static Task InvokeAsync(Action action) {
             Application app = Application.Current;
             Dispatcher dispatcher;

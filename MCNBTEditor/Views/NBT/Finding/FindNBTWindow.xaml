@@ -13,7 +13,8 @@
               Style="{DynamicResource CustomWindowStyleEx}"
               Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
               d:DataContext="{d:DesignInstance f:FindViewModel}"
-              BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}">
+              BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"
+              CanCloseWithEscapeKey="True">
     <Window.Resources>
         <converters:InvertBoolConverter x:Key="InvertBoolConverter"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisible" TrueValue="Visible" FalseValue="Collapsed"/>

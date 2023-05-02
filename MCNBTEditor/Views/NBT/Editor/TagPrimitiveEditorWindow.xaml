@@ -9,17 +9,23 @@
                   xmlns:selector="clr-namespace:MCNBTEditor.Views.NBT.Selector"
                   xmlns:c="clr-namespace:MCNBTEditor.Controls"
                   xmlns:acs="clr-namespace:MCNBTEditor.AdvancedContextService"
+                  xmlns:dialog="clr-namespace:MCNBTEditor.Core.Explorer.Dialog;assembly=MCNBTEditor.Core" 
+                  xmlns:userinputs="clr-namespace:MCNBTEditor.Views.UserInputs"
                   mc:Ignorable="d"
                   Title="{Binding Title}" Height="350" Width="420"
                   Style="{DynamicResource CustomWindowStyle}"
                   WindowStartupLocation="CenterOwner"
                   WindowStyle="ToolWindow" ResizeMode="NoResize"
                   Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
-                  d:DataContext="{d:DesignInstance local:TagPrimitiveEditorViewModel}"
-                  SizeToContent="Height">
+                  d:DataContext="{d:DesignInstance dialog:TagPrimitiveEditorViewModel}"
+                  SizeToContent="Height"
+                  CanCloseWithEnterKey="True"
+                  CanCloseWithEscapeKey="True">
     <Window.Resources>
         <converters:NullToVisibilityConverter x:Key="NullToVisConverter" NullValue="Collapsed" NonNullValue="Visible"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisConverter" TrueValue="Visible" FalseValue="Collapsed"/>
+        <userinputs:SimpleInputValidationRule x:Key="NameValidationRule"/>
+        <userinputs:SimpleInputValidationRule x:Key="ValueValidationRule"/>
     </Window.Resources>
     <Grid>
         <DockPanel Margin="0,0,0,44">
@@ -28,12 +34,34 @@
                        TextWrapping="Wrap" FontSize="16"/>
             <Border Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
                     BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,1,0,1"
-                    Padding="10">
+                    Padding="10,5">
                 <StackPanel>
-                    <TextBlock Visibility="{Binding CanEditName, Converter={StaticResource BoolToVisConverter}}" Padding="5,0,5,5" Text="Name:" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"/>
-                    <TextBox   Visibility="{Binding CanEditName, Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Stretch" Padding="5" Text="Name" VerticalAlignment="Top"/>
-                    <TextBlock Visibility="{Binding CanEditValue, Converter={StaticResource BoolToVisConverter}}" Margin="0,10,0,0" Padding="5" Text="Value:" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50"/>
-                    <TextBox   Visibility="{Binding CanEditValue, Converter={StaticResource BoolToVisConverter}}" HorizontalAlignment="Stretch" Padding="5" Text="Value" VerticalAlignment="Top" Margin="0,0,0,5"/>
+                    <!-- Visibility="{Binding CanEditName, Converter={StaticResource BoolToVisConverter}}" -->
+                    <!-- Visibility="{Binding CanEditValue, Converter={StaticResource BoolToVisConverter}}" -->
+                    <Grid Margin="0,5">
+                        <TextBlock Padding="5" Text="Name:" VerticalAlignment="Center" HorizontalAlignment="Left" Width="50"/>
+                        <TextBox x:Name="NameTextBox" HorizontalAlignment="Stretch" Padding="5" VerticalAlignment="Center" Margin="50,0,0,0" Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}">
+                            <TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <StaticResource ResourceKey="NameValidationRule"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+                    <Grid Margin="0,5">
+                        <TextBlock Padding="5" Text="Value:" VerticalAlignment="Center" HorizontalAlignment="Left" Width="50"/>
+                        <TextBox x:Name="ValueTextBox" HorizontalAlignment="Stretch" Padding="5" VerticalAlignment="Center" Margin="50,0,0,0" Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}">
+                            <TextBox.Text>
+                                <Binding Path="Value" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <StaticResource ResourceKey="ValueValidationRule"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
                 </StackPanel>
             </Border>
         </DockPanel>

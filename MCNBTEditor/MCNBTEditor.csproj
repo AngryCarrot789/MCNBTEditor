@@ -198,7 +198,7 @@
     <Compile Include="Views\UserInputs\DoubleUserInputWindow.xaml.cs">
       <DependentUpon>DoubleUserInputWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserInputs\SingleInputValidationRule.cs" />
+    <Compile Include="Views\UserInputs\SimpleInputValidationRule.cs" />
     <Compile Include="Views\UserInputs\SingleUserInputWindow.xaml.cs">
       <DependentUpon>SingleUserInputWindow.xaml</DependentUpon>
     </Compile>

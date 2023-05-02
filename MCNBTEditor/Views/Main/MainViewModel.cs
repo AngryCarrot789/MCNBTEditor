@@ -90,16 +90,18 @@ namespace MCNBTEditor.Views.Main {
                     this.TreeView.ExpandHierarchyFromRoot(item.GetParentChain(false), true);
                     this.CurrentFolderItem = item;
                 }
-                else {
-                    // edit
+                else if (item is TagPrimitiveViewModel primitive) {
+                    await primitive.EditPrimitiveTagAction();
+                    return;
                 }
             }
 
             if (item.CanHoldChildren && item.Children.Count > 0) {
                 await this.TreeView.RepeatExpandHierarchyFromRootAsync(item.GetParentChain(false));
             }
-            else {
-                // edit
+            else if (item is TagPrimitiveViewModel primitive) {
+                await primitive.EditPrimitiveTagAction();
+                return;
             }
         }
 

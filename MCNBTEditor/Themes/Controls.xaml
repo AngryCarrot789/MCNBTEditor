@@ -678,17 +678,21 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="TextBoxErrorTemplate">
-        <StackPanel>
+        <StackPanel IsHitTestVisible="False">
             <Border BorderBrush="#FFF01428" BorderThickness="1">
                 <AdornedElementPlaceholder x:Name="AdornerPlaceholder"/>
             </Border>
-            <Border Background="{DynamicResource TextBox.Static.Background}" BorderBrush="{DynamicResource TextBox.Static.Border}" BorderThickness="1" CornerRadius="3"
-                    MaxWidth="{Binding ElementName=AdornerPlaceholder, Path=ActualWidth}">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="5" Opacity="0.5"/>
-                </Border.Effect>
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" Margin="5,0,0,0" Padding="5"/>
-            </Border>
+            <Grid MaxWidth="{Binding ElementName=AdornerPlaceholder, Path=ActualWidth}">
+                <Border Background="{DynamicResource AREghZyBrush.Primary.2.Background.Static}" 
+                        BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" 
+                        BorderThickness="1" CornerRadius="3"
+                        Opacity="0.8">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" Opacity="0.5"/>
+                    </Border.Effect>
+                </Border>
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" Margin="5,1,1,1" Padding="5" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}" TextWrapping="Wrap"/>
+            </Grid>
         </StackPanel>
     </ControlTemplate>
 

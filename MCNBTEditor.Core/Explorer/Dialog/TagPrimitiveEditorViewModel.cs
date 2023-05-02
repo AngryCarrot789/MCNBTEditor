@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Views.Dialogs.UserInputs;
 using MCNBTEditor.Core.Views.Dialogs;
@@ -65,20 +63,26 @@ namespace MCNBTEditor.Core.Explorer.Dialog {
         public InputValidator ValueValidator { get; }
 
         public TagPrimitiveEditorViewModel() {
-            this.ValueValidator = InputValidator.FromFunc((x) => {
+            this.ValueValidator = InputValidator.FromFunc((input) => {
                 if (!this.CanEditValue) {
                     return null;
                 }
 
                 switch (this.TagType) {
                     case NBTType.End: return null;
-                    case NBTType.Byte: return byte.TryParse(this.Value, out _) ? null : "Invalid byte value";
-                    case NBTType.Short: return short.TryParse(this.Value, out _) ? null : "Invalid short value";
-                    case NBTType.Int: return int.TryParse(this.Value, out _) ? null : "Invalid int value";
-                    case NBTType.Long: return long.TryParse(this.Value, out _) ? null : "Invalid long value";
-                    case NBTType.Float: return float.TryParse(this.Value, out _) ? null : "Invalid float value";
-                    case NBTType.Double: return double.TryParse(this.Value, out _) ? null : "Invalid double value";
-                    case NBTType.String: return null;
+                    case NBTType.Byte: return byte.TryParse(input, out _) ? null : "Invalid byte value";
+                    case NBTType.Short: return short.TryParse(input, out _) ? null : "Invalid short value";
+                    case NBTType.Int: return int.TryParse(input, out _) ? null : "Invalid int value";
+                    case NBTType.Long: return long.TryParse(input, out _) ? null : "Invalid long value";
+                    case NBTType.Float: return float.TryParse(input, out _) ? null : "Invalid float value";
+                    case NBTType.Double: return double.TryParse(input, out _) ? null : "Invalid double value";
+                    case NBTType.String: {
+                        if (!string.IsNullOrEmpty(input) && input.Length > ushort.MaxValue) {
+                            return $"String is too long: {input.Length} > {ushort.MaxValue}";
+                        }
+
+                        return null;
+                    }
                     default: return $"Error: Input tag type ({this.TagType})";
                 }
             });

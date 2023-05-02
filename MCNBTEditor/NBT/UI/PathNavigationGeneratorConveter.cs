@@ -23,7 +23,9 @@ namespace MCNBTEditor.NBT.UI {
                     list = item.GetPathChain().ToList();
                 }
                 else if (value != DependencyProperty.UnsetValue) {
-                    return new List<Inline>();
+                    return new List<Inline>() {
+                        this.CreateSeparator("<root>")
+                    };
                 }
                 else {
                     return DependencyProperty.UnsetValue;

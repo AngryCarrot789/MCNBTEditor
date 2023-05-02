@@ -125,20 +125,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                 return;
             }
 
-            InputValidator validator = InputValidator.FromFunc(input => {
-                if (string.IsNullOrEmpty(input)) {
-                    return "Input cannot be an empty string";
-                }
-
-                BaseTagViewModel first = compound.FindChildTagByName(input);
-                if (first != null) {
-                    return "A tag already exists with that name: " + first;
-                }
-
-                return null;
-            });
-
-            string newName = await IoC.TagEditorService.EditTagNameAsync($"Rename NBTTag{this.TagType}", "Input a new name for this element", validator, this.Name ?? "");
+            string newName = await IoC.TagEditorService.EditTagNameAsync($"Rename NBTTag{this.TagType}", "Input a new name for this element", compound.CreateNameValidatorForEdit(this), this.Name ?? "");
             if (newName != null) {
                 this.Name = newName;
             }

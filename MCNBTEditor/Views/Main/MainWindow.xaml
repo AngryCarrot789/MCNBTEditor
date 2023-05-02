@@ -25,23 +25,23 @@
         <ui:ListFallbackSourceConverter x:Key="FallbackConverter"/>
     </Window.Resources>
     <Grid>
-        <Grid>
+        <Menu Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Create DAT Object" Command="{Binding CreateDatFileCommand, Mode=OneTime}"/>
+                <MenuItem Header="Open File" Command="{Binding OpenFileCommand, Mode=OneTime}"/>
+                <Separator Style="{StaticResource MenuItemSeparator}"/>
+                <MenuItem IsCheckable="True" Header="Is Reading Compressed" IsChecked="{Binding IsCompressedDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading compressed and uncompressed NBT files (may be ignored for some files, e.g. region files)"/>
+                <MenuItem IsCheckable="True" Header="Is Reading Big-Endian" IsChecked="{Binding IsBigEndianDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading binary data in the big-endian and little-endian format. By default, minecraft saves using big-endian because that's what java's DataInputStream and DataOutputStream appear to use"/>
+                <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+            </MenuItem>
+        </Menu>
+        <Grid Margin="0,18,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="7"/>
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.ColumnSpan="2" Margin="0,0,4,0">
-                <Menu Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" VerticalAlignment="Top">
-                    <MenuItem Header="File">
-                        <MenuItem Header="Create DAT Object" Command="{Binding CreateDatFileCommand, Mode=OneTime}"/>
-                        <MenuItem Header="Open File" Command="{Binding OpenFileCommand, Mode=OneTime}"/>
-                        <Separator Style="{StaticResource MenuItemSeparator}"/>
-                        <MenuItem IsCheckable="True" Header="Is Reading Compressed" IsChecked="{Binding IsCompressedDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading compressed and uncompressed NBT files (may be ignored for some files, e.g. region files)"/>
-                        <MenuItem IsCheckable="True" Header="Is Reading Big-Endian" IsChecked="{Binding IsBigEndianDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading binary data in the big-endian and little-endian format. By default, minecraft saves using big-endian because that's what java's DataInputStream and DataOutputStream appear to use"/>
-                        <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
-                    </MenuItem>
-                </Menu>
                 <c:ExtendedTreeView Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
                     BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"
                     BorderThickness="0,1,0,0"
@@ -54,8 +54,7 @@
                     Drop="MainTreeView_Drop" AllowDrop="True"
                     ScrollViewer.CanContentScroll="True"
                     VirtualizingStackPanel.IsVirtualizing="True"
-                    VirtualizingStackPanel.VirtualizationMode="Recycling"
-                    Margin="0,23,0,0"/>
+                    VirtualizingStackPanel.VirtualizationMode="Recycling"/>
                 <TextBlock Text="Drop NBT files here, or press CTRL+N to create a new root tag, or CTRL+O to open a file"
                     TextAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Padding="10,0"
@@ -69,7 +68,7 @@
                         <ui:PathNavigationGeneratorConveter x:Key="PathNavigationGenerator" AcceptItemForPath="True"/>
                     </Grid.Resources>
                     <Border Height="22" VerticalAlignment="Top" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,0,0,0">
-                        <TextBlock FontFamily="Consolas" h:TextBlockHelper.BindableInlines="{Binding CurrentFolderItem, Converter={StaticResource PathNavigationGenerator}}"/>
+                        <TextBlock FontFamily="Consolas" h:TextBlockHelper.BindableInlines="{Binding CurrentFolderItem, Converter={StaticResource PathNavigationGenerator}}" VerticalAlignment="Center" Padding="5,2"/>
                     </Border>
                     <c:ExtendedListBox x:Name="MainListBox" Margin="0,22,0,0"
                                        SelectedItem="{Binding PrimaryListSelectedItem, UpdateSourceTrigger=PropertyChanged}"

@@ -14,7 +14,8 @@ namespace MCNBTEditor.Views {
     /// </summary>
     public class WindowEx : Window {
         public static readonly DependencyProperty TitlebarBrushProperty = DependencyProperty.Register("TitlebarBrush", typeof(Brush), typeof(WindowEx), new PropertyMetadata());
-        public static readonly DependencyProperty CanCloseWithEscapeKeyProperty = DependencyProperty.Register("CanCloseWithEscapeKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(true));
+        public static readonly DependencyProperty CanCloseWithEscapeKeyProperty = DependencyProperty.Register("CanCloseWithEscapeKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(false));
+        public static readonly DependencyProperty CanCloseWithEnterKeyProperty = DependencyProperty.Register("CanCloseWithEnterKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(false));
 
         [Category("Brush")]
         public Brush TitlebarBrush {
@@ -25,6 +26,11 @@ namespace MCNBTEditor.Views {
         public bool CanCloseWithEscapeKey {
             get => (bool) this.GetValue(CanCloseWithEscapeKeyProperty);
             set => this.SetValue(CanCloseWithEscapeKeyProperty, value);
+        }
+
+        public bool CanCloseWithEnterKey {
+            get => (bool) this.GetValue(CanCloseWithEnterKeyProperty);
+            set => this.SetValue(CanCloseWithEnterKeyProperty, value);
         }
 
         private bool isInRegularClosingHandler;
@@ -109,6 +115,12 @@ namespace MCNBTEditor.Views {
             base.OnPreviewKeyDown(e);
             if (e.Key == Key.Escape && this.CanCloseWithEscapeKey) {
                 e.Handled = true;
+                this.DialogResult = false;
+                this.Close();
+            }
+            else if (e.Key == Key.Enter && this.CanCloseWithEnterKey) {
+                e.Handled = true;
+                this.DialogResult = true;
                 this.Close();
             }
         }

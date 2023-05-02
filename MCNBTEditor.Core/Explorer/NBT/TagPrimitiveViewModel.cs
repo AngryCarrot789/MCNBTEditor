@@ -41,11 +41,11 @@ namespace MCNBTEditor.Core.Explorer.NBT {
         }
 
         public async Task EditValueAction() {
-            await IoC.TagEditorService.EditPrimitiveValueAsync($"Edit NBTTag{this.TagType}", "Edit this tag's value", this.TagType, this.Data);
+            await IoC.TagEditorService.EditPrimitiveValueAsync($"Edit NBTTag{this.TagType}'s value", null, this.TagType, this.Data);
         }
 
         public async Task EditPrimitiveTagAction() {
-            await IoC.TagEditorService.EditPrimitiveTagAsync($"Edit NBTTag{this.TagType}", "Edit this tag", this);
+            await IoC.TagEditorService.EditPrimitiveTagAsync($"Edit NBTTag{this.TagType}", null, this);
         }
 
         public override NBTBase ToNBT() {

@@ -15,7 +15,9 @@
             WindowStartupLocation="CenterOwner"
             WindowStyle="ToolWindow" ResizeMode="NoResize"
             Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
-            d:DataContext="{d:DesignInstance local:ItemSelectorViewModel}">
+            d:DataContext="{d:DesignInstance local:ItemSelectorViewModel}"
+            CanCloseWithEnterKey="True"
+            CanCloseWithEscapeKey="True">
     <Window.Resources>
         <converters:NullToVisibilityConverter x:Key="NullToVisConverter" NullValue="Collapsed" NonNullValue="Visible"/>
     </Window.Resources>

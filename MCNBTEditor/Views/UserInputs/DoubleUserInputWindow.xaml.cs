@@ -6,8 +6,8 @@ namespace MCNBTEditor.Views.UserInputs {
     /// Interaction logic for DoubleUserInputWindow.xaml
     /// </summary>
     public partial class DoubleUserInputWindow : BaseDialog {
-        public SingleInputValidationRule InputValidationRuleA => this.Resources["ValidatorInputA"] as SingleInputValidationRule;
-        public SingleInputValidationRule InputValidationRuleB => this.Resources["ValidatorInputB"] as SingleInputValidationRule;
+        public SimpleInputValidationRule InputValidationRuleA => this.Resources["ValidatorInputA"] as SimpleInputValidationRule;
+        public SimpleInputValidationRule InputValidationRuleB => this.Resources["ValidatorInputB"] as SimpleInputValidationRule;
 
         public DoubleUserInputWindow() {
             this.InitializeComponent();

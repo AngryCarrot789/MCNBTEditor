@@ -13,7 +13,8 @@
         Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
         BorderBrush="DodgerBlue" 
         Style="{DynamicResource NewWindowExStyle}"
-        TitlebarBrush="{DynamicResource AREghZyBrush.Primary.1.Background.Static}">
+        TitlebarBrush="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" 
+        CanCloseWithEscapeKey="True">
     <Grid>
         <Grid.Resources>
             <converters:KeyStrokeStringConverter x:Key="KeyStrokeRepresentationConverter"/>

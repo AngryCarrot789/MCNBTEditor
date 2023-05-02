@@ -11,12 +11,27 @@ namespace MCNBTEditor.Core.Explorer.NBT {
         public TagCompoundViewModel(string name = null) : base(name, NBTType.Compound) {
             this.NameValidator = InputValidator.FromFunc(input => {
                 if (string.IsNullOrEmpty(input)) {
-                    return "Input cannot be an empty string";
+                   return "Input cannot be an empty string";
                 }
 
                 BaseTagViewModel first = this.FindChildTagByName(input);
                 if (first != null) {
-                    return "A tag already exists with that name: " + first;
+                    return "A tag already exists with that name: " + input;
+                }
+
+                return null;
+            });
+        }
+
+        public InputValidator CreateNameValidatorForEdit(BaseTagViewModel editing) {
+            return InputValidator.FromFunc(input => {
+                if (string.IsNullOrEmpty(input)) {
+                    return "Input cannot be an empty string";
+                }
+
+                BaseTagViewModel first = this.FindChildTagByName(input);
+                if (first != null && first != editing) {
+                    return "A tag already exists with that name: " + input;
                 }
 
                 return null;
@@ -41,9 +56,9 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             NBTTagCompound tag = new NBTTagCompound();
             foreach (BaseTagViewModel item in this.ChildTags) {
                 NBTBase nbt = item.ToNBT();
-                if (nbt.TagType != 0) {
+                if (nbt.TagType != NBTType.End) {
                     if (string.IsNullOrEmpty(item.Name)) {
-                        throw new Exception("Tag name cannot be null or empty: " + item);
+                        throw new Exception($"A child tag's name was null or empty: {item} ({item.TagType})");
                     }
 
                     tag.map[item.Name] = nbt;
