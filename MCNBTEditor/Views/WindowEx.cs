@@ -7,12 +7,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Utils;
+using MCNBTEditor.Views.NBT;
 
 namespace MCNBTEditor.Views {
     /// <summary>
     /// An extended window which adds support for a few of the things in the dark theme I made (e.g. Titlebar brush)
     /// </summary>
-    public class WindowEx : Window {
+    public class WindowEx : BaseWindowEx {
         public static readonly DependencyProperty TitlebarBrushProperty = DependencyProperty.Register("TitlebarBrush", typeof(Brush), typeof(WindowEx), new PropertyMetadata());
         public static readonly DependencyProperty CanCloseWithEscapeKeyProperty = DependencyProperty.Register("CanCloseWithEscapeKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(false));
         public static readonly DependencyProperty CanCloseWithEnterKeyProperty = DependencyProperty.Register("CanCloseWithEnterKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(false));
@@ -113,14 +114,8 @@ namespace MCNBTEditor.Views {
 
         protected override void OnPreviewKeyDown(KeyEventArgs e) {
             base.OnPreviewKeyDown(e);
-            if (e.Key == Key.Escape && this.CanCloseWithEscapeKey) {
+            if ((e.Key == Key.Escape && this.CanCloseWithEscapeKey) || (e.Key == Key.Enter && this.CanCloseWithEnterKey)) {
                 e.Handled = true;
-                this.DialogResult = false;
-                this.Close();
-            }
-            else if (e.Key == Key.Enter && this.CanCloseWithEnterKey) {
-                e.Handled = true;
-                this.DialogResult = true;
                 this.Close();
             }
         }

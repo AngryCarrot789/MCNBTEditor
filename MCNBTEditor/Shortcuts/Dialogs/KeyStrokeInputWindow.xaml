@@ -5,6 +5,7 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:views1="clr-namespace:MCNBTEditor.Views"
             xmlns:dialogs1="clr-namespace:MCNBTEditor.Core.Views.Dialogs;assembly=MCNBTEditor.Core"
+            xmlns:ap="clr-namespace:MCNBTEditor.Themes.Attached"
             mc:Ignorable="d"
             d:DataContext="{d:DesignInstance dialogs1:BaseConfirmableDialogViewModel}"
             Title="Input a keystroke" Height="190" Width="300"
@@ -14,8 +15,8 @@
     <Grid>
         <TextBlock Margin="10,10,10,0" VerticalAlignment="Top" Padding="2" Text="Press any key combination in here:"/>
         <TextBox x:Name="InputBox" Text="Input" KeyDown="InputBox_KeyDown" Padding="5" VerticalContentAlignment="Center" Margin="10,35,10,64" Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"/>
-        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" Content="OK" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72"/>
+        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="OK" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
+        <Button Command="{Binding CancelCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
         <RadioButton Checked="OnRadioButtonCheckChanged" Unchecked="OnRadioButtonCheckChanged" IsChecked="True" Content="Is key down" HorizontalAlignment="Left" Margin="10,0,0,43" VerticalAlignment="Bottom"/>
         <RadioButton Checked="OnRadioButtonCheckChanged" Unchecked="OnRadioButtonCheckChanged" IsChecked="False" x:Name="IsKeyReleaseCheckBox" Content="Is key up" HorizontalAlignment="Left" Margin="97,0,0,43" VerticalAlignment="Bottom"/>
     </Grid>

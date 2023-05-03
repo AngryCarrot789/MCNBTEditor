@@ -26,7 +26,24 @@ namespace MCNBTEditor.Core.Explorer.Dialog {
         private string value;
         public string Value {
             get => this.value;
-            set => this.RaisePropertyChanged(ref this.value, value);
+            set {
+                if (this.value == value) {
+                    return;
+                }
+
+                this.RaisePropertyChanged(ref this.value, value);
+                if (!this.IsBoolButtonVisible && this.TagType == NBTType.Byte) {
+                    this.IsBoolButtonVisible = true;
+                }
+
+                if (this.IsBoolButtonVisible) {
+                    switch (value) {
+                        case "0": this.IsBooleanChecked = false; break;
+                        case "1": this.IsBooleanChecked = true; break;
+                        default: this.IsBooleanChecked = null; break;
+                    }
+                }
+            }
         }
 
         private bool canEditName;
@@ -39,6 +56,28 @@ namespace MCNBTEditor.Core.Explorer.Dialog {
         public bool CanEditValue {
             get => this.canEditValue;
             set => this.RaisePropertyChanged(ref this.canEditValue, value);
+        }
+
+        private bool? isBooleanChecked;
+        public bool? IsBooleanChecked {
+            get => this.isBooleanChecked;
+            set {
+                if (this.isBooleanChecked != value) {
+                    switch (value) {
+                        case true: this.Value = "1"; break;
+                        case false: this.Value = "0"; break;
+                        case null: this.Value = "2"; break;
+                    }
+
+                    this.RaisePropertyChanged(ref this.isBooleanChecked, value);
+                }
+            }
+        }
+
+        private bool isBoolButtonVisible;
+        public bool IsBoolButtonVisible {
+            get => this.isBoolButtonVisible;
+            set => this.RaisePropertyChanged(ref this.isBoolButtonVisible, value);
         }
 
         private NBTType tagType;
@@ -54,6 +93,7 @@ namespace MCNBTEditor.Core.Explorer.Dialog {
                         throw new ArgumentOutOfRangeException(nameof(value), value, "Type is not primitive: " + value);
                 }
 
+                this.IsBoolButtonVisible = this.tagType == NBTType.Byte;
                 this.RaisePropertyChanged(ref this.tagType, value);
             }
         }

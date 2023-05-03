@@ -12,7 +12,7 @@
         d:DataContext="{d:DesignInstance viewModels:ShortcutManagerViewModel}"
         Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
         BorderBrush="DodgerBlue" 
-        Style="{DynamicResource NewWindowExStyle}"
+        Style="{DynamicResource CustomWindowStyleEx}"
         TitlebarBrush="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" 
         CanCloseWithEscapeKey="True">
     <Grid>

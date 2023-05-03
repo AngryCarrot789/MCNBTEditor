@@ -10,8 +10,8 @@ using TextRange = MCNBTEditor.Core.Utils.TextRange;
 namespace MCNBTEditor.Views.NBT.Finding {
     public class InlinesTagNameArrayConverter : BaseInlineHighlightConverter, IMultiValueConverter {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
-            if (values == null || values.Length != 3) {
-                throw new Exception("Expected 4 values, got " + (values != null ? values.Length.ToString() : "null"));
+            if (values == null || values.Length != 2) {
+                throw new Exception("Expected 2 values, got " + (values != null ? values.Length.ToString() : "null"));
             }
 
             BaseTagViewModel nbt = (BaseTagViewModel) values[0];

@@ -1,21 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
+using MCNBTEditor.Core;
 using MCNBTEditor.Core.Explorer;
+using MCNBTEditor.Core.Utils;
+using MCNBTEditor.Shortcuts;
 
 namespace MCNBTEditor.Controls {
     public class ExtendedTreeView : TreeView, IExtendedTree {
         public static readonly DependencyProperty UseItemCommandProperty = DependencyProperty.Register("UseItemCommand", typeof(ICommand), typeof(ExtendedTreeView), new PropertyMetadata(null));
 
+        public static readonly DependencyProperty IsNavigatingProperty = DependencyProperty.Register("IsNavigating", typeof(bool), typeof(ExtendedTreeView), new PropertyMetadata(BoolBox.False));
+
         public ICommand UseItemCommand {
             get => (ICommand) this.GetValue(UseItemCommandProperty);
             set => this.SetValue(UseItemCommandProperty, value);
+        }
+
+        public bool IsNavigating {
+            get => (bool) this.GetValue(IsNavigatingProperty);
+            set => this.SetValue(IsNavigatingProperty, value);
         }
 
         public event SelectionChangedEventHandler<BaseTreeItemViewModel> SelectionChanged;
@@ -23,6 +34,30 @@ namespace MCNBTEditor.Controls {
 
         public ExtendedTreeView() {
 
+        }
+
+        public const string BaseViewModelControlKey = "ExTree_ItemHandle";
+
+        protected override void PrepareContainerForItemOverride(DependencyObject element, object item) {
+            base.PrepareContainerForItemOverride(element, item);
+            if (item is BaseTreeItemViewModel treeItem) {
+                BaseViewModel.SetInternalData(treeItem, BaseViewModelControlKey, element);
+            }
+        }
+
+        protected override void ClearContainerForItemOverride(DependencyObject element, object item) {
+            base.ClearContainerForItemOverride(element, item);
+            if (item is BaseTreeItemViewModel treeItem) {
+                BaseViewModel.ClearInternalData(treeItem, BaseViewModelControlKey);
+            }
+        }
+
+        protected override DependencyObject GetContainerForItemOverride() {
+            return new ExtendedTreeViewItem();
+        }
+
+        protected override bool IsItemItsOwnContainerOverride(object item) {
+            return item is ExtendedTreeViewItem;
         }
 
         protected override void OnPreviewMouseWheel(MouseWheelEventArgs e) {
@@ -62,6 +97,138 @@ namespace MCNBTEditor.Controls {
             base.OnApplyTemplate();
             this.PART_ScrollViewier = (ScrollViewer) this.GetTemplateChild("_tv_scrollviewer_");
             // this.RequestBringIntoView += this.OnRequestBringIntoView;
+        }
+
+        public async Task<bool> NavigateToItemAsync(BaseTreeItemViewModel item) {
+            if (this.IsNavigating) {
+                return false;
+            }
+
+            // TreeViewItem container = BaseViewModel.GetInternalData<TreeViewItem>(item, BaseViewModelControlKey);
+            // if (container != null) {
+            //     if (VisualTreeUtils.FindVisualParent<TreeViewItem>(container) is TreeViewItem parentItem) {
+            //         parentItem.IsExpanded = true;
+            //     }
+            //     await this.Dispatcher.InvokeAsync(() => container.IsSelected = true, DispatcherPriority.Background);
+            //     return true;
+            // }
+
+            List<BaseTreeItemViewModel> list = new List<BaseTreeItemViewModel>();
+            list.Add(item);
+
+            for (BaseTreeItemViewModel parent = item.ParentItem; parent != null; parent = parent.ParentItem) {
+                list.Add(parent);
+            }
+
+            list.Reverse();
+            return await this.NavigateUsingRootPathAsync(this.ItemContainerGenerator, list);
+        }
+
+        private static readonly MethodInfo AddContainerFromGeneratorMethodInfo;
+        // private static readonly MethodInfo GetCountMethodInfo;
+
+        static ExtendedTreeView() {
+            AddContainerFromGeneratorMethodInfo = typeof(VirtualizingStackPanel).GetMethod("AddContainerFromGenerator", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
+            // GetCountMethodInfo = typeof(ItemContainerGenerator).GetMethod("GetCount", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.InvokeMethod);
+        }
+
+        private async Task<TreeViewItem> YuckyGenerateContainer(ItemContainerGenerator generator, int index) {
+            ScrollViewer scroller = VisualTreeUtils.FindDescendant<ScrollViewer>(this);
+            if (scroller == null)
+                return null;
+            bool? direction = null; // up = false, down = true
+            bool foundFirst = false;
+            for (int i = 0, len = generator.Items.Count; i < len; i++) {
+                if (generator.ContainerFromIndex(i) is TreeViewItem) {
+                    if (i <= index) {
+                        direction = true;
+                        break;
+                    }
+                    else {
+                        foundFirst = true;
+                    }
+                }
+                else if (foundFirst) {
+                    direction = i <= index;
+                    break;
+                }
+            }
+
+            TreeViewItem treeItem = null;
+            if (direction == null) {
+                return null;
+            }
+            else if (direction == true) { // down
+                while (treeItem == null && this.PART_ScrollViewier.VerticalOffset < (this.PART_ScrollViewier.ExtentHeight - this.PART_ScrollViewier.ViewportHeight)) {
+                    this.PART_ScrollViewier.ScrollToVerticalOffset(this.PART_ScrollViewier.VerticalOffset + (this.PART_ScrollViewier.ViewportHeight / 2d));
+                    treeItem = await this.Dispatcher.InvokeAsync(() => generator.ContainerFromIndex(index) as TreeViewItem, DispatcherPriority.Render);
+                }
+            }
+            else { // up
+                while (treeItem == null && this.PART_ScrollViewier.VerticalOffset > 0d) {
+                    this.PART_ScrollViewier.ScrollToVerticalOffset(Math.Max(this.PART_ScrollViewier.VerticalOffset - (this.PART_ScrollViewier.ViewportHeight / 2d), 0));
+                    treeItem = await this.Dispatcher.InvokeAsync(() => generator.ContainerFromIndex(index) as TreeViewItem, DispatcherPriority.Render);
+                }
+            }
+
+            return treeItem;
+        }
+
+        /// <summary>
+        /// Navigates to the last item in the list, where element 0 is expected to be the "root" item in the
+        /// tree (which isn't typically even in the tree, only the items source is bound)
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="rootHierarchy"></param>
+        /// <returns></returns>
+        public async Task<bool> NavigateUsingRootPathAsync(ItemContainerGenerator root, List<BaseTreeItemViewModel> rootHierarchy) {
+            if (this.IsNavigating) {
+                return false;
+            }
+
+            try {
+                this.IsNavigating = true;
+                TreeViewItem containerItem = null;
+                ItemContainerGenerator generator = root;
+                for (int i = 1; i < rootHierarchy.Count; i++) {
+                    BaseTreeItemViewModel item = rootHierarchy[i];
+                    TreeViewItem container = BaseViewModel.GetInternalData<TreeViewItem>(item, BaseViewModelControlKey);
+                    if (container == null) {
+                        int index = rootHierarchy[i - 1].Children.IndexOf(item);
+                        if (index == -1) {
+                            return false;
+                        }
+
+                        if (containerItem != null) {
+                            containerItem.IsExpanded = true;
+                            containerItem.UpdateLayout();
+                            // containerItem.BringIntoView();
+                        }
+
+                        container = await this.Dispatcher.InvokeAsync(() => generator.ContainerFromIndex(index) as TreeViewItem, DispatcherPriority.Background);
+                        if (container == null) {
+                            if ((container = await this.YuckyGenerateContainer(generator, index)) == null) {
+                                return false;
+                            }
+                        }
+                    }
+
+                    containerItem = container;
+                    generator = container.ItemContainerGenerator;
+                }
+
+                if (rootHierarchy.Count < 1)
+                    return true;
+                if (containerItem == null)
+                    return false;
+
+                containerItem.IsSelected = true;
+                containerItem.BringIntoView();
+                return true;
+            }
+            finally {
+                this.IsNavigating = false;
+            }
         }
 
         public static TreeViewItem ContainerFromItemRecursive(ItemContainerGenerator root, object item) {
@@ -153,261 +320,24 @@ namespace MCNBTEditor.Controls {
             }
         }
 
-        public void SetSelectedFile(object item) {
-            if (item is TreeViewItem obj) {
-                obj.IsSelected = true;
-                obj.BringIntoView();
-                // ChangeSelectionMethod.Invoke(this, new object[] {
-                //     this.ItemContainerGenerator.ItemFromContainer(obj),
-                //     obj,
-                //     true
-                // });
-            }
-            else {
-                TreeViewItem treeViewItem = ContainerFromItemRecursive(this.ItemContainerGenerator, item);
-                if (treeViewItem != null) {
-                    // for (ItemsControl parent = ItemsControlFromItemContainer(treeViewItem); parent != null; parent = ItemsControlFromItemContainer(parent)) {
-                    //     if (parent is TreeViewItem treeItem) {
-                    //         treeItem.IsExpanded = true;
-                    //         // treeItem.ExpandSubtree();
-                    //     }
-                    //     else {
-                    //         break;
-                    //     }
-                    // }
-
-                    treeViewItem.IsSelected = true;
-                    treeViewItem.BringIntoView();
-                }
-
-                // ChangeSelectionMethod.Invoke(this, new object[] {
-                //     item,
-                //     this.ItemContainerGenerator.ContainerFromItem(item),
-                //     true
-                // });
-            }
-            // if (file is BaseNBTCollectionViewModel folder) {
-            //     for (BaseNBTCollectionViewModel parent = folder.Parent; parent != null; parent = parent.Parent) {
-            //         if (!parent.IsExpanded && parent.CanExpand) {
-            //             parent.IsExpanded = true;
-            //         }
-            //     }
-            //     folder.IsExpanded = true;
-            // }
-        }
-
         BaseTreeItemViewModel IExtendedTree.GetSelectedItem() {
             return this.SelectedItem as BaseTreeItemViewModel;
         }
 
-        public bool IsItemExpanded(BaseTreeItemViewModel item) {
-            if (item == null) {
+        public bool? IsItemExpanded(BaseTreeItemViewModel item) {
+            if (item != null && BaseViewModel.TryGetInternalData(item, BaseViewModelControlKey, out TreeViewItem treeItem)) {
+                return treeItem.IsExpanded;
+            }
+
+            return null;
+        }
+
+        public async Task<bool> NavigateAsync(IEnumerable<BaseTreeItemViewModel> items) {
+            if (this.IsNavigating) {
                 return false;
             }
 
-            DependencyObject container = ContainerFromItemRecursive(this.ItemContainerGenerator, item);
-            return container is TreeViewItem treeItem && treeItem.IsExpanded;
-        }
-
-        public void SetExpanded(BaseTreeItemViewModel nbt) {
-            if (nbt == null) {
-                return;
-            }
-
-            DependencyObject container = ContainerFromItemRecursive(this.ItemContainerGenerator, nbt);
-            if (container is TreeViewItem treeItem) {
-                if (!treeItem.IsExpanded) {
-                    treeItem.IsExpanded = true;
-                }
-            }
-
-            // BaseViewModel.SetInternalData(nbt, nameof(TreeViewItem.IsExpanded), true);
-        }
-
-        public bool IsExpanded(BaseTreeItemViewModel nbt) {
-            return this.IsItemExpanded(nbt);
-            // return BaseViewModel.GetInternalData<bool>(nbt, nameof(TreeViewItem.IsExpanded));
-        }
-
-        public async Task<bool> RepeatExpandHierarchyFromRootAsync(IEnumerable<BaseTreeItemViewModel> items) {
-            // TODO: optimise this!!!!
-
-            List<BaseTreeItemViewModel> list = items as List<BaseTreeItemViewModel> ?? items.ToList();
-            bool result = false;
-            for (int i = 0; i < list.Count; i++) {
-                result |= await this.Dispatcher.InvokeAsync(() => this.ExpandHierarchyFromRoot(list, true), DispatcherPriority.Background);
-            }
-
-            return result;
-        }
-
-        public Task ExpandItemSubTree(BaseTreeItemViewModel item) {
-            DependencyObject container = ContainerFromItemRecursive(this.ItemContainerGenerator, item);
-            if (container is TreeViewItem treeItem) {
-                this.ExpandSubtree(treeItem);
-            }
-
-            return Task.CompletedTask;
-        }
-
-        public async Task<bool> MainExpandHierarchy(IEnumerable<int> items) {
-            return false;
-            // List<int> list = items as List<int> ?? items.ToList();
-            // return await await this.Dispatcher.InvokeAsync(() => this.MainExpandHierarchyInternal(list), DispatcherPriority.Background);
-            // bool result = false;
-            // for (int i = 0; i < list.Count; i++) {
-            //     result |= await await this.Dispatcher.InvokeAsync(() => this.MainExpandHierarchyInternal(list), DispatcherPriority.Background);
-            // }
-            // return result;
-        }
-
-        // public async Task<bool> MainExpandHierarchyInternal(IEnumerable<int> items) {
-        //     ItemsControl control = this;
-        //     ItemContainerGenerator root = control.ItemContainerGenerator;
-        //     TreeViewItem lastItem = null;
-        //     using (IEnumerator<int> enumerator = items.GetEnumerator()) {
-        //         while (enumerator.MoveNext()) {
-        //             int itemIndex = enumerator.Current;
-        //             if (root.Status == GeneratorStatus.NotStarted) {
-        //                 control.UpdateLayout();
-        //             }
-//
-        //             if (root.Status == GeneratorStatus.NotStarted || root.Status == GeneratorStatus.Error) {
-        //                 return false;
-        //             }
-        //             // GenerateChildren(root);
-        //             TreeViewItem treeItem;
-        //             if ((treeItem = root.ContainerFromIndex(itemIndex) as TreeViewItem) == null) {
-        //                 using (root.GenerateBatches()) {
-        //                     IItemContainerGenerator gen = root;
-        //                     using (gen.StartAt(gen.GeneratorPositionFromIndex(itemIndex), GeneratorDirection.Forward)) {
-        //                         if (gen.GenerateNext() is TreeViewItem treeItem2) {
-        //                             gen.PrepareItemContainer(treeItem2);
-        //                             this.AddVisualChild(treeItem2);
-        //                         }
-        //                     }
-        //                 }
-//
-        //                 if ((treeItem = root.ContainerFromIndex(itemIndex) as TreeViewItem) == null) {
-        //                     return false;
-        //                 }
-        //             }
-//
-        //             if (!treeItem.IsExpanded) {
-        //                 treeItem.IsExpanded = true;
-        //             }
-//
-        //             this.UpdateLayout();
-        //             lastItem?.UpdateLayout();
-        //             root = treeItem.ItemContainerGenerator;
-        //             if (lastItem != null) {
-        //                 lastItem.IsExpanded = true;
-        //                 lastItem.BringIntoView();
-        //             }
-//
-        //             lastItem = treeItem;
-        //             treeItem.IsSelected = true;
-        //             await this.Dispatcher.InvokeAsync(() => {
-        //                 lastItem.BringIntoView();
-        //             }, DispatcherPriority.Background);
-        //         }
-        //     }
-//
-        //     if (lastItem != null) {
-        //         lastItem.IsSelected = true;
-        //         await this.Dispatcher.InvokeAsync(() => {
-        //             lastItem.BringIntoView();
-        //         }, DispatcherPriority.Background);
-        //     }
-//
-        //     return true;
-        // }
-
-        public bool ExpandHierarchyFromRoot(IEnumerable<BaseTreeItemViewModel> items, bool select) {
-            ItemsControl control = this;
-            ItemContainerGenerator root = control.ItemContainerGenerator;
-            TreeViewItem lastItem = null;
-            using (IEnumerator<BaseTreeItemViewModel> enumerator = items.GetEnumerator()) {
-                while (enumerator.MoveNext()) {
-                    if (root.Status == GeneratorStatus.NotStarted) {
-                        control.UpdateLayout();
-                    }
-
-                    if (root.Status == GeneratorStatus.NotStarted || root.Status == GeneratorStatus.Error) {
-                        return false;
-                    }
-
-                    // GenerateChildren(root);
-                    BaseTreeItemViewModel item = enumerator.Current;
-                    TreeViewItem treeItem;
-                    if ((treeItem = root.ContainerFromItem(item) as TreeViewItem) == null) {
-                        using (root.GenerateBatches()) {
-                            IItemContainerGenerator gen = root;
-                            using (gen.StartAt(new GeneratorPosition(-1, 0), GeneratorDirection.Forward)) {
-                                DependencyObject generated;
-                                while ((generated = gen.GenerateNext()) != null) {
-                                    gen.PrepareItemContainer(generated);
-                                }
-                            }
-                        }
-
-                        if ((treeItem = root.ContainerFromItem(item) as TreeViewItem) == null) {
-                            return false;
-                        }
-                    }
-
-                    if (!treeItem.IsExpanded) {
-                        treeItem.IsExpanded = true;
-                    }
-
-                    root = treeItem.ItemContainerGenerator;
-                    lastItem = treeItem;
-                    lastItem.BringIntoView();
-                }
-            }
-
-            if (select && lastItem != null) {
-                lastItem.IsSelected = true;
-                lastItem.BringIntoView();
-            }
-
-            return true;
-        }
-
-        public async Task<bool> ExpandAsync(IEnumerable<BaseTreeItemViewModel> items, bool select) {
-            ItemContainerGenerator root = this.ItemContainerGenerator;
-            TreeViewItem lastItem = null;
-            using (IEnumerator<BaseTreeItemViewModel> enumerator = items.GetEnumerator()) {
-                while (enumerator.MoveNext()) {
-                    await this.Dispatcher.InvokeAsync(() => {
-                        GenerateChildren(root);
-                    });
-                    BaseTreeItemViewModel item = enumerator.Current;
-                    if (root.ContainerFromItem(item) is TreeViewItem treeItem) {
-                        if (!treeItem.IsExpanded) {
-                            treeItem.IsExpanded = true;
-                        }
-
-                        root = treeItem.ItemContainerGenerator;
-                        lastItem = treeItem;
-                        await this.Dispatcher.InvokeAsync(() => {
-                            lastItem.BringIntoView();
-                        });
-                    }
-                    else {
-                        return false;
-                    }
-                }
-            }
-
-            if (select && lastItem != null) {
-                lastItem.IsSelected = true;
-                await this.Dispatcher.InvokeAsync(() => {
-                    lastItem.BringIntoView();
-                });
-            }
-
-            return true;
+            return await this.NavigateUsingRootPathAsync(this.ItemContainerGenerator, items.ToList());
         }
     }
 }

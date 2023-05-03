@@ -85,23 +85,16 @@ namespace MCNBTEditor.Views.Main {
         }
 
         public async Task UseItemAction(BaseTreeItemViewModel item) {
-            if ((this.SelectedTreeItem == item || this.PrimaryListSelectedItem == item)) {
-                if (item.CanHoldChildren) {
-                    this.TreeView.ExpandHierarchyFromRoot(item.GetParentChain(false), true);
-                    this.CurrentFolderItem = item;
-                }
-                else if (item is TagPrimitiveViewModel primitive) {
-                    await primitive.EditPrimitiveTagAction();
+            if (item.CanHoldChildren && item.Children.Count > 0) {
+                if (this.TreeView.IsNavigating) {
+                    await IoC.MessageDialogs.ShowMessageAsync("Already navigating", "A navigation is already being processed. Wait for it to finish first");
                     return;
                 }
-            }
 
-            if (item.CanHoldChildren && item.Children.Count > 0) {
-                await this.TreeView.RepeatExpandHierarchyFromRootAsync(item.GetParentChain(false));
+                await this.TreeView.NavigateToItemAsync(item);
             }
             else if (item is TagPrimitiveViewModel primitive) {
                 await primitive.EditPrimitiveTagAction();
-                return;
             }
         }
 
@@ -134,13 +127,6 @@ namespace MCNBTEditor.Views.Main {
             };
 
             if (ofd.ShowDialog(FolderPicker.GetCurrentActiveWindow()) == true) {
-                HashSet<string> existing = new HashSet<string>();
-                foreach (BaseTreeItemViewModel item in this.Root.Children) {
-                    if (item is IHaveFilePath file && !string.IsNullOrEmpty(file.FilePath)) {
-                        existing.Add(file.FilePath);
-                    }
-                }
-
                 await this.LoadFilesAction(ofd.FileNames, false);
             }
         }
@@ -252,9 +238,14 @@ namespace MCNBTEditor.Views.Main {
         }
 
         public async Task NavigateToPath(string path) {
+            if (this.TreeView.IsNavigating) {
+                await IoC.MessageDialogs.ShowMessageAsync("Already navigating", "A navigation is already being processed. Wait for it to finish first");
+                return;
+            }
+
             List<BaseTreeItemViewModel> list = await BaseTreeItemViewModel.ResolvePathAction(this.Root, path);
             if (list != null && list.Count > 0) {
-                await this.TreeView.RepeatExpandHierarchyFromRootAsync(list);
+                await this.TreeView.NavigateAsync(list);
                 this.CurrentFolderItem = list[list.Count - 1];
             }
         }

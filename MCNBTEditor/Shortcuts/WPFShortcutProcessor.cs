@@ -118,17 +118,18 @@ namespace MCNBTEditor.Shortcuts {
             if (obj is IDataContext) {
                 context.Merge((IDataContext) obj);
             }
-
-            if (obj is FrameworkElement element) {
-                object elementContext = element.DataContext;
-                if (elementContext is IDataContext dc) {
-                    context.Merge(dc);
+            else if (obj != null) {
+                if (obj is FrameworkElement element) {
+                    object elemDc = element.DataContext;
+                    if (elemDc is IDataContext dc) {
+                        context.Merge(dc);
+                    }
+                    else if (elemDc != null) {
+                        context.AddContext(elemDc);
+                    }
                 }
-                else if (elementContext != null) {
-                    context.AddContext(elementContext);
-                }
 
-                context.AddContext(element);
+                context.AddContext(obj);
             }
 
             context.AddContext(sender);

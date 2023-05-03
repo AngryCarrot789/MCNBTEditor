@@ -76,12 +76,12 @@
     <SolidColorBrush x:Key="ListBox.Static.Border"            Color="{DynamicResource AREghZyColour.Primary.1.Border.Static}"/>
     <SolidColorBrush x:Key="ListBox.Disabled.Background"      Color="{DynamicResource AREghZyColour.Primary.1.Background.Disabled}"/>
     <SolidColorBrush x:Key="ListBox.Disabled.Border"          Color="{DynamicResource AREghZyColour.Primary.1.Border.Disabled}"/>
-    <SolidColorBrush x:Key="Item.MouseOver.Background"        Color="{DynamicResource AREghZyColour.Primary.2.Background.MouseOver}"/>
-    <SolidColorBrush x:Key="Item.MouseOver.Border"            Color="{DynamicResource AREghZyColour.ColourfulGlyph.MouseOver}"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="{DynamicResource AREghZyColour.Primary.2.Background.Selected.Inactive}"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Border"     Color="{DynamicResource AREghZyColour.ColourfulGlyph.Selected.Inactive}"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Background"   Color="{DynamicResource AREghZyColour.Primary.2.Background.Selected}"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Border"       Color="{DynamicResource AREghZyColour.ColourfulGlyph.Selected}"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Background"        Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Border"            Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#FF114C78"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border"     Color="#FF114C78"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Background"   Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Border"       Color="#FF3782CD"/>
 
     <SolidColorBrush x:Key="ListView.Static.Background"              Color="{DynamicResource AREghZyColour.Primary.1.Background.Static}"/>
     <SolidColorBrush x:Key="ListView.Static.Border"                  Color="{DynamicResource AREghZyColour.Primary.1.Border.Static}"/>
@@ -240,14 +240,14 @@
     <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Stroke" Color="{DynamicResource AREghZyColour.Primary.4.Border.Selected.Inactive}"/>
     <SolidColorBrush x:Key="TreeViewItem.Static.Background"                  Color="Transparent"/>
     <SolidColorBrush x:Key="TreeViewItem.Static.Border"                      Color="{DynamicResource AREghZyColour.Primary.2.Border.Static}"/>
-    <SolidColorBrush x:Key="TreeViewItem.Selected.Background"                Color="{DynamicResource AREghZyColour.Primary.4.Background.Selected}"/>
-    <SolidColorBrush x:Key="TreeViewItem.Selected.Border"                    Color="{DynamicResource AREghZyColour.Primary.4.Border.Selected}"/>
-    <SolidColorBrush x:Key="TreeViewItem.Selected.Inactive.Background"       Color="{DynamicResource AREghZyColour.Primary.3.Background.Selected.Inactive}"/>
-    <SolidColorBrush x:Key="TreeViewItem.Selected.Inactive.Border"           Color="{DynamicResource AREghZyColour.Primary.3.Border.Selected.Inactive}"/>
-    <SolidColorBrush x:Key="TreeViewItem.MouseOver.Background"               Color="{DynamicResource AREghZyColour.Primary.3.Background.MouseOver}"/>
-    <SolidColorBrush x:Key="TreeViewItem.MouseOver.Border"                   Color="{DynamicResource AREghZyColour.Primary.3.Border.MouseOver}"/>
-    <SolidColorBrush x:Key="TreeViewItem.MouseDown.Background"               Color="{DynamicResource AREghZyColour.Primary.3.Background.MouseDown}"/>
-    <SolidColorBrush x:Key="TreeViewItem.MouseDown.Border"                   Color="{DynamicResource AREghZyColour.Primary.3.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="TreeViewItem.Selected.Background"                Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="TreeViewItem.Selected.Border"                    Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="TreeViewItem.Selected.Inactive.Background"       Color="#FF114C78"/>
+    <SolidColorBrush x:Key="TreeViewItem.Selected.Inactive.Border"           Color="#FF114C78"/>
+    <SolidColorBrush x:Key="TreeViewItem.MouseOver.Background"               Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="TreeViewItem.MouseOver.Border"                   Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="TreeViewItem.MouseDown.Background"               Color="#FF3782CD"/>
+    <SolidColorBrush x:Key="TreeViewItem.MouseDown.Border"                   Color="#FF3782CD"/>
 
     <SolidColorBrush x:Key="Window.Static.Background"       Color="{DynamicResource AREghZyColour.Deep.1.Background.Static}"/>
     <SolidColorBrush x:Key="Window.Static.Border"           Color="{DynamicResource AREghZyColour.Deep.2.Border.Static}"/>

@@ -9,6 +9,7 @@
             xmlns:c="clr-namespace:MCNBTEditor.Controls"
             xmlns:acs="clr-namespace:MCNBTEditor.AdvancedContextService"
             xmlns:ap="clr-namespace:MCNBTEditor.Controls"
+            xmlns:apc="clr-namespace:MCNBTEditor.Themes.Attached"
             mc:Ignorable="d"
             Title="{Binding Title}" Height="350" Width="420"
             Style="{DynamicResource CustomWindowStyle}"
@@ -32,7 +33,7 @@
                 
             </c:ExtendedListBox>
         </DockPanel>
-        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" Content="Select item" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="85"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72"/>
+        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" apc:CornerHelper.CornerRadius="2" Content="Select item" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="85" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
+        <Button Command="{Binding CancelCommand, Mode=OneTime}" apc:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
     </Grid>
 </views:BaseDialog>

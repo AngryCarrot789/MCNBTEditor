@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:MCNBTEditor.Views.Message"
         xmlns:message="clr-namespace:MCNBTEditor.Core.Views.Dialogs.Message;assembly=MCNBTEditor.Core"
         xmlns:converters="clr-namespace:MCNBTEditor.Converters"
+        xmlns:ap="clr-namespace:MCNBTEditor.Themes.Attached"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance message:MessageDialog}"
         Title="{Binding Titlebar, Mode=OneWay}"
@@ -14,11 +15,10 @@
         MinHeight="120"
         Width="400"
         Height="175"
-        Style="{StaticResource CustomWindowStyleEx}"
+        Style="{DynamicResource CustomWindowStyleEx}"
         WindowStyle="ToolWindow" 
         ResizeMode="CanResize" 
-        Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
-        TitlebarBrush="{DynamicResource AREghZyBrush.Primary.1.Background.Static}">
+        Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}">
     <Window.Resources>
         <converters:EmptyStringToVisibilityConverter x:Key="StringToVisibility"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisConverter" TrueValue="Visible" FalseValue="Visible"/>
@@ -70,7 +70,10 @@
                                     ToolTip="{Binding ToolTip, Mode=OneWay}"
                                     HorizontalAlignment="Center" VerticalAlignment="Stretch"
                                     Padding="10,0" MinWidth="75" Margin="0,0,5,0"
-                                    SnapsToDevicePixels="True"/>
+                                    SnapsToDevicePixels="True"
+                                    ap:CornerHelper.CornerRadius="2"
+                                    Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" 
+                                    BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
                         </DataTemplate>
                     </ItemsControl.Resources>
                 </ItemsControl>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Controls.Primitives;
 using MCNBTEditor.Core.Explorer;
 
 namespace MCNBTEditor.Views.NBT.Finding {
@@ -24,12 +23,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
             base.OnClosed(e);
             if (this.DataContext is FindViewModel findViewModel) {
                 findViewModel.Dispose();
-            }
-        }
-
-        private void ToggleButtonCheckChanged(object sender, System.Windows.RoutedEventArgs e) {
-            if (sender is ToggleButton button && button.IsChecked.HasValue) {
-                this.Topmost = button.IsChecked.Value;
             }
         }
     }

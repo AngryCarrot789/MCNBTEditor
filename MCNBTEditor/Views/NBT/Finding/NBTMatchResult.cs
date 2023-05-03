@@ -43,7 +43,12 @@ namespace MCNBTEditor.Views.NBT.Finding {
         }
 
         private async Task NavigateToItemAction() {
-            await IoC.TreeView.RepeatExpandHierarchyFromRootAsync(this.NBT.GetParentChain(false));
+            if (IoC.TreeView.IsNavigating) {
+                await IoC.MessageDialogs.ShowMessageAsync("Already navigating", "A navigation is already being processed. Wait for it to finish first");
+                return;
+            }
+
+            await IoC.TreeView.NavigateToItemAsync(this.NBT);
         }
 
         public void GetContext(List<IContextEntry> list) {

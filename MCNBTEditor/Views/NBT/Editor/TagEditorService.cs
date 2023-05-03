@@ -20,7 +20,7 @@ namespace MCNBTEditor.Views.NBT.Editor {
             };
 
             if (await this.ShowEditorAsync(vm)) {
-                return vm.Value;
+                return vm.Name;
             }
 
             return null;

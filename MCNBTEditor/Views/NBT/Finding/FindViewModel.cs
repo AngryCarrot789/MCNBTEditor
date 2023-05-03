@@ -105,13 +105,28 @@ namespace MCNBTEditor.Views.NBT.Finding {
             set => this.RaisePropertyChanged(ref this.isSearchTermEmpty, value);
         }
 
-        private bool isSearchActive;
+        private volatile bool isSearchActive;
         public bool IsSearchActive {
             get => this.isSearchActive;
-            set => this.RaisePropertyChanged(ref this.isSearchActive, value);
+            set {
+                if (this.isSearchActive == value)
+                    return;
+                this.isSearchActive = value;
+                this.RaisePropertyChanged();
+                this.StopSearchCommand.RaiseCanExecuteChanged();
+            }
         }
 
-        public ICommand StopSearchCommand { get; }
+        private volatile bool isSearchBarEnabled;
+        public bool IsSearchBarEnabled {
+            get => this.isSearchBarEnabled;
+            set {
+                this.isSearchBarEnabled = value;
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public AsyncRelayCommand StopSearchCommand { get; }
 
         public ObservableCollection<NBTMatchResult> FoundItems { get; }
         private readonly List<NBTMatchResult> queuedResults;
@@ -128,18 +143,26 @@ namespace MCNBTEditor.Views.NBT.Finding {
             this.Root = root;
             this.isSearchTermEmpty = true;
             this.isSearchActive = false;
+            this.isSearchBarEnabled = true;
             this.CloseCommand = new RelayCommand(this.CloseDialogAction);
             this.FoundItems = new ObservableCollection<NBTMatchResult>();
             this.IdleEventService = new IdleEventService();
             this.IdleEventService.MinimumTimeSinceInput = TimeSpan.FromMilliseconds(200);
             this.IdleEventService.OnIdle += this.OnTickSearch;
             this.queuedResults = new List<NBTMatchResult>();
-            this.StopSearchCommand = new RelayCommand(() => this.StopTask(), () => this.IsSearchActive);
+            this.StopSearchCommand = new AsyncRelayCommand(async () => {
+                this.MarkTaskToStop();
+                if (this.searchTask != null) {
+                    this.IsSearchBarEnabled = false;
+                    await Task.Run(async () => await this.searchTask);
+                    this.IsSearchBarEnabled = true;
+                }
+            }, () => this.IsSearchActive);
         }
 
         private void OnInputChanged() {
             if (string.IsNullOrEmpty(this.SearchForNameText) && string.IsNullOrEmpty(this.searchForValueText)) {
-                this.StopTask();
+                this.MarkTaskToStop();
                 this.IdleEventService.CanFireNextTick = false;
                 this.IsSearchTermEmpty = true;
                 this.IsSearchActive = false;
@@ -147,17 +170,16 @@ namespace MCNBTEditor.Views.NBT.Finding {
             else {
                 this.IsSearchTermEmpty = false;
                 this.IdleEventService.OnInput();
+                this.MarkTaskToStop();
             }
         }
 
-        private void StopTask() {
-            if (this.searchTask != null) {
-                this.stopTask = true;
-            }
+        private void MarkTaskToStop() {
+            this.stopTask = true;
         }
 
         public void OnTickSearch() {
-            this.StopTask();
+            this.MarkTaskToStop();
             if (string.IsNullOrEmpty(this.SearchForNameText) && string.IsNullOrEmpty(this.SearchForValueText)) {
                 this.IsSearchTermEmpty = true;
                 this.IsSearchActive = false;
@@ -201,6 +223,8 @@ namespace MCNBTEditor.Views.NBT.Finding {
                 // And adding items on background priority in the async version makes it waaay slower than non-async
 
                 // Which technically means, async is faster than non-async in this case (when non-async uses background and async uses normal)
+                // await this.FindItemsAsync(this.Root.Children.ToList(), searchName, searchValue, nf, vf);
+                this.IsSearchActive = true;
                 await this.FindItemsAsync(this.Root.Children.ToList(), searchName, searchValue, nf, vf);
             }
             catch (Exception e) {
@@ -255,6 +279,10 @@ namespace MCNBTEditor.Views.NBT.Finding {
                     }
                 }
 
+                if (this.stopTask) {
+                    return;
+                }
+
                 if (isMatched && (nameMatches.Count > 0 || valueMatches.Count > 0)) {
                     await this.AddItemAsync(new NBTMatchResult((BaseTagViewModel) child, searchName, searchValue, foundValue, nameMatches, valueMatches));
                 }
@@ -301,7 +329,7 @@ namespace MCNBTEditor.Views.NBT.Finding {
         }
 
         private Task AddItemAsync(NBTMatchResult result) {
-            return IoC.Dispatcher.InvokeLaterAsync(() => this.FoundItems.Add(result));
+            return IoC.Dispatcher.InvokeLaterAsync(() => this.FoundItems.Add(result), true);
         }
 
         public void CloseDialogAction() {
@@ -310,7 +338,7 @@ namespace MCNBTEditor.Views.NBT.Finding {
 
         public void Dispose() {
             this.IdleEventService?.Dispose();
-            this.StopTask();
+            this.MarkTaskToStop();
         }
 
         private static bool AcceptName(string pattern, BaseTagViewModel nbt, FindFlags flags, List<TextRange> matches) {

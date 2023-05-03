@@ -6,6 +6,7 @@
                     xmlns:ui="clr-namespace:MCNBTEditor.NBT.UI">
     <ui:NBTToPathConverter x:Key="NBTPathConverter"/>
     <f:InlinesTagNameValueConverter x:Key="InlinesTagNameValueConverter"/>
+    <f:InlinesTagNameArrayConverter x:Key="InlinesTagNameArrayConverter"/>
     <DataTemplate x:Key="FindTemplateCompoundTemplate" DataType="{x:Type f:NBTMatchResult}">
         <DockPanel Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
             <TextBlock Text="{Binding NBT, Converter={StaticResource NBTPathConverter}}" DockPanel.Dock="Right" FontStyle="Italic"/>
@@ -54,11 +55,9 @@
             <Image Source="{Binding NBT.TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0" FontFamily="Consolas">
                 <ap:TextBlockHelper.BindableInlines>
-                    <MultiBinding Converter="{StaticResource InlinesTagNameValueConverter}">
+                    <MultiBinding Converter="{StaticResource InlinesTagNameArrayConverter}">
                         <Binding Path="NBT" Mode="OneTime"/>
-                        <Binding Path="PrimitiveOrArrayFoundValue" Mode="OneTime"/>
                         <Binding Path="NameMatches" Mode="OneTime"/>
-                        <Binding Path="ValueMatches" Mode="OneTime"/>
                     </MultiBinding>
                 </ap:TextBlockHelper.BindableInlines>
             </TextBlock>

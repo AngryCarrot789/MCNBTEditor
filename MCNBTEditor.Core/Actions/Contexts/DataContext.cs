@@ -77,21 +77,30 @@ namespace MCNBTEditor.Core.Actions.Contexts {
         }
 
         public void Merge(IDataContext ctx) {
-            foreach (object o in ctx.Context) {
-                this.ContextList.Add(o);
+            // ToList() makes this function faster... as long as ctx.Context has more than a few elements
+            // this.ContextList.AddRange(ctx.Context.Where(x => this.ContextList.IndexOf(x) == -1).ToList());
+            foreach (object value in ctx.Context) {
+                if (this.ContextList.IndexOf(value) == -1) {
+                    this.ContextList.Add(value);
+                }
             }
 
             if (ctx is DataContext ctxImpl) { // slight optimisation; no need to deconstruct KeyValuePairs into tuples
                 if (ctxImpl.EntryMap != null && ctxImpl.EntryMap.Count > 0) {
-                    Dictionary<string, object> map = this.EntryMap ?? (this.EntryMap = new Dictionary<string, object>());
-                    foreach (KeyValuePair<string, object> entry in ctxImpl.EntryMap) {
-                        map[entry.Key] = entry.Value;
+                    if (this.EntryMap == null) {
+                        this.EntryMap = new Dictionary<string, object>(ctxImpl.EntryMap);
+                    }
+                    else {
+                        Dictionary<string, object> map = this.EntryMap = new Dictionary<string, object>();
+                        foreach (KeyValuePair<string, object> entry in ctxImpl.EntryMap) {
+                            map[entry.Key] = entry.Value;
+                        }
                     }
                 }
             }
             else {
                 List<(string, object)> list = ctx.CustomData.ToList();
-                if (list.Count <= 0) {
+                if (list.Count < 1) {
                     return;
                 }
 

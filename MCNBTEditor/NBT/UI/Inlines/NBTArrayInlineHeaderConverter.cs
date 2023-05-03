@@ -27,7 +27,7 @@ namespace MCNBTEditor.NBT.UI.Inlines {
                 runs.Add(this.CreateDataRun($"({longArray.Length} long elements)"));
             }
             else {
-                runs.Add(this.CreateNameRun($"<invalid data: {values[1]?.GetType()}>"));
+                runs.Add(this.CreateNameRun($"<invalid array: {values[1]?.GetType()}>"));
             }
 
             return runs;

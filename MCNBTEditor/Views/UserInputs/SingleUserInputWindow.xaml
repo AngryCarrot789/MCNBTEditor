@@ -6,6 +6,7 @@
                   xmlns:userInputsCore="clr-namespace:MCNBTEditor.Core.Views.Dialogs.UserInputs;assembly=MCNBTEditor.Core"
                   xmlns:views="clr-namespace:MCNBTEditor.Views"
                   xmlns:userInputs="clr-namespace:MCNBTEditor.Views.UserInputs"
+                  xmlns:ap="clr-namespace:MCNBTEditor.Themes.Attached"
                   mc:Ignorable="d"
                   d:DataContext="{d:DesignInstance userInputsCore:SingleInputViewModel}"
                   Title="{Binding Title}" Height="132" Width="320"
@@ -33,7 +34,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" Content="OK" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72"/>
+        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="OK" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
+        <Button Command="{Binding CancelCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
     </Grid>
 </views:BaseDialog>

@@ -53,7 +53,11 @@ namespace MCNBTEditor.Core {
         /// </para>
         /// </summary>
         public virtual void RaiseCanExecuteChanged() {
-            this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+            if (this.CanExecuteChanged != null) {
+                IoC.Dispatcher.Invoke(() => {
+                    this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+                });
+            }
         }
 
         /// <summary>

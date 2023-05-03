@@ -11,113 +11,114 @@
               xmlns:helpers="clr-namespace:MCNBTEditor.Controls.Helpers"
               Title="Search for tags" Height="500" Width="500"
               Style="{DynamicResource CustomWindowStyleEx}"
-              Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
+              Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
               d:DataContext="{d:DesignInstance f:FindViewModel}"
               BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"
               CanCloseWithEscapeKey="True">
     <Window.Resources>
-        <converters:InvertBoolConverter x:Key="InvertBoolConverter"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisible" TrueValue="Visible" FalseValue="Collapsed"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToCollapsed" TrueValue="Collapsed" FalseValue="Visible"/>
     </Window.Resources>
     <Grid>
         <TextBlock Text="Search for NBT" FontWeight="Bold" VerticalAlignment="Top" Padding="10,10,5,10" HorizontalAlignment="Left"/>
         <TextBlock Text="{Binding FoundItems.Count, StringFormat='{}{0} items'}" VerticalAlignment="Top" Padding="5,10,10,10" HorizontalAlignment="Left" Margin="105,0,0,0"/>
-        <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" Content="Top" ToolTip="Makes the window top-most, meaning other non-top-most windows cannot be above it" Height="26" VerticalAlignment="Top" HorizontalAlignment="Right" Width="27" Background="{DynamicResource AREghZyBrush.Primary.2.Background.Static}" FontStyle="Italic" Margin="0,5,5,0" Checked="ToggleButtonCheckChanged" Unchecked="ToggleButtonCheckChanged"/>
-        <TextBox x:Name="NameBox" Text="{Binding SearchForNameText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="-1,36,104,0" Height="28" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" Padding="5,3" VerticalContentAlignment="Center"
-                 tap:TextHinting.ShowWhenFocused="True" Tag="Input the name of the Tag here"
-                 Style="{DynamicResource HintedTextBox}"/>
-        <Border Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0 1 0 1" Margin="0,36,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" IsChecked="{Binding IncludeCollectionNameMatches, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="0" ToolTip="Includes NBTTagCompounds and NBTTagLists in the results if they have a name and it matches the search term">
-                    <Image Source="/MCNBTEditor;component/Resources/Icons/icons8-closed-box-48.png" Margin="3">
-                        <Image.Style>
-                            <Style TargetType="Image">
+        <ToggleButton IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Topmost, UpdateSourceTrigger=PropertyChanged}" Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" Content="Top" ToolTip="Makes the window top-most, meaning other non-top-most windows cannot be above it" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="27" Background="{DynamicResource AREghZyBrush.Primary.2.Background.Static}" FontStyle="Italic" Margin="0,5,5,0" tap:CornerHelper.CornerRadius="2"/>
+        <Grid Margin="-1,36,0,0" Height="55" VerticalAlignment="Top" IsEnabled="{Binding IsSearchBarEnabled, Mode=OneWay}">
+            <TextBox x:Name="NameBox" Text="{Binding SearchForNameText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="0,0,104,0" Height="28" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" Background="{DynamicResource AREghZyBrush.Primary.2.Background.Static}" Padding="5,3" VerticalContentAlignment="Center"
+                     tap:TextHinting.ShowWhenFocused="True" Tag="Input the name of the Tag here"
+                     Style="{DynamicResource HintedTextBox}"/>
+            <Border Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0 1 0 1" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" IsChecked="{Binding IncludeCollectionNameMatches, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" ToolTip="Includes NBTTagCompounds and NBTTagLists in the results if they have a name and it matches the search term">
+                        <Image Source="/MCNBTEditor;component/Resources/Icons/icons8-closed-box-48.png" Margin="3">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Opacity" Value="1"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IncludeCollectionNameMatches}" Value="True">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IncludeCollectionNameMatches}" Value="False">
+                                            <Setter Property="Opacity" Value="0.3"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </ToggleButton>
+                    <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="Cc" IsChecked="{Binding IsNameCaseSensitive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" ToolTip="Case sensitive tag names. False by default, meaning all cases are ignored"/>
+                    <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="W"  IsChecked="{Binding IsNameSearchingWholeWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" ToolTip="Only match whole words (meaning, the search term must be trailed and followed by a non-character (e.g. whitespace) in the tag's name)">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
                                 <Setter Property="Opacity" Value="1"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IncludeCollectionNameMatches}" Value="True">
-                                        <Setter Property="Opacity" Value="1"/>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding IncludeCollectionNameMatches}" Value="False">
-                                        <Setter Property="Opacity" Value="0.3"/>
+                                    <DataTrigger Binding="{Binding IsNameRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Opacity" Value="0.7"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Image.Style>
-                    </Image>
-                </ToggleButton>
-                <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="Cc" IsChecked="{Binding IsNameCaseSensitive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" ToolTip="Case sensitive tag names. False by default, meaning all cases are ignored"/>
-                <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="W"  IsChecked="{Binding IsNameSearchingWholeWord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2" ToolTip="Only match whole words (meaning the search term is trailed and followed by a whitespace)">
-                    <ToggleButton.Style>
-                        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
-                            <Setter Property="Opacity" Value="1"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsNameRegex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Value="True">
-                                    <Setter Property="Opacity" Value="0.7"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
-                <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content=".*" IsChecked="{Binding IsNameRegex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="3" ToolTip="Use regex to match the tag names">
-                    <ToggleButton.Style>
-                        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
-                            <Setter Property="Opacity" Value="1"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsNameSearchingWholeWord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Value="True">
-                                    <Setter Property="Opacity" Value="0.7"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
-            </Grid>
-        </Border>
-        <TextBox Text="{Binding SearchForValueText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="-1,63,78,0" Height="28" 
-                 BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" 
-                 Padding="5,3" VerticalContentAlignment="Center"
-                 tap:TextHinting.ShowWhenFocused="True" Tag="Input the value of the Tag here (array element separated with commas)"
-                 Style="{DynamicResource HintedTextBox}"/>
-        <Border Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0 1 0 1" Margin="0,63,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Width="78">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="Cc" IsChecked="{Binding IsValueCaseSentsitive, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ToolTip="Case sensitive tag values. False by default, meaning all cases are ignored"/>
-                <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="W"  IsChecked="{Binding IsValueSearchingWholeWord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="1" ToolTip="Only match whole words (meaning the search term is trailed and followed by a whitespace)">
-                    <ToggleButton.Style>
-                        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
-                            <Setter Property="Opacity" Value="1"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsValueRegex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Value="True">
-                                    <Setter Property="Opacity" Value="0.7"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
-                <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content=".*" IsChecked="{Binding IsValueRegex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.Column="2" ToolTip="Use regex to match the tag values">
-                    <ToggleButton.Style>
-                        <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
-                            <Setter Property="Opacity" Value="1"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsValueSearchingWholeWord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Value="True">
-                                    <Setter Property="Opacity" Value="0.7"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ToggleButton.Style>
-                </ToggleButton>
-            </Grid>
-        </Border>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content=".*" IsChecked="{Binding IsNameRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" ToolTip="Use regex to match the tag names">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                                <Setter Property="Opacity" Value="1"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsNameSearchingWholeWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Opacity" Value="0.7"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                </Grid>
+            </Border>
+            <TextBox Text="{Binding SearchForValueText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="0,27,78,0" Height="28" 
+                     BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" Background="{DynamicResource AREghZyBrush.Primary.2.Background.Static}"
+                     Padding="5,3" VerticalContentAlignment="Center"
+                     tap:TextHinting.ShowWhenFocused="True" Tag="Input the value of the Tag here (array element separated with commas)"
+                     Style="{DynamicResource HintedTextBox}"/>
+            <Border Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0 1 0 1" Margin="0,27,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Width="78">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="Cc" IsChecked="{Binding IsValueCaseSentsitive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Case sensitive tag values. False by default, meaning all cases are ignored"/>
+                    <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content="W"  IsChecked="{Binding IsValueSearchingWholeWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" ToolTip="Only match whole words (meaning, the search term must be trailed and followed by a non-character (e.g. whitespace) in the tag's value)">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                                <Setter Property="Opacity" Value="1"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsValueRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Opacity" Value="0.7"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" BorderThickness="0" Content=".*" IsChecked="{Binding IsValueRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" ToolTip="Use regex to match the tag values">
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
+                                <Setter Property="Opacity" Value="1"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsValueSearchingWholeWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                        <Setter Property="Opacity" Value="0.7"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                </Grid>
+            </Border>
+        </Grid>
         <DockPanel Margin="0,91,0,0">
             <Border Visibility="{Binding IsSearchActive, Converter={StaticResource BoolToVisible}}" DockPanel.Dock="Bottom" Height="24" Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,1,0,0">
                 <Grid>
@@ -138,8 +139,10 @@
                          ItemTemplateSelector="{StaticResource FindResultSelector}"
                          HorizontalContentAlignment="Stretch"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         ScrollViewer.CanContentScroll="False"
-                         Visibility="{Binding IsSearchTermEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsed}}">
+                         Visibility="{Binding IsSearchTermEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsed}}"
+                         ScrollViewer.CanContentScroll="True"
+                         VirtualizingStackPanel.IsVirtualizing="True"
+                         VirtualizingStackPanel.VirtualizationMode="Recycling">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                             <Setter Property="helpers:AttachedInteractivity.DoubleClickCommand" Value="{Binding NavigateToItemCommand}">

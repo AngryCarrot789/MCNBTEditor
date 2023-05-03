@@ -34,8 +34,8 @@ namespace MCNBTEditor.Views.NBT.Editor {
         }
 
         private void TagPrimitiveEditorWindow_ContentRendered(object sender, EventArgs e) {
-            this.SizeToContent = SizeToContent.Manual;
-            this.Height = Math.Ceiling(this.Height + 2);
+            // this.SizeToContent = SizeToContent.Manual;
+            // this.Height = Math.Ceiling(this.Height + 2);
         }
     }
 }

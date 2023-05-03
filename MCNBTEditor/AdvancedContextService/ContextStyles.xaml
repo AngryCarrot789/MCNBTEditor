@@ -17,8 +17,8 @@
 
     </Style>
 
-    <!-- d:DataContext="{d:DesignInstance t:CommandContextEntry}" | Dammit visual studio why won't you accept d:DataContext on styles :'( -->
-    <Style x:Key="ContextualEntryCommandMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
+    <!-- Dammit visual studio why won't you accept d:DataContext on styles :'( -->
+    <Style d:DataContext="{d:DesignInstance t:CommandContextEntry}" x:Key="ContextualEntryCommandMenuItemStyle" TargetType="{x:Type MenuItem}" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="Header"           Value="{Binding Header, Mode=OneWay}"/>
         <Setter Property="InputGestureText" Value="{Binding InputGestureText, Mode=OneWay}"/>
         <Setter Property="ToolTip"          Value="{Binding ToolTip, Mode=OneWay}"/>
@@ -27,21 +27,21 @@
         <Setter Property="CommandParameter" Value="{Binding CommandParameter}"/>
     </Style>
 
-    <!-- d:DataContext="{d:DesignInstance t:ActionContextEntry}" | Dammit visual studio why won't you accept d:DataContext on styles :'( -->
-    <Style x:Key="ContextualEntryActionMenuItemStyle" TargetType="{x:Type acs:AdvancedActionMenuItem}" BasedOn="{StaticResource {x:Type acs:AdvancedActionMenuItem}}">
+    <!--  -->
+    <Style d:DataContext="{d:DesignInstance t:ActionContextEntry}" x:Key="ContextualEntryActionMenuItemStyle" TargetType="{x:Type acs:AdvancedActionMenuItem}" BasedOn="{StaticResource {x:Type acs:AdvancedActionMenuItem}}">
         <Setter Property="ActionId"    Value="{Binding ActionId, Mode=OneWay}"/>
         <Setter Property="ItemsSource" Value="{Binding Children, Mode=OneTime}"/>
     </Style>
 
-    <!-- d:DataContext="{d:DesignInstance t:GroupContextEntry}" | Dammit visual studio why won't you accept d:DataContext on styles :'( -->
-    <Style x:Key="ContextualEntryGroupMenuItemStyle" TargetType="{x:Type acs:AdvancedMenuItem}" BasedOn="{StaticResource {x:Type acs:AdvancedMenuItem}}">
+    <!--  -->
+    <Style d:DataContext="{d:DesignInstance t:GroupContextEntry}" x:Key="ContextualEntryGroupMenuItemStyle" TargetType="{x:Type acs:AdvancedMenuItem}" BasedOn="{StaticResource {x:Type acs:AdvancedMenuItem}}">
         <Setter Property="Header"    Value="{Binding Header, Mode=OneWay}"/>
         <Setter Property="ToolTip"    Value="{Binding ToolTip, Mode=OneWay}"/>
         <Setter Property="ItemsSource" Value="{Binding Children, Mode=OneTime}"/>
     </Style>
 
-    <!-- d:DataContext="{d:DesignInstance t:ShortcutCommandContextEntry}" | Dammit visual studio why won't you accept d:DataContext on styles :'( -->
-    <Style x:Key="ContextualEntryShortcutCommandMenuItemStyle" TargetType="{x:Type acs:AdvancedShortcutMenuItem}" BasedOn="{StaticResource {x:Type acs:AdvancedMenuItem}}">
+    <!--  -->
+    <Style d:DataContext="{d:DesignInstance t:ShortcutCommandContextEntry}" x:Key="ContextualEntryShortcutCommandMenuItemStyle" TargetType="{x:Type acs:AdvancedShortcutMenuItem}" BasedOn="{StaticResource {x:Type acs:AdvancedMenuItem}}">
         <Setter Property="ShortcutIds" Value="{Binding ShortcutIds, Mode=OneTime}"/>
         <Setter Property="Command" Value="{Binding Command, Mode=TwoWay}"/>
         <Setter Property="CommandParameter" Value="{Binding CommandParameter, Mode=TwoWay}"/>

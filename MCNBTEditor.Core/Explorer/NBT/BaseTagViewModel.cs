@@ -186,9 +186,13 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             }
 
             list.Add(new CommandContextEntry("Copy (Binary)", this.CopyBinaryToClipboardCommand));
-            // list.Add(SeparatorEntry.Instance);
-            if (this is TagDataFileViewModel datFileAgain) {
+            list.Add(SeparatorEntry.Instance);
+            if (this is BaseTagCollectionViewModel tagCollectionAgain) {
+                list.Add(new ActionContextEntry(tagCollectionAgain, "actions.nbt.find"));
                 list.Add(SeparatorEntry.Instance);
+            }
+
+            if (this is TagDataFileViewModel datFileAgain) {
                 list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/RemoveFromParent", this.RemoveFromParentCommand));
                 list.Add(new CommandContextEntry("Delete FILE", datFileAgain.DeleteFileCommand));
             }

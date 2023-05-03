@@ -43,10 +43,9 @@
             <Shortcut Name="FindShortcut" DisplayName="Find..." ActionId="actions.nbt.find" Inherit="true">
                 <KeyStroke Mods="CTRL" Key="F"/>
             </Shortcut>
-            <Shortcut Name="FindShortcutGlobal" DisplayName="Find..." ActionId="actions.nbt.find" Inherit="true">
+            <Shortcut Name="FindShortcutGlobal" DisplayName="Find everywhere..." ActionId="actions.nbt.find" Inherit="true">
                 <Shortcut.Context>
                     <Flag Key="IsGlobalFind" Value="True"/>
-                    <Flags>ok no</Flags>
                 </Shortcut.Context>
                 <KeyStroke Mods="CTRL+SHIFT" Key="F"/>
             </Shortcut>

@@ -86,6 +86,7 @@
     <Compile Include="AdvancedContextService\Static\StaticShortcutMenuItem.cs" />
     <Compile Include="Controls\ExtendedListBox.cs" />
     <Compile Include="Controls\ExtendedTreeView.cs" />
+    <Compile Include="Controls\ExtendedTreeViewItem.cs" />
     <Compile Include="Controls\FileMenu\SaveMenuItem.cs" />
     <Compile Include="Controls\FocusHelper.cs" />
     <Compile Include="Controls\Helpers\ActionControlHelper.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Controls\Helpers\ScrollViewerHelper.cs" />
     <Compile Include="Controls\Helpers\TextBlockHelper.cs" />
     <Compile Include="Controls\Helpers\TextBoxHelper.cs" />
+    <Compile Include="Controls\Helpers\ToggleButtonHelper.cs" />
     <Compile Include="Controls\HighlightableTextBlock.cs" />
     <Compile Include="Controls\IconTextPair.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
@@ -185,6 +187,7 @@
     </Compile>
     <Compile Include="Views\NBT\Finding\FindResultTemplateSelector.cs" />
     <Compile Include="Views\NBT\Finding\FindViewModel.cs" />
+    <Compile Include="Views\NBT\Finding\InlinesTagNameArrayConverter.cs" />
     <Compile Include="Views\NBT\Finding\InlinesTagNameValueConverter.cs" />
     <Compile Include="Views\NBT\Finding\Inlines\BaseInlineHighlightConverter.cs" />
     <Compile Include="Views\NBT\Finding\Inlines\HighlightingInlinesConverter.cs" />
@@ -195,6 +198,7 @@
       <DependentUpon>ListSelectorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NBT\Selector\SelectorService.cs" />
+    <Compile Include="Views\NBT\BaseWindowEx.cs" />
     <Compile Include="Views\UserInputs\DoubleUserInputWindow.xaml.cs">
       <DependentUpon>DoubleUserInputWindow.xaml</DependentUpon>
     </Compile>

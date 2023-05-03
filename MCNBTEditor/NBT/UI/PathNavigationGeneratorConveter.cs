@@ -69,6 +69,9 @@ namespace MCNBTEditor.NBT.UI {
                 if (link.DataContext is MainViewModel mvm) {
                     await mvm.NavigateToPath(path);
                 }
+                else if (Window.GetWindow(link) is MainWindow mWin && mWin.DataContext is MainViewModel mvm2) {
+                    await mvm2.NavigateToPath(path);
+                }
             }
         }
     }
