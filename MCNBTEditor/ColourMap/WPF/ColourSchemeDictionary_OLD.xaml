@@ -1,0 +1,446 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <SolidColorBrush x:Key="ZZZZZ_DUMMY_KEY_FOR_IDENTIFICATION" Color="Transparent"/>
+
+    <!--
+        ________________________________________________________________________________________________________________
+
+        Naming standard:
+            AREghZy[Brush|Colour|etc].Control.[primary type].[target name].[dynamic behaviour]...
+
+        I prefixed them with AREghZY just because it's at the top in the list with the VS designer ;)
+        and also helps keep these specific colours grouped instead of being mixed with built in ones
+
+        The naming standard doesn't have to be followed but I mean... no naming standards every need to be followed,
+        but everyone capitalises the first character in function names in C# but doesn't in java
+
+        ________________________________________________________________________________________________________________
+
+
+        USE DYNAMICRESOURCE FOR THESE COLOURS/BRUSHES! otherwise changing themes won't do anything.
+        StaticResources are resolved when the XAML file is loaded/processed, not at runtime when
+        the resource is actually requested
+
+        ________________________________________________________________________________________________________________
+
+        regex for creating colours:
+
+        Replace:
+            \<SolidColorBrush x\:Key\=\"AREghZyBrush\.Control\.(.*)\".*Color\=\"\#([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])\"\/\>
+        With:
+            <Color x:Key="AREghZyColour.Control.$1" A="#$2" R="#$3" G="#$4" B="#$5"/>
+
+        This is the most basic regex pattern i could come up, there's probably a better pattern but this one works :D
+
+        ________________________________________________________________________________________________________________
+
+     -->
+
+        <!-- Colours - just in case... -->
+    <Color x:Key="AREghZy.TestBrush.Colour">Orange</Color>
+
+    <!-- Brushes - The colour map can override the type of brush (e.g. switch to gradient) -->
+    <SolidColorBrush x:Key="AREghZy.TestBrush" Color="Red"/>
+
+    <!-- TONE 1 | Deepest colour (useful for primary containers, e.g. the list box in a file explorer) -->
+    <Color x:Key="AREghZyColour.Control.Tone1.Background.Static"                        A="255" R="35" G="35" B="35"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Background.Selected.Active"               A="255" R="50" G="50" B="50"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Background.Selected.Inactive"             A="255" R="45" G="45" B="45"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Background.MouseOver"                     A="255" R="60" G="60" B="60"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Background.MouseDown"                     A="255" R="53" G="53" B="53"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Background.Disabled"                      A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Border.Static"                            A="255" R="45" G="45" B="45"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Border.Selected.Active"                   A="255" R="60" G="60" B="60"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Border.Selected.Inactive"                 A="255" R="53" G="53" B="53"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Border.MouseOver"                         A="255" R="72" G="72" B="72"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Border.MouseDown"                         A="255" R="64" G="64" B="64"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Border.Disabled"                          A="255" R="115" G="115" B="115"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Foreground.Static"                        A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Foreground.Selected.Active"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Foreground.Selected.Inactive"             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Foreground.MouseOver"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Foreground.MouseDown"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Foreground.Disabled"                      A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Glyph.Static"                             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Glyph.Selected.Active"                    A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Glyph.Selected.Inactive"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Glyph.MouseOver"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Glyph.MouseDown"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone1.Glyph.Disabled"                           A="255" R="230" G="230" B="230"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Background.Static"               Color="{StaticResource AREghZyColour.Control.Tone1.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Background.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone1.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Background.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone1.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Background.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone1.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Background.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone1.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Background.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone1.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Border.Static"                   Color="{StaticResource AREghZyColour.Control.Tone1.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Border.Selected.Active"          Color="{StaticResource AREghZyColour.Control.Tone1.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Border.Selected.Inactive"        Color="{StaticResource AREghZyColour.Control.Tone1.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Border.MouseOver"                Color="{StaticResource AREghZyColour.Control.Tone1.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Border.MouseDown"                Color="{StaticResource AREghZyColour.Control.Tone1.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Border.Disabled"                 Color="{StaticResource AREghZyColour.Control.Tone1.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Foreground.Static"               Color="{StaticResource AREghZyColour.Control.Tone1.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Foreground.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone1.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Foreground.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone1.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Foreground.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone1.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Foreground.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone1.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Foreground.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone1.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Glyph.Static"                    Color="{StaticResource AREghZyColour.Control.Tone1.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Glyph.Selected.Active"           Color="{StaticResource AREghZyColour.Control.Tone1.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Glyph.Selected.Inactive"         Color="{StaticResource AREghZyColour.Control.Tone1.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Glyph.MouseOver"                 Color="{StaticResource AREghZyColour.Control.Tone1.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Glyph.MouseDown"                 Color="{StaticResource AREghZyColour.Control.Tone1.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone1.Glyph.Disabled"                  Color="{StaticResource AREghZyColour.Control.Tone1.Glyph.Disabled}"/>
+
+    <!-- TONE 2 | Deep Colour (useful for deep containers or controls, e.g. text box or scroll bar background) -->
+    <Color x:Key="AREghZyColour.Control.Tone2.Background.Static"                        A="255" R="48" G="48" B="48"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Background.Selected.Active"               A="255" R="60" G="60" B="60"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Background.Selected.Inactive"             A="255" R="56" G="56" B="56"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Background.MouseOver"                     A="255" R="65" G="65" B="65"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Background.MouseDown"                     A="255" R="59" G="59" B="59"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Background.Disabled"                      A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Border.Static"                            A="255" R="57" G="57" B="57"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Border.Selected.Active"                   A="255" R="68" G="68" B="68"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Border.Selected.Inactive"                 A="255" R="62" G="62" B="62"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Border.MouseOver"                         A="255" R="80" G="80" B="80"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Border.MouseDown"                         A="255" R="75" G="75" B="75"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Border.Disabled"                          A="255" R="115" G="115" B="115"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Foreground.Static"                        A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Foreground.Selected.Active"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Foreground.Selected.Inactive"             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Foreground.MouseOver"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Foreground.MouseDown"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Foreground.Disabled"                      A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Glyph.Static"                             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Glyph.Selected.Active"                    A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Glyph.Selected.Inactive"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Glyph.MouseOver"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Glyph.MouseDown"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone2.Glyph.Disabled"                           A="255" R="230" G="230" B="230"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Background.Static"               Color="{StaticResource AREghZyColour.Control.Tone2.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Background.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone2.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Background.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone2.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Background.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone2.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Background.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone2.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Background.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone2.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Border.Static"                   Color="{StaticResource AREghZyColour.Control.Tone2.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Border.Selected.Active"          Color="{StaticResource AREghZyColour.Control.Tone2.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Border.Selected.Inactive"        Color="{StaticResource AREghZyColour.Control.Tone2.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Border.MouseOver"                Color="{StaticResource AREghZyColour.Control.Tone2.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Border.MouseDown"                Color="{StaticResource AREghZyColour.Control.Tone2.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Border.Disabled"                 Color="{StaticResource AREghZyColour.Control.Tone2.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Foreground.Static"               Color="{StaticResource AREghZyColour.Control.Tone2.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Foreground.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone2.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Foreground.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone2.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Foreground.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone2.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Foreground.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone2.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Foreground.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone2.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Glyph.Static"                    Color="{StaticResource AREghZyColour.Control.Tone2.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Glyph.Selected.Active"           Color="{StaticResource AREghZyColour.Control.Tone2.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Glyph.Selected.Inactive"         Color="{StaticResource AREghZyColour.Control.Tone2.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Glyph.MouseOver"                 Color="{StaticResource AREghZyColour.Control.Tone2.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Glyph.MouseDown"                 Color="{StaticResource AREghZyColour.Control.Tone2.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone2.Glyph.Disabled"                  Color="{StaticResource AREghZyColour.Control.Tone2.Glyph.Disabled}"/>
+
+    <!-- TONE 3 | Standard Darker (useful for controls that sink into Tone4) -->
+    <Color x:Key="AREghZyColour.Control.Tone3.Background.Static"                        A="255" R="55" G="55" B="55"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Background.Selected.Active"               A="255" R="70" G="70" B="70"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Background.Selected.Inactive"             A="255" R="65" G="65" B="65"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Background.MouseOver"                     A="255" R="80" G="80" B="80"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Background.MouseDown"                     A="255" R="75" G="75" B="75"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Background.Disabled"                      A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Border.Static"                            A="255" R="66" G="66" B="66"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Border.Selected.Active"                   A="255" R="85" G="85" B="85"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Border.Selected.Inactive"                 A="255" R="80" G="80" B="80"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Border.MouseOver"                         A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Border.MouseDown"                         A="255" R="85" G="85" B="85"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Border.Disabled"                          A="255" R="115" G="115" B="115"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Foreground.Static"                        A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Foreground.Selected.Active"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Foreground.Selected.Inactive"             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Foreground.MouseOver"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Foreground.MouseDown"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Foreground.Disabled"                      A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Glyph.Static"                             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Glyph.Selected.Active"                    A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Glyph.Selected.Inactive"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Glyph.MouseOver"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Glyph.MouseDown"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone3.Glyph.Disabled"                           A="255" R="230" G="230" B="230"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Background.Static"               Color="{StaticResource AREghZyColour.Control.Tone3.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Background.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone3.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Background.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone3.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Background.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone3.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Background.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone3.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Background.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone3.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Border.Static"                   Color="{StaticResource AREghZyColour.Control.Tone3.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Border.Selected.Active"          Color="{StaticResource AREghZyColour.Control.Tone3.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Border.Selected.Inactive"        Color="{StaticResource AREghZyColour.Control.Tone3.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Border.MouseOver"                Color="{StaticResource AREghZyColour.Control.Tone3.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Border.MouseDown"                Color="{StaticResource AREghZyColour.Control.Tone3.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Border.Disabled"                 Color="{StaticResource AREghZyColour.Control.Tone3.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Foreground.Static"               Color="{StaticResource AREghZyColour.Control.Tone3.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Foreground.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone3.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Foreground.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone3.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Foreground.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone3.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Foreground.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone3.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Foreground.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone3.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Glyph.Static"                    Color="{StaticResource AREghZyColour.Control.Tone3.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Glyph.Selected.Active"           Color="{StaticResource AREghZyColour.Control.Tone3.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Glyph.Selected.Inactive"         Color="{StaticResource AREghZyColour.Control.Tone3.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Glyph.MouseOver"                 Color="{StaticResource AREghZyColour.Control.Tone3.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Glyph.MouseDown"                 Color="{StaticResource AREghZyColour.Control.Tone3.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone3.Glyph.Disabled"                  Color="{StaticResource AREghZyColour.Control.Tone3.Glyph.Disabled}"/>
+
+    <!-- TONE 4 | Standard Dark (general dark colours for most things) -->
+    <Color x:Key="AREghZyColour.Control.Tone4.Background.Static"                        A="255" R="64" G="64" B="64"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Background.Selected.Active"               A="255" R="78" G="78" B="78"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Background.Selected.Inactive"             A="255" R="72" G="72" B="72"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Background.MouseOver"                     A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Background.MouseDown"                     A="255" R="80" G="80" B="80"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Background.Disabled"                      A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Border.Static"                            A="255" R="72" G="72" B="72"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Border.Selected.Active"                   A="255" R="72" G="72" B="72"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Border.Selected.Inactive"                 A="255" R="72" G="72" B="72"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Border.MouseOver"                         A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Border.MouseDown"                         A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Border.Disabled"                          A="255" R="115" G="115" B="115"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Foreground.Static"                        A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Foreground.Selected.Active"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Foreground.Selected.Inactive"             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Foreground.MouseOver"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Foreground.MouseDown"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Foreground.Disabled"                      A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Glyph.Static"                             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Glyph.Selected.Active"                    A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Glyph.Selected.Inactive"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Glyph.MouseOver"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Glyph.MouseDown"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone4.Glyph.Disabled"                           A="255" R="230" G="230" B="230"/>
+
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Background.Static"               Color="{StaticResource AREghZyColour.Control.Tone4.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Background.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone4.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Background.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone4.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Background.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone4.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Background.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone4.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Background.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone4.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Border.Static"                   Color="{StaticResource AREghZyColour.Control.Tone4.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Border.Selected.Active"          Color="{StaticResource AREghZyColour.Control.Tone4.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Border.Selected.Inactive"        Color="{StaticResource AREghZyColour.Control.Tone4.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Border.MouseOver"                Color="{StaticResource AREghZyColour.Control.Tone4.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Border.MouseDown"                Color="{StaticResource AREghZyColour.Control.Tone4.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Border.Disabled"                 Color="{StaticResource AREghZyColour.Control.Tone4.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Foreground.Static"               Color="{StaticResource AREghZyColour.Control.Tone4.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Foreground.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone4.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Foreground.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone4.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Foreground.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone4.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Foreground.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone4.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Foreground.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone4.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Glyph.Static"                    Color="{StaticResource AREghZyColour.Control.Tone4.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Glyph.Selected.Active"           Color="{StaticResource AREghZyColour.Control.Tone4.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Glyph.Selected.Inactive"         Color="{StaticResource AREghZyColour.Control.Tone4.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Glyph.MouseOver"                 Color="{StaticResource AREghZyColour.Control.Tone4.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Glyph.MouseDown"                 Color="{StaticResource AREghZyColour.Control.Tone4.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone4.Glyph.Disabled"                  Color="{StaticResource AREghZyColour.Control.Tone4.Glyph.Disabled}"/>
+
+    <!-- TONE 5 | Controls that stand out a bit -->
+    <Color x:Key="AREghZyColour.Control.Tone5.Background.Static"                        A="255" R="75" G="75" B="75"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Background.Selected.Active"               A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Background.Selected.Inactive"             A="255" R="82" G="82" B="82"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Background.MouseOver"                     A="255" R="110" G="110" B="110"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Background.MouseDown"                     A="255" R="95" G="95" B="95"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Background.Disabled"                      A="255" R="150" G="150" B="150"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Border.Static"                            A="255" R="81" G="81" B="81"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Border.Selected.Active"                   A="255" R="105" G="105" B="105"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Border.Selected.Inactive"                 A="255" R="98" G="98" B="98"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Border.MouseOver"                         A="255" R="125" G="125" B="125"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Border.MouseDown"                         A="255" R="110" G="110" B="110"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Border.Disabled"                          A="255" R="180" G="180" B="180"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Foreground.Static"                        A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Foreground.Selected.Active"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Foreground.Selected.Inactive"             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Foreground.MouseOver"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Foreground.MouseDown"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Foreground.Disabled"                      A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Glyph.Static"                             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Glyph.Selected.Active"                    A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Glyph.Selected.Inactive"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Glyph.MouseOver"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Glyph.MouseDown"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone5.Glyph.Disabled"                           A="255" R="230" G="230" B="230"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Background.Static"               Color="{StaticResource AREghZyColour.Control.Tone5.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Background.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone5.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Background.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone5.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Background.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone5.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Background.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone5.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Background.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone5.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Border.Static"                   Color="{StaticResource AREghZyColour.Control.Tone5.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Border.Selected.Active"          Color="{StaticResource AREghZyColour.Control.Tone5.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Border.Selected.Inactive"        Color="{StaticResource AREghZyColour.Control.Tone5.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Border.MouseOver"                Color="{StaticResource AREghZyColour.Control.Tone5.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Border.MouseDown"                Color="{StaticResource AREghZyColour.Control.Tone5.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Border.Disabled"                 Color="{StaticResource AREghZyColour.Control.Tone5.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Foreground.Static"               Color="{StaticResource AREghZyColour.Control.Tone5.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Foreground.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone5.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Foreground.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone5.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Foreground.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone5.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Foreground.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone5.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Foreground.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone5.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Glyph.Static"                    Color="{StaticResource AREghZyColour.Control.Tone5.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Glyph.Selected.Active"           Color="{StaticResource AREghZyColour.Control.Tone5.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Glyph.Selected.Inactive"         Color="{StaticResource AREghZyColour.Control.Tone5.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Glyph.MouseOver"                 Color="{StaticResource AREghZyColour.Control.Tone5.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Glyph.MouseDown"                 Color="{StaticResource AREghZyColour.Control.Tone5.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone5.Glyph.Disabled"                  Color="{StaticResource AREghZyColour.Control.Tone5.Glyph.Disabled}"/>
+
+    <!-- TONE 6 | Pop-out controls (e.g. tab control items or buttons) -->
+    <Color x:Key="AREghZyColour.Control.Tone6.Background.Static"                        A="255" R="82" G="82" B="82"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Background.Selected.Active"               A="255" R="82" G="82" B="82"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Background.Selected.Inactive"             A="255" R="82" G="82" B="82"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Background.MouseOver"                     A="255" R="82" G="82" B="82"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Background.MouseDown"                     A="255" R="82" G="82" B="82"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Background.Disabled"                      A="255" R="82" G="82" B="82"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Border.Static"                            A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Border.Selected.Active"                   A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Border.Selected.Inactive"                 A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Border.MouseOver"                         A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Border.MouseDown"                         A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Border.Disabled"                          A="255" R="90" G="90" B="90"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Foreground.Static"                        A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Foreground.Selected.Active"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Foreground.Selected.Inactive"             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Foreground.MouseOver"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Foreground.MouseDown"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Foreground.Disabled"                      A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Glyph.Static"                             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Glyph.Selected.Active"                    A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Glyph.Selected.Inactive"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Glyph.MouseOver"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Glyph.MouseDown"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone6.Glyph.Disabled"                           A="255" R="230" G="230" B="230"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Background.Static"               Color="{StaticResource AREghZyColour.Control.Tone6.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Background.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone6.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Background.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone6.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Background.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone6.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Background.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone6.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Background.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone6.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Border.Static"                   Color="{StaticResource AREghZyColour.Control.Tone6.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Border.Selected.Active"          Color="{StaticResource AREghZyColour.Control.Tone6.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Border.Selected.Inactive"        Color="{StaticResource AREghZyColour.Control.Tone6.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Border.MouseOver"                Color="{StaticResource AREghZyColour.Control.Tone6.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Border.MouseDown"                Color="{StaticResource AREghZyColour.Control.Tone6.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Border.Disabled"                 Color="{StaticResource AREghZyColour.Control.Tone6.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Foreground.Static"               Color="{StaticResource AREghZyColour.Control.Tone6.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Foreground.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone6.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Foreground.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone6.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Foreground.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone6.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Foreground.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone6.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Foreground.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone6.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Glyph.Static"                    Color="{StaticResource AREghZyColour.Control.Tone6.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Glyph.Selected.Active"           Color="{StaticResource AREghZyColour.Control.Tone6.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Glyph.Selected.Inactive"         Color="{StaticResource AREghZyColour.Control.Tone6.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Glyph.MouseOver"                 Color="{StaticResource AREghZyColour.Control.Tone6.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Glyph.MouseDown"                 Color="{StaticResource AREghZyColour.Control.Tone6.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone6.Glyph.Disabled"                  Color="{StaticResource AREghZyColour.Control.Tone6.Glyph.Disabled}"/>
+
+    <!-- TONE 7 | Bold popout (e.g. scroll bars foreground, thing that needs to be more obvious) -->
+    <Color x:Key="AREghZyColour.Control.Tone7.Background.Static"                        A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Background.Selected.Active"               A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Background.Selected.Inactive"             A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Background.MouseOver"                     A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Background.MouseDown"                     A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Background.Disabled"                      A="255" R="100" G="100" B="100"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Border.Static"                            A="255" R="122" G="122" B="122"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Border.Selected.Active"                   A="255" R="122" G="122" B="122"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Border.Selected.Inactive"                 A="255" R="122" G="122" B="122"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Border.MouseOver"                         A="255" R="122" G="122" B="122"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Border.MouseDown"                         A="255" R="122" G="122" B="122"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Border.Disabled"                          A="255" R="122" G="122" B="122"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Foreground.Static"                        A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Foreground.Selected.Active"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Foreground.Selected.Inactive"             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Foreground.MouseOver"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Foreground.MouseDown"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Foreground.Disabled"                      A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Glyph.Static"                             A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Glyph.Selected.Active"                    A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Glyph.Selected.Inactive"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Glyph.MouseOver"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Glyph.MouseDown"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Tone7.Glyph.Disabled"                           A="255" R="230" G="230" B="230"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Background.Static"               Color="{StaticResource AREghZyColour.Control.Tone7.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Background.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone7.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Background.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone7.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Background.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone7.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Background.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone7.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Background.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone7.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Border.Static"                   Color="{StaticResource AREghZyColour.Control.Tone7.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Border.Selected.Active"          Color="{StaticResource AREghZyColour.Control.Tone7.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Border.Selected.Inactive"        Color="{StaticResource AREghZyColour.Control.Tone7.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Border.MouseOver"                Color="{StaticResource AREghZyColour.Control.Tone7.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Border.MouseDown"                Color="{StaticResource AREghZyColour.Control.Tone7.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Border.Disabled"                 Color="{StaticResource AREghZyColour.Control.Tone7.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Foreground.Static"               Color="{StaticResource AREghZyColour.Control.Tone7.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Foreground.Selected.Active"      Color="{StaticResource AREghZyColour.Control.Tone7.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Foreground.Selected.Inactive"    Color="{StaticResource AREghZyColour.Control.Tone7.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Foreground.MouseOver"            Color="{StaticResource AREghZyColour.Control.Tone7.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Foreground.MouseDown"            Color="{StaticResource AREghZyColour.Control.Tone7.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Foreground.Disabled"             Color="{StaticResource AREghZyColour.Control.Tone7.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Glyph.Static"                    Color="{StaticResource AREghZyColour.Control.Tone7.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Glyph.Selected.Active"           Color="{StaticResource AREghZyColour.Control.Tone7.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Glyph.Selected.Inactive"         Color="{StaticResource AREghZyColour.Control.Tone7.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Glyph.MouseOver"                 Color="{StaticResource AREghZyColour.Control.Tone7.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Glyph.MouseDown"                 Color="{StaticResource AREghZyColour.Control.Tone7.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Tone7.Glyph.Disabled"                  Color="{StaticResource AREghZyColour.Control.Tone7.Glyph.Disabled}"/>
+
+    <!-- PRIMARY 1 | Primary Colours 1 -->
+    <Color x:Key="AREghZyColour.Control.Primary1.Background.Static"                     A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Background.Selected.Active"            A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Background.Selected.Inactive"          A="255" R="22" G="60" B="85"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Background.MouseOver"                  A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Background.MouseDown"                  A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Background.Disabled"                   A="255" R="105" G="130" B="200"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Border.Static"                         A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Border.Selected.Active"                A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Border.Selected.Inactive"              A="255" R="22" G="60" B="85"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Border.MouseOver"                      A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Border.MouseDown"                      A="255" R="75" G="110" B="175"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Border.Disabled"                       A="255" R="105" G="130" B="200"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Foreground.Static"                     A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Foreground.Selected.Active"            A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Foreground.Selected.Inactive"          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Foreground.MouseOver"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Foreground.MouseDown"                  A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Foreground.Disabled"                   A="255" R="230" G="230" B="230"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Glyph.Static"                          A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Glyph.Selected.Active"                 A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Glyph.Selected.Inactive"               A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Glyph.MouseOver"                       A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Glyph.MouseDown"                       A="255" R="250" G="250" B="250"/>
+    <Color x:Key="AREghZyColour.Control.Primary1.Glyph.Disabled"                        A="255" R="230" G="230" B="230"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Background.Static"            Color="{StaticResource AREghZyColour.Control.Primary1.Background.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Background.Selected.Active"   Color="{StaticResource AREghZyColour.Control.Primary1.Background.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Background.Selected.Inactive" Color="{StaticResource AREghZyColour.Control.Primary1.Background.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Background.MouseOver"         Color="{StaticResource AREghZyColour.Control.Primary1.Background.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Background.MouseDown"         Color="{StaticResource AREghZyColour.Control.Primary1.Background.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Background.Disabled"          Color="{StaticResource AREghZyColour.Control.Primary1.Background.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Border.Static"                Color="{StaticResource AREghZyColour.Control.Primary1.Border.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Border.Selected.Active"       Color="{StaticResource AREghZyColour.Control.Primary1.Border.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Border.Selected.Inactive"     Color="{StaticResource AREghZyColour.Control.Primary1.Border.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Border.MouseOver"             Color="{StaticResource AREghZyColour.Control.Primary1.Border.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Border.MouseDown"             Color="{StaticResource AREghZyColour.Control.Primary1.Border.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Border.Disabled"              Color="{StaticResource AREghZyColour.Control.Primary1.Border.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Foreground.Static"            Color="{StaticResource AREghZyColour.Control.Primary1.Foreground.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Foreground.Selected.Active"   Color="{StaticResource AREghZyColour.Control.Primary1.Foreground.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Foreground.Selected.Inactive" Color="{StaticResource AREghZyColour.Control.Primary1.Foreground.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Foreground.MouseOver"         Color="{StaticResource AREghZyColour.Control.Primary1.Foreground.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Foreground.MouseDown"         Color="{StaticResource AREghZyColour.Control.Primary1.Foreground.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Foreground.Disabled"          Color="{StaticResource AREghZyColour.Control.Primary1.Foreground.Disabled}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Glyph.Static"                 Color="{StaticResource AREghZyColour.Control.Primary1.Glyph.Static}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Glyph.Selected.Active"        Color="{StaticResource AREghZyColour.Control.Primary1.Glyph.Selected.Active}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Glyph.Selected.Inactive"      Color="{StaticResource AREghZyColour.Control.Primary1.Glyph.Selected.Inactive}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Glyph.MouseOver"              Color="{StaticResource AREghZyColour.Control.Primary1.Glyph.MouseOver}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Glyph.MouseDown"              Color="{StaticResource AREghZyColour.Control.Primary1.Glyph.MouseDown}"/>
+    <SolidColorBrush x:Key="AREghZyBrush.Control.Primary1.Glyph.Disabled"               Color="{StaticResource AREghZyColour.Control.Primary1.Glyph.Disabled}"/>
+</ResourceDictionary>
