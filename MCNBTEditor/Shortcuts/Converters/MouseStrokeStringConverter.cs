@@ -1,6 +1,8 @@
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using MCNBTEditor.Core.Shortcuts.ViewModels;
@@ -51,7 +53,8 @@ namespace MCNBTEditor.Shortcuts.Converters {
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
             if (values == null || values.Length != 3 || values.Length != 4) {
-                throw new Exception("This converter requires 4 elements; mouseButton, modifiers, clickCount, wheelDelta");
+                Debug.WriteLine($"This converter requires 4 elements; mouseButton, modifiers, clickCount, wheelDelta. Got: {values}");
+                return DependencyProperty.UnsetValue;
             }
 
             if (!(values[0] is int mouseButton)) throw new Exception("values[0] must be an int: mouseButton");

@@ -14,16 +14,13 @@
                   xmlns:userinputs="clr-namespace:MCNBTEditor.Views.UserInputs"
                   mc:Ignorable="d"
                   Title="{Binding Title}" Height="350" Width="350"
-                  Style="{DynamicResource CustomWindowStyleEx}"
                   WindowStartupLocation="CenterOwner"
-                  WindowStyle="ToolWindow" ResizeMode="NoResize"
-                  Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
+                  WindowStyle="ToolWindow" ResizeMode="CanResize"
                   d:DataContext="{d:DesignInstance dialog:TagPrimitiveEditorViewModel}"
                   SizeToContent="Height"
-                  CanCloseWithEnterKey="True"
-                  CanCloseWithEscapeKey="True"
                   xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
-                  xmlns:helpers="clr-namespace:MCNBTEditor.Controls.Helpers">
+                  xmlns:helpers="clr-namespace:MCNBTEditor.Controls.Helpers"
+                  Style="{DynamicResource CustomWindowStyleEx}">
     <Window.Resources>
         <converters:NullToVisibilityConverter x:Key="NullToVisConverter" NullValue="Collapsed" NonNullValue="Visible"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisConverter" TrueValue="Visible" FalseValue="Collapsed"/>
@@ -35,14 +32,11 @@
             <TextBlock Text="{Binding Message}" DockPanel.Dock="Top" Padding="12,8" 
                        Visibility="{Binding Message, Converter={StaticResource NullToVisConverter}}"
                        TextWrapping="Wrap" FontSize="12"/>
-            <Border Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
-                    BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,1,0,1"
-                    Padding="10,5">
+            <Border BorderThickness="0,1,0,1" Padding="10,5">
                 <StackPanel>
                     <Grid Margin="0,5" Visibility="{Binding CanEditName, Converter={StaticResource BoolToVisConverter}}">
                         <TextBlock Padding="5" Text="Name:" VerticalAlignment="Center" HorizontalAlignment="Left" Width="50"/>
-                        <TextBox x:Name="NameTextBox" HorizontalAlignment="Stretch" Padding="5" VerticalAlignment="Center" Margin="50,0,0,0"
-                                 Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}">
+                        <TextBox x:Name="NameTextBox" HorizontalAlignment="Stretch" Padding="5" VerticalAlignment="Center" Margin="50,0,0,0" >
                             <TextBox.Text>
                                 <Binding Path="Name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                                     <Binding.ValidationRules>
@@ -56,14 +50,12 @@
                         <TextBlock Padding="5" Text="Value:" VerticalAlignment="Center" HorizontalAlignment="Left" Width="50"/>
                         <DockPanel HorizontalAlignment="Stretch" Margin="50,0,0,0">
                             <CheckBox DockPanel.Dock="Right" Width="75" 
-                                      Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" 
-                                      BorderThickness="1,1,1,1" Content="Bool State" 
+                                      BorderThickness="1,1,1,1" Content="Bool State"
                                       IsChecked="{Binding IsBooleanChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      BorderBrush="{DynamicResource AREghZyBrush.Primary.1.Border.Static}"
-                                      ToolTip="This tag have been used as a boolean; clicking this will flip it (1 to 0 or 0 to 1)" 
+                                      ToolTip="This tag have been used as a boolean; clicking this will flip it (1 to 0 or 0 to 1)"
                                       Margin="7,0,0,0"
                                       Visibility="{Binding IsBoolButtonVisible, Converter={StaticResource BoolToVisConverter}}"/>
-                            <TextBox x:Name="ValueTextBox" Padding="5" Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"
+                            <TextBox x:Name="ValueTextBox" Padding="5"
                                      FontFamily="Consolas" VerticalContentAlignment="Center">
                                 <TextBox.Text>
                                     <Binding Path="Value" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
@@ -79,7 +71,11 @@
             </Border>
         </DockPanel>
 
-        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="OK" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="75" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
+        <Border DockPanel.Dock="Bottom" VerticalAlignment="Bottom" x:Name="ButtonBarBorder" Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" BorderThickness="0,1,0,0">
+            <Grid Height="43">
+                <Button Command="{Binding ConfirmCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="OK" Margin="0,0,92,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+                <Button Command="{Binding CancelCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+            </Grid>
+        </Border>
     </Grid>
 </views:BaseDialog>

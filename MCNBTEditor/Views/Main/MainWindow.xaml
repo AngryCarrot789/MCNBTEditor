@@ -11,28 +11,30 @@
                   xmlns:h="clr-namespace:MCNBTEditor.Controls.Helpers"
                   xmlns:ui="clr-namespace:MCNBTEditor.NBT.UI"
                   mc:Ignorable="d"
-                  Style="{DynamicResource CustomWindowStyleEx}"
                   Title="MainWindow" Height="500" Width="800"
                   d:DataContext="{d:DesignInstance local:MainViewModel}"
-                  Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
-                  TitlebarBrush="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
                   BorderBrush="DodgerBlue"
                   fg:UIFocusGroup.IsGlobalShortcutFocusTarget="True"
                   fg:UIFocusGroup.FocusGroupPath="Application/EditorView"
-                  CanCloseWithEscapeKey="False">
+                  CanCloseWithEscapeKey="False"
+                  Style="{DynamicResource CustomWindowStyleEx}" 
+                  Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}"
+                  TitlebarBrush="{DynamicResource AREghZyBrush.Tone4.Background.Static}">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibleOrCollapsed" TrueValue="Visible" FalseValue="Collapsed"/>
         <ui:ListFallbackSourceConverter x:Key="FallbackConverter"/>
     </Window.Resources>
     <Grid>
-        <Menu Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}" VerticalAlignment="Top">
+        <Menu VerticalAlignment="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Create DAT Object" Command="{Binding CreateDatFileCommand, Mode=OneTime}"/>
                 <MenuItem Header="Open File" Command="{Binding OpenFileCommand, Mode=OneTime}"/>
-                <Separator Style="{StaticResource MenuItemSeparator}"/>
+                <Separator/>
                 <MenuItem IsCheckable="True" Header="Is Reading Compressed" IsChecked="{Binding IsCompressedDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading compressed and uncompressed NBT files (may be ignored for some files, e.g. region files)"/>
                 <MenuItem IsCheckable="True" Header="Is Reading Big-Endian" IsChecked="{Binding IsBigEndianDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading binary data in the big-endian and little-endian format. By default, minecraft saves using big-endian because that's what java's DataInputStream and DataOutputStream appear to use"/>
                 <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                <Separator/>
+                <MenuItem Header="Settings..." Command="{Binding ShowSettingsCommand}"/>
             </MenuItem>
         </Menu>
         <Grid Margin="0,18,0,0">
@@ -42,32 +44,30 @@
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.ColumnSpan="2" Margin="0,0,4,0">
-                <c:ExtendedTreeView Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
-                    BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"
-                    BorderThickness="0,1,0,0"
-                    ItemsSource="{Binding Path=Root.Children, Mode=OneTime}"
-                    ItemTemplateSelector="{StaticResource ExtendedTreeItemSelector}"
-                    ItemContainerStyle="{StaticResource TreeViewItemStretchedContent}"
-                    UseItemCommand="{Binding UseItemCommand, Mode=OneTime}"
-                    x:Name="MainTreeView"
-                    fg:UIFocusGroup.FocusGroupPath="Application/EditorView/NBTTag"
-                    Drop="MainTreeView_Drop" AllowDrop="True"
-                    ScrollViewer.CanContentScroll="True"
-                    VirtualizingStackPanel.IsVirtualizing="True"
-                    VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                <c:ExtendedTreeView BorderThickness="0,1,1,0"
+                                    ItemsSource="{Binding Path=Root.Children, Mode=OneTime}"
+                                    ItemTemplateSelector="{StaticResource ExtendedTreeItemSelector}"
+                                    UseItemCommand="{Binding UseItemCommand, Mode=OneTime}"
+                                    x:Name="MainTreeView"
+                                    fg:UIFocusGroup.FocusGroupPath="Application/EditorView/NBTTag"
+                                    Drop="MainTreeView_Drop" AllowDrop="True"
+                                    ScrollViewer.CanContentScroll="True"
+                                    VirtualizingStackPanel.IsVirtualizing="True"
+                                    VirtualizingStackPanel.VirtualizationMode="Recycling" 
+                                    Background="{DynamicResource AREghZyBrush.Tone3.Background.Static}" 
+                                    BorderBrush="{DynamicResource AREghZyBrush.Tone4.Border.Static}"/>
                 <TextBlock Text="Drop NBT files here, or press CTRL+N to create a new root tag, or CTRL+O to open a file"
                     TextAlignment="Center"
-                    VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Padding="10,0"
-                    Foreground="{DynamicResource AREghZyBrush.Foreground.Deeper}" TextWrapping="Wrap"
+                    VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Padding="10,0" TextWrapping="Wrap"
                     Visibility="{Binding Root.IsEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibleOrCollapsed}}">
                 </TextBlock>
             </Grid>
-            <Border Grid.Column="1" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="1,1,0,0" Grid.ColumnSpan="2" Margin="3,0,0,0">
-                <Grid Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}">
+            <Border Grid.Column="1" BorderThickness="0,0,0,0" Grid.ColumnSpan="2" Margin="3,0,0,0">
+                <Grid>
                     <Grid.Resources>
                         <ui:PathNavigationGeneratorConveter x:Key="PathNavigationGenerator" AcceptItemForPath="True"/>
                     </Grid.Resources>
-                    <Border Height="22" VerticalAlignment="Top" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="0,0,0,0">
+                    <Border Height="22" VerticalAlignment="Top" BorderThickness="0,1,0,0" Background="{DynamicResource AREghZyBrush.Tone3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone4.Border.Static}">
                         <TextBlock FontFamily="Consolas" h:TextBlockHelper.BindableInlines="{Binding CurrentFolderItem, Converter={StaticResource PathNavigationGenerator}}" VerticalAlignment="Center" Padding="5,2"/>
                     </Border>
                     <c:ExtendedListBox x:Name="MainListBox" Margin="0,22,0,0"
@@ -78,7 +78,7 @@
                                        fg:UIFocusGroup.FocusGroupPath="Application/EditorView/NBTTag"
                                        ScrollViewer.CanContentScroll="True"
                                        VirtualizingStackPanel.IsVirtualizing="True"
-                                       VirtualizingStackPanel.VirtualizationMode="Recycling">
+                                       VirtualizingStackPanel.VirtualizationMode="Recycling" Background="{DynamicResource AREghZyBrush.Tone2.Background.Static}">
                         <ItemsControl.ItemsSource>
                             <MultiBinding Converter="{StaticResource FallbackConverter}">
                                 <Binding Path="CurrentFolderItem.Children" UpdateSourceTrigger="PropertyChanged"/>
@@ -88,7 +88,7 @@
                     </c:ExtendedListBox>
                 </Grid>
             </Border>
-            <GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Background="Transparent" BorderThickness="0,0,0,0" ResizeDirection="Columns" Margin="0,23,0,0" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"/>
+            <GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Background="Transparent" BorderThickness="0,0,0,0" ResizeDirection="Columns" Margin="0,23,0,0"/>
         </Grid>
     </Grid>
 </views:BaseWindow>

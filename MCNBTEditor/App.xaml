@@ -9,8 +9,10 @@
             <Style TargetType="{x:Type controls:ExtendedTreeView}" BasedOn="{StaticResource {x:Type TreeView}}"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/SoftDark.xaml"/>
-                <ResourceDictionary Source="Themes/ControlColoursSoftDarkBlue.xaml"/>
+                <ResourceDictionary Source="Themes/ControlColours.xaml"/>
                 <ResourceDictionary Source="Themes/Controls.xaml"/>
+                <!--
+                -->
                 <ResourceDictionary Source="AdvancedContextService/ContextStyles.xaml"/>
                 <ResourceDictionary Source="Controls/ControlStyles.xaml"/>
                 <ResourceDictionary Source="Views/NBT/Finding/NBTFindingStyles.xaml"/>

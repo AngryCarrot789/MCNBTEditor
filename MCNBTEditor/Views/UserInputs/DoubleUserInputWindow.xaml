@@ -9,13 +9,11 @@
                   xmlns:ap="clr-namespace:MCNBTEditor.Themes.Attached"
                   mc:Ignorable="d"
                   d:DataContext="{d:DesignInstance userInputs1:DoubleInputViewModel}"
-                  Title="{Binding Title}" Height="200" Width="320"
-                  Style="{DynamicResource CustomWindowStyle}" 
-                  WindowStartupLocation="CenterOwner" 
-                  Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}"
+                  Title="{Binding Title}" Height="234.304" Width="320"
+                  WindowStartupLocation="CenterOwner"
                   WindowStyle="ToolWindow" ResizeMode="NoResize"
-                  CanCloseWithEnterKey="True"
-                  CanCloseWithEscapeKey="True">
+                  Style="{DynamicResource CustomWindowStyleEx}"
+                  SizeToContent="Height">
     <Window.Resources>
         <userInputs:SimpleInputValidationRule x:Key="ValidatorInputA"/>
         <userInputs:SimpleInputValidationRule x:Key="ValidatorInputB"/>
@@ -26,7 +24,7 @@
     </Window.InputBindings>
     <Grid>
         <TextBlock Margin="10,10,10,0" VerticalAlignment="Top" Text="{Binding MessageA, Mode=OneTime}"/>
-        <TextBox x:Name="InputBoxA" Padding="1" VerticalContentAlignment="Center" Margin="10,31,10,0" VerticalAlignment="Top" Height="24" Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}">
+        <TextBox x:Name="InputBoxA" Padding="1" VerticalContentAlignment="Center" Margin="10,31,10,0" VerticalAlignment="Top" Height="24">
             <TextBox.Text>
                 <Binding Path="InputA" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                     <Binding.ValidationRules>
@@ -36,14 +34,18 @@
             </TextBox.Text>
         </TextBox>
         <TextBlock Margin="10,60,10,0" VerticalAlignment="Top" Text="{Binding MessageB, Mode=OneTime}"/>
-        <TextBox x:Name="InputBoxB" Padding="1" VerticalContentAlignment="Center" Margin="10,81,10,0" VerticalAlignment="Top" Height="24" Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}">
+        <TextBox x:Name="InputBoxB" Padding="1" VerticalContentAlignment="Center" Margin="10,81,10,0" VerticalAlignment="Top" Height="24">
             <Binding Path="InputB" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                 <Binding.ValidationRules>
                     <StaticResource ResourceKey="ValidatorInputB"/>
                 </Binding.ValidationRules>
             </Binding>
         </TextBox>
-        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="OK" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
+        <Border DockPanel.Dock="Bottom" VerticalAlignment="Bottom" x:Name="ButtonBarBorder" Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" BorderThickness="0,1,0,0">
+            <Grid Height="43">
+                <Button Command="{Binding ConfirmCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="OK" Margin="0,0,92,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+                <Button Command="{Binding CancelCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+            </Grid>
+        </Border>
     </Grid>
 </views:BaseDialog>

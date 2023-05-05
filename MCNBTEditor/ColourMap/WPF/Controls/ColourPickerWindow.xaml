@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MCNBTEditor.ColourMap.WPF.Controls"
         mc:Ignorable="d"
-        Title="ColourPickerWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="ColourPickerWindow" Height="247.84" Width="400"
+        SizeToContent="Height">
+    <Grid Margin="5">
+        <StackPanel>
+            <Slider Margin="0,0,0,5" Minimum="0" Maximum="255" ValueChanged="OnRedChanged" AutoToolTipPlacement="TopLeft" IsMoveToPointEnabled="True"/>
+            <Slider Margin="0,0,0,5" Minimum="0" Maximum="255" ValueChanged="OnGreenChanged" AutoToolTipPlacement="TopLeft" IsMoveToPointEnabled="True"/>
+            <Slider Margin="0,0,0,5" Minimum="0" Maximum="255" ValueChanged="OnBlueChanged" AutoToolTipPlacement="TopLeft" IsMoveToPointEnabled="True"/>
+            <Slider Margin="0,0,0,5" Minimum="0" Maximum="255" ValueChanged="OnAlphaChanged" AutoToolTipPlacement="TopLeft" IsMoveToPointEnabled="True"/>
+            <Border x:Name="PreviewBorder" Height="50">
+                <TextBlock Text="Preview" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>

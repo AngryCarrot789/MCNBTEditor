@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,6 +9,7 @@ using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Explorer.Regions;
 using MCNBTEditor.Core.Utils;
 using MCNBTEditor.Core.Views.Dialogs.Message;
+using MCNBTEditor.Settings;
 using MCNBTEditor.Views.FilePicking;
 using Microsoft.Win32;
 
@@ -73,25 +72,31 @@ namespace MCNBTEditor.Views.Main {
 
         public AsyncRelayCommand<BaseTreeItemViewModel> UseItemCommand { get; }
 
+        public ICommand ShowSettingsCommand { get; }
+
         public MainViewModel(IExtendedTree tree, IExtendedList list) {
             this.TreeView = tree;
             this.ListView = list;
             tree.SelectionChanged += this.TreeOnSelectionChanged;
-            list.SelectionChanged += this.ListOnSelectionChanged;
             this.Root = new RootTreeItemViewModel();
             this.CreateDatFileCommand = new RelayCommand(() => this.Root.AddItem(new TagDataFileViewModel($"New {this.Root.ChildrenCount + 1}.dat")));
             this.OpenFileCommand = new AsyncRelayCommand(this.OpenFileAction);
             this.UseItemCommand = new AsyncRelayCommand<BaseTreeItemViewModel>(this.UseItemAction);
+            this.ShowSettingsCommand = new RelayCommand(() => {
+                new SettingsWindow().Show();
+            });
         }
 
         public async Task UseItemAction(BaseTreeItemViewModel item) {
-            if (item.CanHoldChildren && item.Children.Count > 0) {
+            if (item.CanHoldChildren) {
                 if (this.TreeView.IsNavigating) {
                     await IoC.MessageDialogs.ShowMessageAsync("Already navigating", "A navigation is already being processed. Wait for it to finish first");
                     return;
                 }
 
-                await this.TreeView.NavigateToItemAsync(item);
+                if (!await this.TreeView.NavigateToItemAsync(item)) {
+                    await IoC.MessageDialogs.ShowMessageAsync("Navigation failed", "Failed to navigate to the item!");
+                }
             }
             else if (item is TagPrimitiveViewModel primitive) {
                 await primitive.EditPrimitiveTagAction();
@@ -99,11 +104,11 @@ namespace MCNBTEditor.Views.Main {
         }
 
         private void TreeOnSelectionChanged(BaseTreeItemViewModel oldItem, BaseTreeItemViewModel newItem) {
-            this.SelectedTreeItem = newItem;
             if (newItem == null) {
                 newItem = this.Root;
             }
 
+            this.SelectedTreeItem = newItem;
             if (newItem.CanHoldChildren) {
                 this.CurrentFolderItem = newItem;
                 this.PrimaryListSelectedItem = newItem.GetFirstChild<BaseTreeItemViewModel>();
@@ -153,17 +158,19 @@ namespace MCNBTEditor.Views.Main {
                     }
 
                     for (int i = 0; i <= endIndex; i++) {
+                        BaseTreeItemViewModel itemThatAlreadyExists = null;
+                        BaseTreeItemViewModel itemToRemove = null;
                         string path = paths[i];
                         if (checkAlreadyAdded) {
-                            BaseTreeItemViewModel found = this.Root.FindChild(x => x is IHaveFilePath j && j.FilePath == path);
-                            if (found != null) {
+                            itemThatAlreadyExists = this.Root.FindChild(x => x is IHaveFilePath j && j.FilePath == path);
+                            if (itemThatAlreadyExists != null) {
                                 string result = await Dialogs.ItemAlreadyExistsDialog.ShowAsync("Item already added", path + " was already added. Do you want to replace it with the new file?");
                                 if (result != null && result != "cancel") {
-                                    if (result == "replace") {
-                                        this.Root.RemoveItem(found);
-                                    }
-                                    else if (result == "ignore") {
+                                    if (result == "ignore") {
                                         continue;
+                                    }
+                                    else if (result != "replace") {
+                                        itemThatAlreadyExists = null;
                                     }
                                 }
                                 else {
@@ -195,6 +202,7 @@ namespace MCNBTEditor.Views.Main {
                                 this.Root.AddItem(vm); // add before loading to see the entry counter + the IsLoading property working ;)
                                 try {
                                     await vm.RefreshAction();
+                                    itemToRemove = itemThatAlreadyExists;
                                 }
                                 catch (Exception e) {
                                     this.Root.RemoveItem(vm);
@@ -219,6 +227,7 @@ namespace MCNBTEditor.Views.Main {
                                 this.Root.AddItem(file);
                                 try {
                                     await file.RefreshAction();
+                                    itemToRemove = itemThatAlreadyExists;
                                 }
                                 catch (Exception e) {
                                     this.Root.RemoveItem(file);
@@ -231,6 +240,10 @@ namespace MCNBTEditor.Views.Main {
                                 await Dialogs.UnknownFileFormatDialog.ShowAsync("Unknown file format", $"Unknown file extension: {extension}");
                                 break;
                             }
+                        }
+
+                        if (itemToRemove != null) {
+                            this.Root.RemoveItem(itemToRemove);
                         }
                     }
                 }

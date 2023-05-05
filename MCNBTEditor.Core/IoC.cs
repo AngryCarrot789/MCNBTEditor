@@ -14,6 +14,8 @@ namespace MCNBTEditor.Core {
         public static SimpleIoC Instance { get; } = new SimpleIoC();
 
         public static ActionManager ActionManager { get; } = new ActionManager();
+        public static ShortcutManager ShortcutManager { get; set; }
+        public static IShortcutManagerDialogService ShortcutManagerDialog { get; set; }
         public static Action<string> OnShortcutModified { get; set; }
         public static Action<string> BroadcastShortcutActivity { get; set; }
 
@@ -27,8 +29,6 @@ namespace MCNBTEditor.Core {
         public static IExplorerService ExplorerService { get; set; }
         public static IKeyboardDialogService KeyboardDialogs { get; set; }
         public static IMouseDialogService MouseDialogs { get; set; }
-        public static ShortcutManager ShortcutManager { get; set; }
-        public static IShortcutManagerDialogService ShortcutManagerDialog { get; set; }
 
         public static bool SortTagCompoundByDefault { get; set; } = true;
         public static IExtendedTree TreeView { get; set; }

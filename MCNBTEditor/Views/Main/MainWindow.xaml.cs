@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace MCNBTEditor.Views.Main {
     /// <summary>
@@ -16,6 +17,19 @@ namespace MCNBTEditor.Views.Main {
                     await mvm.LoadFilesAction(files, true);
                 }
             }
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            ResourceDictionary dictionary = ((App) Application.Current).ThemeDictionary;
+            SolidColorBrush brush = dictionary["_REghZy.TestBrush"] as SolidColorBrush;
+            if (brush == null || brush.IsFrozen) {
+                brush = new SolidColorBrush();
+            }
+
+            Color c = Colors.Red;
+            c.B = (byte) e.NewValue;
+            brush.Color = c;
+            dictionary["_REghZy.TestBrush"] = brush;
         }
     }
 }

@@ -4,24 +4,24 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MCNBTEditor.Core.Actions.Helpers {
-    public class ActionCommand<T> : AnAction {
+    public class ShortcutActionCommand<T> : AnAction {
         public Type TargetType { get; }
 
         public string PropertyName { get; }
 
         public PropertyInfo Property { get; }
 
-        public ActionCommand(string propertyName, Func<string> header, Func<string> description) : base(header, description) {
+        public string ShortcutId { get; }
+
+        public ShortcutActionCommand(string propertyName, string shortcutId) : base((string) null, null) {
             this.PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
             this.TargetType = typeof(T);
             this.Property = this.TargetType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
             if (this.Property == null) {
                 throw new Exception($"No such property: {this.TargetType}.{propertyName}");
             }
-        }
 
-        public ActionCommand(string propertyName, string header, string description) : this(propertyName, GetStringProvider(header), GetStringProvider(description)) {
-
+            this.ShortcutId = shortcutId;
         }
 
         public ICommand GetCommand(object instance) {

@@ -8,46 +8,62 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1ad021-2929-4b6a-a12d-6bf47aa88c52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeViewItem.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/Helpers/ToggleButtonHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/BaseWindowEx.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/InlinesTagNameArrayConverter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ActionCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ShortcutActionCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/ColourRGBA.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/ColourSchemaViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/BaseMapItemViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/BrushItemViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/Brushes/BrushViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/Brushes/ColourBrushViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/ColourMapViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/ColourState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/WPF/ColourSchemeDictionary.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/WPF/ColourSchemeDictionary_OLD.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/WPF/Controls/ColourPickerWindow.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ColourMap/WPF/Controls/ColourPickerWindow.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Settings/SettingsViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Settings/SettingsWindow.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Settings/SettingsWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCNBTEditor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCNBTEditor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/BaseRelayCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/BaseRelayCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/BaseViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/BaseViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Dialog/TagPrimitiveEditorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Dialog/TagPrimitiveEditorViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IExtendedTree.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IExtendedTree.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/BaseTreeItemViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/BaseTreeItemViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/IoC.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/IoC.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Utils/Maths.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Utils/Maths.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/FocusHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/FocusHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/MCNBTEditor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/MCNBTEditor.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/NBT/UI/Inlines/NBTArrayInlineHeaderConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/NBT/UI/Inlines/NBTArrayInlineHeaderConverter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/NBT/UI/PathNavigationGeneratorConveter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/NBT/UI/PathNavigationGeneratorConveter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/ShortcutIdToGestureConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/ShortcutIdToGestureConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/MouseStrokeStringConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/MouseStrokeStringConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/KeyStrokeInputWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/KeyStrokeInputWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/MouseStrokeInputWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/MouseStrokeInputWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Views/ShortcutEditorWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Views/ShortcutEditorWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/VisualTreeUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/VisualTreeUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColoursSoftDarkBlue.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColoursSoftDarkBlue.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Utils/DispatcherUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Utils/DispatcherUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/DeepDark.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/DeepDark.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/RedBlackTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/RedBlackTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDark.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDark.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDarkAndBlue.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDarkAndBlue.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/ThemeTypes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ThemeTypes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/ThemesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ThemesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/VeryDarkTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/VeryDarkTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/BaseDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/BaseDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/BaseWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/BaseWindow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTFindingStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTFindingStyles.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/Inlines/BaseInlineHighlightConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/Inlines/BaseInlineHighlightConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/UserInputs/DoubleUserInputWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/UserInputs/DoubleUserInputWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/UserInputs/SingleUserInputWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/UserInputs/SingleUserInputWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" afterDir="false" />
@@ -69,20 +85,32 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/62/0bb9ebea/VisualTreeHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/7e/e728c3b6/Path.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/af/ecb1c361/TreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/d7/30a2adb9/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f9/5c7cb308/ScrollViewer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/45/d6abe1fa/XamlWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/d1/873c4a20/Environment.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/da/9b6b4287/BindingExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/8f/be1721b0/TreeView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/77/5a1c011d/Grid.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/4a/9c7d608d/TypeDelegator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ea/fabc7814/Panel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c1/005019c1/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/46/9a012980/DispatcherPriority.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/64/83548081/SystemParameters.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/40/2dafd3b4/Color.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/21/152ea2b7/CulturePreservingExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/15/9ef7bbba/DUCE.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/fd/20192c68/Style.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/e0/bed0be5b/WindowChromeWorker.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/cd/c405b75f/UIElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/bf/640e1d0a/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/6b/403edca1/HeaderedItemsControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/cd/c405b75f/UIElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/90/a129d20f/ToolTipService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/77/c6f6ffc4/PropertyPath.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f1/b34d8ce3/Binding.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/e0/6b92bb9e/PopupControlService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/fd/e7a1be5c/DefaultTraceListener.cs" root0="SKIP_HIGHLIGHTING" />
@@ -91,110 +119,120 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/42/c3ba74ba/DispatcherTimer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/4d/8b61c1b4/Inline.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f0/f14ec6f6/DispatcherOperation.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MCNBTEditor/obj/Debug/Views/NBT/Editor/TagPrimitiveEditorWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/66/404719a8/VirtualizingPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/4a/b78e7e9f/SizeToContent.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MCNBTEditor/obj/Debug/Views/NBT/Selector/ListSelectorWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/A/ObservableCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f0/491c2d28/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/59/048a7289/Border.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/72/c754e2e2/ContextMenuService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/33/0f4b0110/SolidColorBrush.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/fb3f9fa8/ItemsControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/86/dcb35691/ResourceDictionaryCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/09/8c12636c/Control.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/dc833c32/Selector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/2d/30947b22/DependencyObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/3e/851fcd38/FrameworkElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/05/7ce3bcc5/ArgumentOutOfRangeException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1b/c77db6a5/ListBox.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/e5/2e92c4df/Visual.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/87/946664ef/Animatable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/9e/8c3314cf/BindingBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/8c99457b/ItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/25/9e9c15c2/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/14/c4b1ab98/Span.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/7d/054e33e8/Task.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/88/6dbc0e85/FrugalStructList`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/14/c4b1ab98/Span.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/78/b6a0d52f/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/e9/556c4b19/Collection`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/90/bdc0cc9b/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ec/b2e215ce/Hyperlink.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/90/bdc0cc9b/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/a7dd9101/GeneratorPosition.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/c7/78349205/HwndSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/5b/69c61b9a/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/a9/e516bf04/TextFormatterContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/62/a6b07d92/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/c4/00ad929d/Type.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/d3/68d9db6b/IRecyclingItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/25/faf3297c/Window.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f8/4b582726/DispatcherObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/26/e03119b8/DispatcherOperation`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/76/65a9d6f5/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/30/ccf6f01f/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/3e/b5aa6901/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/55/e32550da/TextTreeText.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/c8e5ce9d/ScrollContentPresenter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/d0/f82ded7d/DynamicResourceExtension.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/c8e5ce9d/ScrollContentPresenter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1b/7bb23128/TextElement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/5d/8883b4a5/Freezable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/bc/46d064b7/WindowChrome.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/83/df36c299/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/04/58d08659/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/f1/27d34994/ContextLayoutManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/76/6c126ca9/Rect.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/5/PropertyChangedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/85/6516c030/MediaContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/8e/5d58bf90/HT.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/1f/d4418f18/Type.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/aa/93ea4ea0/DockPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/4a/62d473c2/ResourceDictionary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/a6/4d4842ac/IAsyncResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34EC56FC-58EC-4B35-97EF-877C03BD11D1/ae/bf8872bc/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/b0/3feae79b/IItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34EC56FC-58EC-4B35-97EF-877C03BD11D1/ae/bf8872bc/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/95/d25b781c/Brush.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/PathUtils.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/NBT/NBTBase.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagCompoundViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Dialog/ITagEditorService.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagPrimitiveViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ShortcutUtils.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/ShortcutUtils.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/IShortcutHandler.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/IMessageDialogService.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/MessageDialog.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Dialogs.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Utils/DispatcherUtils.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/BaseViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IExtendedTree.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/VisualTreeUtils.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/App.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeViewItem.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/NBT/UI/Inlines/NBTArrayInlineHeaderConverter.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/InlinesTagNameConverter.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/InlinesTagNameArrayConverter.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTFindingStyles.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeView.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/BaseRelayCommand.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutProcessor.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/ShortcutIdToGestureConverter.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/Inlines/BaseInlineHighlightConverter.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/Helpers/ToggleButtonHelper.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Dialog/TagPrimitiveEditorViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/WindowBaseEx.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/BaseWindowEx.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/NBT/UI/PathNavigationGeneratorConveter.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/ColourMapManagerViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/ColourMapViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/BaseMapItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/TextColourItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/IThemeHandler.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/ColourItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/ColourState.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/BrushViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/ColourBrushItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/Brushes/ColourBrushItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/Brushes/BrushItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/Brushes/BrushViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Utils/Maths.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/WPF/Controls/ColourPickerWindow.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/ColourMapViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/BaseMapItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Settings/SettingsViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Settings/SettingsWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Settings/SettingsWindow.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/ColourSchemaViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Colour.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/ColourRGBA.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/Brushes/ColourBrushViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/Maps/BrushItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/MouseStrokeStringConverter.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/WPF/ColourSchemeDictionary.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/KeyStrokeInputWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/UserInputs/DoubleUserInputWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ColourMap/WPF/ControlStyles/ControlStylesDictionary.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeView.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ThemeTypes.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ThemesController.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/App.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/DeepDark.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/RedBlackTheme.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDark.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/BaseTreeItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/MouseStrokeInputWindow.xaml" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2P4c90UJ8lg2M21tpLwxXTmFscg" />
@@ -213,7 +251,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.21609196" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -254,6 +292,18 @@
       <workItem from="1683049922596" duration="17452000" />
       <workItem from="1683081807664" duration="2091000" />
       <workItem from="1683088454197" duration="654000" />
+      <workItem from="1683096429690" duration="2929000" />
+      <workItem from="1683134034345" duration="661000" />
+      <workItem from="1683150871977" duration="2598000" />
+      <workItem from="1683157809402" duration="1299000" />
+      <workItem from="1683160777746" duration="10794000" />
+      <workItem from="1683174588491" duration="4625000" />
+      <workItem from="1683181703440" duration="3070000" />
+      <workItem from="1683189204325" duration="11679000" />
+      <workItem from="1683211246413" duration="10495000" />
+      <workItem from="1683237333091" duration="2485000" />
+      <workItem from="1683245090762" duration="4852000" />
+      <workItem from="1683258204525" duration="3303000" />
     </task>
     <servers />
   </component>
@@ -282,20 +332,143 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeView.cs</url>
-          <line>41</line>
-          <properties documentPath="F:\VSProjsV2\MCNBTEditor\MCNBTEditor\Controls\ExtendedTreeView.cs" initialLine="41" containingFunctionPresentation="method 'PrepareContainerForItemOverride'">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/fb3f9fa8/ItemsControl.cs</url>
+          <line>162</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\fb3f9fa8\ItemsControl.cs" initialLine="162" containingFunctionPresentation="method 'OnItemsSourceChanged'">
             <startOffsets>
-              <option value="1620" />
+              <option value="11783" />
             </startOffsets>
             <endOffsets>
-              <option value="1672" />
+              <option value="11828" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/66/404719a8/VirtualizingPanel.cs</url>
+          <line>44</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\66\404719a8\VirtualizingPanel.cs" initialLine="44" containingFunctionPresentation="method 'GetVirtualizationMode'">
+            <startOffsets>
+              <option value="4537" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4698" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs</url>
+          <line>1978</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\7a29af44\VirtualizingStackPanel.cs" initialLine="1978" containingFunctionPresentation="method 'GetOwners'">
+            <startOffsets>
+              <option value="117805" />
+            </startOffsets>
+            <endOffsets>
+              <option value="117895" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/8c99457b/ItemContainerGenerator.cs</url>
+          <line>1502</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\94\8c99457b\ItemContainerGenerator.cs" initialLine="1502" containingFunctionPresentation="method 'GenerateNext'">
+            <startOffsets>
+              <option value="61907" />
+            </startOffsets>
+            <endOffsets>
+              <option value="61960" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs</url>
+          <line>4512</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\7a29af44\VirtualizingStackPanel.cs" initialLine="4512" containingFunctionPresentation="method 'MeasureChild'">
+            <startOffsets>
+              <option value="239561" />
+            </startOffsets>
+            <endOffsets>
+              <option value="239593" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs</url>
+          <line>1365</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\7a29af44\VirtualizingStackPanel.cs" initialLine="1365" containingFunctionPresentation="method 'MeasureOverrideImpl'">
+            <startOffsets>
+              <option value="79059" />
+            </startOffsets>
+            <endOffsets>
+              <option value="79094" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs</url>
+          <line>1074</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\7a29af44\VirtualizingStackPanel.cs" initialLine="1074" containingFunctionPresentation="method 'MeasureOverrideImpl'">
+            <startOffsets>
+              <option value="56088" />
+            </startOffsets>
+            <endOffsets>
+              <option value="56112" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs</url>
+          <line>1080</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\7a29af44\VirtualizingStackPanel.cs" initialLine="1080" containingFunctionPresentation="method 'MeasureOverrideImpl'">
+            <startOffsets>
+              <option value="56421" />
+            </startOffsets>
+            <endOffsets>
+              <option value="56658" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs</url>
+          <line>2048</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\7a29af44\VirtualizingStackPanel.cs" initialLine="2048" containingFunctionPresentation="method 'InitializeViewport'">
+            <startOffsets>
+              <option value="121233" />
+            </startOffsets>
+            <endOffsets>
+              <option value="121257" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs</url>
+          <line>5183</line>
+          <properties documentPath="C:\Users\kettl\AppData\Roaming\JetBrains\Rider2021.1\resharper-host\DecompilerCache\decompiler\B44A5760-2E32-413E-B387-699EAC931482\c3\7a29af44\VirtualizingStackPanel.cs" initialLine="5183" containingFunctionPresentation="method 'EnsureScrollData'">
+            <startOffsets>
+              <option value="269451" />
+            </startOffsets>
+            <endOffsets>
+              <option value="269510" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="DotNetProject">
+        <watch expression="empty" />
+        <watch expression="viewport" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

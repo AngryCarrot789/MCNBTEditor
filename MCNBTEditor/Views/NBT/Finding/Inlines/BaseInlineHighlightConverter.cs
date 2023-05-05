@@ -16,7 +16,6 @@ namespace MCNBTEditor.Views.NBT.Finding.Inlines {
         public Run CreateHighlightedRun(string text = null) {
             return this.HighlightedRunStyle != null ? new Run(text) { Style = this.HighlightedRunStyle } : new Run(text) {
                 Background = new SolidColorBrush(Colors.Goldenrod),
-                Foreground = new SolidColorBrush(Colors.Black)
             };
         }
 

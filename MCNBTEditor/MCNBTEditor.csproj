@@ -44,6 +44,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zlib.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Ionic.Zlib.Core.1.0.0\lib\netstandard2.0\Ionic.Zlib.Core.dll</HintPath>
@@ -84,6 +87,17 @@
     <Compile Include="AdvancedContextService\Static\StaticMenuItemCollection.cs" />
     <Compile Include="AdvancedContextService\Static\StaticMenuSeparator.cs" />
     <Compile Include="AdvancedContextService\Static\StaticShortcutMenuItem.cs" />
+    <Compile Include="ColourMap\ColourRGBA.cs" />
+    <Compile Include="ColourMap\ColourSchemaViewModel.cs" />
+    <Compile Include="ColourMap\Maps\BaseMapItemViewModel.cs" />
+    <Compile Include="ColourMap\Maps\Brushes\BrushViewModel.cs" />
+    <Compile Include="ColourMap\Maps\Brushes\ColourBrushViewModel.cs" />
+    <Compile Include="ColourMap\Maps\BrushItemViewModel.cs" />
+    <Compile Include="ColourMap\Maps\ColourMapViewModel.cs" />
+    <Compile Include="ColourMap\Maps\ColourState.cs" />
+    <Compile Include="ColourMap\WPF\Controls\ColourPickerWindow.xaml.cs">
+      <DependentUpon>ColourPickerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ExtendedListBox.cs" />
     <Compile Include="Controls\ExtendedTreeView.cs" />
     <Compile Include="Controls\ExtendedTreeViewItem.cs" />
@@ -104,6 +118,9 @@
     <Compile Include="Converters\EnumConverter.cs" />
     <Compile Include="Converters\NullConverter.cs" />
     <Compile Include="Converters\SingletonValueConverter.cs" />
+    <Compile Include="DemoTheme.xaml.cs">
+      <DependentUpon>DemoTheme.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Highlighting\HighlightableString.cs" />
     <Compile Include="Highlighting\InlineHelper.cs" />
     <Compile Include="NBT\Actions\FindAction.cs" />
@@ -111,6 +128,10 @@
     <Compile Include="NBT\UI\ListFallbackSourceConverter.cs" />
     <Compile Include="Services\ClipboardService.cs" />
     <Compile Include="Services\WinExplorerService.cs" />
+    <Compile Include="Settings\SettingsViewModel.cs" />
+    <Compile Include="Settings\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shortcuts\ActivationHandlerReference.cs" />
     <Compile Include="Shortcuts\Bindings\ContextualShortcutCommandBinding.cs" />
     <Compile Include="Shortcuts\Bindings\ShortcutActionBinding.cs" />
@@ -212,9 +233,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ColourMap\WPF\ColourSchemeDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColourMap\WPF\ColourSchemeDictionary_OLD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColourMap\WPF\ControlStyles\ControlStylesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ColourMap\WPF\Controls\ColourPickerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ControlStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DemoTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Shortcuts\Dialogs\KeyStrokeInputWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -330,9 +375,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="AppIcon.ico" />
     <Content Include="Keymap.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\AppIcon.ico" />
     <Resource Include="Resources\Icons\FileIcon-Region.png" />
     <Resource Include="Resources\Icons\Credits.txt" />
     <Resource Include="Resources\Icons\FileIcon-TagByte8.png" />
@@ -353,6 +400,8 @@
       <Name>MCNBTEditor.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controls\ColourPickers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -343,7 +343,7 @@ namespace MCNBTEditor.Core.Explorer {
                 return items[0];
             }
             else {
-                return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(items, "Ambiguous path elements", $"There are {items.Count} children with the name '{name}'. Select which one to use:");
+                return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(items, "Ambiguous path elements", $"There are {items.Count} children with the name '{name}'. This list is ordered from oldest to newest added; select which one to use:");
             }
         }
 

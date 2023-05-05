@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -16,7 +15,6 @@ namespace MCNBTEditor.Views {
     public class WindowEx : BaseWindowEx {
         public static readonly DependencyProperty TitlebarBrushProperty = DependencyProperty.Register("TitlebarBrush", typeof(Brush), typeof(WindowEx), new PropertyMetadata());
         public static readonly DependencyProperty CanCloseWithEscapeKeyProperty = DependencyProperty.Register("CanCloseWithEscapeKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(false));
-        public static readonly DependencyProperty CanCloseWithEnterKeyProperty = DependencyProperty.Register("CanCloseWithEnterKey", typeof(bool), typeof(WindowEx), new PropertyMetadata(false));
 
         [Category("Brush")]
         public Brush TitlebarBrush {
@@ -27,11 +25,6 @@ namespace MCNBTEditor.Views {
         public bool CanCloseWithEscapeKey {
             get => (bool) this.GetValue(CanCloseWithEscapeKeyProperty);
             set => this.SetValue(CanCloseWithEscapeKeyProperty, value);
-        }
-
-        public bool CanCloseWithEnterKey {
-            get => (bool) this.GetValue(CanCloseWithEnterKeyProperty);
-            set => this.SetValue(CanCloseWithEnterKeyProperty, value);
         }
 
         private bool isInRegularClosingHandler;
@@ -54,24 +47,20 @@ namespace MCNBTEditor.Views {
             return DispatcherUtils.InvokeAsync(this.Dispatcher, this.showDialogAction);
         }
 
-        protected sealed override void OnClosing(CancelEventArgs e) {
+        protected sealed override async void OnClosing(CancelEventArgs e) {
             if (this.isInRegularClosingHandler || this.isHandlingAsyncClose) {
                 return;
             }
 
             try {
                 this.isInRegularClosingHandler = true;
-                this.OnClosingInternal(e);
+                e.Cancel = true;
+                if (await this.CloseAsync()) {
+                    e.Cancel = false;
+                }
             }
             finally {
                 this.isInRegularClosingHandler = false;
-            }
-        }
-
-        private async void OnClosingInternal(CancelEventArgs e) {
-            e.Cancel = true;
-            if (await this.CloseAsync()) {
-                e.Cancel = false;
             }
         }
 
@@ -114,7 +103,11 @@ namespace MCNBTEditor.Views {
 
         protected override void OnPreviewKeyDown(KeyEventArgs e) {
             base.OnPreviewKeyDown(e);
-            if ((e.Key == Key.Escape && this.CanCloseWithEscapeKey) || (e.Key == Key.Enter && this.CanCloseWithEnterKey)) {
+            if (e.Handled) {
+                return;
+            }
+
+            if ((e.Key == Key.Escape && this.CanCloseWithEscapeKey)) {
                 e.Handled = true;
                 this.Close();
             }
@@ -127,7 +120,7 @@ namespace MCNBTEditor.Views {
             }
 
             public override async Task<bool> ExecuteAsync(AnActionEventArgs e) {
-                if (e.DataContext.TryGetContext(out WindowEx w) && w.CanCloseWithEscapeKey) {
+                if (e.DataContext.TryGetContext(out WindowEx w)) {
                     await w.CloseAsync();
                     return true;
                 }

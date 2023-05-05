@@ -30,7 +30,7 @@ namespace MCNBTEditor.Core.Actions {
         protected AnAction(string header, string description) : this(GetStringProvider(header), GetStringProvider(description)) {
         }
 
-        private static Func<string> GetStringProvider(string hardCoded) {
+        protected static Func<string> GetStringProvider(string hardCoded) {
             return hardCoded != null ? () => hardCoded : ProvideNullString;
         }
 

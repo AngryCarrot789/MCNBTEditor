@@ -434,8 +434,8 @@
     </Style>
 
     <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Deep.3.Background.Static}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Deep.3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Tone3.Background.Static}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Tone3.Border.Static}" />
         <Setter Property="Foreground" Value="{DynamicResource Window.Static.Foreground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
@@ -554,11 +554,11 @@
     </Style>
 
     <Style x:Key="CustomWindowStyleEx" TargetType="{x:Type views:WindowEx}" BasedOn="{StaticResource CustomWindowStyle}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Deep.3.Background.Static}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Deep.3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Tone3.Background.Static}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Tone3.Border.Static}" />
         <Setter Property="Foreground" Value="{DynamicResource Window.Static.Foreground}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="TitlebarBrush" Value="{DynamicResource AREghZyBrush.Deep.3.Border.Static}" />
+        <Setter Property="TitlebarBrush" Value="{DynamicResource AREghZyBrush.Tone3.Border.Static}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type views:WindowEx}">
@@ -686,8 +686,8 @@
                 <AdornedElementPlaceholder x:Name="AdornerPlaceholder"/>
             </Border>
             <Grid MaxWidth="{Binding ElementName=AdornerPlaceholder, Path=ActualWidth}">
-                <Border Background="{DynamicResource AREghZyBrush.Primary.2.Background.Static}" 
-                        BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" 
+                <Border Background="{DynamicResource AREghZyBrush.Tone5.Background.Static}"
+                        BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}"
                         BorderThickness="1" CornerRadius="3"
                         Opacity="0.8">
                     <Border.Effect>
@@ -870,8 +870,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -1000,7 +1006,6 @@
     <Style TargetType="{x:Type ScrollViewer}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="CanContentScroll" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -1813,7 +1818,7 @@
     </Style>
 
     <Style TargetType="{x:Type GridSplitter}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Tone5.Border.Static}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GridSplitter}">
@@ -2748,7 +2753,7 @@
                 </Border>
                 <Track x:Name="PART_Track" Grid.Row="1">
                     <Track.DecreaseRepeatButton>
-                        <RepeatButton Command="{x:Static Slider.DecreaseLarge}" Background="{DynamicResource AREghZyBrush.ColourfulGlyph.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.2.Border.Static}" BorderThickness="1 1 0 1" />
+                        <RepeatButton Command="{x:Static Slider.DecreaseLarge}" Background="{DynamicResource AREghZyBrush.ColourfulGlyph.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" BorderThickness="1 1 0 1" />
                     </Track.DecreaseRepeatButton>
                     <Track.IncreaseRepeatButton>
                         <RepeatButton Command="{x:Static Slider.IncreaseLarge}" Background="Transparent" BorderBrush="Transparent"/>
@@ -2896,7 +2901,7 @@
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource SliderThumb.Static.Foreground}" />
+        <Setter Property="Foreground" Value="{DynamicResource SliderThumb.Static.TickPlacementForeground}" />
         <Setter Property="Template" Value="{StaticResource SliderHorizontal}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
@@ -2909,7 +2914,7 @@
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource SliderThumb.Static.Foreground}" />
+        <Setter Property="Foreground" Value="{DynamicResource SliderThumb.Static.TickPlacementForeground}" />
         <Setter Property="Template" Value="{StaticResource AbletonSliderHorizontal}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
@@ -2972,7 +2977,7 @@
     </Style>
 
     <Style TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Primary.3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Tone6.Border.Static}" />
         <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">
@@ -2985,7 +2990,7 @@
     </Style>
 
     <Style x:Key="VerticalSeparator" TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Primary.3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Tone6.Border.Static}" />
         <Setter Property="Margin" Value="2,0,2,0" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">
@@ -3352,8 +3357,8 @@
     </Style>
 
     <Style TargetType="{x:Type TreeView}">
-        <Setter Property="Background" Value="{StaticResource TreeView.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource TreeView.Static.Border}"/>
+        <Setter Property="Background" Value="{DynamicResource TreeView.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TreeView.Static.Border}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Static}" />
@@ -3379,8 +3384,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeView.Disabled.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TreeView.Disabled.Border}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource TreeView.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource TreeView.Disabled.Border}"/>
                         </Trigger>
                         <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
                             <Setter Property="CanContentScroll" TargetName="_tv_scrollviewer_" Value="true"/>
@@ -3417,8 +3422,8 @@
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Width" Value="16"/>
         <Setter Property="Height" Value="16"/>
-        <Setter Property="Background" Value="{StaticResource TreeViewItem.TreeArrow.Static.Fill}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource TreeViewItem.TreeArrow.Static.Stroke}"/>
+        <Setter Property="Background" Value="{DynamicResource TreeViewItem.TreeArrow.Static.Fill}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TreeViewItem.TreeArrow.Static.Stroke}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
@@ -3452,20 +3457,20 @@
                                 </Setter.Value>
                             </Setter>
                             -->
-                            <Setter Property="Fill" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.Static.Checked.Fill}"/>
-                            <Setter Property="Stroke" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.Static.Checked.Stroke}"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource TreeViewItem.TreeArrow.Static.Checked.Fill}"/>
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="{DynamicResource TreeViewItem.TreeArrow.Static.Checked.Stroke}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Fill" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Fill}"/>
-                            <Setter Property="Stroke" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Stroke}"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource TreeViewItem.TreeArrow.MouseOver.Fill}"/>
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="{DynamicResource TreeViewItem.TreeArrow.MouseOver.Stroke}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                                 <Condition Property="IsChecked" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Fill" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Fill}"/>
-                            <Setter Property="Stroke" TargetName="ExpandPath" Value="{StaticResource TreeViewItem.TreeArrow.MouseOver.Checked.Stroke}"/>
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="{DynamicResource TreeViewItem.TreeArrow.MouseOver.Checked.Fill}"/>
+                            <Setter Property="Stroke" TargetName="ExpandPath" Value="{DynamicResource TreeViewItem.TreeArrow.MouseOver.Checked.Stroke}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -3473,8 +3478,8 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type TreeViewItem}">
-        <Setter Property="Background" Value="{StaticResource TreeViewItem.Static.Background}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource TreeViewItem.Static.Border}"/>
+        <Setter Property="Background" Value="{DynamicResource TreeViewItem.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TreeViewItem.Static.Border}"/>
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="Padding" Value="1,0,0,0"/>
@@ -3514,8 +3519,8 @@
                             <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Border}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Border}"/>
                             <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Deeper}"/>
                         </Trigger>
                         <MultiTrigger>
@@ -3523,8 +3528,8 @@
                                 <Condition Property="IsSelected" Value="true"/>
                                 <Condition Property="IsSelectionActive" Value="false"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Inactive.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Inactive.Border}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Inactive.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Inactive.Border}"/>
                             <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Disabled}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">
@@ -3582,8 +3587,8 @@
                             <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Border}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Border}"/>
                             <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Deeper}"/>
                         </Trigger>
                         <MultiTrigger>
@@ -3591,8 +3596,8 @@
                                 <Condition Property="IsSelected" Value="true"/>
                                 <Condition Property="IsSelectionActive" Value="false"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Inactive.Background}"/>
-                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TreeViewItem.Selected.Inactive.Border}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Inactive.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Inactive.Border}"/>
                             <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Disabled}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">

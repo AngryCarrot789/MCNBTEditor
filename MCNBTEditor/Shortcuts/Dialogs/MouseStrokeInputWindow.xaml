@@ -6,17 +6,22 @@
         mc:Ignorable="d"
         xmlns:views1="clr-namespace:MCNBTEditor.Views"
         xmlns:dialogs1="clr-namespace:MCNBTEditor.Core.Views.Dialogs;assembly=MCNBTEditor.Core"
+        xmlns:ap="clr-namespace:MCNBTEditor.Themes.Attached"
         d:DataContext="{d:DesignInstance dialogs1:BaseConfirmableDialogViewModel}"
-        Title="Input a mouse stroke" Height="190" Width="300"
-        Style="{DynamicResource CustomWindowStyle}"
+        Title="Input a mouse stroke" Height="210" Width="300"
         WindowStartupLocation="CenterOwner"
-        WindowStyle="ToolWindow" ResizeMode="NoResize">
+        WindowStyle="ToolWindow" ResizeMode="NoResize"
+        Style="{DynamicResource CustomWindowStyleEx}">
     <Grid>
         <TextBlock Margin="10,10,10,0" VerticalAlignment="Top" Padding="2" Text="Click any mouse button in here:"/>
-        <Border MouseDown="InputBox_MouseDown" MouseWheel="InputBox_MouseWheel" Margin="10,35,10,39" Background="{DynamicResource AREghZyBrush.Deep.2.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Deep.3.Border.Static}" BorderThickness="1">
+        <Border MouseDown="InputBox_MouseDown" MouseWheel="InputBox_MouseWheel" Margin="10,35,10,54" BorderThickness="1" Background="{DynamicResource AREghZyBrush.Tone2.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone3.Border.Static}">
             <TextBlock x:Name="InputBox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" Content="OK" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72"/>
+        <Border DockPanel.Dock="Bottom" VerticalAlignment="Bottom" x:Name="ButtonBarBorder" Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" BorderThickness="0,1,0,0">
+            <Grid Height="43">
+                <Button Command="{Binding ConfirmCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="OK" Margin="0,0,92,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+                <Button Command="{Binding CancelCommand, Mode=OneTime}" ap:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+            </Grid>
+        </Border>
     </Grid>
 </views1:BaseDialog>

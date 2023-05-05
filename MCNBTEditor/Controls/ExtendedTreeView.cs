@@ -155,13 +155,22 @@ namespace MCNBTEditor.Controls {
             }
 
             TreeViewItem treeItem = null;
-            if (direction == null) {
-                return null;
-            }
-            else if (direction == true) { // down
+            if (direction == null || direction == true) { // true == down
+                if (direction == null) {
+                    this.PART_ScrollViewier.ScrollToVerticalOffset(0);
+                    await this.Dispatcher.InvokeAsync(() => { }, DispatcherPriority.Render);
+                }
+
+                double lastOffset = this.PART_ScrollViewier.VerticalOffset;
                 while (treeItem == null && this.PART_ScrollViewier.VerticalOffset < (this.PART_ScrollViewier.ExtentHeight - this.PART_ScrollViewier.ViewportHeight)) {
                     this.PART_ScrollViewier.ScrollToVerticalOffset(this.PART_ScrollViewier.VerticalOffset + (this.PART_ScrollViewier.ViewportHeight / 2d));
                     treeItem = await this.Dispatcher.InvokeAsync(() => generator.ContainerFromIndex(index) as TreeViewItem, DispatcherPriority.Render);
+                    double newOffset = this.PART_ScrollViewier.VerticalOffset;
+                    if (Math.Abs(lastOffset - newOffset) < 0.1d) { // just in case we get stuck in an infinite loop
+                        break;
+                    }
+
+                    lastOffset = newOffset;
                 }
             }
             else { // up

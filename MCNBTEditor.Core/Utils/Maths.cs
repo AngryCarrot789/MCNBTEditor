@@ -14,6 +14,10 @@ namespace MCNBTEditor.Core.Utils {
             return Math.Max(Math.Min(value, max), min);
         }
 
+        public static byte Clamp(byte value, byte min, byte max) {
+            return value < min ? min : (value > max ? max : value);
+        }
+
         public static int Clamp(int value, int min, int max) {
             return value < min ? min : (value > max ? max : value);
         }

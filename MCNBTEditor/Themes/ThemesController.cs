@@ -23,11 +23,11 @@ namespace MCNBTEditor.Themes {
 
         public static void SetTheme(ThemeType theme) {
             string themeName = theme.GetName();
-            CurrentTheme = theme;
             if (string.IsNullOrEmpty(themeName)) {
                 return;
             }
 
+            CurrentTheme = theme;
             ThemeDictionary = new ResourceDictionary() { Source = new Uri($"Themes/{themeName}.xaml", UriKind.Relative) };
             ControlColours = new ResourceDictionary() { Source = new Uri("Themes/ControlColours.xaml", UriKind.Relative) };
             Controls = new ResourceDictionary() { Source = new Uri("Themes/Controls.xaml", UriKind.Relative) };

@@ -9,18 +9,15 @@
                     xmlns:regions="clr-namespace:MCNBTEditor.Core.Explorer.Regions;assembly=MCNBTEditor.Core"
                     xmlns:converters="clr-namespace:MCNBTEditor.Converters">
     <Style TargetType="{x:Type Run}" x:Key="NBTTagNameRunStyle">
-        <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Static}"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <Style TargetType="{x:Type Run}" x:Key="NBTTagValueRunStyle">
-        <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Deeper}"/>
         <Setter Property="FontFamily" Value="Consolas"/>
     </Style>
 
     <!-- TODO: ??? not sure how to do this without using a style for each type of tag -->
     <Style x:Key="TagTooltipStyle" TargetType="{x:Type ToolTip}" BasedOn="{StaticResource {x:Type ToolTip}}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Primary.2.Background.Static}"/>
     </Style>
 
     <inlines:NBTCollectionInlineHeaderConverter x:Key="NBTCollectionInlinesNameConverter" TagNameRunStyle="{StaticResource NBTTagNameRunStyle}" TagDataRunStyle="{StaticResource NBTTagValueRunStyle}"/>
@@ -263,15 +260,10 @@
     <Style TargetType="{x:Type controls:ExtendedListBox}" BasedOn="{StaticResource {x:Type ListBox}}">
         <Setter Property="ItemTemplateSelector" Value="{StaticResource ExtendedListItemSelector}"/>
         <Setter Property="SelectionMode" Value="Extended"/>
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"/>
     </Style>
 
     <Style TargetType="{x:Type controls:ExtendedTreeView}" BasedOn="{StaticResource {x:Type TreeView}}">
         <Setter Property="ItemTemplateSelector" Value="{StaticResource ExtendedTreeItemSelector}"/>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource TreeViewItemStretchedContent}"/>
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Deep.2.Background.Static}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Primary.2.Border.Static}"/>
     </Style>
 
     <Style TargetType="{x:Type controls:ExtendedTreeViewItem}" BasedOn="{StaticResource {x:Type TreeViewItem}}"/>

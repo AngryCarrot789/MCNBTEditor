@@ -12,14 +12,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MCNBTEditor.Settings {
+namespace MCNBTEditor {
     /// <summary>
-    /// Interaction logic for SettingsWindow.xaml
+    /// Interaction logic for DemoTheme.xaml
     /// </summary>
-    public partial class SettingsWindow : Window {
-        public SettingsWindow() {
+    public partial class DemoTheme : Window {
+        public DemoTheme() {
             InitializeComponent();
-            this.DataContext = new SettingsViewModel();
         }
     }
 }

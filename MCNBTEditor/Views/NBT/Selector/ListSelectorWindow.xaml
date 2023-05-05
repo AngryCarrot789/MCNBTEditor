@@ -12,28 +12,34 @@
             xmlns:apc="clr-namespace:MCNBTEditor.Themes.Attached"
             mc:Ignorable="d"
             Title="{Binding Title}" Height="350" Width="420"
-            Style="{DynamicResource CustomWindowStyle}"
             WindowStartupLocation="CenterOwner"
             WindowStyle="ToolWindow" ResizeMode="NoResize"
-            Background="{DynamicResource AREghZyBrush.Primary.1.Background.Static}"
             d:DataContext="{d:DesignInstance local:ItemSelectorViewModel}"
-            CanCloseWithEnterKey="True"
-            CanCloseWithEscapeKey="True">
+            CanCloseWithEscapeKey="True"
+            Style="{DynamicResource CustomWindowStyleEx}">
     <Window.Resources>
         <converters:NullToVisibilityConverter x:Key="NullToVisConverter" NullValue="Collapsed" NonNullValue="Visible"/>
     </Window.Resources>
     <Grid>
-        <DockPanel Margin="0,0,0,44">
+        <DockPanel Margin="0,0,0,43">
             <TextBlock Text="{Binding Message}" DockPanel.Dock="Top" Padding="12,8" 
                        Visibility="{Binding Message, Converter={StaticResource NullToVisConverter}}"
-                       TextWrapping="Wrap" FontSize="16"/>
-            <c:ExtendedListBox ItemsSource="{Binding Items, Mode=OneTime}" SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" 
-                               Background="{DynamicResource AREghZyBrush.Deep.3.Background.Static}" BorderThickness="0,1,0,1"
-                               SelectionMode="Single" acs:AdvancedContextMenu.IsMenuEnabled="False">
+                       TextWrapping="Wrap" FontSize="13"/>
+            <c:ExtendedListBox ItemsSource="{Binding Items, Mode=OneTime}" 
+                               SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}" 
+                               BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}"
+                               BorderThickness="0,1,0,1"
+                               SelectionMode="Single"
+                               acs:AdvancedContextMenu.IsMenuEnabled="False" 
+                               Background="{DynamicResource AREghZyBrush.Tone2.Background.Static}">
                 
             </c:ExtendedListBox>
         </DockPanel>
-        <Button Command="{Binding ConfirmCommand, Mode=OneTime}" apc:CornerHelper.CornerRadius="2" Content="Select item" Margin="0,0,87,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="85" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
-        <Button Command="{Binding CancelCommand, Mode=OneTime}" apc:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="24" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Primary.3.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Primary.3.Border.Static}"/>
+        <Border DockPanel.Dock="Bottom" VerticalAlignment="Bottom" x:Name="ButtonBarBorder" Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}">
+            <Grid Height="43">
+                <Button Command="{Binding ConfirmCommand, Mode=OneTime}" apc:CornerHelper.CornerRadius="2" Content="Select Item" Margin="0,0,92,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="86" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+                <Button Command="{Binding CancelCommand, Mode=OneTime}" apc:CornerHelper.CornerRadius="2" Content="Cancel" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="23" HorizontalAlignment="Right" Width="72" Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+            </Grid>
+        </Border>
     </Grid>
 </views:BaseDialog>

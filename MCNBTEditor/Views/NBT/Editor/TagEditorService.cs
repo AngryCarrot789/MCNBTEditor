@@ -1,7 +1,4 @@
-using System;
-using System.Data;
 using System.Threading.Tasks;
-using System.Windows.Automation;
 using MCNBTEditor.Core.Explorer.Dialog;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.NBT;
