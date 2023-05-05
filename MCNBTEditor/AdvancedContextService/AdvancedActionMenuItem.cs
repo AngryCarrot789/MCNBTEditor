@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using MCNBTEditor.Core.Actions;
@@ -159,8 +160,16 @@ namespace MCNBTEditor.AdvancedContextService {
 
             context.AddContext(this);
             IInputElement focused = Keyboard.FocusedElement;
-            if (!ReferenceEquals(focused, this)) {
-                AddObjectToDataContext(context, focused);
+            if (focused != null && !ReferenceEquals(focused, this) && focused is DependencyObject obj) {
+                if (obj is FrameworkElement element && element.DataContext is object dc1) {
+                    context.AddContext(dc1);
+                }
+
+                context.AddContext(obj);
+                ItemsControl itemsControl = ItemsControlFromItemContainer(obj);
+                if (itemsControl != null && itemsControl.IsItemItsOwnContainer(obj)) {
+                    context.AddContext(itemsControl);
+                }
             }
 
             if (Window.GetWindow(this) is Window win) {

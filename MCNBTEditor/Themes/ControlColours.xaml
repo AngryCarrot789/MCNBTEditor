@@ -15,7 +15,8 @@
     <SolidColorBrush x:Key="Button.Disabled.Border"                         Color="{DynamicResource AREghZyColour.Tone5.Border.Disabled}"/>
     <SolidColorBrush x:Key="Button.Static.Foreground"                       Color="{DynamicResource AREghZyColour.Foreground.Static}"/>
     <SolidColorBrush x:Key="Button.Disabled.Foreground"                     Color="{DynamicResource AREghZyColour.Foreground.Disabled}"/>
-    <SolidColorBrush x:Key="Button.Defaulted.Border"                        Color="{DynamicResource AREghZyColour.Tone5.Border.Static}"/>
+    <SolidColorBrush x:Key="Button.Defaulted.Background"                    Color="{DynamicResource AREghZyColour.ColourfulGlyph.Static}"/>
+    <SolidColorBrush x:Key="Button.Defaulted.Border"                        Color="{DynamicResource AREghZyColour.ColourfulGlyph.Disabled}"/>
     <SolidColorBrush x:Key="ToggleButton.IsChecked.Background"              Color="{DynamicResource AREghZyColour.Tone5.Border.Selected}"/>
     <SolidColorBrush x:Key="ToggleButton.IsChecked.Border"                  Color="{DynamicResource AREghZyColour.Tone5.Border.Selected}"/>
     <SolidColorBrush x:Key="ToggleButton.Pressed.IsChecked.Background"      Color="{DynamicResource AREghZyColour.Tone6.Border.Selected}"/>

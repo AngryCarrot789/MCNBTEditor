@@ -66,7 +66,7 @@ namespace MCNBTEditor.Core.Actions {
         }
 
         public virtual Presentation GetPresentation(AnActionEventArgs e, bool isToggled) {
-            return isToggled ? Presentation.VisibleAndEnabled : Presentation.VisibleAndDisabled;
+            return Presentation.VisibleAndEnabled;
         }
 
         public virtual Presentation GetPresentationNoToggle(AnActionEventArgs e) {

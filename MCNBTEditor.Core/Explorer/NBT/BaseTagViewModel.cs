@@ -201,7 +201,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                 list.Add(new CommandContextEntry("Delete FILE", datFileAgain.DeleteFileCommand));
             }
             else {
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/RemoveFromParent", this.RemoveFromParentCommand));
+                list.Add(new ActionContextEntry(this, "actions.nbt.remove_from_parent"));
             }
         }
 

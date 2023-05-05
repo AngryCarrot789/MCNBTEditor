@@ -27,6 +27,10 @@
         <userinputs:SimpleInputValidationRule x:Key="NameValidationRule"/>
         <userinputs:SimpleInputValidationRule x:Key="ValueValidationRule"/>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding ConfirmCommand, Mode=OneTime}"/>
+        <KeyBinding Key="Escape" Command="{Binding CancelCommand, Mode=OneTime}"/>
+    </Window.InputBindings>
     <Grid>
         <DockPanel Margin="0,0,0,44">
             <TextBlock Text="{Binding Message}" DockPanel.Dock="Top" Padding="12,8" 

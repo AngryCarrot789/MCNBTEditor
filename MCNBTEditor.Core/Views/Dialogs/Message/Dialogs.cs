@@ -17,22 +17,22 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         public static readonly MessageDialog RemoveDatFileWhenDeletingDialog;
 
         static Dialogs() {
-            YesNoCancelDialog = new MessageDialog {PreFocusedActionId = "yes"};
+            YesNoCancelDialog = new MessageDialog("yes");
             YesNoCancelDialog.AddButton("Yes", "yes", true);
             YesNoCancelDialog.AddButton("No", "no", true);
             YesNoCancelDialog.AddButton("Cancel", "cancel", false);
             YesNoCancelDialog.MarkReadOnly();
 
-            YesNoDialog = new MessageDialog {PreFocusedActionId = "yes"};
+            YesNoDialog = new MessageDialog("yes");
             YesNoDialog.AddButton("Yes", "yes", true);
             YesNoDialog.AddButton("No", "no", true);
             YesNoDialog.MarkReadOnly();
 
-            OkDialog = new MessageDialog{PreFocusedActionId = "ok"};
+            OkDialog = new MessageDialog("ok");
             OkDialog.AddButton("OK", "ok", true);
             OkDialog.MarkReadOnly();
 
-            OkCancelDialog = new MessageDialog{PreFocusedActionId = "ok"};
+            OkCancelDialog = new MessageDialog("ok");
             OkCancelDialog.AddButton("OK", "ok", true);
             OkCancelDialog.AddButton("Cancel", "cancel", false);
             OkCancelDialog.MarkReadOnly();
@@ -45,13 +45,13 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             InvalidClipboardDataDialog.ShowAlwaysUseNextResultOption = true;
             InvalidClipboardDataDialog.MarkReadOnly();
 
-            ItemAlreadyExistsDialog = new MessageDialog {ShowAlwaysUseNextResultOption = true, PreFocusedActionId = "replace"};
+            ItemAlreadyExistsDialog = new MessageDialog("replace") {ShowAlwaysUseNextResultOption = true};
             ItemAlreadyExistsDialog.AddButton("Replace", "replace", true).ToolTip = "Replace the existing item with the new item";
             ItemAlreadyExistsDialog.AddButton("Add anyway", "keep", true).ToolTip = "Keeps the existing item and adds the new item, resulting in 2 items with the same file path";
             ItemAlreadyExistsDialog.AddButton("Ignore", "ignore", true).ToolTip = "Ignores the file, leaving the existing item as-is";
             ItemAlreadyExistsDialog.AddButton("Cancel", "cancel", false).ToolTip = "Stop adding files and remove all files that have been added";
 
-            UnknownFileFormatDialog = new MessageDialog {ShowAlwaysUseNextResultOption = true, PreFocusedActionId = "ok"};
+            UnknownFileFormatDialog = new MessageDialog("ok") {ShowAlwaysUseNextResultOption = true};
             UnknownFileFormatDialog.AddButton("OK", "ok", true);
             UnknownFileFormatDialog.AddButton("Cancel", "cancel", false);
 
@@ -63,7 +63,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             InvalidPathDialog.ShowAlwaysUseNextResultOption = true;
             InvalidPathDialog.MarkReadOnly();
 
-            RemoveDatFileWhenDeletingDialog = new MessageDialog();
+            RemoveDatFileWhenDeletingDialog = new MessageDialog("yes");
             RemoveDatFileWhenDeletingDialog.ShowAlwaysUseNextResultOption = true;
             RemoveDatFileWhenDeletingDialog.AddButton("Yes", "yes", false);
             RemoveDatFileWhenDeletingDialog.AddButton("No", "no", false);

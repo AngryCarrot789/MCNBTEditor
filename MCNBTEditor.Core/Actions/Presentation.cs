@@ -14,9 +14,9 @@ namespace MCNBTEditor.Core.Actions {
         /// </summary>
         public bool IsEnabled => (this.flags & 0b010) != 0;
 
-        public static Presentation VisibleAndEnabled { get; } = new Presentation(true, true);
-        public static Presentation VisibleAndDisabled { get; } = new Presentation(true, false);
-        public static Presentation Invisible { get; } = new Presentation(false, false);
+        public static readonly Presentation VisibleAndEnabled = new Presentation(true, true);
+        public static readonly Presentation VisibleAndDisabled = new Presentation(true, false);
+        public static readonly Presentation Invisible = new Presentation(false, false);
 
         public Presentation(bool isVisible, bool isEnabled) {
             this.flags = Bits.Join(isVisible, isEnabled);

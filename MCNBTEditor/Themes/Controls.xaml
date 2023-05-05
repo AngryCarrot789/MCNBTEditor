@@ -39,6 +39,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource Button.Defaulted.Background}" />
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Button.Defaulted.Border}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">

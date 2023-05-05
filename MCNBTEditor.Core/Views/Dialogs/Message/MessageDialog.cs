@@ -20,6 +20,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         private string automaticResult;
         private bool allowNullButtonActionForAutoResult;
         private string defaultResult;
+        private string primaryResult;
         private readonly ObservableCollectionEx<DialogButton> buttons;
 
         /// <summary>
@@ -128,10 +129,12 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             }
         }
 
-        private string preFocusedActionId;
-        public string PreFocusedActionId {
-            get => this.preFocusedActionId;
-            set => this.RaisePropertyChanged(ref this.preFocusedActionId, value);
+        /// <summary>
+        /// The resulting action ID that gets returned when the dialog closes with a successful result but no button was explicitly clicked
+        /// </summary>
+        public string PrimaryResult {
+            get => this.primaryResult;
+            set => this.RaisePropertyChanged(ref this.primaryResult, value);
         }
 
         /// <summary>
@@ -149,9 +152,11 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
 
         private DialogButton lastClickedButton;
 
-        public MessageDialog(IEnumerable<DialogButton> buttons = null) {
-            this.buttons = new ObservableCollectionEx<DialogButton>(buttons ?? Enumerable.Empty<DialogButton>());
+        public MessageDialog(string primaryResult = null, string defaultResult = null) {
+            this.buttons = new ObservableCollectionEx<DialogButton>();
             this.Buttons = new ReadOnlyObservableCollection<DialogButton>(this.buttons);
+            this.primaryResult = primaryResult;
+            this.defaultResult = defaultResult;
             this.buttons.CollectionChanged += (sender, args) => {
                 // Shouldn't be read only, because buttons is private
                 this.RaisePropertyChanged(nameof(this.HasNoButtons));
@@ -188,10 +193,15 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
 
             string output;
             bool? result = await IoC.MessageDialogs.ShowDialogAsync(this);
-            if (result == true && this.lastClickedButton != null) {
-                output = this.lastClickedButton.ActionType;
-                if (output != null && this.IsAlwaysUseNextResultChecked) { // (output != null || this.AllowNullButtonActionForAutoResult)
-                    this.AutomaticResult = output;
+            if (result == true) {
+                if (this.lastClickedButton != null) {
+                    output = this.lastClickedButton.ActionType;
+                    if (output != null && this.IsAlwaysUseNextResultChecked) { // (output != null || this.AllowNullButtonActionForAutoResult)
+                        this.AutomaticResult = output;
+                    }
+                }
+                else {
+                    output = this.PrimaryResult;
                 }
             }
             else {
@@ -279,7 +289,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 automaticResult = this.automaticResult,
                 ShowAlwaysUseNextResultOption = this.ShowAlwaysUseNextResultOption,
                 IsAlwaysUseNextResultChecked = this.IsAlwaysUseNextResultChecked,
-                preFocusedActionId = this.preFocusedActionId,
+                primaryResult = this.primaryResult,
                 defaultResult = this.defaultResult
             };
 
@@ -322,7 +332,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             private readonly bool oldShowAlwaysUseNextResult;
             private readonly bool oldCanShowAlwaysUseNextResultForQueue;
             private readonly string oldDefaultResult;
-            private readonly string oldPreFocusedActionId;
+            private readonly string oldPrimaryResult;
             private readonly bool isReadOnly;
 
             public MessageDialog Dialog { get; }
@@ -341,7 +351,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 this.oldButtons = dialog.Buttons.ToList();
                 this.oldAutoResult = dialog.AutomaticResult;
                 this.oldDefaultResult = dialog.DefaultResult;
-                this.oldPreFocusedActionId = dialog.PreFocusedActionId;
+                this.oldPrimaryResult = dialog.PrimaryResult;
             }
 
             /// <summary>
@@ -372,7 +382,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
                 this.Dialog.CanShowAlwaysUseNextResultForCurrentQueueOption = this.oldCanShowAlwaysUseNextResultForQueue;
                 this.Dialog.IsAlwaysUseNextResultChecked = this.oldAlwaysUseNextResult;
                 this.Dialog.DefaultResult = this.oldDefaultResult;
-                this.Dialog.PreFocusedActionId = this.oldPreFocusedActionId;
+                this.Dialog.PrimaryResult = this.oldPrimaryResult;
             }
         }
     }

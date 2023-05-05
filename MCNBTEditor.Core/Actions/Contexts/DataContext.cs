@@ -54,6 +54,10 @@ namespace MCNBTEditor.Core.Actions.Contexts {
             return false;
         }
 
+        public bool ContainsKey(string key) {
+            return this.TryGet<object>(key, out _);
+        }
+
         public bool HasFlag(string key) {
             return this.TryGet(key, out bool value) && value;
         }
@@ -95,9 +99,8 @@ namespace MCNBTEditor.Core.Actions.Contexts {
                         this.EntryMap = new Dictionary<string, object>(ctxImpl.EntryMap);
                     }
                     else {
-                        Dictionary<string, object> map = this.EntryMap = new Dictionary<string, object>();
                         foreach (KeyValuePair<string, object> entry in ctxImpl.EntryMap) {
-                            map[entry.Key] = entry.Value;
+                            this.EntryMap[entry.Key] = entry.Value;
                         }
                     }
                 }

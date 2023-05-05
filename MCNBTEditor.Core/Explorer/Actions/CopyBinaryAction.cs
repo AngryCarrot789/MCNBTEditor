@@ -14,13 +14,12 @@ namespace MCNBTEditor.Core.Explorer.Actions {
         public static readonly MessageDialog TypeDialog;
 
         static CopyBinaryAction() {
-            TypeDialog = new MessageDialog {ShowAlwaysUseNextResultOption = true};
+            TypeDialog = new MessageDialog("bc") {ShowAlwaysUseNextResultOption = true};
             TypeDialog.Titlebar = "Serialisation/Deserialisation";
             TypeDialog.Message = "Select how you would like to serialise/deserialise the NBT data";
             DialogButton btn1 = TypeDialog.AddButton("BE+Compress", "bc", true);
             btn1.ToolTip = "Big-endian binary format and compressed using GZIP\n" +
                            "This is the default option and recommended option, as minecraft saves in big-endian by default, and compressed data is easily detectable due to the GZIP header";
-            TypeDialog.PreFocusedActionId = btn1.ActionType;
             TypeDialog.AddButton("BE+Uncompressed", "bu", true).ToolTip = "Big-endian binary format without compression (uncompressed binary)";
             TypeDialog.AddButton("LE+Compress", "lc", true).ToolTip = "Little-endian binary format and compressed using GZIP";
             TypeDialog.AddButton("LE+Uncompressed", "lu", true).ToolTip = "Little-endian binary format without compression (uncompressed binary)";

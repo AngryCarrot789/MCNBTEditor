@@ -68,7 +68,7 @@ namespace MCNBTEditor.Views.Message {
             };
 
             if (MessageWindow.DODGY_PRIMARY_SELECTION == null) {
-                MessageWindow.DODGY_PRIMARY_SELECTION = dialog.PreFocusedActionId;
+                MessageWindow.DODGY_PRIMARY_SELECTION = dialog.PrimaryResult;
             }
 
             dialog.Dialog = window;

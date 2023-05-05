@@ -43,7 +43,7 @@ namespace MCNBTEditor.Views.Message {
 
                         btn.Dispatcher.InvokeAsync(() => {
                             btn.Focus();
-                        }, DispatcherPriority.Background);
+                        }, DispatcherPriority.Render);
                     }
                 }
 

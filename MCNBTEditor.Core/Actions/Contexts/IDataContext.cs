@@ -28,8 +28,6 @@ namespace MCNBTEditor.Core.Actions.Contexts {
         /// <summary>
         /// Returns whether this data context contains an instance of the given type
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         bool HasContext<T>();
 
         /// <summary>
@@ -43,10 +41,13 @@ namespace MCNBTEditor.Core.Actions.Contexts {
         bool TryGet<T>(string key, out T value);
 
         /// <summary>
+        /// Whether or not the custom data contains the given key
+        /// </summary>
+        bool ContainsKey(string key);
+
+        /// <summary>
         /// A helper function for checking if this context contains the given custom key as a boolean, and that boolean is true
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
         bool HasFlag(string key);
     }
 }

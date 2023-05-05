@@ -370,7 +370,7 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(shortcut.ActionId) || this.CurrentDataContext == null) {
+            if (string.IsNullOrWhiteSpace(shortcut.ActionId) || context == null) {
                 return false;
             }
 

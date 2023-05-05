@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.Actions.Contexts;
@@ -79,31 +80,52 @@ namespace MCNBTEditor.Core.Actions {
         }
 
         /// <summary>
-        /// Tries to execute an action with the given ID and context. The args will be created and errors are handled and passed to <see cref="OnActionException"/>
+        /// Executes an action with the given ID and context
         /// </summary>
         /// <param name="id">The action ID to execute</param>
         /// <param name="context">The context to use. Cannot be null</param>
         /// <param name="isUserInitiated">
         /// Whether a user executed the action, e.g. via a button/menu click or clicking a check box.
-        /// Supply false if this was invoked by, for example, a task or scheduler
+        /// Supply false if this was invoked by, for example, a task or scheduler. A non-user initiated
+        /// execution usually won't create error dialogs and may instead log to the console or just throw an exception
         /// </param>
         /// <returns>False if no such action exists, or the action could not execute. Otherwise, true, meaning the action executed successfully</returns>
         /// <exception cref="Exception">The context is null, or the assembly was compiled in debug mode and the action threw ane exception</exception>
         /// <exception cref="ArgumentException">ID is null, empty or consists of only whitespaces</exception>
         /// <exception cref="ArgumentNullException">Context is null</exception>
-        public virtual Task<bool> Execute(string id, IDataContext context, bool isUserInitiated = true) {
+        public Task<bool> Execute(string id, IDataContext context, bool isUserInitiated = true) {
             ValidateId(id);
             ValidateContext(context);
+            AnActionEventArgs args = new AnActionEventArgs(this, id, context, isUserInitiated);
             if (this.actions.TryGetValue(id, out AnAction action)) {
-                AnActionEventArgs args = new AnActionEventArgs(this, id, context, isUserInitiated);
-                return action.ExecuteAsync(args);
+                return this.ExecuteCore(action, args);
             }
             else {
-                return this.GetNoSuchActionResult(id, context);
+                return this.GetNoSuchActionResult(args);
             }
         }
 
-        public virtual Task<bool> GetNoSuchActionResult(string actionId, IDataContext context) {
+        protected virtual async Task<bool> ExecuteCore(AnAction action, AnActionEventArgs e) {
+            if (e.IsUserInitiated) {
+                if (Debugger.IsAttached) {
+                    return await action.ExecuteAsync(e);
+                }
+                else {
+                    try {
+                        return await action.ExecuteAsync(e);
+                    }
+                    catch (Exception ex) {
+                        await IoC.MessageDialogs.ShowMessageExAsync("Action execution exception", $"An exception occurred while executing '{e.ActionId ?? action.GetType().ToString()}'", ex.ToString());
+                        return true;
+                    }
+                }
+            }
+            else {
+                return await action.ExecuteAsync(e);
+            }
+        }
+
+        public virtual Task<bool> GetNoSuchActionResult(AnActionEventArgs e) {
             return Task.FromResult(false);
         }
 
@@ -120,16 +142,16 @@ namespace MCNBTEditor.Core.Actions {
         public virtual Presentation GetPresentation(string id, IDataContext context, bool isUserInitiated = true) {
             ValidateId(id);
             ValidateContext(context);
+            AnActionEventArgs args = new AnActionEventArgs(this, id, context, isUserInitiated);
             if (this.actions.TryGetValue(id, out AnAction action)) {
-                AnActionEventArgs args = new AnActionEventArgs(this, id, context, isUserInitiated);
                 return action.GetPresentation(args);
             }
             else {
-                return this.GetNoSuchActionPresentation(id, context);
+                return this.GetNoSuchActionPresentation(args);
             }
         }
 
-        public virtual Presentation GetNoSuchActionPresentation(string actionId, IDataContext context) {
+        public virtual Presentation GetNoSuchActionPresentation(AnActionEventArgs e) {
             return Presentation.VisibleAndDisabled;
         }
 

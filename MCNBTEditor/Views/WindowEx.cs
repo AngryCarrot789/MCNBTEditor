@@ -97,7 +97,7 @@ namespace MCNBTEditor.Views {
         /// Called when the window is trying to be closed
         /// </summary>
         /// <returns>True if the window can close, otherwise false to stop it from closing</returns>
-        public virtual Task<bool> OnClosingAsync() {
+        protected virtual Task<bool> OnClosingAsync() {
             return Task.FromResult(true);
         }
 
@@ -129,6 +129,8 @@ namespace MCNBTEditor.Views {
         //     }
         // }
 
+
+        // Binding a checkbox to the window's Topmost property is more effective and works both ways
         [ActionRegistration("actions.views.MakeWindowTopMost")]
         private class MakeTopMostAction : ToggleAction {
             public MakeTopMostAction() : base(() => "Make window top-most", () => "Makes the window top most, so that non-top-most windows cannot be on top of it") {
