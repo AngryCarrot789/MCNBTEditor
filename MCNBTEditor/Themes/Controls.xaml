@@ -434,8 +434,8 @@
     </Style>
 
     <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Tone3.Background.Static}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Tone3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource Window.Static.Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Window.Static.Border}" />
         <Setter Property="Foreground" Value="{DynamicResource Window.Static.Foreground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
@@ -554,11 +554,11 @@
     </Style>
 
     <Style x:Key="CustomWindowStyleEx" TargetType="{x:Type views:WindowEx}" BasedOn="{StaticResource CustomWindowStyle}">
-        <Setter Property="Background" Value="{DynamicResource AREghZyBrush.Tone3.Background.Static}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource AREghZyBrush.Tone3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource Window.Static.Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Window.Static.Border}" />
         <Setter Property="Foreground" Value="{DynamicResource Window.Static.Foreground}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="TitlebarBrush" Value="{DynamicResource AREghZyBrush.Tone3.Border.Static}" />
+        <Setter Property="TitlebarBrush" Value="{DynamicResource Window.Static.Title.Background}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type views:WindowEx}">

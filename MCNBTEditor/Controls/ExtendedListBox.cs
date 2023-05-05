@@ -17,7 +17,13 @@ namespace MCNBTEditor.Controls {
 
         IEnumerable<BaseTreeItemViewModel> IExtendedList.SelectedItems => base.SelectedItems.OfType<BaseTreeItemViewModel>();
 
+        int IExtendedList.Count => this.Items.Count;
+
         public new event SelectionChangedEventHandler<IEnumerable<BaseTreeItemViewModel>> SelectionChanged;
+        
+        public int IndexOf(BaseTreeItemViewModel item) {
+            return this.Items.IndexOf(item);
+        }
 
         private ScrollViewer PART_ScrollViewer;
 

@@ -42,7 +42,7 @@ namespace MCNBTEditor.Core.Shortcuts.ViewModels {
             this.TheShortcut = reference;
             this.Name = reference.Name;
             this.DisplayName = reference.DisplayName ?? reference.Name;
-            this.Path = reference.Path;
+            this.Path = reference.FullPath;
             this.Description = reference.Description;
             this.isGlobal = reference.IsGlobal;
             this.inherit = reference.Inherit;

@@ -1,5 +1,9 @@
+using System.Threading.Tasks;
+
 namespace MCNBTEditor.Core.Explorer {
-    public class IRemoveable {
-        
+    public interface IRemoveable {
+        bool CanRemoveFromParent();
+
+        Task<bool> RemoveFromParentAsync();
     }
 }

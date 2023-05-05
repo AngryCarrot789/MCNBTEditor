@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Views.Dialogs.Message;
@@ -145,6 +146,18 @@ namespace MCNBTEditor.Core.Explorer.NBT {
 
         public void AddItem(BaseTreeItemViewModel item) {
             base.Add(item);
+        }
+
+        public void InsertItems(int index, IEnumerable<NBTBase> tagList) {
+            int i = 0;
+            this.InsertRange(index, tagList.Select(x => CreateFrom($"<tag{i++}>", x)));
+        }
+
+        public void InsertItems(int index, IEnumerable<(string, NBTBase)> tagList) {
+            // TODO: show GUI when duplicate entries exist... because this code here is nasty
+            this.InsertRange(index, tagList.Select(x => x.Item1?.Length < 1 ? (null, x.Item2) : x).
+                                            Where(x => this.ChildTags.Any(a => a.Name == x.Item1 || (string.IsNullOrEmpty(a.Name) && string.IsNullOrEmpty(x.Item1)))).
+                                            Select(x => CreateFrom(x.Item1?.Length < 1 ? null : x.Item1, x.Item2)));
         }
 
         public bool RemoveItem(BaseTreeItemViewModel item) {

@@ -8,8 +8,6 @@ namespace MCNBTEditor.Views {
         }
 
         public async Task CloseWindowAsync() {
-            typeof(string).GetProperty("ok");
-
             await this.Dispatcher.InvokeAsync(this.CloseWindow);
         }
     }

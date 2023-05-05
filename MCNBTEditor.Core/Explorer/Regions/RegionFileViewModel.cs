@@ -7,9 +7,10 @@ using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Regions;
+using MCNBTEditor.Core.Shortcuts;
 
 namespace MCNBTEditor.Core.Explorer.Regions {
-    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IHaveTreePath, IContextProvider, IDisposable {
+    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IHaveTreePath, IContextProvider, IDisposable, IShortcutToCommand {
         private string filePath;
         public string FilePath {
             get => this.filePath;
@@ -151,6 +152,16 @@ namespace MCNBTEditor.Core.Explorer.Regions {
 
         public void ClearItems() {
             base.Clear();
+        }
+
+        public virtual ICommand GetCommandForShortcut(string shortcutId) {
+            switch (shortcutId) {
+                case "Application/EditorView/NBTTag/CopyFilePath": return this.CopyFilePathToClipboardCommand;
+                case "Application/EditorView/NBTTag/OpenInExplorer": return this.ShowInExplorerCommand;
+                case "Application/EditorView/NBTTag/RemoveFromParent": return this.RemoveFromParentCommand;
+            }
+
+            return null;
         }
     }
 }

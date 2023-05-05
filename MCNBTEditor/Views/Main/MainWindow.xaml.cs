@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using MCNBTEditor.Themes;
 
 namespace MCNBTEditor.Views.Main {
     /// <summary>
@@ -30,6 +32,16 @@ namespace MCNBTEditor.Views.Main {
             c.B = (byte) e.NewValue;
             brush.Color = c;
             dictionary["_REghZy.TestBrush"] = brush;
+        }
+
+        // lazy
+        private void MenuItem_Click(object sender, RoutedEventArgs e) {
+            switch (((MenuItem) sender).Tag) {
+                case "0": ThemesController.SetTheme(ThemeType.SoftDark); return;
+                case "1": ThemesController.SetTheme(ThemeType.DeepDark); return;
+                case "2": ThemesController.SetTheme(ThemeType.SoftDarkAndBlue); return;
+                case "3": ThemesController.SetTheme(ThemeType.RedBlackTheme); return;
+            }
         }
     }
 }

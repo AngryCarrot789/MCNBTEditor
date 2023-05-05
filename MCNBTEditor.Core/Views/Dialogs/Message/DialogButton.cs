@@ -9,7 +9,8 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         public MessageDialog Dialog { get; }
 
         /// <summary>
-        /// A command that fires when this dialog is clicked
+        /// A command that fires when this dialog is clicked. This is read only, as it's only
+        /// meant to be fired by the UI typically when a button is clicked
         /// </summary>
         public AsyncRelayCommand Command { get; }
 
@@ -39,6 +40,10 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         }
 
         private bool canUseAsAutomaticResult;
+
+        /// <summary>
+        /// Whether or not this button can be used as the automatic result when the owning dialog is trying to show
+        /// </summary>
         public bool CanUseAsAutomaticResult {
             get => this.canUseAsAutomaticResult;
             set => this.RaisePropertyChanged(ref this.canUseAsAutomaticResult, value);

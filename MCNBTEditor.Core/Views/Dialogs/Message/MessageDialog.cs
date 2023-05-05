@@ -47,7 +47,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             set => this.RaisePropertyChanged(ref this.message, value);
         }
 
-        public bool ShowAlwaysUseNextResultOption {
+        public bool ShowAlwaysUseNextResultOption { // dialog will show "Always use this option"
             get => this.showAlwaysUseNextResultOption;
             set {
                 this.EnsureNotReadOnly();
@@ -58,7 +58,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             }
         }
 
-        public bool IsAlwaysUseNextResultChecked { // dialog will show "Always use this option"
+        public bool IsAlwaysUseNextResultChecked {
             get => this.isAlwaysUseNextResultChecked;
             set {
                 this.EnsureNotReadOnly();
@@ -138,7 +138,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
         /// The buttons for this message dialog. This list is ordered left to right, meaning that the first element will be on the very left.
         /// <para>
         /// On windows, the UI list is typically aligned to the right, meaning the last element is on the very right. So to have the typical
-        /// Yes/No/Cancel buttons, you would add them to this list in that exact order
+        /// Yes/No/Cancel buttons, you would add them to this list in that exact order; left to right
         /// </para>
         /// </summary>
         public ReadOnlyObservableCollection<DialogButton> Buttons { get; }

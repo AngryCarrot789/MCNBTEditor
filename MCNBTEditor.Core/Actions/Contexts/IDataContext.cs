@@ -26,6 +26,13 @@ namespace MCNBTEditor.Core.Actions.Contexts {
         bool TryGetContext<T>(out T value);
 
         /// <summary>
+        /// Returns whether this data context contains an instance of the given type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        bool HasContext<T>();
+
+        /// <summary>
         /// Gets custom data for the given key
         /// </summary>
         T Get<T>(string key);

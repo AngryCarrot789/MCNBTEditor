@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 
@@ -30,7 +31,16 @@ namespace MCNBTEditor.Views.Message {
                 if (DODGY_PRIMARY_SELECTION != null && this.DataContext is MessageDialog dialog) {
                     DialogButton button = dialog.GetButtonById(DODGY_PRIMARY_SELECTION);
                     DODGY_PRIMARY_SELECTION = null;
-                    if (button != null && this.ButtonBarList.ItemContainerGenerator.ContainerFromItem(button) is Button btn) {
+                    if (button != null && this.ButtonBarList.ItemContainerGenerator.ContainerFromItem(button) is UIElement element) {
+                        Button btn = null;
+                        if (element is ContentPresenter presenter && VisualTreeHelper.GetChildrenCount(presenter) == 1) {
+                            btn = VisualTreeHelper.GetChild(presenter, 0) as Button;
+                        }
+
+                        if (btn == null && (btn = element as Button) == null) {
+                            return;
+                        }
+
                         btn.Dispatcher.InvokeAsync(() => {
                             btn.Focus();
                         }, DispatcherPriority.Background);

@@ -36,6 +36,11 @@
                 <Separator/>
                 <MenuItem Header="Settings..." Command="{Binding ShowSettingsCommand}"/>
             </MenuItem>
+            <MenuItem Header="Theme">
+                <MenuItem Header="Soft Dark" Click="MenuItem_Click" Tag="0"/>
+                <MenuItem Header="Deep Dark" Click="MenuItem_Click" Tag="1"/>
+                <MenuItem Header="Dark And Red" Click="MenuItem_Click" Tag="3"/>
+            </MenuItem>
         </Menu>
         <Grid Margin="0,18,0,0">
             <Grid.ColumnDefinitions>

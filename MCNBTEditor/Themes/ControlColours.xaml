@@ -249,8 +249,8 @@
     <SolidColorBrush x:Key="TreeViewItem.MouseDown.Background"               Color="{DynamicResource AREghZyColour.Tone6.Background.MouseDown}"/>
     <SolidColorBrush x:Key="TreeViewItem.MouseDown.Border"                   Color="{DynamicResource AREghZyColour.Tone6.Border.MouseDown}"/>
 
-    <SolidColorBrush x:Key="Window.Static.Background"       Color="{DynamicResource AREghZyColour.Tone1.Background.Static}"/>
-    <SolidColorBrush x:Key="Window.Static.Border"           Color="{DynamicResource AREghZyColour.Tone2.Border.Static}"/>
+    <SolidColorBrush x:Key="Window.Static.Background"       Color="{DynamicResource AREghZyColour.Tone3.Background.Static}"/>
+    <SolidColorBrush x:Key="Window.Static.Border"           Color="{DynamicResource AREghZyColour.Tone5.Border.Static}"/>
     <SolidColorBrush x:Key="Window.Static.Foreground"       Color="{DynamicResource AREghZyColour.Foreground.Static}"/>
-    <SolidColorBrush x:Key="Window.Static.Title.Background" Color="{DynamicResource AREghZyColour.Tone1.Background.Static}"/>
+    <SolidColorBrush x:Key="Window.Static.Title.Background" Color="{DynamicResource AREghZyColour.Tone3.Border.Static}"/>
 </ResourceDictionary>

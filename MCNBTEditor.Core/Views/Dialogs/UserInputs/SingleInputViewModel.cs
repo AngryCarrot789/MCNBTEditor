@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using MCNBTEditor.Core.Views.ViewModels;
-
-namespace MCNBTEditor.Core.Views.Dialogs.UserInputs {
+﻿namespace MCNBTEditor.Core.Views.Dialogs.UserInputs {
     public class SingleInputViewModel : BaseConfirmableDialogViewModel {
         private string title;
         public string Title {

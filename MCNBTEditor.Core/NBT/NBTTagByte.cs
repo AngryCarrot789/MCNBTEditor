@@ -6,11 +6,18 @@ namespace MCNBTEditor.Core.NBT {
 
         public override NBTType TagType => NBTType.Byte;
 
+        public static NBTTagByte TrueValue => new NBTTagByte(1);
+        public static NBTTagByte FalseValue => new NBTTagByte(0);
+
         public NBTTagByte() {
         }
 
         public NBTTagByte(byte var2) {
             this.data = var2;
+        }
+
+        public static NBTTagByte FromBool(bool state) {
+            return state ? TrueValue : FalseValue;
         }
 
         public override void Write(IDataOutput output) {

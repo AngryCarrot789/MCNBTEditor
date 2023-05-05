@@ -214,6 +214,7 @@
     <Compile Include="Views\NBT\Finding\Inlines\HighlightingInlinesConverter.cs" />
     <Compile Include="Views\NBT\Finding\Inlines\InlineHelper.cs" />
     <Compile Include="Views\NBT\Finding\NBTMatchResult.cs" />
+    <Compile Include="Views\NBT\Finding\RegexValidationRule.cs" />
     <Compile Include="Views\NBT\Selector\ItemSelectorViewModel.cs" />
     <Compile Include="Views\NBT\Selector\ListSelectorWindow.xaml.cs">
       <DependentUpon>ListSelectorWindow.xaml</DependentUpon>

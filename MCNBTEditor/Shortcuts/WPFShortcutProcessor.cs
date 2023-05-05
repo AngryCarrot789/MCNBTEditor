@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using MCNBTEditor.Core;
 using MCNBTEditor.Core.Actions.Contexts;
@@ -12,6 +13,9 @@ using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Shortcuts {
     public class WPFShortcutProcessor : ShortcutProcessor {
+        public bool IsProcessingKey { get; private set; }
+        public bool IsProcessingMouse { get; private set; }
+
         public new WPFShortcutManager Manager => (WPFShortcutManager) base.Manager;
 
         public string CurrentInputBindingUsageID { get; set; } = WPFShortcutManager.DEFAULT_USAGE_ID;
@@ -30,10 +34,11 @@ namespace MCNBTEditor.Shortcuts {
         // Could maybe implement a bool flag to state if it's current being processed or not?
 
         public async void OnWindowMouseDown(object sender, MouseButtonEventArgs e, bool isPreviewEvent) {
-            if (e.OriginalSource is DependencyObject focused && CanProcessEvent(focused, isPreviewEvent)) {
+            if (!this.IsProcessingMouse && e.OriginalSource is DependencyObject focused && CanProcessEvent(focused, isPreviewEvent)) {
                 UIFocusGroup.ProcessFocusGroupChange(focused);
 
                 try {
+                    this.IsProcessingMouse = true;
                     this.CurrentInputBindingUsageID = UIFocusGroup.GetUsageID(focused) ?? WPFShortcutManager.DEFAULT_USAGE_ID;
                     this.SetupDataContext(sender, focused);
                     MouseStroke stroke = new MouseStroke((int) e.ChangedButton, (int) Keyboard.Modifiers, e.ClickCount);
@@ -42,6 +47,7 @@ namespace MCNBTEditor.Shortcuts {
                     }
                 }
                 finally {
+                    this.IsProcessingMouse = false;
                     this.CurrentDataContext = null;
                     this.CurrentInputBindingUsageID = WPFShortcutManager.DEFAULT_USAGE_ID;
                 }
@@ -49,7 +55,7 @@ namespace MCNBTEditor.Shortcuts {
         }
 
         public async void OnWindowMouseWheel(object sender, MouseWheelEventArgs e, bool isPreviewEvent) {
-            if (e.OriginalSource is DependencyObject focused && CanProcessEvent(focused, isPreviewEvent)) {
+            if (!this.IsProcessingMouse && e.OriginalSource is DependencyObject focused && CanProcessEvent(focused, isPreviewEvent)) {
                 int button;
                 if (e.Delta < 0) {
                     button = WPFShortcutManager.BUTTON_WHEEL_DOWN;
@@ -62,6 +68,7 @@ namespace MCNBTEditor.Shortcuts {
                 }
 
                 try {
+                    this.IsProcessingMouse = true;
                     this.CurrentInputBindingUsageID = UIFocusGroup.GetUsageID(focused) ?? WPFShortcutManager.DEFAULT_USAGE_ID;
                     this.SetupDataContext(sender, focused);
                     MouseStroke stroke = new MouseStroke(button, (int) Keyboard.Modifiers, 0, e.Delta);
@@ -70,6 +77,7 @@ namespace MCNBTEditor.Shortcuts {
                     }
                 }
                 finally {
+                    this.IsProcessingMouse = false;
                     this.CurrentDataContext = null;
                     this.CurrentInputBindingUsageID = WPFShortcutManager.DEFAULT_USAGE_ID;
                 }
@@ -77,7 +85,7 @@ namespace MCNBTEditor.Shortcuts {
         }
 
         public async void OnKeyEvent(object sender, DependencyObject focused, KeyEventArgs e, bool isRelease, bool isPreviewEvent) {
-            if (e.Handled) {
+            if (this.IsProcessingKey || e.Handled) {
                 return;
             }
 
@@ -100,6 +108,7 @@ namespace MCNBTEditor.Shortcuts {
             }
 
             try {
+                this.IsProcessingKey = true;
                 this.CurrentInputBindingUsageID = UIFocusGroup.GetUsageID(focused) ?? WPFShortcutManager.DEFAULT_USAGE_ID;
                 this.SetupDataContext(sender, focused);
                 KeyStroke stroke = new KeyStroke((int) key, (int) Keyboard.Modifiers, isRelease);
@@ -108,6 +117,7 @@ namespace MCNBTEditor.Shortcuts {
                 }
             }
             finally {
+                this.IsProcessingKey = false;
                 this.CurrentDataContext = null;
                 this.CurrentInputBindingUsageID = WPFShortcutManager.DEFAULT_USAGE_ID;
             }
@@ -130,6 +140,10 @@ namespace MCNBTEditor.Shortcuts {
                 }
 
                 context.AddContext(obj);
+                ItemsControl itemsControl = ItemsControl.ItemsControlFromItemContainer(obj);
+                if (itemsControl != null && itemsControl.IsItemItsOwnContainer(obj)) {
+                    context.AddContext(itemsControl);
+                }
             }
 
             context.AddContext(sender);
@@ -138,7 +152,7 @@ namespace MCNBTEditor.Shortcuts {
 
         public override async Task<bool> OnShortcutActivated(GroupedShortcut shortcut) {
             bool finalResult = false;
-            if (WPFShortcutManager.InputBindingCallbackMap.TryGetValue(shortcut.Path, out Dictionary<string, List<ActivationHandlerReference>> usageMap)) {
+            if (WPFShortcutManager.InputBindingCallbackMap.TryGetValue(shortcut.FullPath, out Dictionary<string, List<ActivationHandlerReference>> usageMap)) {
                 if (shortcut.IsGlobal || shortcut.Group.IsGlobal) {
                     if (usageMap.TryGetValue(WPFShortcutManager.DEFAULT_USAGE_ID, out List<ActivationHandlerReference> list) && list.Count > 0) {
                         finalResult = await this.ActivateShortcut(shortcut, list);

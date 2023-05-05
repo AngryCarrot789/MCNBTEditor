@@ -107,31 +107,27 @@ namespace MCNBTEditor.Views {
                 return;
             }
 
-            if ((e.Key == Key.Escape && this.CanCloseWithEscapeKey)) {
+            if (e.Key == Key.Escape && this.CanCloseWithEscapeKey) {
                 e.Handled = true;
                 this.Close();
             }
         }
 
-        [ActionRegistration("actions.views.windows.CloseViewAction")]
-        private class CloseViewAction : AnAction {
-            public CloseViewAction() : base(() => "Close window", () => "Closes the current window") {
-
-            }
-
-            public override async Task<bool> ExecuteAsync(AnActionEventArgs e) {
-                if (e.DataContext.TryGetContext(out WindowEx w)) {
-                    await w.CloseAsync();
-                    return true;
-                }
-
-                return false;
-            }
-
-            public override Presentation GetPresentation(AnActionEventArgs e) {
-                return Presentation.BoolToEnabled(e.DataContext.TryGetContext<WindowEx>(out _));
-            }
-        }
+        // [ActionRegistration("actions.views.windows.CloseViewAction")]
+        // private class CloseViewAction : AnAction {
+        //     public CloseViewAction() : base(() => "Close window", () => "Closes the current window") {
+        //     }
+        //     public override async Task<bool> ExecuteAsync(AnActionEventArgs e) {
+        //         if (e.DataContext.TryGetContext(out WindowEx w) && w.CanCloseWithEscapeKey) {
+        //             await w.CloseAsync();
+        //             return true;
+        //         }
+        //         return false;
+        //     }
+        //     public override Presentation GetPresentation(AnActionEventArgs e) {
+        //         return Presentation.BoolToEnabled(e.DataContext.TryGetContext<WindowEx>(out _));
+        //     }
+        // }
 
         [ActionRegistration("actions.views.MakeWindowTopMost")]
         private class MakeTopMostAction : ToggleAction {

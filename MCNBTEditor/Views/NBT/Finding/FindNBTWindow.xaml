@@ -12,21 +12,31 @@
               Title="Search for tags" Height="500" Width="500"
               d:DataContext="{d:DesignInstance f:FindViewModel}"
               CanCloseWithEscapeKey="True"
-              Style="{DynamicResource CustomWindowStyleEx}">
+              Style="{DynamicResource CustomWindowStyleEx}"
+              BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisible" TrueValue="Visible" FalseValue="Collapsed"/>
         <converters:BoolToVisibilityConverter x:Key="BoolToCollapsed" TrueValue="Collapsed" FalseValue="Visible"/>
+        <f:RegexValidationRule x:Key="NameRegexValidator"/>
+        <f:RegexValidationRule x:Key="ValueRegexValidator"/>
     </Window.Resources>
     <Grid>
         <TextBlock Text="Search for NBT" FontWeight="Bold" VerticalAlignment="Top" Padding="10,10,5,10" HorizontalAlignment="Left"/>
         <TextBlock Text="{Binding FoundItems.Count, StringFormat='{}{0} items'}" VerticalAlignment="Top" Padding="5,10,10,10" HorizontalAlignment="Left" Margin="105,0,0,0"/>
         <ToggleButton IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Topmost, UpdateSourceTrigger=PropertyChanged}" Content="Top" ToolTip="Makes the window top-most, meaning other non-top-most windows cannot be above it" Height="27" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" FontStyle="Italic" Margin="0,5,5,0" tap:CornerHelper.CornerRadius="2"/>
-        <Grid Margin="-1,36,0,0" Height="55" VerticalAlignment="Top" IsEnabled="{Binding IsSearchBarEnabled, Mode=OneWay}">
+        <Grid Margin="0,36,0,0" Height="55" VerticalAlignment="Top" IsEnabled="{Binding IsSearchBarEnabled, Mode=OneWay}">
             <TextBox Background="{DynamicResource AREghZyBrush.Tone5.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" 
-                     x:Name="NameBox" Text="{Binding SearchForNameText, UpdateSourceTrigger=PropertyChanged}" 
-                     VerticalAlignment="Top" Margin="0,0,104,0" Height="28" Padding="5,3" VerticalContentAlignment="Center"
+                     x:Name="NameBox" VerticalAlignment="Top" Margin="0,0,104,0" Height="28" Padding="5,3" VerticalContentAlignment="Center"
                      tap:TextHinting.ShowWhenFocused="True" Tag="Input the name of the Tag here"
-                     Style="{DynamicResource HintedTextBox}"/>
+                     Style="{DynamicResource HintedTextBox}" BorderThickness="0,1,1,1">
+                <TextBox.Text>
+                    <Binding Path="SearchForNameText" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <StaticResource ResourceKey="NameRegexValidator"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Border Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" BorderThickness="0 1 0 1" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Width="104">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -65,7 +75,7 @@
                             </Style>
                         </ToggleButton.Style>
                     </ToggleButton>
-                    <ToggleButton BorderThickness="0" Content=".*" IsChecked="{Binding IsNameRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" ToolTip="Use regex to match the tag names">
+                    <ToggleButton BorderThickness="0" Content=".*" IsChecked="{Binding IsNameRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" ToolTip="Use regex to match the tag names" Checked="OnNameRegexCheckChanged">
                         <ToggleButton.Style>
                             <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
                                 <Setter Property="Opacity" Value="1"/>
@@ -80,10 +90,18 @@
                 </Grid>
             </Border>
             <TextBox Background="{DynamicResource AREghZyBrush.Tone5.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" 
-                     Text="{Binding SearchForValueText, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="0,27,78,0" Height="28" 
+                     x:Name="ValueBox" VerticalAlignment="Top" Margin="0,27,78,0" Height="28" 
                      Padding="5,3" VerticalContentAlignment="Center"
                      tap:TextHinting.ShowWhenFocused="True" Tag="Input the value of the Tag here (array element separated with commas)"
-                     Style="{DynamicResource HintedTextBox}"/>
+                     Style="{DynamicResource HintedTextBox}" BorderThickness="0,1,1,1">
+                <TextBox.Text>
+                    <Binding Path="SearchForValueText" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
+                        <Binding.ValidationRules>
+                            <StaticResource ResourceKey="ValueRegexValidator"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
             <Border Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}" BorderThickness="0 1 0 1" Margin="0,27,0,0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Right" Width="78">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -104,7 +122,7 @@
                             </Style>
                         </ToggleButton.Style>
                     </ToggleButton>
-                    <ToggleButton BorderThickness="0" Content=".*" IsChecked="{Binding IsValueRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" ToolTip="Use regex to match the tag values">
+                    <ToggleButton BorderThickness="0" Content=".*" IsChecked="{Binding IsValueRegex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" ToolTip="Use regex to match the tag values" Checked="OnValueRegexCheckChanged">
                         <ToggleButton.Style>
                             <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource {x:Type ToggleButton}}">
                                 <Setter Property="Opacity" Value="1"/>

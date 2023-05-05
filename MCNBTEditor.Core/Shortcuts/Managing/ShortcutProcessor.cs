@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.Shortcuts.Inputs;
@@ -353,6 +354,18 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
                 foreach (object obj in context.Context) {
                     if (obj is IShortcutHandler handler && await handler.OnShortcutActivated(this, shortcut)) {
                         return true;
+                    }
+                    else if (obj is IShortcutToCommand converter) {
+                        ICommand command = converter.GetCommandForShortcut(shortcut.FullPath);
+                        if (command is BaseAsyncRelayCommand asyncCommand) {
+                            if (await asyncCommand.TryExecuteAsync(null)) {
+                                return true;
+                            }
+                        }
+                        else if (command != null && command.CanExecute(null)) {
+                            command.Execute(null);
+                            return true;
+                        }
                     }
                 }
             }

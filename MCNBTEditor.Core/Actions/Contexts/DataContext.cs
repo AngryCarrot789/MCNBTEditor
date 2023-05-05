@@ -36,6 +36,10 @@ namespace MCNBTEditor.Core.Actions.Contexts {
             return false;
         }
 
+        public bool HasContext<T>() {
+            return this.ContextList.Any(x => x is T);
+        }
+
         public bool TryGet<T>(string key, out T value) {
             if (key == null) {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null");

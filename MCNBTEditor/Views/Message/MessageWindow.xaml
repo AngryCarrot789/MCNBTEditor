@@ -69,7 +69,8 @@
                                     SnapsToDevicePixels="True"
                                     ap:CornerHelper.CornerRadius="2"
                                     Background="{DynamicResource AREghZyBrush.Tone6.Background.Static}"
-                                    BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"/>
+                                    BorderBrush="{DynamicResource AREghZyBrush.Tone6.Border.Static}"
+                                    Focusable="True"/>
                         </DataTemplate>
                     </ItemsControl.Resources>
                 </ItemsControl>

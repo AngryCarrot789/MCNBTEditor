@@ -94,7 +94,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             }
 
             if (canRemove && "yes" == await Dialogs.RemoveDatFileWhenDeletingDialog.ShowAsync("Remove dat file?", "Do you want to also remove the DAT file from the list?")) {
-                this.RemoveFromParentItem(false); // removes from root
+                await this.RemoveFromParentAsync(); // removes from root
             }
         }
 

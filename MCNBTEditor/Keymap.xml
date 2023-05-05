@@ -13,18 +13,24 @@
         <Group Name="EditorView">
             <Group Name="NBTTag">
                 <Shortcut Name="CopyNameShortcut" DisplayName="Copy Name" ActionId="actions.nbt.copy.name">
-                    <KeyStroke Mods="CTRL+SHIFT" Key="C"/>
+                    <KeyStroke Mods="CTRL+ALT" Key="C"/>
                 </Shortcut>
                 <Shortcut Name="CopyValueShortcut" DisplayName="Copy Value" ActionId="actions.nbt.copy.primitive_value">
+                    <KeyStroke Mods="CTRL+SHIFT" Key="C"/>
+                </Shortcut>
+                <Shortcut Name="CopyBinaryShortcut" DisplayName="Copy Binary" ActionId="actions.nbt.copy.binary.sysclipboard">
                     <KeyStroke Mods="CTRL" Key="C"/>
                 </Shortcut>
-                <Shortcut Name="RenameShortcut1" DisplayName="Rename">
+                <Shortcut Name="PasteBinaryShortcut" DisplayName="Paste Binary" ActionId="actions.nbt.paste.binary.sysclipboard">
+                    <KeyStroke Mods="CTRL" Key="V"/>
+                </Shortcut>
+                <Shortcut Name="RenameShortcut1" DisplayName="Rename" ActionId="actions.nbt.rename.tag">
                     <KeyStroke Mods="CTRL" Key="R"/>
                 </Shortcut>
-                <Shortcut Name="RenameShortcut2" DisplayName="Rename">
+                <Shortcut Name="RenameShortcut2" DisplayName="Rename" ActionId="actions.nbt.rename.tag">
                     <KeyStroke Key="F2"/>
                 </Shortcut>
-                <Shortcut Name="RemoveFromParent" DisplayName="Remove tag">
+                <Shortcut Name="RemoveFromParent" DisplayName="Remove tag" ActionId="actions.nbt.remove_from_parent">
                     <KeyStroke Key="Delete"/>
                 </Shortcut>
                 <Shortcut Name="Save" DisplayName="Save">

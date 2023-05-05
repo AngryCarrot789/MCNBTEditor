@@ -107,8 +107,8 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
                     list.AddLast(shortcut);
                 }
 
-                if (!string.IsNullOrWhiteSpace(shortcut.Path)) { // should only be null or non-empty
-                    this.pathToShortcut[shortcut.Path] = shortcut;
+                if (!string.IsNullOrWhiteSpace(shortcut.FullPath)) { // should only be null or non-empty
+                    this.pathToShortcut[shortcut.FullPath] = shortcut;
                 }
             }
         }

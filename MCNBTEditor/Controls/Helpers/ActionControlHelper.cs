@@ -113,6 +113,11 @@ namespace MCNBTEditor.Controls.Helpers {
                 }
 
                 context.AddContext(element);
+                ItemsControl itemsControl = ItemsControl.ItemsControlFromItemContainer(element);
+                if (itemsControl != null && itemsControl.IsItemItsOwnContainer(element)) {
+                    context.AddContext(itemsControl);
+                }
+
                 if (Window.GetWindow(element) is Window win) {
                     context.AddContext(win);
                 }

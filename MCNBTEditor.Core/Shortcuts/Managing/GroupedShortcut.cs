@@ -61,7 +61,7 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
         /// <summary>
         /// This shortcut's full path (the parent's path (if available/not root) and this shortcut's name)
         /// </summary>
-        public string Path { get; }
+        public string FullPath { get; }
 
         /// <summary>
         /// Additional context for this shortcut to be passed to the action system
@@ -71,7 +71,7 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
         public GroupedShortcut(ShortcutGroup @group, string name, IShortcut shortcut, bool isGlobal = false, bool inherit = false) {
             this.Group = @group ?? throw new ArgumentNullException(nameof(@group), "Collection cannot be null");
             this.Shortcut = shortcut;
-            this.Path = @group.GetPathForName(name);
+            this.FullPath = @group.GetPathForName(name);
             this.Name = name;
             this.IsGlobal = isGlobal;
             this.Inherit = inherit;
@@ -79,7 +79,7 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
 
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
-            sb.Append(this.Shortcut.IsEmpty ? "Empty/No Shortcut" : this.Shortcut.ToString()).Append(" -> ").Append(this.Path);
+            sb.Append(this.Shortcut.IsEmpty ? "Empty/No Shortcut" : this.Shortcut.ToString()).Append(" -> ").Append(this.FullPath);
             if (!string.IsNullOrWhiteSpace(this.Description)) {
                 sb.Append(" (").Append(this.Description).Append(")");
             }

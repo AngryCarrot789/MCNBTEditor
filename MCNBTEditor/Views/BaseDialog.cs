@@ -18,9 +18,6 @@ namespace MCNBTEditor.Views {
                     case Key.Escape:
                         this.DialogResult = false;
                         break;
-                    case Key.Enter:
-                        this.DialogResult = true;
-                        break;
                     default: return;
                 }
 
