@@ -3,7 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
                     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
                     xmlns:views="clr-namespace:MCNBTEditor.Views"
-                    xmlns:ap="clr-namespace:MCNBTEditor.Themes.Attached">
+                    xmlns:ap="clr-namespace:MCNBTEditor.Themes.Attached" xmlns:converters="clr-namespace:MCNBTEditor.Themes.Converters">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -3499,6 +3499,10 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
+
+                        <Rectangle x:Name="HorLn" Margin="9,1,0,0" Height="1" Stroke="{DynamicResource AREghZyBrush.Foreground.Deeper}" StrokeDashCap="Square" StrokeDashArray="0,2" StrokeDashOffset="1" SnapsToDevicePixels="True"/>
+                        <Rectangle x:Name="VerLn" Width="1" Stroke="{DynamicResource AREghZyBrush.Foreground.Deeper}" StrokeDashCap="Square" StrokeDashArray="0,2" Margin="0,0,1,0" Grid.RowSpan="2" SnapsToDevicePixels="true" Fill="{DynamicResource DynamicResource AREghZyBrush.Foreground.Deeper}"/>
+
                         <ToggleButton x:Name="Expander" ClickMode="Press"
                                       IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
                                       Style="{StaticResource ExpandCollapseToggleStyle}"/>
@@ -3518,6 +3522,15 @@
                         </Trigger>
                         <Trigger Property="HasItems" Value="false">
                             <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                            <Setter Property="Visibility" TargetName="HorLn" Value="Visible"/>
+                            <Setter Property="Grid.RowSpan" TargetName="VerLn" Value="2"/>
+                            <Setter Property="Grid.Row" TargetName="VerLn" Value="0"/>
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="true">
+                            <Setter Property="Visibility" TargetName="Expander" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="HorLn" Value="Hidden"/>
+                            <Setter Property="Grid.RowSpan" TargetName="VerLn" Value="1"/>
+                            <Setter Property="Grid.Row" TargetName="VerLn" Value="2"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Background" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Background}"/>
@@ -3620,6 +3633,10 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!-- WinForms style: https://stackoverflow.com/questions/19560466/how-to-make-wpf-treeview-style-as-winforms-treeview -->
+
+    <converters:TreeViewLineConverter x:Key="LineConverter"/>
 
     <Style TargetType="{x:Type Thumb}">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>

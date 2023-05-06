@@ -90,6 +90,24 @@
                     </TreeView>
                 </Grid>
             </TabItem>
+            <TabItem>
+                <TreeView>
+                    <TreeViewItem Header="Item1">
+                        <TreeViewItem Header="Item2">
+                            <TreeViewItem Header="Item3">
+                                <TreeViewItem Header="Item4"/>
+                                <TreeViewItem Header="Item5"/>
+                                <TreeViewItem Header="Item6"/>
+                            </TreeViewItem>
+                            <TreeViewItem Header="Item7"/>
+                            <TreeViewItem Header="Item8">
+                                <TreeViewItem Header="Item9"/>
+                            </TreeViewItem>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Item10"/>
+                    </TreeViewItem>
+                </TreeView>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

@@ -28,7 +28,7 @@ namespace MCNBTEditor.Shortcuts.Converters {
         }
 
         public static bool ShortcutIdToGesture(string path, string fallback, out string gesture) {
-            GroupedShortcut shortcut = ShortcutManager.Instance.FindShortcutByPath(path);
+            GroupedShortcut shortcut = ShortcutManager.Instance?.FindShortcutByPath(path);
             if (shortcut == null) {
                 return (gesture = fallback) != null;
             }
@@ -38,8 +38,8 @@ namespace MCNBTEditor.Shortcuts.Converters {
         }
 
         public static bool ShortcutIdToGesture(IEnumerable<string> paths, string fallback, out string gesture) {
-            List<GroupedShortcut> shortcut = ShortcutManager.Instance.FindShortcutsByPaths(paths).ToList();
-            if (shortcut.Count < 1) {
+            List<GroupedShortcut> shortcut = ShortcutManager.Instance?.FindShortcutsByPaths(paths).ToList();
+            if (shortcut == null || shortcut.Count < 1) {
                 return (gesture = fallback) != null;
             }
 

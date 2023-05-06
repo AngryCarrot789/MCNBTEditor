@@ -21,7 +21,7 @@ namespace MCNBTEditor.Shortcuts.Converters {
         }
 
         public static bool ShortcutIdToTooltip(string path, string fallback, out string tooltip) {
-            GroupedShortcut shortcut = ShortcutManager.Instance.FindShortcutByPath(path);
+            GroupedShortcut shortcut = ShortcutManager.Instance?.FindShortcutByPath(path);
             if (shortcut == null) {
                 return (tooltip = fallback) != null;
             }

@@ -176,6 +176,7 @@
     <Compile Include="Themes\Controls.xaml.cs">
       <DependentUpon>Controls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Themes\Converters\TreeViewLineConverter.cs" />
     <Compile Include="Themes\ThemesController.cs" />
     <Compile Include="Themes\ThemeTypes.cs" />
     <Compile Include="NBT\UI\BaseNBTHeaderRunConverter.cs" />

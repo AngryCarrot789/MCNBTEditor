@@ -214,9 +214,8 @@ namespace MCNBTEditor.Core.Explorer {
         protected virtual void RemoveAll(Predicate<BaseTreeItemViewModel> canRemove) {
             // this.RemoveAll(this.items.Where(canRemove).ToList());
             this.ValidateCanHoldChildren();
-            ObservableCollectionEx<BaseTreeItemViewModel> list = this.children;
-            for (int i = list.Count - 1; i >= 0; i--) {
-                BaseTreeItemViewModel item = list[i];
+            for (int i = this.children.Count - 1; i >= 0; i--) {
+                BaseTreeItemViewModel item = this.children[i];
                 if (canRemove(item)) {
                     this.EnsureChild(item, false);
                     this.children.RemoveAt(i);
