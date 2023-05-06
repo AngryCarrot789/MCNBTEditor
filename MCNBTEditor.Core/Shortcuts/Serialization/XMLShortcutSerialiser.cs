@@ -288,7 +288,7 @@ namespace MCNBTEditor.Core.Shortcuts.Serialization {
             if (node == null)
                 return null;
             string value = node.Value;
-            return string.IsNullOrWhiteSpace(value) ? null : value;
+            return string.IsNullOrEmpty(value) ? null : value;
         }
 
         #endregion
