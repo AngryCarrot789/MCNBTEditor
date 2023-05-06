@@ -1,21 +1,22 @@
 using System;
 using System.Threading.Tasks;
+using MCNBTEditor.Core.Views.Dialogs;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 using MCNBTEditor.Utils;
 
 namespace MCNBTEditor.Views.Message {
     public class MessageDialogService : IMessageDialogService {
-        public Task ShowMessageAsync(string caption, string message) {
-            return DispatcherUtils.Invoke(() => {
+        public async Task ShowMessageAsync(string caption, string message) {
+            await DispatcherUtils.Invoke(async () => {
                 MessageWindow.DODGY_PRIMARY_SELECTION = "ok";
-                return Dialogs.OkDialog.ShowAsync(caption, message);
+                await Dialogs.OkDialog.ShowAsync(caption, message);
             });
         }
 
-        public Task ShowMessageExAsync(string title, string header, string message) {
-            return DispatcherUtils.Invoke(() => {
+        public async Task ShowMessageExAsync(string title, string header, string message) {
+            await DispatcherUtils.Invoke(async () => {
                 MessageWindow.DODGY_PRIMARY_SELECTION = "ok";
-                return Dialogs.OkDialog.ShowAsync(title, header, message);
+                await Dialogs.OkDialog.ShowAsync(title, header, message);
             });
         }
 
@@ -71,10 +72,14 @@ namespace MCNBTEditor.Views.Message {
                 MessageWindow.DODGY_PRIMARY_SELECTION = dialog.PrimaryResult;
             }
 
+            IDialog oldDialog = dialog.Dialog;
             dialog.Dialog = window;
-            bool? result = window.ShowDialog();
-            dialog.Dialog = null;
-            return result;
+            try {
+                return window.ShowDialog();
+            }
+            finally {
+                dialog.Dialog = oldDialog;
+            }
         }
 
         public Task<bool?> ShowDialogAsync(MessageDialog dialog) {

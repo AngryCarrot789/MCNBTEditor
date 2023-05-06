@@ -2929,6 +2929,9 @@
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextAlignment" Value="Left" />
         <Setter Property="Foreground" Value="{DynamicResource AREghZyBrush.Foreground.Static}" />
+        <Setter Property="RenderOptions.EdgeMode" Value="Unspecified"/>
+        <Setter Property="TextOptions.TextRenderingMode" Value="ClearType"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.5" />
@@ -3500,8 +3503,8 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Rectangle x:Name="HorLn" Margin="9,1,0,0" Height="1" Stroke="{DynamicResource AREghZyBrush.Foreground.Deeper}" StrokeDashCap="Square" StrokeDashArray="0,2" StrokeDashOffset="1" SnapsToDevicePixels="True"/>
-                        <Rectangle x:Name="VerLn" Width="1" Stroke="{DynamicResource AREghZyBrush.Foreground.Deeper}" StrokeDashCap="Square" StrokeDashArray="0,2" Margin="0,0,1,0" Grid.RowSpan="2" SnapsToDevicePixels="true" Fill="{DynamicResource DynamicResource AREghZyBrush.Foreground.Deeper}"/>
+                        <Rectangle x:Name="HorLn" Margin="9,1,0,0" Height="1" Stroke="{DynamicResource AREghZyBrush.Tone7.Border.Static}" StrokeDashCap="Square" StrokeDashArray="0,3" StrokeDashOffset="1" SnapsToDevicePixels="True"/>
+                        <Rectangle x:Name="VerLn" Width="1" Stroke="{DynamicResource AREghZyBrush.Tone7.Border.Static}" StrokeDashCap="Square" StrokeDashArray="0,3" Margin="0,0,1,0" Grid.RowSpan="2" SnapsToDevicePixels="true" Fill="{DynamicResource AREghZyBrush.Tone7.Border.Static}"/>
 
                         <ToggleButton x:Name="Expander" ClickMode="Press"
                                       IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"

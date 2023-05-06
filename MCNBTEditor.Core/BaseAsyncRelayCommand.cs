@@ -28,6 +28,10 @@ namespace MCNBTEditor.Core {
         /// </summary>
         public bool IsRunning => this.isRunningState == 1;
 
+        protected BaseAsyncRelayCommand() {
+
+        }
+
         /// <summary>
         /// Whether or not this async command can actually run or not. If it is already running, this will (typically) return false
         /// <para>
@@ -37,8 +41,17 @@ namespace MCNBTEditor.Core {
         /// </summary>
         /// <param name="parameter">The parameter passed to this command</param>
         /// <returns>Whether or not this command can be executed or not</returns>
-        public override bool CanExecute(object parameter) {
-            return this.isRunningState == 0 && base.CanExecute(parameter);
+        public sealed override bool CanExecute(object parameter) {
+            return this.isRunningState == 0 && base.CanExecute(parameter) && this.CanExecuteCore(parameter);
+        }
+
+        /// <summary>
+        /// The core method for checking if the command implementation can execute or not. This is called by <see cref="CanExecute"/>
+        /// </summary>
+        /// <param name="parameter">The parameter passed to this command</param>
+        /// <returns>Whether or not this command can be executed or not</returns>
+        protected virtual bool CanExecuteCore(object parameter) {
+            return true;
         }
 
         /// <summary>
@@ -52,7 +65,11 @@ namespace MCNBTEditor.Core {
         }
 
         /// <summary>
-        /// The core method for executing this async command. If the command is already running, then this method will return and the command will not be executed
+        /// Executes this async command, if it is not running. If the command is already running,
+        /// then this method will return and the command will not be executed.
+        /// <para>
+        /// <see cref="TryExecuteAsync"/> should be used if you need to check if the command actually executed or not
+        /// </para>
         /// </summary>
         /// <param name="parameter">The parameter passed to this command</param>
         // Slight optimisation by not using async for ExecuteAsync, so that a state machine isn't needed
@@ -74,7 +91,7 @@ namespace MCNBTEditor.Core {
         /// <param name="parameter">The parameter passed to this command</param>
         // Cannot make this non-async because... well... ContinueWith seems dodgy
         public async Task<bool> TryExecuteAsync(object parameter) {
-            if (Interlocked.CompareExchange(ref this.isRunningState, 1, 0) == 1) {
+            if (this.CanExecute(parameter) && Interlocked.CompareExchange(ref this.isRunningState, 1, 0) == 1) {
                 return false;
             }
 

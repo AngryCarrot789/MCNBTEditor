@@ -18,8 +18,8 @@ namespace MCNBTEditor.Core {
             this.canExecute = canExecute;
         }
 
-        public override bool CanExecute(object parameter) {
-            return base.CanExecute(parameter) && (this.canExecute == null || this.canExecute());
+        protected override bool CanExecuteCore(object parameter) {
+            return this.canExecute == null || this.canExecute();
         }
 
         protected override Task ExecuteCoreAsync(object parameter) {
@@ -50,16 +50,14 @@ namespace MCNBTEditor.Core {
             this.ConvertParameter = convertParameter;
         }
 
-        public override bool CanExecute(object parameter) {
+        protected override bool CanExecuteCore(object parameter) {
             if (this.ConvertParameter) {
                 parameter = GetConvertedParameter<T>(parameter);
             }
 
-            if (base.CanExecute(parameter)) {
-                return this.canExecute == null || parameter == null && this.canExecute(default) || parameter is T t && this.canExecute(t);
-            }
-
-            return false;
+            return this.canExecute == null ||
+                   parameter == null && this.canExecute(default) ||
+                   parameter is T t && this.canExecute(t);
         }
 
         protected override Task ExecuteCoreAsync(object parameter) {

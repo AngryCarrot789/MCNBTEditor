@@ -21,9 +21,7 @@ namespace MCNBTEditor.Core.Actions {
             return manager.GetAction(this.ActionId);
         }
 
-        public override bool CanExecute(object parameter) {
-            if (!base.CanExecute(parameter))
-                return false;
+        protected override bool CanExecuteCore(object parameter) {
             Presentation p = ActionManager.Instance.GetPresentation(this.ActionId, this.Context);
             return p.IsVisible && p.IsEnabled;
         }

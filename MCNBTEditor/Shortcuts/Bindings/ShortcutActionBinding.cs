@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Contexts;

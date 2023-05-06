@@ -10,11 +10,7 @@ namespace MCNBTEditor.Core.Actions.Helpers {
     /// </summary>
     /// <typeparam name="T">The type which contains the target command</typeparam>
     public class ShortcutActionCommand<T> : AnAction {
-        public Type TargetType { get; }
-
-        public string PropertyName { get; }
-
-        public PropertyInfo Property { get; }
+        public Func<T, ICommand> CommandAccessor { get; }
 
         public string ShortcutId { get; }
 
@@ -26,18 +22,19 @@ namespace MCNBTEditor.Core.Actions.Helpers {
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
         public ShortcutActionCommand(string shortcutId, string propertyName) : base((string) null, null) {
-            this.PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
-            this.TargetType = typeof(T);
-            this.Property = this.TargetType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
-            if (this.Property == null) {
-                throw new Exception($"No such property: {this.TargetType}.{propertyName}");
+            if (propertyName == null)
+                throw new ArgumentNullException(nameof(propertyName));
+            PropertyInfo propertyInfo = typeof(T).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            if (propertyInfo == null) {
+                throw new Exception($"No such property: {typeof(T)}.{propertyName}");
             }
 
+            this.CommandAccessor = (Func<T, ICommand>) Delegate.CreateDelegate(typeof(Func<T, ICommand>), propertyInfo.GetMethod);
             this.ShortcutId = shortcutId;
         }
 
-        public ICommand GetCommand(object instance) {
-            return this.Property.GetValue(instance) as ICommand;
+        public ICommand GetCommand(in T instance) {
+            return this.CommandAccessor(instance);
         }
 
         public override async Task<bool> ExecuteAsync(AnActionEventArgs e) {

@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using System.Windows.Input;
 using System.Xml;
 using MCNBTEditor.Core.Shortcuts.Inputs;

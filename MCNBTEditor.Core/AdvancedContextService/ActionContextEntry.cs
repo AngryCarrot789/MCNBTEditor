@@ -20,11 +20,11 @@ namespace MCNBTEditor.Core.AdvancedContextService {
 
         }
 
-        public ActionContextEntry(object dataContext, string actionId, IEnumerable<IContextEntry> children = null) : this(dataContext, actionId, null, children) {
+        public ActionContextEntry(object dataContext, string actionId, IEnumerable<IContextEntry> children = null) : this(dataContext, actionId, null, null, children) {
 
         }
 
-        public ActionContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) : this(dataContext, null, null, children) {
+        public ActionContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) : this(dataContext, null, null, null, children) {
 
         }
 

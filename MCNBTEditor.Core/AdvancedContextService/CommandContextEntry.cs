@@ -3,8 +3,7 @@ using System.Windows.Input;
 
 namespace MCNBTEditor.Core.AdvancedContextService {
     /// <summary>
-    /// The default implementation for a context entry in which an ICommand is executed when clicked.
-    /// This supports a custom header, input gesture, tooltip and command parameter to reflect the UI menu item
+    /// The default implementation for a context entry in which an ICommand is executed when clicked
     /// </summary>
     public class CommandContextEntry : BaseContextEntry {
         private string inputGestureText;
@@ -29,10 +28,8 @@ namespace MCNBTEditor.Core.AdvancedContextService {
             set => this.RaisePropertyChanged(ref this.commandParameter, value);
         }
 
-        public CommandContextEntry(string header, string inputGestureText, string description, ICommand command, object commandParameter, IEnumerable<IContextEntry> children = null) : base(null, children) {
-            this.Header = header;
+        public CommandContextEntry(string header, string inputGestureText, string description, ICommand command, object commandParameter, IEnumerable<IContextEntry> children = null) : base(null, header, description, children) {
             this.inputGestureText = inputGestureText;
-            this.Description = description;
             this.command = command;
             this.commandParameter = commandParameter;
         }

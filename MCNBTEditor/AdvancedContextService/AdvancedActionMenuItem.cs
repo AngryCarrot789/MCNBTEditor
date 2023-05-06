@@ -6,7 +6,6 @@ using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Utils;
-using MCNBTEditor.Shortcuts;
 using MCNBTEditor.Shortcuts.Converters;
 
 namespace MCNBTEditor.AdvancedContextService {

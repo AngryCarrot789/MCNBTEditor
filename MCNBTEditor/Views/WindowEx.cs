@@ -33,7 +33,7 @@ namespace MCNBTEditor.Views {
         private readonly Action showAction;
         private readonly Func<bool?> showDialogAction;
 
-        public WindowEx() {
+        public WindowEx() : base() {
             this.showAction = this.Show;
             this.showDialogAction = this.ShowDialog;
         }

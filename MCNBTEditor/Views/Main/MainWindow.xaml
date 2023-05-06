@@ -21,7 +21,9 @@
                   CanCloseWithEscapeKey="False"
                   Style="{DynamicResource CustomWindowStyleEx}" 
                   Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}"
-                  TitlebarBrush="{DynamicResource AREghZyBrush.Tone4.Background.Static}">
+                  TitlebarBrush="{DynamicResource AREghZyBrush.Tone4.Background.Static}"
+                  VisualTextRenderingMode="ClearType"
+                  RenderOptions.EdgeMode="Unspecified">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibleOrCollapsed" TrueValue="Visible" FalseValue="Collapsed"/>
         <ui:ListFallbackSourceConverter x:Key="FallbackConverter"/>

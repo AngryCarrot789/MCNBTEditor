@@ -363,7 +363,7 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
                 else if (obj is IShortcutToCommand converter) {
                     ICommand command = converter.GetCommandForShortcut(shortcut.FullPath);
                     if (command is BaseAsyncRelayCommand asyncCommand) {
-                        if (asyncCommand.CanExecute(null) && await asyncCommand.TryExecuteAsync(null)) {
+                        if (await asyncCommand.TryExecuteAsync(null)) {
                             return true;
                         }
                     }

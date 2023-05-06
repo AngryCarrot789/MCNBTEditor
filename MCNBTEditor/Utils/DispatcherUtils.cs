@@ -25,6 +25,16 @@ namespace MCNBTEditor.Utils {
             return Task.FromResult<TResult>(default);
         }
 
+        public static void Invoke(Action action) {
+            Application app = Application.Current;
+            Dispatcher dispatcher;
+            if (app != null && (dispatcher = app.Dispatcher) != null) {
+                Invoke(dispatcher, action);
+            }
+
+            throw new Exception("Application main thread is unavailable");
+        }
+
         public static TResult Invoke<TResult>(Func<TResult> function) {
             Application app = Application.Current;
             Dispatcher dispatcher;

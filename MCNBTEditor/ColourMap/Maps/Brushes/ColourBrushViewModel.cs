@@ -4,7 +4,6 @@ using System.Windows.Media;
 using MCNBTEditor.ColourMap.WPF.Controls;
 using MCNBTEditor.Core;
 using MCNBTEditor.Core.AdvancedContextService;
-using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.ColourMap.Maps.Brushes {
     public class ColourBrushViewModel : BrushViewModel {

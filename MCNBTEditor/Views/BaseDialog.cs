@@ -8,7 +8,11 @@ using MCNBTEditor.Views.FilePicking;
 namespace MCNBTEditor.Views {
     public class BaseDialog : BaseWindowCore, IDialog {
         public BaseDialog() {
-            this.Owner = FolderPicker.GetCurrentActiveWindow();
+            Window owner = FolderPicker.GetCurrentActiveWindow();
+            if (owner != this) {
+                this.Owner = owner;
+            }
+
             this.WindowStartupLocation = WindowStartupLocation.CenterOwner;
         }
 

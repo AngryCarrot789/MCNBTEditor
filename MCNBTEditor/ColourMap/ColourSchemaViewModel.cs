@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using MCNBTEditor.ColourMap.Maps;
-using MCNBTEditor.ColourMap.Maps.Brushes;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.ColourMap {

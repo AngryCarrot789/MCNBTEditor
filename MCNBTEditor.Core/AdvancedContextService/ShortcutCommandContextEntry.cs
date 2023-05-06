@@ -41,5 +41,10 @@ namespace MCNBTEditor.Core.AdvancedContextService {
         public ShortcutCommandContextEntry(string shortcutId, ICommand command, IEnumerable<IContextEntry> children = null) : this(shortcutId, command, null, children) {
 
         }
+
+        public ShortcutCommandContextEntry(string header, string description, string shortcutId, ICommand command, IEnumerable<IContextEntry> children = null) : this(shortcutId, command, null, children) {
+            this.Header = header;
+            this.Description = description;
+        }
     }
 }

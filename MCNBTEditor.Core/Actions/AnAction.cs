@@ -39,10 +39,17 @@ namespace MCNBTEditor.Core.Actions {
         /// Executes this specific action with the given action event args
         /// </para>
         /// <para>
-        /// About the return value: When executed by a shortcut processor, the return value is used along side the final
-        /// outcome of the processor input event. Typically, the first action to return true is the last action to be invoked in
-        /// that specific frame and causes the input event to be handled. In this case, it's typically a better option for the return
-        /// value to be whether this action is actually executable in some form, instead of whether if it executed successfully or not
+        /// About the return value: When executed by a shortcut processor, the return value is used along side
+        /// the final outcome of the processor input event. Typically, the first action to return true is the
+        /// last action to be invoked in that specific frame and causes the input event to be handled.
+        /// </para>
+        /// <para>
+        /// In this case, it's typically a better option for the return value to be whether this action is actually executable
+        /// in some form, instead of whether if it executed successfully or not
+        /// </para>
+        /// <para>
+        /// For example, RemoveSelectedItemsAction: the args data context did not contain some sort of "list" object, so returning false
+        /// makes sense. However, if it did contain a list but there were 0 items actually selected, then returning true may be the better option.
         /// </para>
         /// </summary>
         /// <param name="e">The action event args, containing info about the current context</param>

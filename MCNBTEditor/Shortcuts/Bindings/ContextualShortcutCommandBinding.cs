@@ -53,18 +53,17 @@ namespace MCNBTEditor.Shortcuts.Bindings {
         private Task<bool> OnShortcutFired(ShortcutProcessor processor, GroupedShortcut shortcut) {
             ICommand cmd = this.Command;
             object param = this.CommandParameter;
-            if (cmd != null && cmd.CanExecute(param)) {
+            if (cmd != null) {
                 if (cmd is BaseAsyncRelayCommand arc) {
                     return arc.TryExecuteAsync(param);
                 }
-                else {
+                else if (cmd.CanExecute(param)) {
                     cmd.Execute(param);
                     return Task.FromResult(true);
                 }
             }
-            else {
-                return Task.FromResult(false);
-            }
+
+            return Task.FromResult(false);
         }
 
         protected override Freezable CreateInstanceCore() => new ContextualShortcutCommandBinding();

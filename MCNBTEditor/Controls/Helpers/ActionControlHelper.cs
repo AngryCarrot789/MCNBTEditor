@@ -4,7 +4,6 @@ using System.Windows.Controls.Primitives;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.Utils;
-using MCNBTEditor.Shortcuts;
 
 namespace MCNBTEditor.Controls.Helpers {
     public static class ActionControlHelper {

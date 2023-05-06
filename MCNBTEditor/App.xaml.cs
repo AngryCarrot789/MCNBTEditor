@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using System.Windows.Media;
-using MCNBTEditor.ColourMap;
 using MCNBTEditor.Core;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Helpers;
@@ -35,8 +29,103 @@ namespace MCNBTEditor {
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application {
+        public ResourceDictionary ThemeDictionary { get; private set; }
+
         private async void Application_Startup(object sender, StartupEventArgs e) {
-            ShortcutManager.Instance =  new WPFShortcutManager();
+            this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            try {
+                await this.InitApp();
+            }
+            catch (Exception ex) {
+                await IoC.MessageDialogs.ShowMessageExAsync("App initialisation failed", "Failed to start MCNBTEditor", ex.ToString());
+                this.Shutdown();
+                return;
+            }
+
+            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            MainWindow window = new MainWindow();
+            IoC.TreeView = window.MainTreeView;
+            this.MainWindow = window;
+            window.Show();
+
+            if (window.DataContext is MainViewModel mvm) {
+                string[] args = e.Args;
+                if (args.Length > 0) {
+                    await mvm.LoadFilesAction(new string[] {args[0]}, true);
+                }
+                else {
+                    string debugPath = @"C:\Users\kettl\Desktop\TheRareCarrot.dat";
+                    if (File.Exists(debugPath)) {
+                        await mvm.LoadFilesAction(new string[1] {
+                            debugPath
+                        }, true);
+                    }
+                }
+            }
+
+            // string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "WPFStyles.xaml");
+            // using (Stream stream = new BufferedStream(new FileStream(path, FileMode.Create), 16384)) {
+            //     var writer = new StreamWriter(stream);
+            //     writer.Write($"<!-- BEGIN STYLES -->\n");
+            //     foreach ((Style style, string type) in this.GetAllStyles(this.MainWindow)) {
+            //         try {
+            //             string xaml = XamlWriter.Save(style);
+            //             writer.Write($"<!-- STYLE FOR {type} -->\n");
+            //             writer.Write(xaml);
+            //         }
+            //         catch (Exception ex) {
+            //             writer.Write($"<!-- STYLE FOR {type} FAILED: {ex.Message} -->\n");
+            //         }
+            //
+            //         writer.Write("\n\n\n");
+            //     }
+            //
+            //     await writer.WriteAsync("\n\n\n\n\n\n\n\n\n\n");
+            //     await writer.WriteAsync($"<!-- BEGIN TEMPLATES -->\n");
+            //     foreach ((ControlTemplate template, string type) in this.GetAllTemplates(this.MainWindow)) {
+            //         try {
+            //             string xaml = XamlWriter.Save(template);
+            //             writer.Write($"<!-- CONTROLTEMPLATE FOR {type} -->\n");
+            //             writer.Write(xaml);
+            //         }
+            //         catch (Exception ex) {
+            //             writer.Write($"<!-- CONTROLTEMPLATE FOR {type} FAILED: {ex.Message} -->\n");
+            //         }
+            //
+            //         writer.Write("\n\n\n");
+            //     }
+            // }
+
+            // ResourceDictionary dictionary = this.Resources.MergedDictionaries.First(x => x.Contains("ZZZZZ_DUMMY_KEY_FOR_IDENTIFICATION"));
+            // if (dictionary == null) {
+            //     throw new Exception("Could not find style dictionary");
+            // }
+            // this.ThemeDictionary = dictionary;
+            // dictionary["_REghZy.TestBrush"] = new SolidColorBrush(Colors.Red);
+            // new DemoTheme().Show();
+
+            // this regex API is ass, surely there should be a Replace function in the match/groups?
+            // string text = File.ReadAllText(@"C:\Users\kettl\Desktop\test.txt");
+            // string HexToDecimal(Match match) {
+            //     string hex = match.Groups[1].Value.Substring(1);
+            //     if (int.TryParse(hex, NumberStyles.HexNumber, null, out int result)) {
+            //         return match.Value.Replace(match.Groups[1].Value, result.ToString());
+            //     }
+            //     else {
+            //         return match.Value;
+            //     }
+            // }
+            // text = Regex.Replace(text, "[ARGB]=\"(#..)\"", HexToDecimal);
+            // File.WriteAllText(@"C:\Users\kettl\Desktop\test.txt", text);
+        }
+
+        public async Task InitApp() {
+            string[] envArgs = Environment.GetCommandLineArgs();
+            if (envArgs.Length > 0 && Path.GetDirectoryName(envArgs[0]) is string dir) {
+                Directory.SetCurrentDirectory(dir);
+            }
+
+            ShortcutManager.Instance = new WPFShortcutManager();
             ActionManager.Instance = new ActionManager();
             ActionManager.SearchAndRegisterActions(ActionManager.Instance);
             ActionManager.Instance.Register("actions.main-window.OpenFile", new ShortcutActionCommand<MainViewModel>("Application/EditorView/OpenFile", nameof(MainViewModel.OpenFileCommand)));
@@ -66,90 +155,17 @@ namespace MCNBTEditor {
 
             };
 
-            string filePath = @"Keymap.xml";
-            if (File.Exists(filePath)) {
-                using (FileStream stream = File.OpenRead(filePath)) {
+            string keymapFilePath = Path.GetFullPath(@"Keymap.xml");
+            if (File.Exists(keymapFilePath)) {
+                using (FileStream stream = File.OpenRead(keymapFilePath)) {
                     ShortcutGroup group = WPFKeyMapSerialiser.Instance.Deserialise(stream);
                     WPFShortcutManager.WPFInstance.SetRoot(group);
                 }
             }
             else {
-                MessageBox.Show("Keymap file does not exist: " + filePath);
+                await IoC.MessageDialogs.ShowMessageAsync("No keymap available", "Keymap file does not exist: " + keymapFilePath + $".\n{Directory.GetCurrentDirectory()}\n{String.Join("\n", Environment.GetCommandLineArgs())}");
             }
-
-            // string fullPath = Path.GetFullPath(filePath);
-            // WPFKeyMapSerialiser.Instance.Serialise(WPFShortcutManager.WPFInstance.Root).Save(FileUtils.ChangeActualFileName(fullPath, "KeyMap2"));
-
-            MainWindow window = new MainWindow();
-            IoC.TreeView = window.MainTreeView;
-            this.MainWindow = window;
-            window.Show();
-
-            string debugPath = @"C:\Users\kettl\Desktop\TheRareCarrot.dat";
-            if (window.DataContext is MainViewModel mvm && File.Exists(debugPath)) {
-                // mvm.LoadFile(@"C:\Users\kettl\Desktop\TheRareCarrot.dat");
-                await mvm.LoadFilesAction(new string[1] {
-                    debugPath
-                }, true);
-
-                // string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "WPFStyles.xaml");
-                // using (Stream stream = new BufferedStream(new FileStream(path, FileMode.Create), 16384)) {
-                //     var writer = new StreamWriter(stream);
-                //     writer.Write($"<!-- BEGIN STYLES -->\n");
-                //     foreach ((Style style, string type) in this.GetAllStyles(this.MainWindow)) {
-                //         try {
-                //             string xaml = XamlWriter.Save(style);
-                //             writer.Write($"<!-- STYLE FOR {type} -->\n");
-                //             writer.Write(xaml);
-                //         }
-                //         catch (Exception ex) {
-                //             writer.Write($"<!-- STYLE FOR {type} FAILED: {ex.Message} -->\n");
-                //         }
-//
-                //         writer.Write("\n\n\n");
-                //     }
-//
-                //     await writer.WriteAsync("\n\n\n\n\n\n\n\n\n\n");
-                //     await writer.WriteAsync($"<!-- BEGIN TEMPLATES -->\n");
-                //     foreach ((ControlTemplate template, string type) in this.GetAllTemplates(this.MainWindow)) {
-                //         try {
-                //             string xaml = XamlWriter.Save(template);
-                //             writer.Write($"<!-- CONTROLTEMPLATE FOR {type} -->\n");
-                //             writer.Write(xaml);
-                //         }
-                //         catch (Exception ex) {
-                //             writer.Write($"<!-- CONTROLTEMPLATE FOR {type} FAILED: {ex.Message} -->\n");
-                //         }
-//
-                //         writer.Write("\n\n\n");
-                //     }
-                // }
-            }
-
-            // ResourceDictionary dictionary = this.Resources.MergedDictionaries.First(x => x.Contains("ZZZZZ_DUMMY_KEY_FOR_IDENTIFICATION"));
-            // if (dictionary == null) {
-            //     throw new Exception("Could not find style dictionary");
-            // }
-            // this.ThemeDictionary = dictionary;
-            // dictionary["_REghZy.TestBrush"] = new SolidColorBrush(Colors.Red);
-            // new DemoTheme().Show();
-
-            // this regex API is ass, surely there should be a Replace function in the match/groups?
-            // string text = File.ReadAllText(@"C:\Users\kettl\Desktop\test.txt");
-            // string HexToDecimal(Match match) {
-            //     string hex = match.Groups[1].Value.Substring(1);
-            //     if (int.TryParse(hex, NumberStyles.HexNumber, null, out int result)) {
-            //         return match.Value.Replace(match.Groups[1].Value, result.ToString());
-            //     }
-            //     else {
-            //         return match.Value;
-            //     }
-            // }
-            // text = Regex.Replace(text, "[ARGB]=\"(#..)\"", HexToDecimal);
-            // File.WriteAllText(@"C:\Users\kettl\Desktop\test.txt", text);
         }
-
-        public ResourceDictionary ThemeDictionary { get; private set; }
 
         private IEnumerable<(Style, string)> GetAllStyles(DependencyObject root) {
             int children = VisualTreeHelper.GetChildrenCount(root);

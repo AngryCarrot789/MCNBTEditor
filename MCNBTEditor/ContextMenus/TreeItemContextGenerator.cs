@@ -30,22 +30,22 @@ namespace MCNBTEditor.ContextMenus {
 
         public void Generate(List<IContextEntry> list, BaseTagViewModel tag, bool isMultiSelect) {
             if (isMultiSelect) {
-                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Names"));
+                string newLineText;
+                switch (Environment.NewLine ?? "") {
+                    case "\n": newLineText = "a new line/line feed (\\n) char"; break;
+                    case "\r": newLineText = "a carriage return (\\r) char"; break;
+                    case "\r\n": newLineText = "a CRLF (\\r\\n) sequence"; break;
+                    default: newLineText = $"the system's new line text sequence ({Environment.NewLine.Length} chars)"; break;
+                }
+
+                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Names", $"Copy these tags' names as a string separated by {newLineText}"));
                 if (tag is TagPrimitiveViewModel p2) {
-                    list.Add(new ActionContextEntry(p2, "actions.nbt.copy.primitive_value", "Copy Values"));
+                    list.Add(new ActionContextEntry(p2, "actions.nbt.copy.primitive_value", "Copy Values", $"Copy these tags' primitive values as a string separated by {newLineText}"));
                 }
 
-                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.binary.sysclipboard"));
+                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.binary.sysclipboard", "Copy (binary)"));
                 list.Add(SeparatorEntry.Instance);
-                if (tag is BaseTagCollectionViewModel) {
-                    list.Add(new ActionContextEntry(tag, "actions.nbt.find"));
-                    list.Add(SeparatorEntry.Instance);
-                }
-
-                list.Add(new ActionContextEntry(tag, "actions.nbt.remove_from_parent"));
-                if (tag is TagDataFileViewModel dat) {
-                    list.Add(new CommandContextEntry("Delete FILE", dat.DeleteFileCommand, "Delete FILES"));
-                }
+                list.Add(new ActionContextEntry(tag, "actions.nbt.remove_from_parent", "Remove tags", "Removes these tags from their parent tag"));
             }
             else {
                 if (tag is BaseTagCollectionViewModel tagCollection) {
@@ -61,21 +61,21 @@ namespace MCNBTEditor.ContextMenus {
                 list.Add(SeparatorEntry.Instance);
                 if (tag is TagDataFileViewModel datFile) {
                     list.Add(new CommandContextEntry("Refresh", datFile.RefreshDataCommand));
-                    list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/Save", datFile.SaveFileCommand));
-                    list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/SaveAs", datFile.SaveFileAsCommand));
-                    list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyFilePath", datFile.CopyFilePathToClipboardCommand));
-                    list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/OpenInExplorer", datFile.ShowInExplorerCommand));
+                    list.Add(new ShortcutCommandContextEntry("Save", null, "Application/EditorView/NBTTag/Save", datFile.SaveFileCommand));
+                    list.Add(new ShortcutCommandContextEntry("Save As...", null, "Application/EditorView/NBTTag/SaveAs", datFile.SaveFileAsCommand));
+                    list.Add(new ShortcutCommandContextEntry("Copy file path", null, "Application/EditorView/NBTTag/CopyFilePath", datFile.CopyFilePathToClipboardCommand));
+                    list.Add(new ShortcutCommandContextEntry("Open in Explorer", null, "Application/EditorView/NBTTag/OpenInExplorer", datFile.ShowInExplorerCommand));
                 }
 
                 list.Add(SeparatorEntry.Instance);
-                list.Add(new ActionContextEntry(tag, "actions.nbt.rename.tag"));
+                list.Add(new ActionContextEntry(tag, "actions.nbt.rename.tag", "Rename", "Renames this tag"));
                 if (tag is TagPrimitiveViewModel p2) {
                     list.Add(new CommandContextEntry("Edit...", p2.EditGeneralCommand));
-                    list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name"));
-                    list.Add(new ActionContextEntry(tag, "actions.nbt.copy.primitive_value"));
+                    list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Name", "Copy this tag's name to the clipboard"));
+                    list.Add(new ActionContextEntry(tag, "actions.nbt.copy.primitive_value", "Copy Value", "Copies this tag's value to the clipboard"));
                 }
                 else {
-                    list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name"));
+                    list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Name", "Copy this tag's name to the clipboard"));
                 }
 
                 list.Add(new ActionContextEntry(tag, "actions.nbt.copy.binary.sysclipboard"));

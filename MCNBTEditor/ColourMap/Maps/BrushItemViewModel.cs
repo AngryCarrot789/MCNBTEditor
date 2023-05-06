@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 using MCNBTEditor.ColourMap.Maps.Brushes;
-using MCNBTEditor.ColourMap.WPF.Controls;
 using MCNBTEditor.Core;
 using MCNBTEditor.Core.AdvancedContextService;
 

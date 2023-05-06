@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using MCNBTEditor.Core;
 
 namespace MCNBTEditor.ColourMap.Maps {

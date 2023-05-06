@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows;
-using MCNBTEditor.Core;
 using MCNBTEditor.Core.Utils;
-using MCNBTEditor.Shortcuts;
 using MCNBTEditor.Shortcuts.Converters;
 
 namespace MCNBTEditor.AdvancedContextService {

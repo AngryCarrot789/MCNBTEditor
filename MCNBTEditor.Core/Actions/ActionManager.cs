@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.Actions.Contexts;
 
@@ -40,6 +41,16 @@ namespace MCNBTEditor.Core.Actions {
             }
         }
 
+        public AnAction Unregister(string id) {
+            ValidateId(id);
+            if (this.actions.TryGetValue(id, out AnAction action)) {
+                this.actions.Remove(id);
+                return action;
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Registers an action with the given ID
         /// </summary>
@@ -69,6 +80,10 @@ namespace MCNBTEditor.Core.Actions {
         }
 
         private void RegisterInternal(string id, AnAction action) {
+            if (this.actions.TryGetValue(id, out AnAction existing)) {
+                throw new Exception($"An action is already registered with the ID '{id}': {existing?.GetType()}");
+            }
+
             this.actions[id] = action;
         }
 

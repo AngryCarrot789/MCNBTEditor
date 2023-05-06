@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MCNBTEditor.Core;
-using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Utils;
 

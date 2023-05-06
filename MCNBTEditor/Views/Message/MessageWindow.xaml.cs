@@ -12,7 +12,7 @@ namespace MCNBTEditor.Views.Message {
     public partial class MessageWindow : BaseDialog {
         public static string DODGY_PRIMARY_SELECTION; // lol this is so bad
 
-        public MessageWindow() {
+        public MessageWindow() : base() {
             this.InitializeComponent();
             this.Loaded += (sender, args) => {
                 // Makes the window fit the size of the button bar + check boxes

@@ -30,7 +30,7 @@
                     <CheckBox IsEnabled="{Binding ShowAlwaysUseNextResultOption}" IsChecked="{Binding IsAlwaysUseNextResultChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,2">
                         <TextBlock TextWrapping="Wrap" Text="Always use this option" TextAlignment="Center"/>
                     </CheckBox>
-                    <!-- 
+                    <!--
                     <CheckBox.Visibility>
                         <MultiBinding Converter="{StaticResource NotSureWhatToNameThis}">
                             <Binding Path="ShowAlwaysUseNextResultOption"/>
