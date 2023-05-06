@@ -1,16 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Regions;
 using MCNBTEditor.Core.Shortcuts;
 
 namespace MCNBTEditor.Core.Explorer.Regions {
-    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IHaveTreePath, IContextProvider, IDisposable, IShortcutToCommand {
+    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IHaveTreePath, IDisposable, IShortcutToCommand {
         private string filePath;
         public string FilePath {
             get => this.filePath;
@@ -98,6 +96,7 @@ namespace MCNBTEditor.Core.Explorer.Regions {
                 return;
             }
 
+            this.Clear();
             await Task.Run(() => {
                 this.IsLoading = true;
                 try {
@@ -126,18 +125,6 @@ namespace MCNBTEditor.Core.Explorer.Regions {
             this.Region?.Dispose();
         }
 
-        public virtual void GetContext(List<IContextEntry> list) {
-            list.Add(new CommandContextEntry("Refresh", this.RefreshCommand));
-            list.Add(new CommandContextEntry("Save (coming soon)", this.SaveFileCommand));
-            list.Add(new CommandContextEntry("Save as (coming soon)", this.SaveFileAsCommand));
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyFilePath", this.CopyFilePathToClipboardCommand));
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/OpenInExplorer", this.ShowInExplorerCommand));
-
-            list.Add(SeparatorEntry.Instance);
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/RemoveFromParent", this.RemoveFromParentCommand));
-            list.Add(new CommandContextEntry("Delete FILE", this.DeleteFileCommand));
-        }
-
         public void AddItem(BaseTreeItemViewModel item) {
             base.Add(item);
         }
@@ -154,6 +141,7 @@ namespace MCNBTEditor.Core.Explorer.Regions {
             base.Clear();
         }
 
+        // TODO: remove this because it's such a bad design
         public virtual ICommand GetCommandForShortcut(string shortcutId) {
             switch (shortcutId) {
                 case "Application/EditorView/NBTTag/CopyFilePath": return this.CopyFilePathToClipboardCommand;

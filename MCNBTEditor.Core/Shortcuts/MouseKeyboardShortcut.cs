@@ -6,7 +6,7 @@ using MCNBTEditor.Core.Shortcuts.Usage;
 
 namespace MCNBTEditor.Core.Shortcuts {
     public class MouseKeyboardShortcut : IMouseShortcut, IKeyboardShortcut {
-        public static MouseShortcut EmptyMouseKeyboardShortcut = new MouseShortcut();
+        public static readonly MouseShortcut EmptyMouseKeyboardShortcut = new MouseShortcut();
 
         private readonly List<IInputStroke> inputStrokes;
 

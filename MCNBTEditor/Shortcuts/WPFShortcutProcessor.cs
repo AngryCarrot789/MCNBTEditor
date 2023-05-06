@@ -31,7 +31,7 @@ namespace MCNBTEditor.Shortcuts {
         // Using async void here could possibly be dangerous if the awaited processor method (e.g. OnMouseStroke) halts
         // for a while due to a dialog for example. However... the methods should only really be callable when the window
         // is actually focused. But if the "root" event source is not a window then it could possibly be a problem
-        // Could maybe implement a bool flag to state if it's current being processed or not?
+        // IsProcessingMouse and IsProcessingKey should prevent this issue
 
         public async void OnWindowMouseDown(object sender, MouseButtonEventArgs e, bool isPreviewEvent) {
             if (!this.IsProcessingMouse && e.OriginalSource is DependencyObject focused && CanProcessEvent(focused, isPreviewEvent)) {
@@ -125,25 +125,9 @@ namespace MCNBTEditor.Shortcuts {
 
         public void SetupDataContext(object sender, DependencyObject obj) {
             DataContext context = new DataContext();
-            if (obj is IDataContext) {
-                context.Merge((IDataContext) obj);
-            }
-            else if (obj != null) {
-                if (obj is FrameworkElement element) {
-                    object elemDc = element.DataContext;
-                    if (elemDc is IDataContext dc) {
-                        context.Merge(dc);
-                    }
-                    else if (elemDc != null) {
-                        context.AddContext(elemDc);
-                    }
-                }
-
-                context.AddContext(obj);
-                ItemsControl itemsControl = ItemsControl.ItemsControlFromItemContainer(obj);
-                if (itemsControl != null && itemsControl.IsItemItsOwnContainer(obj)) {
-                    context.AddContext(itemsControl);
-                }
+            WPFShortcutManager.AccumulateContext(context, obj, true, true, false);
+            if (sender is FrameworkElement s && s.DataContext is object sdc) {
+                context.AddContext(sdc);
             }
 
             context.AddContext(sender);
@@ -207,7 +191,7 @@ namespace MCNBTEditor.Shortcuts {
         }
 
         public override bool OnShortcutUsagesCreated() {
-            StringJoiner joiner = new StringJoiner(new StringBuilder(), ", ");
+            StringJoiner joiner = new StringJoiner(", ");
             foreach (KeyValuePair<IShortcutUsage, GroupedShortcut> pair in this.ActiveUsages) {
                 joiner.Append(pair.Key.CurrentStroke.ToString());
             }
@@ -217,7 +201,7 @@ namespace MCNBTEditor.Shortcuts {
         }
 
         public override bool OnSecondShortcutUsagesProgressed() {
-            StringJoiner joiner = new StringJoiner(new StringBuilder(), ", ");
+            StringJoiner joiner = new StringJoiner(", ");
             foreach (KeyValuePair<IShortcutUsage, GroupedShortcut> pair in this.ActiveUsages) {
                 joiner.Append(pair.Key.CurrentStroke.ToString());
             }

@@ -54,6 +54,8 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
                 return await this.OnSecondShortcutUsageCompleted(usage, shortcut);
             }
             finally {
+                // The OnKeyStroke/OnMouseStroke functions immediately return the return of OnUnexpectedCompletedUsage,
+                // so clearing this is safe to do
                 this.ActiveUsages.Clear();
             }
         }
@@ -350,27 +352,29 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
         /// <returns>The mouse stroke event outcome. True = Handled/Cancelled, False = Ignored/Continue</returns>
         public virtual async Task<bool> OnShortcutActivated(GroupedShortcut shortcut) {
             IDataContext context = this.CurrentDataContext;
-            if (context != null) {
-                foreach (object obj in context.Context) {
-                    if (obj is IShortcutHandler handler && await handler.OnShortcutActivated(this, shortcut)) {
-                        return true;
-                    }
-                    else if (obj is IShortcutToCommand converter) {
-                        ICommand command = converter.GetCommandForShortcut(shortcut.FullPath);
-                        if (command is BaseAsyncRelayCommand asyncCommand) {
-                            if (await asyncCommand.TryExecuteAsync(null)) {
-                                return true;
-                            }
-                        }
-                        else if (command != null && command.CanExecute(null)) {
-                            command.Execute(null);
+            if (context == null) {
+                return false;
+            }
+
+            foreach (object obj in context.Context) {
+                if (obj is IShortcutHandler handler && await handler.OnShortcutActivated(this, shortcut)) {
+                    return true;
+                }
+                else if (obj is IShortcutToCommand converter) {
+                    ICommand command = converter.GetCommandForShortcut(shortcut.FullPath);
+                    if (command is BaseAsyncRelayCommand asyncCommand) {
+                        if (asyncCommand.CanExecute(null) && await asyncCommand.TryExecuteAsync(null)) {
                             return true;
                         }
+                    }
+                    else if (command != null && command.CanExecute(null)) {
+                        command.Execute(null);
+                        return true;
                     }
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(shortcut.ActionId) || context == null) {
+            if (string.IsNullOrWhiteSpace(shortcut.ActionId)) {
                 return false;
             }
 

@@ -94,5 +94,17 @@ namespace MCNBTEditor.Shortcuts {
 
             return null;
         }
+
+        public static object GetDataContext(object value) {
+            if (value is FrameworkElement element) {
+                return element.DataContext;
+            }
+            else if (value is FrameworkContentElement contentElement) {
+                return contentElement.DataContext;
+            }
+            else {
+                return null;
+            }
+        }
     }
 }

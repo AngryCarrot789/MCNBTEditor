@@ -22,8 +22,8 @@ namespace MCNBTEditor.Utils {
             }
         }
 
-        public void InvokeLater(Action action, bool background = false) {
-            this.dispatcher.Invoke(action, background ? DispatcherPriority.Background : DispatcherPriority.Normal);
+        public void InvokeLater(Action action, bool wayLater = false) {
+            this.dispatcher.Invoke(action, wayLater ? DispatcherPriority.Background : DispatcherPriority.Normal);
         }
 
         public T Invoke<T>(Func<T> function) {
@@ -32,24 +32,24 @@ namespace MCNBTEditor.Utils {
             return this.dispatcher.Invoke(function);
         }
 
-        public T InvokeLater<T>(Func<T> function, bool background = false) {
-            return this.dispatcher.Invoke(function, background ? DispatcherPriority.Background : DispatcherPriority.Normal);
+        public T InvokeLater<T>(Func<T> function, bool wayLater = false) {
+            return this.dispatcher.Invoke(function, wayLater ? DispatcherPriority.Background : DispatcherPriority.Normal);
         }
 
         public Task InvokeAsync(Action action) {
             return DispatcherUtils.InvokeAsync(this.dispatcher, action);
         }
 
-        public Task InvokeLaterAsync(Action action, bool background = false) {
-            return this.dispatcher.InvokeAsync(action, background ? DispatcherPriority.Background : DispatcherPriority.Normal).Task;
+        public Task InvokeLaterAsync(Action action, bool wayLater = false) {
+            return this.dispatcher.InvokeAsync(action, wayLater ? DispatcherPriority.Background : DispatcherPriority.Normal).Task;
         }
 
         public Task<T> InvokeAsync<T>(Func<T> function) {
             return DispatcherUtils.InvokeAsync(this.dispatcher, function);
         }
 
-        public Task<T> InvokeLaterAsync<T>(Func<T> function, bool background = false) {
-            return this.dispatcher.InvokeAsync(function, background ? DispatcherPriority.Background : DispatcherPriority.Normal).Task;
+        public Task<T> InvokeLaterAsync<T>(Func<T> function, bool wayLater = false) {
+            return this.dispatcher.InvokeAsync(function, wayLater ? DispatcherPriority.Background : DispatcherPriority.Normal).Task;
         }
     }
 }

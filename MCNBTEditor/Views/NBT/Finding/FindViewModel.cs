@@ -311,7 +311,7 @@ namespace MCNBTEditor.Views.NBT.Finding {
                 }
 
                 string foundValue = null;
-                if (searchValue != null) {
+                if (searchValue != null && (searchName == null || isMatched)) {
                     if (child is TagPrimitiveViewModel || child is BaseTagArrayViewModel) {
                         isMatched = AcceptValue(searchValue, (BaseTagViewModel) child, vf, valueMatches, out foundValue);
                     }

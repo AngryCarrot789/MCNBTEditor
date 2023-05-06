@@ -106,6 +106,10 @@ namespace MCNBTEditor.Shortcuts.Bindings {
 
                 context.AddContext(this);
                 if (Window.GetWindow(this) is Window w) {
+                    if (w.DataContext is object dc1) {
+                        context.AddContext(dc1);
+                    }
+
                     context.AddContext(w);
                 }
 

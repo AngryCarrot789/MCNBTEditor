@@ -48,9 +48,9 @@ namespace MCNBTEditor.Core.Timing {
                         catch (Exception e) {
                             Debug.WriteLine(e.ToString());
                             #if DEBUG
-                            await IoC.MessageDialogs.ShowMessageAsync("Error", "An error occurred during an idle event service: " + e.Message);
+                            throw;
                             #else
-                                // throw e;
+                            await IoC.MessageDialogs.ShowMessageAsync("Error", "An error occurred during an idle event service: " + e.Message);
                             #endif
                         }
                     }

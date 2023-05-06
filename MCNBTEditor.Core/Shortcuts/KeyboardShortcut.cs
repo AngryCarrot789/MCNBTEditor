@@ -12,7 +12,7 @@ namespace MCNBTEditor.Core.Shortcuts {
     /// </para>
     /// </summary>
     public class KeyboardShortcut : IKeyboardShortcut {
-        public static KeyboardShortcut EmptyKeyboardShortcut = new KeyboardShortcut();
+        public static readonly KeyboardShortcut EmptyKeyboardShortcut = new KeyboardShortcut();
 
         private readonly List<KeyStroke> keyStrokes;
 

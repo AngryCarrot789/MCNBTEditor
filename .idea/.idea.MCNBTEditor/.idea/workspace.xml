@@ -8,28 +8,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1ad021-2929-4b6a-a12d-6bf47aa88c52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/NewTagAction.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/IWPFContextGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ContextMenus/FindResultContextGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ContextMenus/TreeItemContextGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/FileIcon-TagByteArray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/FileIcon-TagIntArray.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/FileIcon-TagLongArray.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCNBTEditor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCNBTEditor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnActionEventArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnActionEventArgs.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/IDataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/IDataContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Presentation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Presentation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ToggleAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ToggleAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ShortcutActionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ShortcutActionCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionContextEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/BaseContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/BaseContextEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/CommandCheckableContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/CommandCheckableContextEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/CommandContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/CommandContextEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/GroupContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/GroupContextEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ShortcutCommandContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ShortcutCommandContextEntry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/BaseAsyncRelayCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/BaseAsyncRelayCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyBinaryAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyBinaryAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/PasteBinaryAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/PasteBinaryAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RenameTagAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RenameTagAction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Dialog/ITagEditorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Dialog/ITagEditorService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagPrimitiveViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagPrimitiveViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Regions/RegionFileViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Regions/RegionFileViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/NBT/NBTTagList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/NBT/NBTTagList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Services/IDispatcher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Services/IDispatcher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Inputs/MouseStroke.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Inputs/MouseStroke.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/KeyboardShortcut.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/KeyboardShortcut.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/GroupedShortcut.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/GroupedShortcut.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutGroup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Utils/BoolBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Utils/BoolBox.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Dialogs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Dialogs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/MessageDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/MessageDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/MouseKeyboardShortcut.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/MouseKeyboardShortcut.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Serialization/NewSerialiser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Serialization/XMLShortcutSerialiser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/ViewModels/ShortcutViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/ViewModels/ShortcutViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Timing/IdleEventService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Timing/IdleEventService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Utils/StringJoiner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Utils/StringJoiner.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedActionMenuItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedActionMenuItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/MouseStrokeInputWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/MouseStrokeInputWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedContextMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedContextMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedShortcutMenuItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedShortcutMenuItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/Helpers/ActionControlHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/Helpers/ActionControlHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/MCNBTEditor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/MCNBTEditor.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/FileIcon.psd" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/FileIcon.psd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Bindings/ShortcutActionBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Bindings/ShortcutActionBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/KeyStrokeStringConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/KeyStrokeStringConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/UIFocusGroup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/UIFocusGroup.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/VisualTreeUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/VisualTreeUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFKeyMapSerialiser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFKeyMapSerialiser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutProcessor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Utils/DispatcherDelegate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Utils/DispatcherDelegate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTFindingStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTFindingStyles.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +89,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/7e/e728c3b6/Path.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/67/f6bcd1f8/Keyboard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f9/5c7cb308/ScrollViewer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/45/d6abe1fa/XamlWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/41/0ccba01d/KeyboardDevice.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/fa/5c76560e/MemoryStream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/46/9a012980/DispatcherPriority.cs" root0="SKIP_HIGHLIGHTING" />
@@ -72,13 +114,17 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/72/c754e2e2/ContextMenuService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/33/0f4b0110/SolidColorBrush.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/09/8c12636c/Control.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/18/3ee22da6/ObservableCollection`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f4/510cb62e/CollectionView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/87/946664ef/Animatable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/9e/8c3314cf/BindingBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/14/c4b1ab98/Span.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/a4/56a0b3b6/ListCollectionView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/78/b6a0d52f/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/e9/556c4b19/Collection`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/2d/4437f45e/Boolean.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ec/b2e215ce/Hyperlink.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1d/2302b3f8/ContextMenuEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/08/d78ecdab/ContentPresenter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/5b/69c61b9a/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/a9/e516bf04/TextFormatterContext.cs" root0="SKIP_HIGHLIGHTING" />
@@ -120,14 +166,20 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/fd/e7a1be5c/DefaultTraceListener.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/47/676a94a5/ToggleButton.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f0/f14ec6f6/DispatcherOperation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/99fcc677/FrameworkContentElement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/b8/3ebaa908/ContentElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/0d/efc7b7c5/ValidationRule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/fb3f9fa8/ItemsControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/86/dcb35691/ResourceDictionaryCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/dc833c32/Selector.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/15/95c30116/FocusManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/2d/30947b22/DependencyObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/3e/851fcd38/FrameworkElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/05/7ce3bcc5/ArgumentOutOfRangeException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1b/c77db6a5/ListBox.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/da/e5eeed65/MenuItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/c6/4db13c3e/DependencyProperty.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/e5/2e92c4df/Visual.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/8c99457b/ItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/25/9e9c15c2/List`1.cs" root0="SKIP_HIGHLIGHTING" />
@@ -140,6 +192,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/30/ccf6f01f/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/3e/b5aa6901/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/c8e5ce9d/ScrollContentPresenter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/5d/8883b4a5/Freezable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/bc/46d064b7/WindowChrome.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/83/df36c299/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
@@ -154,57 +207,57 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/RegexValidationRule.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/IListenToActions.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/IListenToShortcuts.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/IShortcutToCommand.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Regions/RegionFileViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagPrimitiveViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/NBTActionUtils.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/ExtendedListActionBase.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagDataFileViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RemoveFromParentAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IRemoveable.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RenameTagAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/Helpers/ActionControlHelper.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutProcessor.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Bindings/ShortcutActionBinding.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyValueAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyNameAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/NBT/NBTTagByte.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/DialogButton.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IExtendedList.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedListBox.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/BaseDialog.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/PasteBinaryAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagCollectionViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnActionEventArgs.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionManager.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ToggleAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Presentation.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/IDataContext.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Utils/BoolBox.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/MessageDialog.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Dialogs.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyBinaryAction.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Selector/ListSelectorWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/KeyStrokeInputWindow.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Dialogs/MouseStrokeInputWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/BaseTreeItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/GroupContextEntry.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/CommandContextEntry.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/KeyboardShortcut.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/MouseKeyboardShortcut.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Inputs/MouseStroke.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Utils/StringJoiner.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/UIFocusGroup.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Serialization/NewSerialiser.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Serialization/XMLShortcutSerialiser.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Regions/RegionFileViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/BaseAsyncRelayCommand.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Services/IDispatcher.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Utils/DispatcherDelegate.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/BaseContextGenerator.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/IContextGenerator.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/IWPFContextGenerator.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedContextMenu.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/NBT/Contextual/TreeItemContextGenerator.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/NBT/ContextMenus/FindResultContextGenerator.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ContextMenus/FindResultContextGenerator.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ContextMenus/TagContextGenerator.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Dialog/ITagEditorService.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/BaseContextEntry.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionContextEntry.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/IDataContext.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/NewTagAction.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionManager.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/BaseGroupObject.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutGroup.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/GroupedShortcut.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedShortcutMenuItem.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ShortcutActionCommand.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Bindings/ShortcutActionBinding.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutManager.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Shortcuts/WPFShortcutProcessor.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedActionMenuItem.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/Helpers/ActionControlHelper.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/ContextMenus/TreeItemContextGenerator.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/NBT/NBTTagList.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2P4c90UJ8lg2M21tpLwxXTmFscg" />
@@ -223,7 +276,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.21609196" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -279,6 +332,9 @@
       <workItem from="1683264778216" duration="5041000" />
       <workItem from="1683270265691" duration="9051000" />
       <workItem from="1683285517802" duration="5642000" />
+      <workItem from="1683299443846" duration="4666000" />
+      <workItem from="1683322977349" duration="3672000" />
+      <workItem from="1683354572582" duration="14225000" />
     </task>
     <servers />
   </component>
@@ -442,6 +498,7 @@
       <configuration name="DotNetProject">
         <watch expression="empty" />
         <watch expression="viewport" />
+        <watch expression="this.e.ActionId" />
       </configuration>
     </watches-manager>
   </component>

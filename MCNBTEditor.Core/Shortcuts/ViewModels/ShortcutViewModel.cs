@@ -45,7 +45,7 @@ namespace MCNBTEditor.Core.Shortcuts.ViewModels {
             this.Path = reference.FullPath;
             this.Description = reference.Description;
             this.isGlobal = reference.IsGlobal;
-            this.inherit = reference.Inherit;
+            this.inherit = reference.IsInherited;
             this.InputStrokes = new ObservableCollection<InputStrokeViewModel>();
             this.AddKeyStrokeCommand = new RelayCommand(this.AddKeyStrokeAction);
             this.AddMouseStrokeCommand = new RelayCommand(this.AddMouseStrokeAction);

@@ -9,6 +9,8 @@
               xmlns:converters="clr-namespace:MCNBTEditor.Converters"
               xmlns:tap="clr-namespace:MCNBTEditor.Themes.Attached"
               xmlns:helpers="clr-namespace:MCNBTEditor.Controls.Helpers"
+              xmlns:acs="clr-namespace:MCNBTEditor.AdvancedContextService"
+              xmlns:contextual="clr-namespace:MCNBTEditor.ContextMenus"
               Title="Search for tags" Height="500" Width="500"
               d:DataContext="{d:DesignInstance f:FindViewModel}"
               CanCloseWithEscapeKey="True"
@@ -159,7 +161,8 @@
                          Visibility="{Binding IsSearchTermEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToCollapsed}}"
                          ScrollViewer.CanContentScroll="True"
                          VirtualizingStackPanel.IsVirtualizing="True"
-                         VirtualizingStackPanel.VirtualizationMode="Recycling">
+                         VirtualizingStackPanel.VirtualizationMode="Recycling"
+                         acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:FindResultContextGenerator.Instance}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem" BasedOn="{StaticResource {x:Type ListBoxItem}}">
                             <Setter Property="helpers:AttachedInteractivity.DoubleClickCommand" Value="{Binding NavigateToItemCommand}">

@@ -9,7 +9,7 @@ using MCNBTEditor.Core.Shortcuts.Managing;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Core.Shortcuts.Serialization {
-    public abstract class NewSerialiser {
+    public abstract class XMLShortcutSerialiser {
         #region Serialisation
 
         public XmlDocument Serialise(ShortcutGroup root) {
@@ -44,7 +44,7 @@ namespace MCNBTEditor.Core.Shortcuts.Serialization {
                     shortcutElement.SetAttribute("DisplayName", shortcut.DisplayName);
                 if (shortcut.IsGlobal)
                     shortcutElement.SetAttribute("IsGlobal", "true");
-                if (shortcut.Inherit)
+                if (shortcut.IsInherited)
                     shortcutElement.SetAttribute("Inherit", "true");
                 if (!string.IsNullOrWhiteSpace(shortcut.ActionId))
                     shortcutElement.SetAttribute("ActionId", shortcut.ActionId);
@@ -73,10 +73,10 @@ namespace MCNBTEditor.Core.Shortcuts.Serialization {
         }
 
         protected void SerialiseContext(XmlDocument doc, XmlElement shortcutElement, DataContext context) {
-            if (context.EntryMap != null && context.EntryMap.Count > 0) {
+            if (context.CustomDataMap != null && context.CustomDataMap.Count > 0) {
                 List<string> flags = new List<string>();
                 List<KeyValuePair<string, string>> entries = new List<KeyValuePair<string, string>>();
-                foreach (KeyValuePair<string, object> pair in context.EntryMap) {
+                foreach (KeyValuePair<string, object> pair in context.CustomDataMap) {
                     if (string.IsNullOrWhiteSpace(pair.Key)) {
                         continue;
                     }
@@ -221,7 +221,7 @@ namespace MCNBTEditor.Core.Shortcuts.Serialization {
                                         }
                                     }
 
-                                    if (context.EntryMap == null || context.EntryMap.Count < 1) {
+                                    if (context.CustomDataMap == null || context.CustomDataMap.Count < 1) {
                                         context = null;
                                     }
 

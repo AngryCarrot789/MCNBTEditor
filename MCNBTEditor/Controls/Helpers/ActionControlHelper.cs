@@ -4,6 +4,7 @@ using System.Windows.Controls.Primitives;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.Utils;
+using MCNBTEditor.Shortcuts;
 
 namespace MCNBTEditor.Controls.Helpers {
     public static class ActionControlHelper {
@@ -119,6 +120,9 @@ namespace MCNBTEditor.Controls.Helpers {
                 }
 
                 if (Window.GetWindow(element) is Window win) {
+                    object winDc = win.DataContext;
+                    if (winDc != null)
+                        context.AddContext(winDc);
                     context.AddContext(win);
                 }
 

@@ -9,11 +9,11 @@ namespace MCNBTEditor.Core.AdvancedContextService {
             set => this.RaisePropertyChanged(ref this.isChecked, value);
         }
 
-        public CommandCheckableContextEntry(string header, string inputGestureText, string toolTip, ICommand command, object commandParameter, IEnumerable<IContextEntry> children = null) : base(header, inputGestureText, toolTip, command, commandParameter, children) {
+        public CommandCheckableContextEntry(string header, string inputGestureText, string description, ICommand command, object commandParameter, IEnumerable<IContextEntry> children = null) : base(header, inputGestureText, description, command, commandParameter, children) {
 
         }
 
-        public CommandCheckableContextEntry(string header, string inputGestureText, string toolTip, ICommand command, IEnumerable<IContextEntry> children = null) : this(header, inputGestureText, toolTip, command, null, children) {
+        public CommandCheckableContextEntry(string header, string inputGestureText, string description, ICommand command, IEnumerable<IContextEntry> children = null) : this(header, inputGestureText, description, command, null, children) {
 
         }
 

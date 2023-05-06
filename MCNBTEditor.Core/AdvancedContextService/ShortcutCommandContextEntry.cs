@@ -4,6 +4,10 @@ using System.Windows.Input;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Core.AdvancedContextService {
+    /// <summary>
+    /// A class for mixing shortcuts and commands into one. This will pull context information
+    /// from the shortcut part, while allowing an ICommand to be executed
+    /// </summary>
     public class ShortcutCommandContextEntry : BaseContextEntry {
         public ObservableCollectionEx<string> ShortcutIds { get; }
 

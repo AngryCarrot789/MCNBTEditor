@@ -9,7 +9,7 @@ using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Views.NBT.Finding {
-    public class NBTMatchResult : IContextProvider {
+    public class NBTMatchResult {
         public BaseTagViewModel NBT { get; }
 
         public string NameSearchTerm { get; }
@@ -49,12 +49,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
 
             await IoC.TreeView.NavigateToItemAsync(this.NBT);
-        }
-
-        public void GetContext(List<IContextEntry> list) {
-            list.Add(new CommandContextEntry("Navigate", this.NavigateToItemCommand));
-            list.Add(SeparatorEntry.Instance);
-            this.NBT.GetContext(list);
         }
     }
 }

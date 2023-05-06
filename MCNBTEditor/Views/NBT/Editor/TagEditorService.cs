@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.Explorer.Dialog;
 using MCNBTEditor.Core.Explorer.NBT;
@@ -7,7 +8,7 @@ using MCNBTEditor.Utils;
 
 namespace MCNBTEditor.Views.NBT.Editor {
     public class TagEditorService : ITagEditorService {
-        public async Task<string> EditTagNameAsync(string title, string message, InputValidator nameValidator, string defaultName = "Tag Name Here") {
+        public async Task<string> EditNameAsync(string title, string message, InputValidator nameValidator, string defaultName = "Tag Name Here") {
             TagPrimitiveEditorViewModel vm = new TagPrimitiveEditorViewModel {
                 NameValidator = nameValidator,
                 CanEditName = true,
@@ -23,7 +24,7 @@ namespace MCNBTEditor.Views.NBT.Editor {
             return null;
         }
 
-        public async Task<string> EditPrimitiveValueAsync(string title, string message, NBTType type, string defaultValue = null) {
+        public async Task<string> EditValueAsync(string title, string message, NBTType type, string defaultValue = null) {
             TagPrimitiveEditorViewModel vm = new TagPrimitiveEditorViewModel {
                 CanEditValue = true,
                 Title = title,
@@ -39,7 +40,7 @@ namespace MCNBTEditor.Views.NBT.Editor {
             return null;
         }
 
-        public async Task<bool> EditPrimitiveTagAsync(string title, string message, TagPrimitiveViewModel tag) {
+        public async Task<bool> EditPrimitiveAsync(string title, string message, TagPrimitiveViewModel tag) {
             TagCompoundViewModel parent = tag.ParentItem as TagCompoundViewModel;
             TagPrimitiveEditorViewModel editor = new TagPrimitiveEditorViewModel {
                 CanEditValue = true,
@@ -61,6 +62,28 @@ namespace MCNBTEditor.Views.NBT.Editor {
             }
 
             return false;
+        }
+
+        public async Task<TagPrimitiveViewModel> EditPrimitiveExAsync(string title, string message, NBTType type, TagCompoundViewModel targetOwningTag) {
+            if (!type.IsPrimitive())
+                throw new ArgumentException($"Type is not primitive: {type}", nameof(type));
+
+            TagPrimitiveEditorViewModel editor = new TagPrimitiveEditorViewModel {
+                CanEditValue = true,
+                CanEditName = true,
+                Title = title,
+                Message = message,
+                TagType = type,
+                Value = "",
+                NameValidator = targetOwningTag.NameValidator,
+                Name = $"My {type}"
+            };
+
+            if (await this.ShowEditorAsync(editor)) {
+                return new TagPrimitiveViewModel(editor.Name, type) {Data = editor.Value};
+            }
+
+            return null;
         }
 
         public Task<bool> ShowEditorAsync(TagPrimitiveEditorViewModel model) {

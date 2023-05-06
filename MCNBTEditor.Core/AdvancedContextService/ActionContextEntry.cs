@@ -3,8 +3,7 @@ using MCNBTEditor.Core.Actions;
 
 namespace MCNBTEditor.Core.AdvancedContextService {
     /// <summary>
-    /// The default implementation for a context entry (aka menu item), which also supports modifying the header,
-    /// input gesture text, command and command parameter to reflect the UI menu item
+    /// The class for action-based context entries. The header, tooltip, etc, are automatically fetched
     /// </summary>
     public class ActionContextEntry : BaseContextEntry {
         private string actionId;
@@ -13,18 +12,24 @@ namespace MCNBTEditor.Core.AdvancedContextService {
             set => this.RaisePropertyChanged(ref this.actionId, value);
         }
 
-        private ActionManager manager = ActionManager.Instance;
-        public ActionManager Manager {
-            get => this.manager;
-            set => this.RaisePropertyChanged(ref this.manager, value ?? ActionManager.Instance);
-        }
-
-        public ActionContextEntry(object dataContext, string actionId, IEnumerable<IContextEntry> children = null) : base(dataContext, children) {
+        public ActionContextEntry(object dataContext, string actionId, string header, string description, IEnumerable<IContextEntry> children = null) : base(dataContext, header, description, children) {
             this.actionId = actionId;
         }
 
-        public ActionContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) : this(dataContext, null, children) {
+        public ActionContextEntry(object dataContext, string actionId, string header, IEnumerable<IContextEntry> children = null) : this(dataContext, actionId, header, null, children) {
 
+        }
+
+        public ActionContextEntry(object dataContext, string actionId, IEnumerable<IContextEntry> children = null) : this(dataContext, actionId, null, children) {
+
+        }
+
+        public ActionContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) : this(dataContext, null, null, children) {
+
+        }
+
+        public void SetActionKey(string key, object value) {
+            base.SetContextKey(key, value);
         }
     }
 }

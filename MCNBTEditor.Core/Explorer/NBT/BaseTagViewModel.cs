@@ -10,7 +10,7 @@ using MCNBTEditor.Core.Shortcuts;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Core.Explorer.NBT {
-    public abstract class BaseTagViewModel : BaseTreeItemViewModel, IHaveTreePath, IContextProvider, IShortcutToCommand, IRemoveable {
+    public abstract class BaseTagViewModel : BaseTreeItemViewModel, IHaveTreePath, IShortcutToCommand, IRemoveable {
         public string TreePathPartName {
             get {
                 if (this.ParentItem is TagListViewModel tagList) {
@@ -110,6 +110,25 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             }
         }
 
+        public static BaseTagViewModel CreateFrom(string name, NBTType type) {
+            switch (type) {
+                case NBTType.Compound:  return new TagCompoundViewModel(name);
+                case NBTType.List:      return new TagListViewModel(name);
+                case NBTType.LongArray: return new TagLongArrayViewModel(name);
+                case NBTType.IntArray:  return new TagIntArrayViewModel(name);
+                case NBTType.ByteArray: return new TagByteArrayViewModel(name);
+                case NBTType.Byte:      return new TagPrimitiveViewModel(name, NBTType.Byte);
+                case NBTType.Short:     return new TagPrimitiveViewModel(name, NBTType.Short);
+                case NBTType.Int:       return new TagPrimitiveViewModel(name, NBTType.Int);
+                case NBTType.Long:      return new TagPrimitiveViewModel(name, NBTType.Long);
+                case NBTType.Float:     return new TagPrimitiveViewModel(name, NBTType.Float);
+                case NBTType.Double:    return new TagPrimitiveViewModel(name, NBTType.Double);
+                case NBTType.String:    return new TagPrimitiveViewModel(name, NBTType.String);
+                case NBTType.End:       return new TagPrimitiveViewModel(name, NBTType.End);
+                default:                throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
         public List<BaseTagViewModel> GetParentTagChain() {
             BaseTagViewModel item = this;
             List<BaseTagViewModel> list = new List<BaseTagViewModel>();
@@ -125,7 +144,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                 return;
             }
 
-            string newName = await IoC.TagEditorService.EditTagNameAsync($"Rename NBTTag{this.TagType}", "Input a new name for this element", compound.CreateNameValidatorForEdit(this), this.Name ?? "");
+            string newName = await IoC.TagEditorService.EditNameAsync($"Rename NBTTag{this.TagType}", "Input a new name for this element", compound.CreateNameValidatorForEdit(this), this.Name ?? "");
             if (newName != null) {
                 this.Name = newName;
             }

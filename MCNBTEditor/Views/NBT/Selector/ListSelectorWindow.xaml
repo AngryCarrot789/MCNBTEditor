@@ -33,7 +33,6 @@
                                BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}"
                                BorderThickness="0,1,0,1"
                                SelectionMode="Single"
-                               acs:AdvancedContextMenu.IsMenuEnabled="False" 
                                Background="{DynamicResource AREghZyBrush.Tone2.Background.Static}">
                 
             </c:ExtendedListBox>

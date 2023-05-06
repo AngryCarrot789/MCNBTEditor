@@ -13,7 +13,7 @@ using MCNBTEditor.Core.Views.Dialogs.Message;
 namespace MCNBTEditor.Core.Explorer.Actions {
     [ActionRegistration("actions.nbt.paste.binary.sysclipboard")]
     public class PasteBinaryAction : AnAction {
-        public PasteBinaryAction() : base("Copy Value", "Copies the primitive tag's value to the system clipboard") {
+        public PasteBinaryAction() : base("Paste (Binary)", "Gets the system clipboard and deserialises it back into NBT data") {
 
         }
 

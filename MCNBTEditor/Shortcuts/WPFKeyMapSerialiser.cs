@@ -8,7 +8,7 @@ using MCNBTEditor.Core.Utils;
 using MCNBTEditor.Utils;
 
 namespace MCNBTEditor.Shortcuts {
-    public class WPFKeyMapSerialiser : NewSerialiser {
+    public class WPFKeyMapSerialiser : XMLShortcutSerialiser {
         public static readonly WPFKeyMapSerialiser Instance = new WPFKeyMapSerialiser();
 
         public WPFKeyMapSerialiser() {
@@ -147,7 +147,7 @@ namespace MCNBTEditor.Shortcuts {
         }
 
         public static string ModsToString(ModifierKeys keys) {
-            StringJoiner joiner = new StringJoiner(new StringBuilder(), "+");
+            StringJoiner joiner = new StringJoiner("+");
             if ((keys & ModifierKeys.Control) != 0) joiner.Append("ctrl");
             if ((keys & ModifierKeys.Alt) != 0)     joiner.Append("alt");
             if ((keys & ModifierKeys.Shift) != 0)   joiner.Append("shift");

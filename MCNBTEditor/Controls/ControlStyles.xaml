@@ -34,6 +34,9 @@
                          TagDouble="/MCNBTEditor;component/Resources/Icons/FileIcon-TagDouble64.png"
                          TagString="/MCNBTEditor;component/Resources/Icons/FileIcon-TagString.png"
                          TagList="/MCNBTEditor;component/Resources/Icons/icons8-bulleted-list-48.png"
+                         TagByteArray="/MCNBTEditor;component/Resources/Icons/TagArrayIcon.png"
+                         TagIntArray="/MCNBTEditor;component/Resources/Icons/TagArrayIcon.png"
+                         TagLongArray="/MCNBTEditor;component/Resources/Icons/TagArrayIcon.png"
                          TagCompoundClosed="/MCNBTEditor;component/Resources/Icons/icons8-closed-box-48.png"
                          TagCompoundOpenEmpty="/MCNBTEditor;component/Resources/Icons/icons8-empty-box-48.png"
                          TagCompoundOpenFull="/MCNBTEditor;component/Resources/Icons/icons8-open-box-48.png"/>
@@ -52,7 +55,7 @@
     </Style>
 
     <HierarchicalDataTemplate x:Key="TreeRegionFileTemplate" DataType="{x:Type regions:RegionFileViewModel}" ItemsSource="{Binding Children}">
-        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}" IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
             <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/FileIcon-Region.png"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -66,7 +69,7 @@
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="TreeTagCompoundTemplate" DataType="{x:Type nbt:TagCompoundViewModel}" ItemsSource="{Binding Children}">
-        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18">
             <Image x:Name="Img" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -99,7 +102,7 @@
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="TreeTagListTemplate" DataType="{x:Type nbt:TagListViewModel}" ItemsSource="{Binding Children}">
-        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18">
             <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/icons8-bulleted-list-48.png"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -113,7 +116,7 @@
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="TreeTagArrayTemplate" DataType="{x:Type nbt:BaseTagArrayViewModel}">
-        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18">
             <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -127,7 +130,7 @@
     </HierarchicalDataTemplate>
 
     <HierarchicalDataTemplate x:Key="TreeTagPrimitive" DataType="{x:Type nbt:TagPrimitiveViewModel}">
-        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18">
             <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -143,7 +146,7 @@
     <!-- List entries -->
 
     <DataTemplate x:Key="ListRegionFileTemplate" DataType="{x:Type regions:RegionFileViewModel}">
-        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}"
+        <StackPanel Background="Transparent" Orientation="Horizontal" Height="18"
                     IsEnabled="{Binding IsLoading, Converter={StaticResource InvertBoolConverter}}">
             <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/FileIcon-Region.png"/>
             <TextBlock Margin="4 0 0 0">
@@ -158,7 +161,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ListTagCompoundTemplate" DataType="{x:Type nbt:TagCompoundViewModel}">
-        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Orientation="Horizontal" Height="18">
             <Image x:Name="Img" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -180,7 +183,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ListTagListTemplate" DataType="{x:Type nbt:TagListViewModel}">
-        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Orientation="Horizontal" Height="18">
             <Image Width="16" Height="16" Source="/MCNBTEditor;component/Resources/Icons/icons8-bulleted-list-48.png"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -194,7 +197,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ListTagArrayTemplate" DataType="{x:Type nbt:BaseTagArrayViewModel}">
-        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Orientation="Horizontal" Height="18">
             <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>
@@ -208,7 +211,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ListTagPrimitive" DataType="{x:Type nbt:TagPrimitiveViewModel}">
-        <StackPanel Orientation="Horizontal" Height="18" acs:AdvancedContextMenu.ContextProvider="{Binding}">
+        <StackPanel Orientation="Horizontal" Height="18">
             <Image Source="{Binding TagType, Converter={StaticResource TagIconConverter}}" Width="16" Height="16"/>
             <TextBlock Margin="4 0 0 0">
                 <ap:TextBlockHelper.BindableInlines>

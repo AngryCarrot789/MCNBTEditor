@@ -4,15 +4,19 @@ using System.Linq;
 
 namespace MCNBTEditor.Core.Actions.Contexts {
     public class DataContext : IDataContext {
-        public Dictionary<string, object> EntryMap { get; set; }
+        public Dictionary<string, object> CustomDataMap { get; set; }
         public List<object> ContextList { get; }
 
         public IEnumerable<object> Context => this.ContextList;
 
-        public IEnumerable<(string, object)> CustomData => this.EntryMap != null ? this.EntryMap.Select(x => (x.Key, x.Value)) : Enumerable.Empty<(string, object)>();
+        public IEnumerable<(string, object)> CustomData => this.CustomDataMap != null ? this.CustomDataMap.Select(x => (x.Key, x.Value)) : Enumerable.Empty<(string, object)>();
 
         public DataContext() {
             this.ContextList = new List<object>();
+        }
+
+        public DataContext(object primaryContext) : this() {
+            this.AddContext(primaryContext);
         }
 
         public void AddContext(object context) {
@@ -45,7 +49,7 @@ namespace MCNBTEditor.Core.Actions.Contexts {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null");
             }
 
-            if (this.EntryMap != null && this.EntryMap.TryGetValue(key, out object data) && data is T t) {
+            if (this.CustomDataMap != null && this.CustomDataMap.TryGetValue(key, out object data) && data is T t) {
                 value = t;
                 return true;
             }
@@ -73,34 +77,30 @@ namespace MCNBTEditor.Core.Actions.Contexts {
             }
 
             if (value == null) {
-                this.EntryMap?.Remove(key);
+                this.CustomDataMap?.Remove(key);
             }
             else {
-                if (this.EntryMap == null) {
-                    this.EntryMap = new Dictionary<string, object>();
+                if (this.CustomDataMap == null) {
+                    this.CustomDataMap = new Dictionary<string, object>();
                 }
 
-                this.EntryMap[key] = value;
+                this.CustomDataMap[key] = value;
             }
         }
 
         public void Merge(IDataContext ctx) {
-            // ToList() makes this function faster... as long as ctx.Context has more than a few elements
-            // this.ContextList.AddRange(ctx.Context.Where(x => this.ContextList.IndexOf(x) == -1).ToList());
             foreach (object value in ctx.Context) {
-                if (this.ContextList.IndexOf(value) == -1) {
-                    this.ContextList.Add(value);
-                }
+                this.ContextList.Add(value);
             }
 
             if (ctx is DataContext ctxImpl) { // slight optimisation; no need to deconstruct KeyValuePairs into tuples
-                if (ctxImpl.EntryMap != null && ctxImpl.EntryMap.Count > 0) {
-                    if (this.EntryMap == null) {
-                        this.EntryMap = new Dictionary<string, object>(ctxImpl.EntryMap);
+                if (ctxImpl.CustomDataMap != null && ctxImpl.CustomDataMap.Count > 0) {
+                    if (this.CustomDataMap == null) {
+                        this.CustomDataMap = new Dictionary<string, object>(ctxImpl.CustomDataMap);
                     }
                     else {
-                        foreach (KeyValuePair<string, object> entry in ctxImpl.EntryMap) {
-                            this.EntryMap[entry.Key] = entry.Value;
+                        foreach (KeyValuePair<string, object> entry in ctxImpl.CustomDataMap) {
+                            this.CustomDataMap[entry.Key] = entry.Value;
                         }
                     }
                 }
@@ -111,7 +111,7 @@ namespace MCNBTEditor.Core.Actions.Contexts {
                     return;
                 }
 
-                Dictionary<string, object> map = this.EntryMap ?? (this.EntryMap = new Dictionary<string, object>());
+                Dictionary<string, object> map = this.CustomDataMap ?? (this.CustomDataMap = new Dictionary<string, object>());
                 foreach ((string a, object b) in list) {
                     map[a] = b;
                 }

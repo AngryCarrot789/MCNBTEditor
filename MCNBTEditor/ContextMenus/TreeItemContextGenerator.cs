@@ -1,13 +1,16 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using MCNBTEditor.AdvancedContextService;
 using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Explorer;
+using MCNBTEditor.Core.Explorer.Actions;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Explorer.Regions;
+using MCNBTEditor.Core.NBT;
 
-namespace MCNBTEditor.NBT.ContextMenus {
+namespace MCNBTEditor.ContextMenus {
     public class TreeItemContextGenerator : IWPFContextGenerator {
         public static TreeItemContextGenerator Instance { get; } = new TreeItemContextGenerator();
 
@@ -46,6 +49,10 @@ namespace MCNBTEditor.NBT.ContextMenus {
             }
             else {
                 if (tag is BaseTagCollectionViewModel tagCollection) {
+                    if (this.GenerateNewItems(list, tagCollection)) {
+                        list.Add(SeparatorEntry.Instance);
+                    }
+
                     list.Add(new CommandContextEntry("Sort by Name", tagCollection.SortByNameCommand));
                     list.Add(new CommandContextEntry("Sort by Type", tagCollection.SortByTypeCommand));
                     list.Add(new CommandContextEntry("Sort by Both (default)", tagCollection.SortByBothCommand));
@@ -96,6 +103,58 @@ namespace MCNBTEditor.NBT.ContextMenus {
             list.Add(SeparatorEntry.Instance);
             list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/RemoveFromParent", region.RemoveFromParentCommand));
             list.Add(new CommandContextEntry("Delete FILE", region.DeleteFileCommand));
+        }
+
+        public bool GenerateNewItems(List<IContextEntry> list, BaseTagCollectionViewModel tag) {
+            if (tag is TagCompoundViewModel || (tag is TagListViewModel tagList && tagList.ChildrenCount < 1)) {
+                List<IContextEntry> entries = new List<IContextEntry>();
+                this.GetAllNewItems(entries, tag);
+                list.Add(new GroupContextEntry(tag, "New...", "All possible types of tags to create", entries));
+                return true;
+            }
+            else if (tag is TagListViewModel tagList2) {
+                switch (tagList2.TargetType) {
+                    case NBTType.End: break;
+                    case NBTType.Byte:      list.Add(CreateAction("actions.nbt.newtag", "Add new Byte", "Create new NBTTagByte", NewTagAction.TypeKey, NBTType.Byte)); break;
+                    case NBTType.Short:     list.Add(CreateAction("actions.nbt.newtag", "Add new Short", "Create new NBTTagShort", NewTagAction.TypeKey, NBTType.Short)); break;
+                    case NBTType.Int:       list.Add(CreateAction("actions.nbt.newtag", "Add new Int", "Create new NBTTagInt", NewTagAction.TypeKey, NBTType.Int)); break;
+                    case NBTType.Long:      list.Add(CreateAction("actions.nbt.newtag", "Add new Long", "Create new NBTTagLong", NewTagAction.TypeKey, NBTType.Long)); break;
+                    case NBTType.Float:     list.Add(CreateAction("actions.nbt.newtag", "Add new Float", "Create new NBTTagFloat", NewTagAction.TypeKey, NBTType.Float)); break;
+                    case NBTType.Double:    list.Add(CreateAction("actions.nbt.newtag", "Add new Double", "Create new NBTTagDouble", NewTagAction.TypeKey, NBTType.Double)); break;
+                    case NBTType.String:    list.Add(CreateAction("actions.nbt.newtag", "Add new String", "Create new NBTTagString", NewTagAction.TypeKey, NBTType.String)); break;
+                    case NBTType.ByteArray: list.Add(CreateAction("actions.nbt.newtag", "Add new Byte Array", "Create new NBTTagByteArray", NewTagAction.TypeKey, NBTType.ByteArray)); break;
+                    case NBTType.IntArray:  list.Add(CreateAction("actions.nbt.newtag", "Add new Int Array", "Create new NBTTagIntArray", NewTagAction.TypeKey, NBTType.IntArray)); break;
+                    case NBTType.LongArray: list.Add(CreateAction("actions.nbt.newtag", "Add new Long Array", "Create new NBTTagLongArray", NewTagAction.TypeKey, NBTType.LongArray)); break;
+                    case NBTType.List:      list.Add(CreateAction("actions.nbt.newtag", "Add new List", "Create new NBTTagList", NewTagAction.TypeKey, NBTType.List)); break;
+                    case NBTType.Compound:  list.Add(CreateAction("actions.nbt.newtag", "Add new Compound", "Create new NBTTagCompound", NewTagAction.TypeKey, NBTType.Compound)); break;
+                    default: throw new ArgumentOutOfRangeException();
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public void GetAllNewItems(List<IContextEntry> list, BaseTagCollectionViewModel target) {
+            list.Add(CreateAction("actions.nbt.newtag", "Byte", "Create new NBTTagByte", NewTagAction.TypeKey, NBTType.Byte));
+            list.Add(CreateAction("actions.nbt.newtag", "Short", "Create new NBTTagShort", NewTagAction.TypeKey, NBTType.Short));
+            list.Add(CreateAction("actions.nbt.newtag", "Int", "Create new NBTTagInt", NewTagAction.TypeKey, NBTType.Int));
+            list.Add(CreateAction("actions.nbt.newtag", "Long", "Create new NBTTagLong", NewTagAction.TypeKey, NBTType.Long));
+            list.Add(CreateAction("actions.nbt.newtag", "Float", "Create new NBTTagFloat", NewTagAction.TypeKey, NBTType.Float));
+            list.Add(CreateAction("actions.nbt.newtag", "Double", "Create new NBTTagDouble", NewTagAction.TypeKey, NBTType.Double));
+            list.Add(CreateAction("actions.nbt.newtag", "String", "Create new NBTTagString", NewTagAction.TypeKey, NBTType.String));
+            list.Add(CreateAction("actions.nbt.newtag", "Byte Array", "Create new NBTTagByteArray", NewTagAction.TypeKey, NBTType.ByteArray));
+            list.Add(CreateAction("actions.nbt.newtag", "Int Array", "Create new NBTTagIntArray", NewTagAction.TypeKey, NBTType.IntArray));
+            list.Add(CreateAction("actions.nbt.newtag", "Long Array", "Create new NBTTagLongArray", NewTagAction.TypeKey, NBTType.LongArray));
+            list.Add(CreateAction("actions.nbt.newtag", "List", "Create new NBTTagList", NewTagAction.TypeKey, NBTType.List));
+            list.Add(CreateAction("actions.nbt.newtag", "Compound", "Create new NBTTagCompound", NewTagAction.TypeKey, NBTType.Compound));
+        }
+
+        private static ActionContextEntry CreateAction(string action, string header, string description, string key, object value) {
+            ActionContextEntry entry = new ActionContextEntry(null, action, header, description);
+            entry.SetActionKey(key, value);
+            return entry;
         }
     }
 }

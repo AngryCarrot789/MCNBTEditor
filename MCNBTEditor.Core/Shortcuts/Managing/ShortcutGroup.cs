@@ -132,7 +132,7 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
             foreach (GroupedShortcut shortcut in this.shortcuts) {
                 if (requireGlobal && !shortcut.IsGlobal) {
                     // I actually can't remember if this.FullPath should be used here or shortcut.Path
-                    if (shortcut.Inherit && IsFocusPathInScope(this.FullPath, focus, true)) {
+                    if (shortcut.IsInherited && IsFocusPathInScope(this.FullPath, focus, true)) {
                         if (!allowDuplicateInheritedShortcuts && list.Count > 0) {
                             IInputStroke primary = shortcut.Shortcut.PrimaryStroke; // saves potentially boxing Key/Mouse strokes multiple times
                             if (list.Find(x => x.Shortcut.IsPrimaryStroke(primary)) != null) {

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.Shortcuts.Inputs;
 using MCNBTEditor.Core.Shortcuts.Managing;
 using MCNBTEditor.Core.Utils;
@@ -25,7 +27,7 @@ namespace MCNBTEditor.Shortcuts {
             InputBindingCallbackMap = new Dictionary<string, Dictionary<string, List<ActivationHandlerReference>>>();
             KeyStroke.KeyCodeToStringProvider = (x) => ((Key) x).ToString();
             KeyStroke.ModifierToStringProvider = (x, s) => {
-                StringJoiner joiner = new StringJoiner(new StringBuilder(), s ? " + " : "+");
+                StringJoiner joiner = new StringJoiner(s ? " + " : "+");
                 ModifierKeys keys = (ModifierKeys) x;
                 if ((keys & ModifierKeys.Control) != 0) joiner.Append("Ctrl");
                 if ((keys & ModifierKeys.Alt) != 0)     joiner.Append("Alt");
@@ -96,31 +98,31 @@ namespace MCNBTEditor.Shortcuts {
         // Typically applied only to windows
         public static void OnIsGlobalShortcutFocusTargetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             if (d is UIElement element) {
-                if (!(ShortcutManager.Instance is WPFShortcutManager manager)) {
-                    Debug.WriteLine($"ShortcutManager Global Instance is not an instance of {nameof(WPFShortcutManager)}: {ShortcutManager.Instance?.GetType()}");
+                if (!(Instance is WPFShortcutManager manager)) {
+                    Debug.WriteLine($"ShortcutManager Global Instance is not an instance of {nameof(WPFShortcutManager)}: {Instance?.GetType()}");
                     return;
                 }
 
                 element.MouseDown -= RootMouseDownHandlerNonPreview;
-                element.PreviewMouseDown -= RootMouseDownHandlerPreview;
                 element.MouseUp -= RootMouseUpHandlerNonPreview;
-                element.PreviewMouseUp -= RootMouseUpHandlerPreview;
                 element.KeyDown -= RootKeyDownHandlerNonPreview;
-                element.PreviewKeyDown -= RootKeyDownHandlerPreview;
                 element.KeyUp -= RootKeyUpHandlerNonPreview;
-                element.PreviewKeyUp -= RootKeyUpHandlerPreview;
                 element.MouseWheel -= RootWheelHandlerNonPreview;
+                element.PreviewMouseDown -= RootMouseDownHandlerPreview;
+                element.PreviewMouseUp -= RootMouseUpHandlerPreview;
+                element.PreviewKeyDown -= RootKeyDownHandlerPreview;
+                element.PreviewKeyUp -= RootKeyUpHandlerPreview;
                 element.PreviewMouseWheel -= RootWheelHandlerPreview;
                 if (e.NewValue != e.OldValue && (bool) e.NewValue) {
                     element.MouseDown += RootMouseDownHandlerNonPreview;
-                    element.PreviewMouseDown += RootMouseDownHandlerPreview;
                     element.MouseUp += RootMouseUpHandlerNonPreview;
-                    element.PreviewMouseUp += RootMouseUpHandlerPreview;
                     element.KeyDown += RootKeyDownHandlerNonPreview;
-                    element.PreviewKeyDown += RootKeyDownHandlerPreview;
                     element.KeyUp += RootKeyUpHandlerNonPreview;
-                    element.PreviewKeyUp += RootKeyUpHandlerPreview;
                     element.MouseWheel += RootWheelHandlerNonPreview;
+                    element.PreviewMouseDown += RootMouseDownHandlerPreview;
+                    element.PreviewMouseUp += RootMouseUpHandlerPreview;
+                    element.PreviewKeyDown += RootKeyDownHandlerPreview;
+                    element.PreviewKeyUp += RootKeyUpHandlerPreview;
                     element.PreviewMouseWheel += RootWheelHandlerPreview;
                     element.SetValue(UIFocusGroup.ShortcutProcessorProperty, new WPFShortcutProcessor(manager));
                 }
@@ -176,6 +178,37 @@ namespace MCNBTEditor.Shortcuts {
 
         public void SetRoot(ShortcutGroup @group) {
             this.Root = @group;
+        }
+
+        public static void AccumulateContext(DataContext context, DependencyObject target, bool self, bool ic, bool window) {
+            if (self) {
+                if (target is FrameworkElement frameworkElement) {
+                    object dc = frameworkElement.DataContext;
+                    if (dc != null) {
+                        context.AddContext(dc);
+                    }
+                }
+
+                context.AddContext(target);
+            }
+
+            if (ic) {
+                ItemsControl itemsControl = ItemsControl.ItemsControlFromItemContainer(target);
+                if (itemsControl != null && itemsControl.IsItemItsOwnContainer(target)) {
+                    context.AddContext(itemsControl);
+                }
+            }
+
+            if (window) {
+                if (Window.GetWindow(target) is Window win) {
+                    object dc = win.DataContext;
+                    if (dc != null) {
+                        context.AddContext(dc);
+                    }
+
+                    context.AddContext(win);
+                }
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.AdvancedContextService;
 
 namespace MCNBTEditor.AdvancedContextService {
-    public interface IContextGenerator {
+    public interface IWPFContextGenerator {
         /// <summary>
         /// Generates context entries and adds them into the list parameter. Leading, repeated and trailing separators are automatically filtered out
         /// </summary>

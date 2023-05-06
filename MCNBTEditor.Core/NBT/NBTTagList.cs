@@ -22,16 +22,22 @@ namespace MCNBTEditor.Core.NBT {
             output.WriteByte(this.tagType);
             output.WriteInt(this.tags.Count);
             foreach (NBTBase tag in this.tags) {
-                tag.Write(output);
+                if ((byte) tag.TagType == this.tagType) {
+                    tag.Write(output);
+                }
             }
         }
 
         public override void Read(IDataInput input, int deep) {
             if (deep <= 512 || deep <= AlternativeMaxStackDepth) {
                 this.tagType = input.ReadByte();
+                if (this.tagType > 12) {
+                    throw new Exception($"Invalid tag type: {(int) this.tagType}");
+                }
+
                 int count = input.ReadInt();
                 if (this.tagType == 0 && count > 0) {
-                    throw new Exception("Missing tag type for tags. Expected " + count + " items of TagEnd");
+                    throw new Exception("Missing tag type for tags. Expected " + count + " items of TagEnd?");
                 }
 
                 this.tags.Clear();

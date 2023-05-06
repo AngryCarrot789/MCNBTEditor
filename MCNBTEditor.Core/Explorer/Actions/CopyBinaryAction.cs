@@ -26,7 +26,7 @@ namespace MCNBTEditor.Core.Explorer.Actions {
             TypeDialog.AddButton("Cancel", "cancel", false).ToolTip = "Cancel the copy action";
         }
 
-        public CopyBinaryAction() : base("Copy Value", "Copies the primitive tag's value to the system clipboard") {
+        public CopyBinaryAction() : base("Copy (Binary)", "Serialises the tag into binary and sets the system clipboard to that data") {
 
         }
 

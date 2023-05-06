@@ -18,10 +18,10 @@
                 <Shortcut Name="CopyValueShortcut" DisplayName="Copy Value" ActionId="actions.nbt.copy.primitive_value">
                     <KeyStroke Mods="CTRL+SHIFT" Key="C"/>
                 </Shortcut>
-                <Shortcut Name="CopyBinaryShortcut" DisplayName="Copy Binary" ActionId="actions.nbt.copy.binary.sysclipboard">
+                <Shortcut Name="CopyBinaryShortcut" DisplayName="Copy (Binary)" ActionId="actions.nbt.copy.binary.sysclipboard">
                     <KeyStroke Mods="CTRL" Key="C"/>
                 </Shortcut>
-                <Shortcut Name="PasteBinaryShortcut" DisplayName="Paste Binary" ActionId="actions.nbt.paste.binary.sysclipboard">
+                <Shortcut Name="PasteBinaryShortcut" DisplayName="Paste (Binary)" ActionId="actions.nbt.paste.binary.sysclipboard">
                     <KeyStroke Mods="CTRL" Key="V"/>
                 </Shortcut>
                 <Shortcut Name="RenameShortcut1" DisplayName="Rename" ActionId="actions.nbt.rename.tag">
@@ -48,6 +48,9 @@
             </Group>
             <Shortcut Name="FindShortcut" DisplayName="Find..." ActionId="actions.nbt.find" Inherit="true">
                 <KeyStroke Mods="CTRL" Key="F"/>
+            </Shortcut>
+            <Shortcut Name="OpenFile" DisplayName="Open File" Inherit="true" ActionId="actions.main-window.OpenFile">
+                <KeyStroke Mods="CTRL" Key="O"/>
             </Shortcut>
             <Shortcut Name="FindShortcutGlobal" DisplayName="Find everywhere..." ActionId="actions.nbt.find" Inherit="true">
                 <Shortcut.Context>

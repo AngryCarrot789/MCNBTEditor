@@ -80,6 +80,7 @@
     <Compile Include="AdvancedContextService\AdvancedMenuItem.cs" />
     <Compile Include="AdvancedContextService\AdvancedMenuItemStyleSelector.cs" />
     <Compile Include="AdvancedContextService\AdvancedShortcutMenuItem.cs" />
+    <Compile Include="AdvancedContextService\IWPFContextGenerator.cs" />
     <Compile Include="AdvancedContextService\Static\StaticBaseMenuItem.cs" />
     <Compile Include="AdvancedContextService\Static\StaticMenu.cs" />
     <Compile Include="AdvancedContextService\Static\StaticMenuElement.cs" />
@@ -98,6 +99,8 @@
     <Compile Include="ColourMap\WPF\Controls\ColourPickerWindow.xaml.cs">
       <DependentUpon>ColourPickerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ContextMenus\FindResultContextGenerator.cs" />
+    <Compile Include="ContextMenus\TreeItemContextGenerator.cs" />
     <Compile Include="Controls\ExtendedListBox.cs" />
     <Compile Include="Controls\ExtendedTreeView.cs" />
     <Compile Include="Controls\ExtendedTreeViewItem.cs" />
@@ -371,11 +374,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Resources\Icons\FileIcon.psd" />
+    <None Include="Resources\Icons\TagArrayIcon.psd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Icons\TagArrayIcon.png" />
+    <Resource Include="Resources\Icons\FileIcon-TagByteArray.png" />
+    <Resource Include="Resources\Icons\FileIcon-TagIntArray.png" />
+    <Resource Include="Resources\Icons\FileIcon-TagLongArray.png" />
     <Resource Include="AppIcon.ico" />
     <Content Include="Keymap.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

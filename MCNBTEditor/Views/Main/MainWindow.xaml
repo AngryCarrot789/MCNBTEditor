@@ -10,6 +10,8 @@
                   xmlns:fg="clr-namespace:MCNBTEditor.Shortcuts"
                   xmlns:h="clr-namespace:MCNBTEditor.Controls.Helpers"
                   xmlns:ui="clr-namespace:MCNBTEditor.NBT.UI"
+                  xmlns:acs="clr-namespace:MCNBTEditor.AdvancedContextService"
+                  xmlns:contextual="clr-namespace:MCNBTEditor.ContextMenus"
                   mc:Ignorable="d"
                   Title="MainWindow" Height="500" Width="800"
                   d:DataContext="{d:DesignInstance local:MainViewModel}"
@@ -28,7 +30,7 @@
         <Menu VerticalAlignment="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Create DAT Object" Command="{Binding CreateDatFileCommand, Mode=OneTime}"/>
-                <MenuItem Header="Open File" Command="{Binding OpenFileCommand, Mode=OneTime}"/>
+                <acs:AdvancedShortcutMenuItem Header="Open File" ShortcutId="Application/EditorView/OpenFile" Command="{Binding OpenFileCommand, Mode=OneTime}"/>
                 <Separator/>
                 <MenuItem IsCheckable="True" Header="Is Reading Compressed" IsChecked="{Binding IsCompressedDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading compressed and uncompressed NBT files (may be ignored for some files, e.g. region files)"/>
                 <MenuItem IsCheckable="True" Header="Is Reading Big-Endian" IsChecked="{Binding IsBigEndianDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Toggle this to switch between reading binary data in the big-endian and little-endian format. By default, minecraft saves using big-endian because that's what java's DataInputStream and DataOutputStream appear to use"/>
@@ -60,8 +62,9 @@
                                     VirtualizingStackPanel.IsVirtualizing="True"
                                     VirtualizingStackPanel.VirtualizationMode="Recycling" 
                                     Background="{DynamicResource AREghZyBrush.Tone3.Background.Static}" 
-                                    BorderBrush="{DynamicResource AREghZyBrush.Tone4.Border.Static}"/>
-                <TextBlock Text="Drop NBT files here, or press CTRL+N to create a new root tag, or CTRL+O to open a file"
+                                    BorderBrush="{DynamicResource AREghZyBrush.Tone4.Border.Static}"
+                                    acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:TreeItemContextGenerator.Instance}"/>
+                <TextBlock Text="Drop NBT files here, or CTRL+O to open a file"
                     TextAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Padding="10,0" TextWrapping="Wrap"
                     Visibility="{Binding Root.IsEmpty, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVisibleOrCollapsed}}">
@@ -83,7 +86,8 @@
                                        fg:UIFocusGroup.FocusGroupPath="Application/EditorView/NBTTag"
                                        ScrollViewer.CanContentScroll="True"
                                        VirtualizingStackPanel.IsVirtualizing="True"
-                                       VirtualizingStackPanel.VirtualizationMode="Recycling" Background="{DynamicResource AREghZyBrush.Tone2.Background.Static}">
+                                       VirtualizingStackPanel.VirtualizationMode="Recycling" Background="{DynamicResource AREghZyBrush.Tone2.Background.Static}"
+                                       acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:TreeItemContextGenerator.Instance}">
                         <ItemsControl.ItemsSource>
                             <MultiBinding Converter="{StaticResource FallbackConverter}">
                                 <Binding Path="CurrentFolderItem.Children" UpdateSourceTrigger="PropertyChanged"/>

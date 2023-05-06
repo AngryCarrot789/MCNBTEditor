@@ -7,7 +7,7 @@ using MCNBTEditor.Core.Explorer.NBT;
 namespace MCNBTEditor.Core.Explorer.Actions {
     [ActionRegistration("actions.nbt.rename.tag")]
     public class RenameTagAction : AnAction {
-        public RenameTagAction() : base("Copy Value", "Copies the primitive tag's value to the system clipboard") {
+        public RenameTagAction() : base("Rename", "Renames this tag") {
 
         }
 

@@ -6,6 +6,7 @@ using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Utils;
+using MCNBTEditor.Shortcuts;
 using MCNBTEditor.Shortcuts.Converters;
 
 namespace MCNBTEditor.AdvancedContextService {
@@ -115,19 +116,19 @@ namespace MCNBTEditor.AdvancedContextService {
 
             if (!this.hasExplicitHeader && (hasNoHeader || this.hasFirstLoad)) {
                 if (ActionIdToHeaderConverter.ActionIdToHeader(id, null, out string value)) {
-                    this.Header = value;
+                    this.SetCurrentValue(HeaderProperty, value);
                 }
             }
 
             if (!this.hasExplicitToolTip && (hasNoTooltip || this.hasFirstLoad)) {
                 if (ActionIdToToolTipConverter.ActionIdToToolTip(id, null, out string value)) {
-                    this.ToolTip = value;
+                    this.SetCurrentValue(ToolTipProperty, value);
                 }
             }
 
             if (!this.hasExplicitGesture && (hasNoGesture || this.hasFirstLoad)) {
                 if (ActionIdToGestureConverter.ActionIdToGesture(id, null, out string value)) {
-                    this.InputGestureText = value;
+                    this.SetCurrentValue(InputGestureTextProperty, value);
                 }
             }
 
@@ -173,7 +174,11 @@ namespace MCNBTEditor.AdvancedContextService {
             }
 
             if (Window.GetWindow(this) is Window win) {
-                AddObjectToDataContext(context, win);
+                if (win.DataContext is object dc1) {
+                    context.AddContext(dc1);
+                }
+
+                context.AddContext(win);
             }
 
             if (includeToggleState && this.IsCheckable) {
@@ -181,18 +186,6 @@ namespace MCNBTEditor.AdvancedContextService {
             }
 
             return context;
-        }
-
-        private static void AddObjectToDataContext(DataContext context, object obj) {
-            if (obj == null) {
-                return;
-            }
-
-            if (obj is FrameworkElement element && element.DataContext is object dc) {
-                context.AddContext(dc);
-            }
-
-            context.AddContext(obj);
         }
 
         protected bool GetCanExecute() {
@@ -247,7 +240,7 @@ namespace MCNBTEditor.AdvancedContextService {
 
             this.CanExecute = false;
             if (this.InvokeActionAfterBaseClick) {
-                // true by default, and ToggleActions would break if this was false
+                // true by default, and ToggleActions would behave weirdly if this was false
                 base.OnClick();
                 this.DispatchAction(id);
             }

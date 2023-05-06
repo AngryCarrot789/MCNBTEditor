@@ -10,16 +10,34 @@ namespace MCNBTEditor.Core.AdvancedContextService {
 
         public IDataContext Context => this.context;
 
+        private string header;
+        public string Header {
+            get => this.header;
+            set => this.RaisePropertyChanged(ref this.header, value);
+        }
+
+        private string description;
+        public string Description {
+            get => this.description;
+            set => this.RaisePropertyChanged(ref this.description, value);
+        }
+
         public IEnumerable<IContextEntry> Children { get; }
 
-        protected BaseContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) {
+        protected BaseContextEntry(object dataContext, string header, string description, IEnumerable<IContextEntry> children = null) {
             this.context = new DataContext();
             if (dataContext != null)
                 this.context.AddContext(dataContext);
             this.Children = children;
+            this.header = header;
+            this.description = description;
         }
 
-        protected BaseContextEntry(IEnumerable<IContextEntry> children = null) : this(null, children) {
+        protected BaseContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) : this(dataContext, null, null, children) {
+
+        }
+
+        protected BaseContextEntry(IEnumerable<IContextEntry> children = null) : this(null, null, null, children) {
 
         }
 

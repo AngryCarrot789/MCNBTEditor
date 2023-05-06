@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows;
+using MCNBTEditor.Core;
 using MCNBTEditor.Core.Utils;
+using MCNBTEditor.Shortcuts;
 using MCNBTEditor.Shortcuts.Converters;
 
 namespace MCNBTEditor.AdvancedContextService {
@@ -91,19 +94,19 @@ namespace MCNBTEditor.AdvancedContextService {
 
             if (!this.hasExplicitHeader && (hasNoHeader || this.hasFirstLoad)) {
                 if (ShortcutIdToHeaderConverter.ShortcutIdToHeader(firstId, firstId, out string value)) {
-                    this.Header = value;
+                    this.SetCurrentValue(HeaderProperty, value);
                 }
             }
 
             if (!this.hasExplicitToolTip && (hasNoTooltip || this.hasFirstLoad)) {
                 if (ShortcutIdToToolTipConverter.ShortcutIdToTooltip(firstId, null, out string value)) {
-                    this.ToolTip = value;
+                    this.SetCurrentValue(ToolTipProperty, value);
                 }
             }
 
             if (!this.hasExplicitGesture && (hasNoGesture || this.hasFirstLoad)) {
                 if (ShortcutIdToGestureConverter.ShortcutIdToGesture(ids, null, out string value)) {
-                    this.InputGestureText = value;
+                    this.SetCurrentValue(InputGestureTextProperty, value);
                 }
             }
 
@@ -113,8 +116,11 @@ namespace MCNBTEditor.AdvancedContextService {
         }
 
         protected bool IsValueUnset(DependencyProperty property) {
-            object value = this.GetValue(property);
-            return !(value is string str) || string.IsNullOrEmpty(str);
+            if (this.ReadLocalValue(property) == DependencyProperty.UnsetValue) {
+                return true;
+            }
+
+            return this.GetValue(property) == null; // allow empty bound strings
         }
     }
 }

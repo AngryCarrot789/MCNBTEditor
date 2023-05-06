@@ -52,7 +52,7 @@ namespace MCNBTEditor.Shortcuts.Converters {
         }
 
         public static string ModsToString(ModifierKeys keys) {
-            StringJoiner joiner = new StringJoiner(new StringBuilder(), "+");
+            StringJoiner joiner = new StringJoiner("+");
             if ((keys & ModifierKeys.Control) != 0) joiner.Append("Ctrl");
             if ((keys & ModifierKeys.Alt) != 0)     joiner.Append("Alt");
             if ((keys & ModifierKeys.Shift) != 0)   joiner.Append("Shift");

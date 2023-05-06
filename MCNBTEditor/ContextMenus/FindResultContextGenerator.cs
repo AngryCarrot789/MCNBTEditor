@@ -5,7 +5,7 @@ using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Views.NBT.Finding;
 
-namespace MCNBTEditor.NBT.ContextMenus {
+namespace MCNBTEditor.ContextMenus {
     public class FindResultContextGenerator : IWPFContextGenerator {
         public static FindResultContextGenerator Instance { get; } = new FindResultContextGenerator();
 

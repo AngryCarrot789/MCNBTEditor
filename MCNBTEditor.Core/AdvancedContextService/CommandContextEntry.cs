@@ -3,23 +3,13 @@ using System.Windows.Input;
 
 namespace MCNBTEditor.Core.AdvancedContextService {
     /// <summary>
-    /// The default implementation for a context entry (aka menu item), which also supports modifying the header,
-    /// input gesture text, command and command parameter to reflect the UI menu item
+    /// The default implementation for a context entry in which an ICommand is executed when clicked.
+    /// This supports a custom header, input gesture, tooltip and command parameter to reflect the UI menu item
     /// </summary>
     public class CommandContextEntry : BaseContextEntry {
-        private string header;
         private string inputGestureText;
-        private string toolTip;
         private ICommand command;
         private object commandParameter;
-
-        /// <summary>
-        /// The menu item's header, aka text
-        /// </summary>
-        public string Header {
-            get => this.header;
-            set => this.RaisePropertyChanged(ref this.header, value);
-        }
 
         /// <summary>
         /// The preview input gesture text, which is typically on the right side of a menu item (used for shortcuts)
@@ -27,14 +17,6 @@ namespace MCNBTEditor.Core.AdvancedContextService {
         public string InputGestureText {
             get => this.inputGestureText;
             set => this.RaisePropertyChanged(ref this.inputGestureText, value);
-        }
-
-        /// <summary>
-        /// A mouse over tooltip for this entry
-        /// </summary>
-        public string ToolTip {
-            get => this.toolTip;
-            set => this.RaisePropertyChanged(ref this.toolTip, value);
         }
 
         public ICommand Command {
@@ -47,15 +29,15 @@ namespace MCNBTEditor.Core.AdvancedContextService {
             set => this.RaisePropertyChanged(ref this.commandParameter, value);
         }
 
-        public CommandContextEntry(string header, string inputGestureText, string toolTip, ICommand command, object commandParameter, IEnumerable<IContextEntry> children = null) : base(null, children) {
-            this.header = header;
+        public CommandContextEntry(string header, string inputGestureText, string description, ICommand command, object commandParameter, IEnumerable<IContextEntry> children = null) : base(null, children) {
+            this.Header = header;
             this.inputGestureText = inputGestureText;
-            this.toolTip = toolTip;
+            this.Description = description;
             this.command = command;
             this.commandParameter = commandParameter;
         }
 
-        public CommandContextEntry(string header, string inputGestureText, string toolTip, ICommand command, IEnumerable<IContextEntry> children = null) : this(header, inputGestureText, toolTip, command, null, children) {
+        public CommandContextEntry(string header, string inputGestureText, string description, ICommand command, IEnumerable<IContextEntry> children = null) : this(header, inputGestureText, description, command, null, children) {
 
         }
 

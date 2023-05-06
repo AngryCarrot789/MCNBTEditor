@@ -91,7 +91,7 @@ namespace MCNBTEditor.Core.Shortcuts.Inputs {
         }
 
         public override string ToString() {
-            return this.ToString(true, true, true);
+            return this.ToString(true, true, false);
         }
 
         public string ToString(bool appendClickCount, bool appendDelta, bool useSpacers) {

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using MCNBTEditor.ColourMap;
 using MCNBTEditor.Core;
 using MCNBTEditor.Core.Actions;
+using MCNBTEditor.Core.Actions.Helpers;
 using MCNBTEditor.Core.Shortcuts.Managing;
 using MCNBTEditor.Core.Shortcuts.ViewModels;
 using MCNBTEditor.Services;
@@ -38,7 +39,7 @@ namespace MCNBTEditor {
             ShortcutManager.Instance =  new WPFShortcutManager();
             ActionManager.Instance = new ActionManager();
             ActionManager.SearchAndRegisterActions(ActionManager.Instance);
-            // ActionManager.Instance.Register("d", new ActionCommand());
+            ActionManager.Instance.Register("actions.main-window.OpenFile", new ShortcutActionCommand<MainViewModel>("Application/EditorView/OpenFile", nameof(MainViewModel.OpenFileCommand)));
 
             InputStrokeViewModel.KeyToReadableString = KeyStrokeStringConverter.ToStringFunction;
             InputStrokeViewModel.MouseToReadableString = MouseStrokeStringConverter.ToStringFunction;
