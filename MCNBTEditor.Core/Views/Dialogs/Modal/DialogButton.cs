@@ -1,8 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using MCNBTEditor.Core;
 
-namespace MCNBTEditor.Views.Modal {
+namespace MCNBTEditor.Core.Views.Dialogs.Modal {
     public class DialogButton : BaseViewModel {
         /// <summary>
         /// The dialog that owns this button
@@ -73,7 +72,7 @@ namespace MCNBTEditor.Views.Modal {
         }
 
         public void UpdateState() {
-            if (this.Dialog.IsAlwaysUseNextResultChecked || this.Dialog.IsAlwaysUseNextResultForCurrentQueueChecked) {
+            if (this.Dialog.IsAlwaysUseThisOptionChecked || this.Dialog.IsAlwaysUseThisOptionForCurrentQueueChecked) {
                 this.IsEnabled = this.CanUseAsAutomaticResult;
             }
             else {

@@ -36,11 +36,11 @@ namespace MCNBTEditor.Views.Main {
             get => this.seletedTreeItem;
             set {
                 this.RaisePropertyChanged(ref this.seletedTreeItem, value);
-                this.RaisePropertyChanged(nameof(this.SelectedFilePathable));
+                this.RaisePropertyChanged(nameof(this.SelectedFilePathItem));
             }
         }
 
-        public IHaveFilePath SelectedFilePathable => this.SelectedTreeItem?.RootParent as IHaveFilePath;
+        public IHaveFilePath SelectedFilePathItem => this.SelectedTreeItem?.GetRootParent(true) as IHaveFilePath;
 
         public IEnumerable<BaseTreeItemViewModel> SelectedFolderItems => this.ListView.SelectedItems;
 
@@ -76,8 +76,7 @@ namespace MCNBTEditor.Views.Main {
         public IExtendedList ListView { get; }
 
         public AsyncRelayCommand<BaseTreeItemViewModel> UseItemCommand { get; }
-
-        public ICommand ShowSettingsCommand { get; }
+        public RelayCommand ShowSettingsCommand { get; }
 
         public MainViewModel(IExtendedTree tree, IExtendedList list) {
             this.TreeView = tree;
@@ -205,7 +204,7 @@ namespace MCNBTEditor.Views.Main {
                                 added.Add(vm);
                                 this.Root.AddItem(vm); // add before loading to see the entry counter + the IsLoading property working ;)
                                 try {
-                                    await vm.RefreshAction();
+                                    await vm.Refresh();
                                     itemToRemove = itemThatAlreadyExists;
                                 }
                                 catch (Exception e) {
@@ -214,8 +213,7 @@ namespace MCNBTEditor.Views.Main {
                                         vm.Dispose();
                                     }
                                     catch { /* ignored */ }
-
-                                    await Dialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                                    await Dialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}", e.ToString());
                                 }
 
                                 break;
@@ -230,12 +228,12 @@ namespace MCNBTEditor.Views.Main {
                                 added.Add(file);
                                 this.Root.AddItem(file);
                                 try {
-                                    await file.RefreshAction();
+                                    await file.Refresh();
                                     itemToRemove = itemThatAlreadyExists;
                                 }
                                 catch (Exception e) {
                                     this.Root.RemoveItem(file);
-                                    await Dialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}: \n\n{e.Message}");
+                                    await Dialogs.OpenFileFailureDialog.ShowAsync("Failed to open file", $"Failed to open region file at {path}", e.ToString());
                                 }
 
                                 break;

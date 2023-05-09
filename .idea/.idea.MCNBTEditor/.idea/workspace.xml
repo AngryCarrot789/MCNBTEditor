@@ -8,114 +8,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c1ad021-2929-4b6a-a12d-6bf47aa88c52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/IContextGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ShortcutActionContextEntry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/ActionIds.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RefreshAction.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Context/FindResultContextGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IRefreshable.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/IconType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ContextMenus/WPFFindResultContextGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/ContextMenus/WPFTreeItemContextGenerator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/Helpers/TopmostFocus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/SelectionAdorder.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/IconTypeToImageSourceConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/UIGeneral/icons8-copy-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/UIGeneral/icons8-copy-to-clipboard-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/UIGeneral/icons8-edit-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/UIGeneral/icons8-paste-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/UIGeneral/icons8-sync-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ColourKeys.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Modal/BaseDialogExViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Modal/BaseDialogEx.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Modal/BaseDialogEx.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MCNBTEditor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MCNBTEditor/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionRegistrationAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionRegistrationAttribute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnActionEventArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/AnActionEventArgs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Contexts/DataContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ActionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ActionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/ShortcutActionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/Helpers/CommandAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/LambdaAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/LambdaAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ToggleAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Actions/ToggleAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionCheckableContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionCheckableContextEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionContextEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/BaseContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/BaseContextEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/IContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/IContextEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/SeparatorEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/SeparatorEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ShortcutCommandContextEntry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ShortcutCommandContextEntry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/AsyncRelayCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/AsyncRelayCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/BaseAsyncRelayCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/BaseAsyncRelayCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/BaseRelayCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/BaseRelayCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyBinaryAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyBinaryAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyNameAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyNameAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyValueAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/CopyValueAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/ExtendedListActionBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/MultiSelectionAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/NBTActionUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/NBTActionUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/NewTagAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/NewTagAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/PasteBinaryAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/PasteBinaryAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RemoveFromParentAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RemoveFromParentAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RenameTagAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/RenameTagAction.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/BaseTreeItemViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/BaseTreeItemViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IHaveTreePath.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IHaveTreePath.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IRemoveable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IRemoveable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/BaseTagViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagDataFileViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagDataFileViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagListViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagListViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagPrimitiveViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagPrimitiveViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Regions/RegionFileViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Regions/RegionFileViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/MCNBTEditor.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/MCNBTEditor.Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/RelayCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/RelayCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Serialization/XMLShortcutSerialiser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Serialization/XMLShortcutSerialiser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Usage/KeyboardShortcutUsage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Usage/KeyboardShortcutUsage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Usage/MouseKeyboardShortcutUsage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Usage/MouseKeyboardShortcutUsage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/ViewModels/ShortcutViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/ViewModels/ShortcutViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/BaseConfirmableDialogViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/BaseConfirmableDialogViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/BaseDialogViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/BaseDialogViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/DialogButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/DialogButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/DialogButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Modal/DialogButton.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Dialogs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Dialogs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/IMessageDialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/IMessageDialogService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/MessageDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/MessageDialog.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Windows/BaseWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Windows/BaseWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedActionMenuItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedActionMenuItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedContextMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedContextMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedMenuItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedMenuItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedMenuItemStyleSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedMenuItemStyleSelector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedShortcutMenuItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedShortcutMenuItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/IWPFContextGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/IWPFContextGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Messages.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/ContextMenus/FindResultContextGenerator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/ContextMenus/TreeItemContextGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Context/TreeItemContextGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedListBox.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedListBox.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeViewItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeViewItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Highlighting/HighlightableString.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Highlighting/HighlightableString.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Keymap.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/MCNBTEditor.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/MCNBTEditor.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/NBT/Actions/FindAction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/NBT/Actions/FindAction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/Credits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Resources/Icons/Credits.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/ActionIdToHeaderConverter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/Converters/ActionIdToToolTipConverter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/VisualTreeUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Shortcuts/VisualTreeUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/DeepDark.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/DeepDark.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/RedBlackTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/RedBlackTheme.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDark.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/SoftDark.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDarkAndBlue.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/ThemesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ThemesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Themes/VeryDarkTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/VeryDarkTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/BaseDialog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/BaseDialog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/BaseWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/BaseWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/BaseWindowCore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/WindowViewBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindNBTWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/NBT/BaseWindowEx.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,224 +50,214 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/28/a3c74228/DrawingContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/6DADD22E-0197-42CE-80AA-EFEF99855BE0/b2/8c3b640f/020007E8.il" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/7e/e728c3b6/Path.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/bc/e4c99fd3/RenderDataDrawingContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/91/d43a79a8/StreamingContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/67/f6bcd1f8/Keyboard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f9/5c7cb308/ScrollViewer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/34/9ab00ad2/BindingFlags.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/45/d6abe1fa/XamlWriter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A8D4FA59-5CED-467F-968E-9FF0B17C676B/ba/b3d32ba3/ICloneable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/41/0ccba01d/KeyboardDevice.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/8a/a2e37185/Thickness.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/31/e08a49e5/XmlBindingWorker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/fa/5c76560e/MemoryStream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/52/7d4b09b5/MenuItemRole.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DD4FF991-C77F-49E9-B596-E7E8C90C5B61/5A/LightCompiler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F0AE9D55-1C12-4547-946F-CF48550B8F5E/81/48c5f414/MarkupExtension.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/46/9a012980/DispatcherPriority.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/64/83548081/SystemParameters.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DD4FF991-C77F-49E9-B596-E7E8C90C5B61/24/LambdaExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/40/2dafd3b4/Color.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/46/aafde798/IDataBindEngineClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/fd/20192c68/Style.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/f3/85f2addf/WeakReference.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/bf/640e1d0a/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/6b/403edca1/HeaderedItemsControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/66/5a13b19b/CustomAttributeExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/35/be418ce5/Delegate.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/3b/f61d15af/InternalFlags.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1e/17855035/InternalFlags2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/82/5120b32d/Line.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/8b/1420be70/Nullable`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/de/7ea6e509/ItemCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/42/c3ba74ba/DispatcherTimer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c2/12a2e1e4/StaticResourceExtension.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/4d/8b61c1b4/Inline.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/66/404719a8/VirtualizingPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/4a/b78e7e9f/SizeToContent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/A/ObservableCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/4e/9c98c7e3/MILCMD_DRAW_IMAGE.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/59/048a7289/Border.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f0/491c2d28/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/89/e619da70/ExecutionContextSwitcher.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/72/c754e2e2/ContextMenuService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/33/0f4b0110/SolidColorBrush.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/09/8c12636c/Control.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/18/3ee22da6/ObservableCollection`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/b6/6a3540ac/RenderData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f4/510cb62e/CollectionView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/a1/916236ee/PopupAnimation.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/87/946664ef/Animatable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/9e/8c3314cf/BindingBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/b1/d9d6abc5/Environment.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/2c/47ba3b46/Directory.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/8b/eadf3e1c/Exception.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/20/939d4aa2/KeyboardNavigationMode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/a4/56a0b3b6/ListCollectionView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/14/c4b1ab98/Span.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/78/b6a0d52f/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/e9/556c4b19/Collection`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/2d/4437f45e/Boolean.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ec/b2e215ce/Hyperlink.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1d/2302b3f8/ContextMenuEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/e3/e29fb959/BitmapImage.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/b2/f7200661/ClrBindingWorker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/08/d78ecdab/ContentPresenter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/5b/69c61b9a/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/62/a6b07d92/List`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/a9/e516bf04/TextFormatterContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/c4/00ad929d/Type.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/d3/68d9db6b/IRecyclingItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/4d/961dc645/KeyboardNavigation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f8/4b582726/DispatcherObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/26/e03119b8/DispatcherOperation`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/88/a5deae6a/Uri.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/76/65a9d6f5/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/d0/f82ded7d/DynamicResourceExtension.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/55/e32550da/TextTreeText.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/20/04849270/GC.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1b/7bb23128/TextElement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/68/264d3cfd/ToolBar.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/bb/26908ba5/MediaPlayer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/37/78ea8e3f/Separator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/09/21e37876/Image.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/76/6c126ca9/Rect.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/1f/d4418f18/Type.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F9E5760D-F966-45C9-BA05-ADE12DE1A174/49/3d39be1e/DllImport.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/aa/93ea4ea0/DockPanel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/12/76e134f0/Activator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/a6/4d4842ac/IAsyncResult.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/97/9c54cd5c/SystemResourceKey.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/b0/3feae79b/IItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A8D4FA59-5CED-467F-968E-9FF0B17C676B/20B/DllImportAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/5f/56fc6e10/MILCMD.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/16/41a707e1/WindowStyle.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/8d/618d063f/VisualDrawingContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/cc/62034e0f/ListBoxItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/62/0bb9ebea/VisualTreeHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/84/385d8d78/MimeType.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/6d/5976b348/BindingExpressionBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/af/ecb1c361/TreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A8D4FA59-5CED-467F-968E-9FF0B17C676B/3CD/ReadOnlyCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/d7/30a2adb9/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/f0/8514a599/RequestCachePolicy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/d1/873c4a20/Environment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/C/ReadOnlyObservableCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/da/9b6b4287/BindingExpression.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/39/6da7f15e/ContextMenu.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/8f/be1721b0/TreeView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/77/5a1c011d/Grid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/4a/9c7d608d/TypeDelegator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/3a/95a685d2/BitmapFrame.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/a1/06a72101/BitmapInitialize.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ea/fabc7814/Panel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c1/005019c1/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/a1/d5912681/AsyncMethodBuilderCore.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/21/152ea2b7/CulturePreservingExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/81/34c7bfef/Regex.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/15/9ef7bbba/DUCE.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/41/4826496d/BitmapSource.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/2f/49969364/Button.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/76/a26cc761/DefinitionBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/e0/bed0be5b/WindowChromeWorker.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/cd/c405b75f/UIElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/90/a129d20f/ToolTipService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/77/c6f6ffc4/PropertyPath.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/6a/133758af/ShutdownMode.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f1/b34d8ce3/Binding.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/e0/6b92bb9e/PopupControlService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/fd/e7a1be5c/DefaultTraceListener.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F0AE9D55-1C12-4547-946F-CF48550B8F5E/6d/8aca6859/ValueSerializer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/54/f519f8ac/AdornerLayer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/3c/f3a34b76/StartupEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/47/676a94a5/ToggleButton.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/f3/b5bd30e0/TranslateTransform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/79/24cbaa56/RectangleGeometry.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/25/58e5c381/ISerializable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/34/feb715e3/RoutedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/fb/d225f3b8/CheckBox.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/0d/efc7b7c5/ValidationRule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/fb3f9fa8/ItemsControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/dc833c32/Selector.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/68/b3ee41fb/DependentList.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/05/7ce3bcc5/ArgumentOutOfRangeException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1b/c77db6a5/ListBox.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/da/e5eeed65/MenuItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/e5/2e92c4df/Visual.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/25/9e9c15c2/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/88/6dbc0e85/FrugalStructList`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/25/faf3297c/Window.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/30/ccf6f01f/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/3e/b5aa6901/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/5d/8883b4a5/Freezable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/bc/46d064b7/WindowChrome.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/83/df36c299/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/02/b7b76723/Pen.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/0a/e248eb9a/Application.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/39/b19acd41/UncommonField`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/5/PropertyChangedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/85/6516c030/MediaContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/aa/b21c7564/ResourceKey.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/dc/a08099a8/MethodImplOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/28/a3c74228/DrawingContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/56/10cddbec/TextLine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/bb/90edfeee/SimpleTextLine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/bc/e4c99fd3/RenderDataDrawingContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/91/d43a79a8/StreamingContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/67/f6bcd1f8/Keyboard.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/34/9ab00ad2/BindingFlags.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/45/d6abe1fa/XamlWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A8D4FA59-5CED-467F-968E-9FF0B17C676B/ba/b3d32ba3/ICloneable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/41/0ccba01d/KeyboardDevice.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/7a29af44/VirtualizingStackPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/8d/068d3fe3/SimpleRun.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DD4FF991-C77F-49E9-B596-E7E8C90C5B61/5A/LightCompiler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F0AE9D55-1C12-4547-946F-CF48550B8F5E/81/48c5f414/MarkupExtension.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/64/83548081/SystemParameters.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DD4FF991-C77F-49E9-B596-E7E8C90C5B61/24/LambdaExpression.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c9/52ed3749/TextBlock.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/35/be418ce5/Delegate.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/42/c3ba74ba/DispatcherTimer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/4d/8b61c1b4/Inline.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/66/404719a8/VirtualizingPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/4e/9c98c7e3/MILCMD_DRAW_IMAGE.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f0/491c2d28/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/89/e619da70/ExecutionContextSwitcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/72/c754e2e2/ContextMenuService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/33/0f4b0110/SolidColorBrush.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/b6/6a3540ac/RenderData.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/a1/916236ee/PopupAnimation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/87/946664ef/Animatable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/b1/d9d6abc5/Environment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/8b/eadf3e1c/Exception.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/20/939d4aa2/KeyboardNavigationMode.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/14/c4b1ab98/Span.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ec/b2e215ce/Hyperlink.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1d/2302b3f8/ContextMenuEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/e3/e29fb959/BitmapImage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/b2/f7200661/ClrBindingWorker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/5b/69c61b9a/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/a9/e516bf04/TextFormatterContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/c4/00ad929d/Type.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/d3/68d9db6b/IRecyclingItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/4d/961dc645/KeyboardNavigation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/26/e03119b8/DispatcherOperation`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/88/a5deae6a/Uri.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/76/65a9d6f5/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/55/e32550da/TextTreeText.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1b/7bb23128/TextElement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/68/264d3cfd/ToolBar.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F9E5760D-F966-45C9-BA05-ADE12DE1A174/49/3d39be1e/DllImport.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/aa/93ea4ea0/DockPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/12/76e134f0/Activator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/a6/4d4842ac/IAsyncResult.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/97/9c54cd5c/SystemResourceKey.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/b0/3feae79b/IItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/5f/56fc6e10/MILCMD.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/16/41a707e1/WindowStyle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/8d/618d063f/VisualDrawingContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/cc/62034e0f/ListBoxItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/84/385d8d78/MimeType.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/6d/5976b348/BindingExpressionBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/af/ecb1c361/TreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/d1/873c4a20/Environment.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/39/6da7f15e/ContextMenu.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/a1/06a72101/BitmapInitialize.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/a1/d5912681/AsyncMethodBuilderCore.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/81/34c7bfef/Regex.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/41/4826496d/BitmapSource.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/2f/49969364/Button.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/76/a26cc761/DefinitionBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/e0/bed0be5b/WindowChromeWorker.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/fd/e7a1be5c/DefaultTraceListener.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F0AE9D55-1C12-4547-946F-CF48550B8F5E/6d/8aca6859/ValueSerializer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/54/f519f8ac/AdornerLayer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/3c/f3a34b76/StartupEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/af/e44b10b0/CommandValueSerializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/f0/f14ec6f6/DispatcherOperation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/80/b5d73157/Adorner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/99fcc677/FrameworkContentElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MCNBTEditor.Core/Explorer/IRefreshable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/fb/d225f3b8/CheckBox.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/b8/3ebaa908/ContentElement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/0d/efc7b7c5/ValidationRule.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/75/5521ba67/TextFormatter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MCNBTEditor.Core/Actions/ActionCommand.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/c3/fb3f9fa8/ItemsControl.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/03/39cf4324/BindingWorker.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Context/TreeItemContextGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/86/dcb35691/ResourceDictionaryCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/dc833c32/Selector.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/68/b3ee41fb/DependentList.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/15/95c30116/FocusManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/09/2ca3d5f3/ButtonBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f7/0cd54700/DataGrid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/2d/30947b22/DependencyObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/05/7ce3bcc5/ArgumentOutOfRangeException.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1b/c77db6a5/ListBox.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/3e/851fcd38/FrameworkElement.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/da/e5eeed65/MenuItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ea/4d15c836/TextSearch.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/c6/4db13c3e/DependencyProperty.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/e5/2e92c4df/Visual.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/e6/2f10533b/EffectiveValueEntry.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/25/9e9c15c2/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/8c99457b/ItemContainerGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/88/6dbc0e85/FrugalStructList`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/7d/054e33e8/Task.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/1a/6490dcf3/DataBindOperation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/90/bdc0cc9b/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/ba/a7dd9101/GeneratorPosition.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/c7/78349205/HwndSource.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/25/faf3297c/Window.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/908F8BCA-7F36-4990-9AF9-C6824762362B/30/ccf6f01f/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/3e/b5aa6901/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/94/c8e5ce9d/ScrollContentPresenter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/52/adb5396c/DataBindEngine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/58/602d4ca6/ArgumentException.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/5d/8883b4a5/Freezable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/bc/46d064b7/WindowChrome.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/0f/9ebf0c39/DictionaryEntry.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAB4CD49-4110-4705-846E-3433671ECD50/83/df36c299/Task`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/02/b7b76723/Pen.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5980A88A-E531-4D4B-9811-FCDE1734D236/04/58d08659/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/f1/27d34994/ContextLayoutManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7C7D3BFE-60ED-41ED-9303-6401615F9456/39/b19acd41/UncommonField`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D56D80E8-DBD1-41E5-A055-5C18C399F3D0/5/PropertyChangedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/85/6516c030/MediaContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/8e/5d58bf90/HT.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/43/a04582e5/MenuBase.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/aa/b21c7564/ResourceKey.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/4a/62d473c2/ResourceDictionary.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/F41477F4-0011-4A51-8264-35E5BCA60F0E/C/LinkedList.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6DADD22E-0197-42CE-80AA-EFEF99855BE0/dc/a08099a8/MethodImplOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34EC56FC-58EC-4B35-97EF-877C03BD11D1/ae/bf8872bc/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A00F19C6-EECF-4367-BCAB-09A5642DB9E5/95/d25b781c/Brush.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B44A5760-2E32-413E-B387-699EAC931482/f1/bdb8ff81/PropertyPathWorker.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/MCNBTEditor/ContextMenus/FindResultContextGenerator.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Context/WPFTreeItemContextGenerator.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/ContextMenus/TreeItemContextGenerator.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/ContextMenus/WPFTreeItemContextGenerator.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/IWPFContextGenerator.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Context/FindResultContextGenerator.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Highlighting/HighlightableString.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/NBTMatchResult.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/BaseDialogViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Windows/BaseWindowViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/BaseConfirmableDialogViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Finding/FindViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagPrimitiveViewModel.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagEditorService.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/NBT/Editor/TagPrimitiveEditorWindow.xaml.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/SoftDark.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/VeryDarkTheme.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/RedBlackTheme.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/DeepDark.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Resources/IconTypeToUriConverter.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedContextMenu.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/ContextStyles.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor.Core/IconType.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/IconEntry.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Resources/IconTypeToImageSourceConverter.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedTreeViewItem.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ListSelectionRectangle.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Controls/SelectionAdorder.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ControlStyles.xaml" />
       <option value="$PROJECT_DIR$/MCNBTEditor/Controls/ExtendedListBox.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionCheckableContextEntry.cs" />
@@ -360,7 +266,6 @@
       <option value="$PROJECT_DIR$/MCNBTEditor/AdvancedContextService/AdvancedActionMenuItem.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ShortcutActionContextEntry.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor/ContextMenus/WPFFindResultContextGenerator.cs" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Actions/ActionIds.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/AdvancedContextService/ActionContextEntry.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Context/TreeItemContextGenerator.cs" />
@@ -373,8 +278,37 @@
       <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ColourDictionaries/SoftDark.xaml" />
       <option value="$PROJECT_DIR$/MCNBTEditor/Themes/Controls.xaml" />
       <option value="$PROJECT_DIR$/MCNBTEditor/Themes/ControlColours.xaml" />
-      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" />
       <option value="$PROJECT_DIR$/MCNBTEditor.Core/Shortcuts/Managing/ShortcutProcessor.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/NBT/Actions/FindAction.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/BaseTreeItemViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/WindowEx.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/ValidatableWindowEx.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/ValidationHandlingWindowEx.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/BaseView.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/WindowViewBase.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/BaseWindow.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/BaseDialog.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/App.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/BaseDialogEx.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/DialogStyles.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/BaseDialogEx.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/Dialogs.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/DialogButton.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/MessageDialog.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/BaseDialogExViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/Regions/RegionFileViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Explorer/NBT/TagDataFileViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Main/MainViewModel.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Modal/DialogButton.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/IMessageDialogService.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageDialogService.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Modal/BaseDialogEx.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor/Views/Message/MessageWindow.xaml" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/Dialogs.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Message/MessageDialog.cs" />
+      <option value="$PROJECT_DIR$/MCNBTEditor.Core/Views/Dialogs/Modal/BaseDialogExViewModel.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="2P4c90UJ8lg2M21tpLwxXTmFscg" />
@@ -472,7 +406,8 @@
       <workItem from="1683570786991" duration="12615000" />
       <workItem from="1683585844051" duration="1311000" />
       <workItem from="1683604862186" duration="2918000" />
-      <workItem from="1683609919496" duration="11390000" />
+      <workItem from="1683609919496" duration="11510000" />
+      <workItem from="1683627372088" duration="9344000" />
     </task>
     <servers />
   </component>

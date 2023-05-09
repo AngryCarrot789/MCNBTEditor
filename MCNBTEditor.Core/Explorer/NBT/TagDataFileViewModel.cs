@@ -79,7 +79,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                     compound = CompressedStreamTools.Read(this.FilePath, out _, this.IsCompressed, this.IsBigEndian);
                 }
                 catch (Exception e) {
-                    await IoC.MessageDialogs.ShowMessageAsync("Failed to refresh NBT", $"Failed to read NBT file at:\n\n{this.FilePath}\n\n{e.Message}");
+                    await IoC.MessageDialogs.ShowMessageExAsync("Failed to refresh NBT", $"Failed to read NBT file at:\n{this.FilePath}", e.ToString());
                     return;
                 }
 
@@ -91,6 +91,32 @@ namespace MCNBTEditor.Core.Explorer.NBT {
                     await IoC.MessageDialogs.ShowMessageAsync("Failed to parse NBT", $"Failed to parse NBT into UI elements for file at:\n\n{this.FilePath}\n\n{e.Message}");
                 }
             }
+        }
+
+        public async Task Refresh() {
+            if (File.Exists(this.FilePath)) {
+                NBTTagCompound compound;
+                try {
+                    compound = CompressedStreamTools.Read(this.FilePath, out _, this.IsCompressed, this.IsBigEndian);
+                }
+                catch (Exception e) {
+                    throw new Exception("Failed to read NBT from file", e);
+                }
+
+                try {
+                    this.Clear();
+                    this.AddRange(compound.map.Select(x => CreateFrom(x.Key, x.Value)));
+                }
+                catch (Exception e) {
+                    throw new Exception("Failed to parse NBT data", e);
+                }
+            }
+        }
+
+        public void LoadFromFile(string filePath) {
+            NBTTagCompound compound = CompressedStreamTools.Read(filePath, out _, this.IsCompressed, this.IsBigEndian);
+            this.Clear();
+            this.AddRange(compound.map.Select(x => CreateFrom(x.Key, x.Value)));
         }
 
         public async Task DeleteFileAction() {
@@ -171,7 +197,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
         public async Task SaveToFileAction(bool forceSaveAs) {
             string path;
             if (forceSaveAs || string.IsNullOrEmpty(this.FilePath) || (!this.hasFileSavedOnce && !File.Exists(this.FilePath))) {
-                DialogResult<string> result = IoC.FilePicker.ShowSaveFileDialog(Filters.NBTCommonTypesWithAllFiles, titleBar: "Select a save location for the NBT file");
+                DialogResult<string> result = IoC.FilePicker.ShowSaveFileDialog(Filters.NBTCommonTypesWithAllFiles, this.Name ?? "new tag.dat", "Select a save location for the NBT file");
                 if (!result.IsSuccess || string.IsNullOrEmpty(result.Value)) {
                     return;
                 }

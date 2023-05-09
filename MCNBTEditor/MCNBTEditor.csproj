@@ -195,7 +195,10 @@
     <Compile Include="Utils\TextPointerUtils.cs" />
     <Compile Include="Views\BaseDialog.cs" />
     <Compile Include="Views\BaseWindow.cs" />
-    <Compile Include="Views\BaseWindowCore.cs" />
+    <Compile Include="Views\Modal\BaseDialogEx.xaml.cs">
+      <DependentUpon>BaseDialogEx.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowViewBase.cs" />
     <Compile Include="Views\FilePicking\FilePickDialogService.cs" />
     <Compile Include="Views\FilePicking\FolderPicker.cs" />
     <Compile Include="Views\Main\MainViewModel.cs" />
@@ -226,7 +229,6 @@
       <DependentUpon>ListSelectorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NBT\Selector\SelectorService.cs" />
-    <Compile Include="Views\NBT\BaseWindowEx.cs" />
     <Compile Include="Views\UserInputs\DoubleUserInputWindow.xaml.cs">
       <DependentUpon>DoubleUserInputWindow.xaml</DependentUpon>
     </Compile>
@@ -321,6 +323,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Message\MessageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Modal\BaseDialogEx.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -36,7 +36,7 @@ namespace MCNBTEditor.NBT.Actions {
 
             bool isRoot = e.DataContext.HasFlag(GlobalFindKey);
             if (isRoot) {
-                root = root.RootParent;
+                root = root.GetRootParent(false);
             }
 
             FindNBTWindow window = new FindNBTWindow(root);

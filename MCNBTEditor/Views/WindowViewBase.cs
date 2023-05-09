@@ -11,14 +11,14 @@ namespace MCNBTEditor.Views {
     /// A base <see cref="Window"/> implementation which implements <see cref="IViewBase"/> and <see cref="IHasErrorInfo"/> to
     /// extract <see cref="ValidationError"/> instances and update the view model in the event of errors
     /// </summary>
-    public class BaseView : WindowEx, IViewBase, IHasErrorInfo {
+    public class WindowViewBase : WindowEx, IViewBase, IHasErrorInfo {
         private readonly EventHandler<ValidationErrorEventArgs> errorEventHandler;
 
         public Dictionary<string, object> Errors { get; }
 
         public bool HasAnyErrors => this.Errors.Count > 0;
 
-        public BaseView() {
+        public WindowViewBase() {
             this.Errors = new Dictionary<string, object>();
             this.errorEventHandler = this.OnError;
             this.Loaded += this.OnLoaded;

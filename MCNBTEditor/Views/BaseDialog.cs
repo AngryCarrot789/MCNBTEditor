@@ -6,10 +6,10 @@ using MCNBTEditor.Utils;
 using MCNBTEditor.Views.FilePicking;
 
 namespace MCNBTEditor.Views {
-    public class BaseDialog : BaseWindowCore, IDialog {
+    public class BaseDialog : WindowViewBase, IDialog {
         public BaseDialog() {
             Window owner = FolderPicker.GetCurrentActiveWindow();
-            if (owner != this) {
+            if (owner != this && owner.Owner != this) {
                 this.Owner = owner;
             }
 
@@ -17,19 +17,19 @@ namespace MCNBTEditor.Views {
         }
 
         protected override void OnKeyDown(KeyEventArgs e) {
+            base.OnKeyDown(e);
             if (!e.Handled) {
                 switch (e.Key) {
                     case Key.Escape:
                         this.DialogResult = false;
                         break;
-                    default: return;
+                    default:
+                        return;
                 }
 
                 e.Handled = true;
                 this.Close();
             }
-
-            base.OnKeyDown(e);
         }
 
         public void CloseDialog(bool result) {
@@ -38,7 +38,8 @@ namespace MCNBTEditor.Views {
         }
 
         public Task CloseDialogAsync(bool result) {
-            return DispatcherUtils.InvokeAsync(this.Dispatcher, () => this.CloseDialog(result));
+            this.DialogResult = result;
+            return this.CloseAsync();
         }
     }
 }

@@ -7,6 +7,7 @@ using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Views.Dialogs.Message;
+using MCNBTEditor.Core.Views.Dialogs.Modal;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
     public class CopyBinaryAction : MultiSelectionAction {

@@ -16,9 +16,9 @@ namespace MCNBTEditor.Views.Modal {
     /// <summary>
     /// Interaction logic for BaseDialogEx.xaml
     /// </summary>
-    public partial class BaseDialogEx : Window {
+    public partial class BaseDialogEx : BaseDialog {
         public BaseDialogEx() {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -55,28 +55,28 @@ namespace MCNBTEditor {
             }));
             ActionManager.Instance.Register("actions.main-window.OpenFile", new CommandAction<MainViewModel>(t => t.OpenFileCommand));
             ActionManager.Instance.Register("actions.item.SaveFile", new CommandAction<BaseTreeItemViewModel>(t => {
-                switch (t) {
+                switch (t.GetRootParent()) {
                     case TagDataFileViewModel dat: return dat.SaveFileCommand;
                     case RegionFileViewModel rg: return rg.SaveFileCommand;
                     default: return null;
                 }
             }));
             ActionManager.Instance.Register("actions.item.SaveFileAs", new CommandAction<BaseTreeItemViewModel>(t => {
-                switch (t) {
+                switch (t.GetRootParent()) {
                     case TagDataFileViewModel dat: return dat.SaveFileAsCommand;
                     case RegionFileViewModel rg: return rg.SaveFileAsCommand;
                     default: return null;
                 }
             }));
             ActionManager.Instance.Register("actions.item.OpenInExplorer", new CommandAction<BaseTreeItemViewModel>(t => {
-                switch (t) {
+                switch (t.GetRootParent()) {
                     case TagDataFileViewModel dat: return dat.OpenInExplorerCommand;
                     case RegionFileViewModel rg: return rg.OpenInExplorerCommand;
                     default: return null;
                 }
             }));
             ActionManager.Instance.Register("actions.item.CopyFilePath", new CommandAction<BaseTreeItemViewModel>(t => {
-                switch (t) {
+                switch (t.GetRootParent()) {
                     case TagDataFileViewModel dat: return dat.CopyFilePathToClipboardCommand;
                     case RegionFileViewModel rg: return rg.CopyFilePathToClipboardCommand;
                     default: return null;

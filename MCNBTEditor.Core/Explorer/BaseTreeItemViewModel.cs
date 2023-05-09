@@ -46,18 +46,6 @@ namespace MCNBTEditor.Core.Explorer {
         }
 
         /// <summary>
-        /// Calculates the root parent of this item. If the current instance is already root, then the current instance is returned
-        /// </summary>
-        public BaseTreeItemViewModel RootParent {
-            get {
-                BaseTreeItemViewModel root = this;
-                for (BaseTreeItemViewModel next = this.ParentItem; next != null; next = next.ParentItem)
-                    root = next;
-                return root;
-            }
-        }
-
-        /// <summary>
         /// Whether this item is empty, as in, has no children. This will not throw even if <see cref="CanHoldChildren"/> is false
         /// </summary>
         public bool IsEmpty => this.children.Count < 1;
@@ -165,6 +153,41 @@ namespace MCNBTEditor.Core.Explorer {
             }
 
             return def;
+        }
+
+        /// <summary>
+        /// Gets this item's absolute root item. When trying to exclude the absolute root: if this
+        /// item is already the absolute root, then the current instance is returned. If this item's parent
+        /// is absolute root, then the current instance is returned again. Otherwise, calculate the 2nd to last root item
+        /// </summary>
+        /// <param name="tryExcludeAbsoluteRoot">
+        /// Whether to try and exclude the absolute root item or not (that is, the item that has no parent)
+        /// </param>
+        /// <returns></returns>
+        public BaseTreeItemViewModel GetRootParent(bool tryExcludeAbsoluteRoot = true) {
+            return GetRootParent(this, tryExcludeAbsoluteRoot);
+        }
+
+        public static BaseTreeItemViewModel GetRootParent(BaseTreeItemViewModel root, bool tryExcludeAbsoluteRoot = true) {
+            if (root == null)
+                return null;
+
+            if (tryExcludeAbsoluteRoot) {
+                BaseTreeItemViewModel last = root;
+                for (BaseTreeItemViewModel parent = root.ParentItem; parent != null; parent = parent.ParentItem) {
+                    last = root;
+                    root = parent;
+                }
+
+                return last;
+            }
+            else {
+                for (BaseTreeItemViewModel next = root.ParentItem; next != null; next = next.ParentItem) {
+                    root = next;
+                }
+
+                return root;
+            }
         }
 
         protected void ValidateCanHoldChildren() {

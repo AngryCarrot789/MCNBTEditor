@@ -1,30 +1,25 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using MCNBTEditor.Core;
 using MCNBTEditor.Core.Utils;
-using MCNBTEditor.Core.Views.Dialogs;
-using MCNBTEditor.Views.Message;
-
-namespace MCNBTEditor.Views.Modal {
+namespace MCNBTEditor.Core.Views.Dialogs.Modal {
     /// <summary>
     /// A helper view model for managing message dialogs that can have multiple buttons
     /// </summary>
-    public class BaseDialogExViewModel : BaseViewModel {
-        private string titlebar;
-        private string header;
-        private string message;
-        private bool showAlwaysUseNextResultOption;
-        private bool isAlwaysUseNextResultChecked;
-        private bool canShowAlwaysUseNextResultForCurrentQueueOption;
-        private bool isAlwaysUseNextResultForCurrentQueueChecked;
-        private string automaticResult;
-        private string defaultResult;
-        private string primaryResult;
-        private readonly ObservableCollectionEx<DialogButton> buttons;
+    public abstract class BaseDialogExViewModel : BaseViewModel {
+        protected string titlebar;
+        protected string header;
+        protected string message;
+        protected bool showAlwaysUseNextResultOption;
+        protected bool isAlwaysUseThisOptionChecked;
+        protected bool canShowAlwaysUseNextResultForCurrentQueueOption;
+        protected bool isAlwaysUseThisOptionForCurrentQueueChecked;
+        protected string automaticResult;
+        protected string defaultResult;
+        protected string primaryResult;
+        protected readonly ObservableCollectionEx<DialogButton> buttons;
 
         /// <summary>
         /// Whether or not this dialog's core behaviour is locked or not. The message and caption can still be modified, but pretty
@@ -34,7 +29,7 @@ namespace MCNBTEditor.Views.Modal {
         /// be cloned (via <see cref="Clone"/>) and then furtuer modified
         /// </para>
         /// </summary>
-        public bool IsReadOnly { get; private set; }
+        public bool IsReadOnly { get; protected set; }
 
         public IDialog Dialog { get; set; }
 
@@ -61,8 +56,8 @@ namespace MCNBTEditor.Views.Modal {
             set {
                 this.EnsureNotReadOnly();
                 this.RaisePropertyChanged(ref this.showAlwaysUseNextResultOption, value);
-                if (!value && this.IsAlwaysUseNextResultChecked) {
-                    this.IsAlwaysUseNextResultChecked = false;
+                if (!value && this.IsAlwaysUseThisOptionChecked) {
+                    this.IsAlwaysUseThisOptionChecked = false;
                 }
             }
         }
@@ -71,13 +66,14 @@ namespace MCNBTEditor.Views.Modal {
         /// Whether or not the GUI option to use the next outcome as an automatic result is checked
         /// </summary>
         [Bindable(true)]
-        public bool IsAlwaysUseNextResultChecked {
-            get => this.isAlwaysUseNextResultChecked;
+        public bool IsAlwaysUseThisOptionChecked {
+            get => this.isAlwaysUseThisOptionChecked;
             set {
-                this.isAlwaysUseNextResultChecked = value && this.ShowAlwaysUseNextResultOption;
+                this.EnsureNotReadOnly();
+                this.isAlwaysUseThisOptionChecked = value && this.ShowAlwaysUseNextResultOption;
                 this.RaisePropertyChanged();
-                if (!this.isAlwaysUseNextResultChecked && this.IsAlwaysUseNextResultForCurrentQueueChecked) {
-                    this.IsAlwaysUseNextResultForCurrentQueueChecked = false;
+                if (!this.isAlwaysUseThisOptionChecked && this.IsAlwaysUseThisOptionForCurrentQueueChecked) {
+                    this.IsAlwaysUseThisOptionForCurrentQueueChecked = false;
                 }
 
                 this.UpdateButtons();
@@ -89,8 +85,8 @@ namespace MCNBTEditor.Views.Modal {
             set {
                 this.EnsureNotReadOnly();
                 this.RaisePropertyChanged(ref this.canShowAlwaysUseNextResultForCurrentQueueOption, value);
-                if (!value && this.IsAlwaysUseNextResultForCurrentQueueChecked) {
-                    this.IsAlwaysUseNextResultForCurrentQueueChecked = false;
+                if (!value && this.IsAlwaysUseThisOptionForCurrentQueueChecked) {
+                    this.IsAlwaysUseThisOptionForCurrentQueueChecked = false;
                 }
             }
         }
@@ -99,10 +95,11 @@ namespace MCNBTEditor.Views.Modal {
         /// Whether or not the GUI option to use the next outcome as an automatic result, but only for the current queue/usage, is checked
         /// </summary>
         [Bindable(true)]
-        public bool IsAlwaysUseNextResultForCurrentQueueChecked {
-            get => this.isAlwaysUseNextResultForCurrentQueueChecked;
+        public bool IsAlwaysUseThisOptionForCurrentQueueChecked {
+            get => this.isAlwaysUseThisOptionForCurrentQueueChecked;
             set {
-                this.RaisePropertyChanged(ref this.isAlwaysUseNextResultForCurrentQueueChecked, value && this.CanShowAlwaysUseNextResultForCurrentQueueOption);
+                this.EnsureNotReadOnly();
+                this.RaisePropertyChanged(ref this.isAlwaysUseThisOptionForCurrentQueueChecked, value && this.CanShowAlwaysUseNextResultForCurrentQueueOption);
                 this.UpdateButtons();
             }
         }
@@ -131,7 +128,10 @@ namespace MCNBTEditor.Views.Modal {
         /// </summary>
         public string PrimaryResult {
             get => this.primaryResult;
-            set => this.RaisePropertyChanged(ref this.primaryResult, value);
+            set {
+                this.EnsureNotReadOnly();
+                this.RaisePropertyChanged(ref this.primaryResult, value);
+            }
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace MCNBTEditor.Views.Modal {
 
         public bool HasButtons => this.Buttons.Count > 0;
 
-        private DialogButton lastClickedButton;
+        protected DialogButton lastClickedButton;
 
         public BaseDialogExViewModel(string primaryResult = null, string defaultResult = null) {
             this.buttons = new ObservableCollectionEx<DialogButton>();
@@ -189,23 +189,14 @@ namespace MCNBTEditor.Views.Modal {
             }
 
             string output;
-            MessageWindow window = new MessageWindow {
-                DataContext = this
-            };
-
-            this.Dialog = window;
-            if (MessageWindow.DODGY_PRIMARY_SELECTION == null) {
-                MessageWindow.DODGY_PRIMARY_SELECTION = this.PrimaryResult;
-            }
-
             this.UpdateButtons();
-            bool? result = window.ShowDialog();
+            bool? result = await this.ShowDialogAsync();
             DialogButton button = this.lastClickedButton;
             this.lastClickedButton = null;
             if (result == true) {
                 if (button != null) {
                     output = button.ActionType;
-                    if (output != null && this.IsAlwaysUseNextResultChecked) { // (output != null || this.AllowNullButtonActionForAutoResult)
+                    if (output != null && this.IsAlwaysUseThisOptionChecked) { // (output != null || this.AllowNullButtonActionForAutoResult)
                         this.AutomaticResult = output;
                     }
                 }
@@ -218,6 +209,8 @@ namespace MCNBTEditor.Views.Modal {
             }
             return output;
         }
+
+        protected abstract Task<bool?> ShowDialogAsync();
 
         public async Task OnButtonClicked(DialogButton button) {
             this.lastClickedButton = button;
@@ -294,108 +287,23 @@ namespace MCNBTEditor.Views.Modal {
         /// Creates a clone of this dialog. The returned instance will not be read only, allowing it to be further modified
         /// </summary>
         /// <returns></returns>
-        public virtual BaseDialogExViewModel Clone() {
-            BaseDialogExViewModel dialog = new BaseDialogExViewModel() {
-                titlebar = this.titlebar,
-                header = this.header,
-                message = this.message,
-                automaticResult = this.automaticResult,
-                ShowAlwaysUseNextResultOption = this.ShowAlwaysUseNextResultOption,
-                IsAlwaysUseNextResultChecked = this.IsAlwaysUseNextResultChecked,
-                primaryResult = this.primaryResult,
-                defaultResult = this.defaultResult
-            };
+        public abstract BaseDialogExViewModel CloneCore();
 
-            foreach (DialogButton button in this.buttons)
-                dialog.buttons.Add(button.Clone(dialog));
-            return dialog;
-        }
-
+        /// <summary>
+        /// Marks this dialog as read-only, meaning most properties cannot be modified (apart from header, message, etc)
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
         public void MarkReadOnly() {
+            if (this.ShowAlwaysUseNextResultOption) {
+                throw new InvalidOperationException($"Cannot set read-only when {nameof(this.ShowAlwaysUseNextResultOption)}");
+            }
+
             this.IsReadOnly = true;
         }
 
         protected void EnsureNotReadOnly() {
             if (this.IsReadOnly) {
                 throw new InvalidOperationException("This message dialog instance is read-only. Create a clone to modify it");
-            }
-        }
-
-        /// <summary>
-        /// Creates a disposable usage/state of this message dialog which, if <see cref="IsAlwaysUseNextResultForCurrentQueueChecked"/> is true,
-        /// allows the buttons and auto-result to be restored once the usage instance is disposed
-        /// <para>
-        /// This only needs to be used if you intend on modifying the state of the current <see cref="BaseDialogExViewModel"/> during some
-        /// sort of "queue/collection based" work, and want to restore those changes once you're finished
-        /// <para>
-        /// An example is loading files; you realistically need to use this in order to restore the <see cref="AutomaticResult"/> to the previous
-        /// value if <see cref="IsAlwaysUseNextResultForCurrentQueueChecked"/> is true)
-        /// </para>
-        /// </para>
-        /// </summary>
-        /// <returns></returns>
-        public MessageDialogUsage Use() {
-            return new MessageDialogUsage(this);
-        }
-
-        public class MessageDialogUsage : IDisposable {
-            private readonly List<DialogButton> oldButtons;
-            private readonly string oldAutoResult;
-            private readonly bool oldAlwaysUseNextResult;
-            private readonly bool oldShowAlwaysUseNextResult;
-            private readonly bool oldCanShowAlwaysUseNextResultForQueue;
-            private readonly string oldDefaultResult;
-            private readonly string oldPrimaryResult;
-            private readonly bool wasReadOnly;
-
-            public BaseDialogExViewModel Dialog { get; }
-
-            public MessageDialogUsage(BaseDialogExViewModel dialog) {
-                this.Dialog = dialog;
-                if (dialog.IsReadOnly) {
-                    this.wasReadOnly = true;
-                    dialog.IsReadOnly = false;
-                }
-
-                // Store the current dialog state
-                this.oldAlwaysUseNextResult = dialog.IsAlwaysUseNextResultChecked;
-                this.oldShowAlwaysUseNextResult = this.Dialog.ShowAlwaysUseNextResultOption;
-                this.oldCanShowAlwaysUseNextResultForQueue = this.Dialog.CanShowAlwaysUseNextResultForCurrentQueueOption;
-                this.oldButtons = dialog.Buttons.ToList();
-                this.oldAutoResult = dialog.AutomaticResult;
-                this.oldDefaultResult = dialog.DefaultResult;
-                this.oldPrimaryResult = dialog.PrimaryResult;
-            }
-
-            /// <summary>
-            /// Restores the dialog to its old state
-            /// </summary>
-            public void Dispose() {
-                this.Dialog.buttons.ClearAndAddRange(this.oldButtons);
-                if (this.Dialog.IsAlwaysUseNextResultForCurrentQueueChecked) {
-                    // We are only applying data for the current queue, and that queue is
-                    // finished now, so, revert the data
-                    this.Dialog.IsAlwaysUseNextResultForCurrentQueueChecked = false; // this should always be false when the usage instance is created
-                    this.Dialog.AutomaticResult = this.oldAutoResult;
-                }
-                else {
-                    // here we handle the case where we are saving results globally for this
-                    // dialog; "save these results" is checked, but
-                    // "save for current queue only" is not checked
-                    // -------------------------------------------------------
-                    // nothing needs to be handled here
-                    // -------------------------------------------------------
-                }
-
-                this.Dialog.ShowAlwaysUseNextResultOption = this.oldShowAlwaysUseNextResult;
-                this.Dialog.CanShowAlwaysUseNextResultForCurrentQueueOption = this.oldCanShowAlwaysUseNextResultForQueue;
-                this.Dialog.IsAlwaysUseNextResultChecked = this.oldAlwaysUseNextResult;
-                this.Dialog.DefaultResult = this.oldDefaultResult;
-                this.Dialog.PrimaryResult = this.oldPrimaryResult;
-
-                if (this.wasReadOnly) {
-                    this.Dialog.IsReadOnly = true;
-                }
             }
         }
     }

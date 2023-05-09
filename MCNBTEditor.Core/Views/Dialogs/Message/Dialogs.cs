@@ -39,11 +39,9 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
 
             ClipboardUnavailableDialog = OkDialog.Clone();
             ClipboardUnavailableDialog.ShowAlwaysUseNextResultOption = true;
-            ClipboardUnavailableDialog.MarkReadOnly();
 
             InvalidClipboardDataDialog = OkDialog.Clone();
             InvalidClipboardDataDialog.ShowAlwaysUseNextResultOption = true;
-            InvalidClipboardDataDialog.MarkReadOnly();
 
             ItemAlreadyExistsDialog = new MessageDialog("replace") {ShowAlwaysUseNextResultOption = true};
             ItemAlreadyExistsDialog.AddButton("Replace", "replace").ToolTip = "Replace the existing item with the new item";
@@ -56,18 +54,15 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             UnknownFileFormatDialog.AddButton("Cancel", "cancel", false);
 
             OpenFileFailureDialog = OkDialog.Clone();
-            OpenFileFailureDialog.ShowAlwaysUseNextResultOption = true;
             OpenFileFailureDialog.MarkReadOnly();
 
             InvalidPathDialog = OkDialog.Clone();
-            InvalidPathDialog.ShowAlwaysUseNextResultOption = true;
             InvalidPathDialog.MarkReadOnly();
 
             RemoveItemWhenDeletingDialog = new MessageDialog("yes") {ShowAlwaysUseNextResultOption = true};
             RemoveItemWhenDeletingDialog.AddButton("Yes", "yes");
             RemoveItemWhenDeletingDialog.AddButton("No", "no");
             RemoveItemWhenDeletingDialog.AddButton("Cancel", "cancel", false);
-            RemoveItemWhenDeletingDialog.MarkReadOnly();
         }
     }
 }

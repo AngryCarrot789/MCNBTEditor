@@ -63,9 +63,9 @@
         </Menu>
         <Border VerticalAlignment="Bottom" Height="23" DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}">
             <DockPanel>
-                <TextBlock Text="{Binding SelectedFilePathable.FilePath}" DockPanel.Dock="Right" VerticalAlignment="Center" Padding="5,0"/>
+                <TextBlock Text="{Binding SelectedFilePathItem.FilePath}" DockPanel.Dock="Right" VerticalAlignment="Center" Padding="5,0"/>
                 <Separator Style="{StaticResource VerticalSeparator}" DockPanel.Dock="Right" Background="{DynamicResource AREghZyBrush.Tone5.Border.Static}"/>
-                <TextBlock x:Name="StatusBarTextBlock" VerticalAlignment="Center" Padding="5,0"/>
+                <TextBlock x:Name="StatusBarTextBlock" VerticalAlignment="Center" Padding="5,0" ToolTip="The file path of the root item that owns the currently selected tree item"/>
             </DockPanel>
         </Border>
         <Grid Margin="0">
@@ -87,7 +87,8 @@
                                     VirtualizingStackPanel.VirtualizationMode="Recycling" 
                                     Background="{DynamicResource AREghZyBrush.Tone3.Background.Static}" 
                                     BorderBrush="{DynamicResource AREghZyBrush.Tone4.Border.Static}"
-                                    acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:WPFTreeItemContextGenerator.Instance}"/>
+                                    acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:WPFTreeItemContextGenerator.Instance}"
+                                    IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False" TextSearch.Text="TheR" TextSearch.TextPath="Name"/>
                 <TextBlock Text="Drop NBT files here, or CTRL+O to open a file"
                     TextAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Padding="10,0" TextWrapping="Wrap"

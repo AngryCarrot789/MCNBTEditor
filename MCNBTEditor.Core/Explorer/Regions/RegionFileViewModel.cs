@@ -103,6 +103,15 @@ namespace MCNBTEditor.Core.Explorer.Regions {
         }
 
         public async Task RefreshAction() {
+            try {
+                await this.Refresh();
+            }
+            catch (Exception e) {
+                await IoC.MessageDialogs.ShowMessageExAsync("Error reading region", "Error reading region file or chunks", e.ToString());
+            }
+        }
+
+        public async Task Refresh() {
             if (string.IsNullOrWhiteSpace(this.FilePath) || !File.Exists(this.FilePath)) {
                 return;
             }
@@ -114,8 +123,9 @@ namespace MCNBTEditor.Core.Explorer.Regions {
             this.RaisePropertyChanged(nameof(this.IsLoading));
             this.IsReadOnly = true;
             this.Clear();
-            await Task.Run(async () => {
-                try {
+
+            try {
+                await Task.Run(() => {
                     this.Region = new RegionFile(this.filePath, this.IsBigEndian);
                     for (int x = 0; x < 32; x++) {
                         for (int z = 0; z < 32; z++) {
@@ -128,14 +138,12 @@ namespace MCNBTEditor.Core.Explorer.Regions {
                             }
                         }
                     }
-                }
-                catch (Exception e) {
-                    await IoC.MessageDialogs.ShowMessageExAsync("Error reading region", "Error reading region file or chunks", e.ToString());
-                }
-            });
-
-            this.IsLoading = false;
-            this.IsReadOnly = false;
+                });
+            }
+            finally {
+                this.IsLoading = false;
+                this.IsReadOnly = false;
+            }
         }
 
         public virtual async Task<bool> RemoveFromParentAction() {

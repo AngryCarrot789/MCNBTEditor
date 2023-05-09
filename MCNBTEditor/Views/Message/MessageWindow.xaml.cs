@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using MCNBTEditor.Core.Views.Dialogs.Message;
+using MCNBTEditor.Core.Views.Dialogs.Modal;
+using MCNBTEditor.Views.Modal;
 
 namespace MCNBTEditor.Views.Message {
     /// <summary>
