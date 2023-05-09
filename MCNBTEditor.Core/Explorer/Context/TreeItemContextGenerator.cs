@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
-using MCNBTEditor.AdvancedContextService;
+using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.AdvancedContextService;
-using MCNBTEditor.Core.Explorer;
 using MCNBTEditor.Core.Explorer.Actions;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Explorer.Regions;
 using MCNBTEditor.Core.NBT;
 
-namespace MCNBTEditor.ContextMenus {
-    public class TreeItemContextGenerator : IWPFContextGenerator {
+namespace MCNBTEditor.Core.Explorer.Context {
+    public class TreeItemContextGenerator {
         public static TreeItemContextGenerator Instance { get; } = new TreeItemContextGenerator();
 
         public void Generate(List<IContextEntry> list, DependencyObject source, DependencyObject target, object context) {
@@ -24,6 +22,20 @@ namespace MCNBTEditor.ContextMenus {
                 this.Generate(list, tag, isMultiSelect);
             }
             else if (context is RegionFileViewModel region) {
+                this.Generate(list, region, isMultiSelect);
+            }
+        }
+
+        public void Generate(List<IContextEntry> list, IDataContext context) {
+            bool isMultiSelect = false;
+            if (context.TryGetContext(out IExtendedList extendedList)) {
+                isMultiSelect = extendedList.SelectedItems.Count() > 1;
+            }
+
+            if (context.TryGetContext(out BaseTagViewModel tag)) {
+                this.Generate(list, tag, isMultiSelect);
+            }
+            else if (context.TryGetContext(out RegionFileViewModel region)) {
                 this.Generate(list, region, isMultiSelect);
             }
         }
@@ -43,7 +55,7 @@ namespace MCNBTEditor.ContextMenus {
                     list.Add(new ActionContextEntry(p2, "actions.nbt.copy.primitive_value", "Copy Values", $"Copy these tags' primitive values as a string separated by {newLineText}"));
                 }
 
-                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.binary.sysclipboard", "Copy (binary)"));
+                list.Add(new ActionContextEntry(tag, ActionIds.CopyBinaryAction, "Copy (binary)"));
                 list.Add(SeparatorEntry.Instance);
                 list.Add(new ActionContextEntry(tag, "actions.nbt.remove_from_parent", "Remove tags", "Removes these tags from their parent tag"));
             }
@@ -64,11 +76,11 @@ namespace MCNBTEditor.ContextMenus {
                     list.Add(new ShortcutCommandContextEntry("Save", null, "Application/EditorView/NBTTag/Save", datFile.SaveFileCommand));
                     list.Add(new ShortcutCommandContextEntry("Save As...", null, "Application/EditorView/NBTTag/SaveAs", datFile.SaveFileAsCommand));
                     list.Add(new ShortcutCommandContextEntry("Copy file path", null, "Application/EditorView/NBTTag/CopyFilePath", datFile.CopyFilePathToClipboardCommand));
-                    list.Add(new ShortcutCommandContextEntry("Open in Explorer", null, "Application/EditorView/NBTTag/OpenInExplorer", datFile.ShowInExplorerCommand));
+                    list.Add(new ShortcutCommandContextEntry("Open in Explorer", null, "Application/EditorView/NBTTag/OpenInExplorer", datFile.OpenInExplorerCommand));
                 }
 
                 list.Add(SeparatorEntry.Instance);
-                list.Add(new ActionContextEntry(tag, "actions.nbt.rename.tag", "Rename", "Renames this tag"));
+                list.Add(new ActionContextEntry(tag, "actions.nbt.rename", "Rename", "Renames this tag"));
                 if (tag is TagPrimitiveViewModel p2) {
                     list.Add(new CommandContextEntry("Edit...", p2.EditGeneralCommand));
                     list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Name", "Copy this tag's name to the clipboard"));
@@ -78,8 +90,8 @@ namespace MCNBTEditor.ContextMenus {
                     list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Name", "Copy this tag's name to the clipboard"));
                 }
 
-                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.binary.sysclipboard"));
-                list.Add(new ActionContextEntry(tag, "actions.nbt.paste.binary.sysclipboard"));
+                list.Add(new ActionContextEntry(tag, ActionIds.CopyBinaryAction));
+                list.Add(new ActionContextEntry(tag, ActionIds.PasteBinaryAction));
                 list.Add(SeparatorEntry.Instance);
                 if (tag is BaseTagCollectionViewModel) {
                     list.Add(new ActionContextEntry(tag, "actions.nbt.find"));
@@ -98,7 +110,7 @@ namespace MCNBTEditor.ContextMenus {
             list.Add(new CommandContextEntry("Save (coming soon)", region.SaveFileCommand));
             list.Add(new CommandContextEntry("Save as (coming soon)", region.SaveFileAsCommand));
             list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyFilePath", region.CopyFilePathToClipboardCommand));
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/OpenInExplorer", region.ShowInExplorerCommand));
+            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/OpenInExplorer", region.OpenInExplorerCommand));
 
             list.Add(SeparatorEntry.Instance);
             list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/RemoveFromParent", region.RemoveFromParentCommand));

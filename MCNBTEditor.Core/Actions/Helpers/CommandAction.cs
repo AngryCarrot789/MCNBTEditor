@@ -9,19 +9,19 @@ namespace MCNBTEditor.Core.Actions.Helpers {
     /// Creates a new action which invokes an <see cref="ICommand"/>
     /// </summary>
     /// <typeparam name="T">The type which contains the target command</typeparam>
-    public class ShortcutActionCommand<T> : AnAction {
+    public class ShortcutCommandAction<T> : AnAction {
         public Func<T, ICommand> CommandAccessor { get; }
 
         public string ShortcutId { get; }
 
         /// <summary>
-        /// Constructor for <see cref="ShortcutActionCommand{T}"/>
+        /// Constructor for <see cref="ShortcutCommandAction{T}"/>
         /// </summary>
         /// <param name="shortcutId">The ID of the shortcut</param>
         /// <param name="propertyName">The name of the <see cref="ICommand"/> property in <see cref="T"/></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
-        public ShortcutActionCommand(string shortcutId, string propertyName) : base((string) null, null) {
+        public ShortcutCommandAction(string shortcutId, string propertyName) : base((string) null, null) {
             if (propertyName == null)
                 throw new ArgumentNullException(nameof(propertyName));
             PropertyInfo propertyInfo = typeof(T).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
@@ -30,6 +30,18 @@ namespace MCNBTEditor.Core.Actions.Helpers {
             }
 
             this.CommandAccessor = (Func<T, ICommand>) Delegate.CreateDelegate(typeof(Func<T, ICommand>), propertyInfo.GetMethod);
+            this.ShortcutId = shortcutId;
+        }
+
+        /// <summary>
+        /// Constructor for <see cref="ShortcutCommandAction{T}"/>
+        /// </summary>
+        /// <param name="shortcutId">The ID of the shortcut</param>
+        /// <param name="propertyName">The name of the <see cref="ICommand"/> property in <see cref="T"/></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
+        public ShortcutCommandAction(string shortcutId, Func<T, ICommand> accessor) : base((string) null, null) {
+            this.CommandAccessor = accessor ?? throw new ArgumentNullException(nameof(accessor));
             this.ShortcutId = shortcutId;
         }
 

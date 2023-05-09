@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using MCNBTEditor.Core.Actions;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    public abstract class ExtendedListActionBase : AnAction {
-        protected ExtendedListActionBase(Func<string> header, Func<string> description) : base(header, description) {
+    public abstract class MultiSelectionAction : AnAction {
+        protected MultiSelectionAction(Func<string> header, Func<string> description) : base(header, description) {
 
         }
 
-        protected ExtendedListActionBase(string header, string description) : base(header, description) {
+        protected MultiSelectionAction(string header, string description) : base(header, description) {
 
         }
 
