@@ -1,12 +1,13 @@
 using System;
 using System.Threading.Tasks;
+using MCNBTEditor.Core;
 
-namespace MCNBTEditor.Core.Views.Dialogs.Message {
+namespace MCNBTEditor.Views.Modal {
     public class DialogButton : BaseViewModel {
         /// <summary>
         /// The dialog that owns this button
         /// </summary>
-        public MessageDialog Dialog { get; }
+        public BaseDialogExViewModel Dialog { get; }
 
         /// <summary>
         /// A command that fires when this dialog is clicked. This is read only, as it's only
@@ -49,7 +50,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             set => this.RaisePropertyChanged(ref this.canUseAsAutomaticResult, value);
         }
 
-        public DialogButton(MessageDialog dialog, string actionType, string text, bool canUseAsAutomaticResult) {
+        public DialogButton(BaseDialogExViewModel dialog, string actionType, string text, bool canUseAsAutomaticResult) {
             this.Dialog = dialog ?? throw new ArgumentNullException(nameof(dialog));
             this.ActionType = actionType;
             this.text = text ?? actionType ?? "<btn>";
@@ -65,7 +66,7 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
             return Task.CompletedTask;
         }
 
-        public virtual DialogButton Clone(MessageDialog dialog) {
+        public virtual DialogButton Clone(BaseDialogExViewModel dialog) {
             return new DialogButton(dialog, this.ActionType, this.Text, this.CanUseAsAutomaticResult) {
                 IsEnabled = this.IsEnabled, ToolTip = this.ToolTip
             };
