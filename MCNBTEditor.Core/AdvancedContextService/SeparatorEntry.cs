@@ -3,6 +3,6 @@ namespace MCNBTEditor.Core.AdvancedContextService {
     /// A separator element between menu items
     /// </summary>
     public class SeparatorEntry : IContextEntry {
-        public static SeparatorEntry Instance { get; } = new SeparatorEntry();
+        public static readonly SeparatorEntry Instance = new SeparatorEntry();
     }
 }

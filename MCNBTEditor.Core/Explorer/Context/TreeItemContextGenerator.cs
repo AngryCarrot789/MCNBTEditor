@@ -9,23 +9,7 @@ using MCNBTEditor.Core.Explorer.Regions;
 using MCNBTEditor.Core.NBT;
 
 namespace MCNBTEditor.Core.Explorer.Context {
-    public class TreeItemContextGenerator {
-        public static TreeItemContextGenerator Instance { get; } = new TreeItemContextGenerator();
-
-        public void Generate(List<IContextEntry> list, DependencyObject source, DependencyObject target, object context) {
-            bool isMultiSelect = false;
-            if (source is IExtendedList extendedList) { // ListBox
-                isMultiSelect = extendedList.SelectedItems.Count() > 1;
-            }
-
-            if (context is BaseTagViewModel tag) {
-                this.Generate(list, tag, isMultiSelect);
-            }
-            else if (context is RegionFileViewModel region) {
-                this.Generate(list, region, isMultiSelect);
-            }
-        }
-
+    public class TreeItemContextGenerator : IContextGenerator {
         public void Generate(List<IContextEntry> list, IDataContext context) {
             bool isMultiSelect = false;
             if (context.TryGetContext(out IExtendedList extendedList)) {
@@ -33,26 +17,28 @@ namespace MCNBTEditor.Core.Explorer.Context {
             }
 
             if (context.TryGetContext(out BaseTagViewModel tag)) {
-                this.Generate(list, tag, isMultiSelect);
+                this.GenerateForTag(list, tag, isMultiSelect);
             }
             else if (context.TryGetContext(out RegionFileViewModel region)) {
-                this.Generate(list, region, isMultiSelect);
+                this.GenerateForRegion(list, region, isMultiSelect);
             }
         }
 
-        public void Generate(List<IContextEntry> list, BaseTagViewModel tag, bool isMultiSelect) {
-            if (isMultiSelect) {
-                string newLineText;
-                switch (Environment.NewLine ?? "") {
-                    case "\n": newLineText = "a new line/line feed (\\n) char"; break;
-                    case "\r": newLineText = "a carriage return (\\r) char"; break;
-                    case "\r\n": newLineText = "a CRLF (\\r\\n) sequence"; break;
-                    default: newLineText = $"the system's new line text sequence ({Environment.NewLine.Length} chars)"; break;
-                }
+        public static string GetNewLineDescriptor() {
+            switch (Environment.NewLine) {
+                case "\n":   return "a new line/line feed (\\n) char";
+                case "\r":   return "a carriage return (\\r) char";
+                case "\r\n": return "a CRLF (\\r\\n) sequence";
+                default:     return $"the system's new line text sequence ({Environment.NewLine.Length} chars)";
+            }
+        }
 
-                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Names", $"Copy these tags' names as a string separated by {newLineText}"));
+        public void GenerateForTag(List<IContextEntry> list, BaseTagViewModel tag, bool isMultiSelect) {
+            if (isMultiSelect) {
+                string newLineDesc = GetNewLineDescriptor();
+                list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Names", $"Copy these tags' names as a string separated by {newLineDesc}"));
                 if (tag is TagPrimitiveViewModel p2) {
-                    list.Add(new ActionContextEntry(p2, "actions.nbt.copy.primitive_value", "Copy Values", $"Copy these tags' primitive values as a string separated by {newLineText}"));
+                    list.Add(new ActionContextEntry(p2, "actions.nbt.copy.primitive_value", "Copy Values", $"Copy these tags' primitive values as a string separated by {newLineDesc}"));
                 }
 
                 list.Add(new ActionContextEntry(tag, ActionIds.CopyBinaryAction, "Copy (binary)"));
@@ -90,30 +76,30 @@ namespace MCNBTEditor.Core.Explorer.Context {
                     list.Add(new ActionContextEntry(tag, "actions.nbt.copy.name", "Copy Name", "Copy this tag's name to the clipboard"));
                 }
 
-                list.Add(new ActionContextEntry(tag, ActionIds.CopyBinaryAction));
-                list.Add(new ActionContextEntry(tag, ActionIds.PasteBinaryAction));
+                list.Add(new ActionContextEntry(tag, ActionIds.CopyBinaryAction, "Copy (binary)"));
+                list.Add(new ActionContextEntry(tag, ActionIds.PasteBinaryAction, "Paste (binary)"));
                 list.Add(SeparatorEntry.Instance);
                 if (tag is BaseTagCollectionViewModel) {
-                    list.Add(new ActionContextEntry(tag, "actions.nbt.find"));
+                    list.Add(new ActionContextEntry(tag, "actions.nbt.find", "Find"));
                     list.Add(SeparatorEntry.Instance);
                 }
 
-                list.Add(new ActionContextEntry(tag, "actions.nbt.remove_from_parent"));
+                list.Add(new ActionContextEntry(tag, "actions.nbt.remove_from_parent", "Remove"));
                 if (tag is TagDataFileViewModel datFileAgain) {
                     list.Add(new CommandContextEntry("Delete FILE", datFileAgain.DeleteFileCommand));
                 }
             }
         }
 
-        public void Generate(List<IContextEntry> list, RegionFileViewModel region, bool isMultiSelect) {
+        public void GenerateForRegion(List<IContextEntry> list, RegionFileViewModel region, bool isMultiSelect) {
             list.Add(new CommandContextEntry("Refresh", region.RefreshCommand));
             list.Add(new CommandContextEntry("Save (coming soon)", region.SaveFileCommand));
             list.Add(new CommandContextEntry("Save as (coming soon)", region.SaveFileAsCommand));
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyFilePath", region.CopyFilePathToClipboardCommand));
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/OpenInExplorer", region.OpenInExplorerCommand));
+            list.Add(new ActionContextEntry(region, "actions.item.CopyFilePath", "Copy file path", "Copies this .DAT file's file path to the system clipboard"));
+            list.Add(new ActionContextEntry(region, "actions.item.OpenInExplorer", "Show in Explorer", "Opens the windows file explorer with this .DAT actual file's selected"));
 
             list.Add(SeparatorEntry.Instance);
-            list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/RemoveFromParent", region.RemoveFromParentCommand));
+            list.Add(new ActionContextEntry(region, "actions.nbt.remove_from_parent", "Remove", "Removes the region from the tree"));
             list.Add(new CommandContextEntry("Delete FILE", region.DeleteFileCommand));
         }
 

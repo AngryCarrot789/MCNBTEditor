@@ -8,6 +8,7 @@ using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Views.NBT.Finding {
+    // TODO: move to core project
     public class NBTMatchResult {
         public BaseTagViewModel NBT { get; }
 

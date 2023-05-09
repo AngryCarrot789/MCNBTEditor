@@ -95,7 +95,7 @@ namespace MCNBTEditor.Shortcuts {
             return null;
         }
 
-        public static object GetDataContext(object value) {
+        public static object GetDataContext(DependencyObject value) {
             if (value is FrameworkElement element) {
                 return element.DataContext;
             }

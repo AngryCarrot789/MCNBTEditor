@@ -4,6 +4,6 @@ namespace MCNBTEditor.Core.Explorer {
     public interface IRemoveable {
         bool CanRemoveFromParent();
 
-        Task<bool> RemoveFromParentAsync();
+        Task RemoveFromParentAction();
     }
 }

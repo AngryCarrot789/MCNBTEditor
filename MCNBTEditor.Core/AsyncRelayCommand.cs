@@ -40,7 +40,7 @@ namespace MCNBTEditor.Core {
         /// </summary>
         public bool ConvertParameter { get; set; }
 
-        public AsyncRelayCommand(Func<T, Task> execute, Func<T, bool> canExecute = null, bool convertParameter = false) {
+        public AsyncRelayCommand(Func<T, Task> execute, Func<T, bool> canExecute = null, bool convertParameter = true) {
             if (execute == null) {
                 throw new ArgumentNullException(nameof(execute), "Execute callback cannot be null");
             }

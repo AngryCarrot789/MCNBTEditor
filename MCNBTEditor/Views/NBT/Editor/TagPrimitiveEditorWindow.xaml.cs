@@ -12,7 +12,7 @@ namespace MCNBTEditor.Views.NBT.Editor {
         public SimpleInputValidationRule ValueValidationRule => (SimpleInputValidationRule) this.Resources["ValueValidationRule"];
 
         public TagPrimitiveEditorWindow() {
-            InitializeComponent();
+            this.InitializeComponent();
             this.ContentRendered += this.TagPrimitiveEditorWindow_ContentRendered;
             this.Loaded += this.TagPrimitiveEditorWindow_Loaded;
         }
@@ -20,6 +20,14 @@ namespace MCNBTEditor.Views.NBT.Editor {
         private void TagPrimitiveEditorWindow_Loaded(object sender, RoutedEventArgs e) {
             this.NameTextBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
             this.ValueTextBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+            if (this.NameTextBox.Visibility == Visibility.Visible) {
+                this.NameTextBox.Focus();
+                this.NameTextBox.SelectAll();
+            }
+            else if (this.ValueTextBox.Visibility == Visibility.Visible) {
+                this.ValueTextBox.Focus();
+                this.ValueTextBox.SelectAll();
+            }
         }
 
         private void TagPrimitiveEditorWindow_ContentRendered(object sender, EventArgs e) {

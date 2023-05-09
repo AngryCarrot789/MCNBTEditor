@@ -99,8 +99,8 @@
     <Compile Include="ColourMap\WPF\Controls\ColourPickerWindow.xaml.cs">
       <DependentUpon>ColourPickerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContextMenus\FindResultContextGenerator.cs" />
-    <Compile Include="ContextMenus\TreeItemContextGenerator.cs" />
+    <Compile Include="ContextMenus\WPFFindResultContextGenerator.cs" />
+    <Compile Include="ContextMenus\WPFTreeItemContextGenerator.cs" />
     <Compile Include="Controls\ExtendedListBox.cs" />
     <Compile Include="Controls\ExtendedTreeView.cs" />
     <Compile Include="Controls\ExtendedTreeViewItem.cs" />
@@ -112,8 +112,10 @@
     <Compile Include="Controls\Helpers\TextBlockHelper.cs" />
     <Compile Include="Controls\Helpers\TextBoxHelper.cs" />
     <Compile Include="Controls\Helpers\ToggleButtonHelper.cs" />
+    <Compile Include="Controls\Helpers\TopmostFocus.cs" />
     <Compile Include="Controls\HighlightableTextBlock.cs" />
     <Compile Include="Controls\IconTextPair.cs" />
+    <Compile Include="Controls\SelectionAdorder.cs" />
     <Compile Include="Converters\BoolConverter.cs" />
     <Compile Include="Converters\BoolConverterAND.cs" />
     <Compile Include="Converters\ChainValueConverter.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="NBT\Actions\FindAction.cs" />
     <Compile Include="NBT\UI\ExtendedListItemTemplateSelector.cs" />
     <Compile Include="NBT\UI\ListFallbackSourceConverter.cs" />
+    <Compile Include="Resources\IconTypeToImageSourceConverter.cs" />
     <Compile Include="Services\ClipboardService.cs" />
     <Compile Include="Services\WinExplorerService.cs" />
     <Compile Include="Settings\SettingsViewModel.cs" />
@@ -140,8 +143,6 @@
     <Compile Include="Shortcuts\Bindings\ShortcutActionBinding.cs" />
     <Compile Include="Shortcuts\Bindings\ShortcutCommandBinding.cs" />
     <Compile Include="Shortcuts\Converters\ActionIdToGestureConverter.cs" />
-    <Compile Include="Shortcuts\Converters\ActionIdToHeaderConverter.cs" />
-    <Compile Include="Shortcuts\Converters\ActionIdToToolTipConverter.cs" />
     <Compile Include="Shortcuts\Converters\GlobalUpdateShortcutGestureConverter.cs" />
     <Compile Include="Shortcuts\Converters\KeyStrokeStringConverter.cs" />
     <Compile Include="Shortcuts\Converters\MouseStrokeStringConverter.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Themes\Attached\PasswordBoxHelper.cs" />
     <Compile Include="Themes\Attached\TextBoxAutoSelect.cs" />
     <Compile Include="Themes\Attached\TextHinting.cs" />
+    <Compile Include="Themes\ColourKeys.cs" />
     <Compile Include="Themes\Controls.xaml.cs">
       <DependentUpon>Controls.xaml</DependentUpon>
     </Compile>
@@ -278,6 +280,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\ColourDictionaries\DeepDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ColourDictionaries\RedBlackTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ColourDictionaries\SoftDark.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\ColourDictionaries\VeryDarkTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -299,26 +317,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Controls.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\DeepDark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\RedBlackTheme.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\SoftDark.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\SoftDarkAndBlue.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Themes\VeryDarkTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -381,6 +379,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Icons\UIGeneral\icons8-sync-48.png" />
+    <Resource Include="Resources\Icons\UIGeneral\icons8-edit-48.png" />
+    <Resource Include="Resources\Icons\UIGeneral\icons8-paste-48.png" />
+    <Resource Include="Resources\Icons\UIGeneral\icons8-copy-to-clipboard-48.png" />
+    <Resource Include="Resources\Icons\UIGeneral\icons8-copy-48.png" />
     <Resource Include="Resources\Icons\TagArrayIcon.png" />
     <Resource Include="Resources\Icons\FileIcon-TagByteArray.png" />
     <Resource Include="Resources\Icons\FileIcon-TagIntArray.png" />

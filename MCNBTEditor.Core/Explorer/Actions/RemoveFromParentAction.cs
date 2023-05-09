@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using MCNBTEditor.Core.Actions;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    [ActionRegistration("actions.nbt.remove_from_parent")]
-    public class RemoveFromParentAction : ExtendedListActionBase {
+    public class RemoveFromParentAction : MultiSelectionAction {
         public RemoveFromParentAction() : base("Remove", "Remove the tag from its parent") {
 
         }
@@ -17,7 +16,7 @@ namespace MCNBTEditor.Core.Explorer.Actions {
         public override async Task<bool> ExecuteSelectionAsync(AnActionEventArgs e, IEnumerable<BaseTreeItemViewModel> selection) {
             foreach (BaseTreeItemViewModel item in selection) {
                 if (item is IRemoveable removeable && removeable.CanRemoveFromParent()) {
-                    await removeable.RemoveFromParentAsync();
+                    await removeable.RemoveFromParentAction();
                 }
             }
 

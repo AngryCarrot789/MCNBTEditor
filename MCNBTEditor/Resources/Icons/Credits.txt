@@ -14,4 +14,18 @@ https://icons8.com/icon/71407/16"
 https://icons8.com/icon/71421/32"
 https://icons8.com/icon/71365/64"
 
+Other icons:
+
+<a target="_blank" href="https://icons8.com/icon/11911/copy">Copy</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/18734/copy-to-clipboard">Copy to Clipboard</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/13383/paste">Paste</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/12082/edit">Edit</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/63313/sync">Sync</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+
+
+
+
+
+
+
 

@@ -10,7 +10,7 @@ using MCNBTEditor.Core.Shortcuts;
 using MCNBTEditor.Core.Utils;
 
 namespace MCNBTEditor.Core.Explorer.NBT {
-    public abstract class BaseTagViewModel : BaseTreeItemViewModel, IHaveTreePath, IShortcutToCommand, IRemoveable {
+    public abstract class BaseTagViewModel : BaseTreeItemViewModel, IHaveTreePath, IRemoveable {
         public string TreePathPartName {
             get {
                 if (this.ParentItem is TagListViewModel tagList) {
@@ -45,7 +45,7 @@ namespace MCNBTEditor.Core.Explorer.NBT {
         protected BaseTagViewModel(string name, NBTType type) {
             this.Name = name;
             this.TagType = type;
-            this.RemoveFromParentCommand = new AsyncRelayCommand(async () => await this.RemoveFromParentAsync(), this.CanRemoveFromParent);
+            this.RemoveFromParentCommand = new AsyncRelayCommand(async () => await this.RemoveFromParentAction(), this.CanRemoveFromParent);
             this.CopyNameCommand = new AsyncRelayCommand(async () => {
                 await ClipboardUtils.SetClipboardOrShowErrorDialog(this.Name ?? "");
             }, () => !string.IsNullOrEmpty(this.Name));
@@ -173,71 +173,21 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             return this.ParentItem is IHaveChildren;
         }
 
-        public virtual Task<bool> RemoveFromParentAsync() {
-            // minecraft mod style of "doRemove parameter" functions ;)
-            return Task.FromResult(this.ParentItem is IHaveChildren children && children.RemoveItem(this));
+        public virtual Task RemoveFromParentAction() {
+            if (this.ParentItem is IHaveChildren children) {
+                children.RemoveItem(this);
+            }
+
+            return Task.CompletedTask;
         }
 
-        public virtual void GetContext(List<IContextEntry> list) {
-            // I know using "this is" is a smelly way of doing things but it's so
-            // much easier in this case than using virtual functions. may change soon
-            if (this is BaseTagCollectionViewModel tagCollection) {
-                list.Add(new CommandContextEntry("Sort by Name", tagCollection.SortByNameCommand));
-                list.Add(new CommandContextEntry("Sort by Type", tagCollection.SortByTypeCommand));
-                list.Add(new CommandContextEntry("Sort by Both (default)", tagCollection.SortByBothCommand));
-                list.Add(SeparatorEntry.Instance);
-            }
-
-            if (this is TagDataFileViewModel datFile) {
-                list.Add(new CommandContextEntry("Refresh", datFile.RefreshDataCommand));
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/Save", datFile.SaveFileCommand));
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/SaveAs", datFile.SaveFileAsCommand));
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyFilePath", datFile.CopyFilePathToClipboardCommand));
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/OpenInExplorer", datFile.ShowInExplorerCommand));
-                list.Add(SeparatorEntry.Instance);
-            }
-
-            if (this is TagPrimitiveViewModel p2) {
-                list.Add(new CommandContextEntry("Edit Value", p2.EditGeneralCommand));
-                list.Add(new ShortcutCommandContextEntry(ShortcutUtils.ToFull("Application/EditorView/NBTTag", "RenameShortcut1", "RenameShortcut2"), p2.RenameCommand));
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyNameShortcut", p2.CopyNameCommand));
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyValueShortcut", p2.CopyValueCommand));
-            }
-            else {
-                list.Add(new ShortcutCommandContextEntry(ShortcutUtils.ToFull("Application/EditorView/NBTTag", "RenameShortcut1", "RenameShortcut2"), this.RenameCommand));
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/CopyNameShortcut", this.CopyNameCommand));
-            }
-
-            list.Add(new CommandContextEntry("Copy (Binary)", this.CopyBinaryToClipboardCommand));
-            list.Add(SeparatorEntry.Instance);
-            if (this is BaseTagCollectionViewModel tagCollectionAgain) {
-                list.Add(new ActionContextEntry(tagCollectionAgain, "actions.nbt.find"));
-                list.Add(SeparatorEntry.Instance);
-            }
-
-            if (this is TagDataFileViewModel datFileAgain) {
-                list.Add(new ShortcutCommandContextEntry("Application/EditorView/NBTTag/RemoveFromParent", this.RemoveFromParentCommand));
-                list.Add(new CommandContextEntry("Delete FILE", datFileAgain.DeleteFileCommand));
-            }
-            else {
-                list.Add(new ActionContextEntry(this, "actions.nbt.remove_from_parent"));
-            }
+        public virtual bool RemoveFromParent() {
+            return this.ParentItem is IHaveChildren children && children.RemoveItem(this);
         }
 
-        // this does not feel right to use at all... but it's the only way for shortcuts to actually "invoke"
-        // something that isn't an action nor one of the InputBinding classes for actions and shortcuts
-
-        public virtual ICommand GetCommandForShortcut(string shortcutId) {
-            if (this is TagDataFileViewModel datFile) {
-                switch (shortcutId) {
-                    case "Application/EditorView/NBTTag/Save": return datFile.SaveFileCommand;
-                    case "Application/EditorView/NBTTag/SaveAs": return datFile.SaveFileAsCommand;
-                    case "Application/EditorView/NBTTag/CopyFilePath": return datFile.CopyFilePathToClipboardCommand;
-                    case "Application/EditorView/NBTTag/OpenInExplorer": return datFile.ShowInExplorerCommand;
-                }
-            }
-
-            return null;
+        // Easiest way to implement a modified notification
+        public virtual void OnModified(BaseTagViewModel tag) {
+            this.ParentTag?.OnModified(tag);
         }
     }
 }

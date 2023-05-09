@@ -5,9 +5,8 @@ using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Explorer.NBT;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    [ActionRegistration("actions.nbt.rename.tag")]
     public class RenameTagAction : AnAction {
-        public RenameTagAction() : base("Rename", "Renames this tag") {
+        public RenameTagAction() : base() {
 
         }
 

@@ -10,7 +10,7 @@
     <Color x:Key="AREghZyColour.Glyph.MouseDown"                     R="235" G="235" B="235" A="255"/>
     <Color x:Key="AREghZyColour.Glyph.Selected"                      R="228" G="228" B="228" A="255"/>
     <Color x:Key="AREghZyColour.Glyph.Selected.Inactive"             R="218" G="218" B="218" A="255"/>
-    <Color x:Key="AREghZyColour.ColourfulGlyph.Static"               R="55"  G="130" B="190" A="255"/>
+    <Color x:Key="AREghZyColour.ColourfulGlyph.Static"               A="#FF" R="#34" G="#94" B="#E1"/>
     <Color x:Key="AREghZyColour.ColourfulGlyph.Disabled"             R="85"  G="135" B="175" A="255"/>
     <Color x:Key="AREghZyColour.ColourfulGlyph.MouseOver"            R="45"  G="125" B="215" A="255"/>
     <Color x:Key="AREghZyColour.ColourfulGlyph.MouseDown"            R="50"  G="135" B="200" A="255"/>
@@ -76,7 +76,6 @@
     <Color x:Key="AREghZyColour.Tone7.Border.Selected.Inactive"      R="81"  G="81"  B="81" A="255"/>
     <Color x:Key="AREghZyColour.Tone7.Background.Disabled"           R="115" G="115" B="115" A="255"/>
     <Color x:Key="AREghZyColour.Tone7.Border.Disabled"               R="130" G="130" B="130" A="255"/>
-
     <Color x:Key="AREghZyColour.Tone8.Background.Static"             R="80"  G="80"  B="80" A="255"/>
     <Color x:Key="AREghZyColour.Tone8.Border.Static"                 R="95"  G="95"  B="95" A="255"/>
     <Color x:Key="AREghZyColour.Tone8.Background.MouseOver"          R="95"  G="95"  B="95" A="255"/>

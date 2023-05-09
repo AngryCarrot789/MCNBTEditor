@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.Views.ViewModels;
@@ -6,12 +7,12 @@ namespace MCNBTEditor.Core.Views.Dialogs {
     public class BaseConfirmableDialogViewModel : BaseDialogViewModel, IErrorInfoHandler {
         protected bool HasErrors { get; private set; }
 
-        public RelayCommand ConfirmCommand { get; }
-        public RelayCommand CancelCommand { get; }
+        public AsyncRelayCommand ConfirmCommand { get; }
+        public AsyncRelayCommand CancelCommand { get; }
 
         public BaseConfirmableDialogViewModel() {
-            this.ConfirmCommand = new RelayCommand(async () => await this.ConfirmAction(), this.CanConfirm);
-            this.CancelCommand = new RelayCommand(async () => await this.CancelAction());
+            this.ConfirmCommand = new AsyncRelayCommand(this.ConfirmAction, this.CanConfirm);
+            this.CancelCommand = new AsyncRelayCommand(this.CancelAction);
         }
 
         public BaseConfirmableDialogViewModel(IDialog dialog) : this() {
@@ -21,14 +22,12 @@ namespace MCNBTEditor.Core.Views.Dialogs {
         public virtual async Task ConfirmAction() {
             if (await this.CanConfirmAsync()) {
                 await this.Dialog.CloseDialogAsync(true);
-                await this.OnDialogClosedAsync();
             }
         }
 
         public virtual async Task CancelAction() {
             if (await this.CanCancelAsync()) {
                 await this.Dialog.CloseDialogAsync(false);
-                await this.OnDialogClosedAsync();
             }
         }
 
@@ -59,10 +58,6 @@ namespace MCNBTEditor.Core.Views.Dialogs {
         /// </summary>
         public virtual Task<bool> CanCancelAsync() {
             return Task.FromResult(true);
-        }
-
-        public virtual Task OnDialogClosedAsync() {
-            return Task.CompletedTask;
         }
     }
 }

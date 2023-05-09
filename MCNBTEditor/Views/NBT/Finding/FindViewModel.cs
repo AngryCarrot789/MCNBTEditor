@@ -15,10 +15,21 @@ using MCNBTEditor.Core.Views.Windows;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Views.NBT.Finding {
+    // TODO: move to core project
     public class FindViewModel : BaseWindowViewModel, IDisposable {
-        public ICommand CloseCommand { get; }
-
         private bool isNameRegex;
+        private bool isNameSearchingWholeWord;
+        private bool isNameCaseSensitive;
+        private bool includeCollectionNameMatches;
+        private bool isValueRegex;
+        private bool isValueSearchingWholeWord;
+        private bool isValueCaseSensitive;
+        private string searchForNameText;
+        private string searchForValueText;
+        private bool isSearchTermEmpty;
+        private volatile bool isSearchActive;
+        private volatile bool isSearchBarEnabled;
+
         public bool IsNameRegex {
             get => this.isNameRegex;
             set {
@@ -29,7 +40,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private bool isNameSearchingWholeWord;
         public bool IsNameSearchingWholeWord {
             get => this.isNameSearchingWholeWord;
             set {
@@ -40,19 +50,16 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private bool isNameCaseSensitive;
         public bool IsNameCaseSensitive {
             get => this.isNameCaseSensitive;
             set => this.RaisePropertyChangedIfChanged(ref this.isNameCaseSensitive, value);
         }
 
-        private bool includeCollectionNameMatches;
         public bool IncludeCollectionNameMatches {
             get => this.includeCollectionNameMatches;
             set => this.RaisePropertyChangedIfChanged(ref this.includeCollectionNameMatches, value);
         }
 
-        private bool isValueRegex;
         public bool IsValueRegex {
             get => this.isValueRegex;
             set {
@@ -63,7 +70,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private bool isValueSearchingWholeWord;
         public bool IsValueSearchingWholeWord {
             get => this.isValueSearchingWholeWord;
             set {
@@ -74,13 +80,11 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private bool isValueCaseSentsitive;
-        public bool IsValueCaseSentsitive {
-            get => this.isValueCaseSentsitive;
-            set => this.RaisePropertyChangedIfChanged(ref this.isValueCaseSentsitive, value);
+        public bool IsValueCaseSensitive {
+            get => this.isValueCaseSensitive;
+            set => this.RaisePropertyChangedIfChanged(ref this.isValueCaseSensitive, value);
         }
 
-        private string searchForNameText;
         public string SearchForNameText {
             get => this.searchForNameText;
             set {
@@ -89,7 +93,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private string searchForValueText;
         public string SearchForValueText {
             get => this.searchForValueText;
             set {
@@ -98,13 +101,11 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private bool isSearchTermEmpty;
         public bool IsSearchTermEmpty {
             get => this.isSearchTermEmpty;
             set => this.RaisePropertyChanged(ref this.isSearchTermEmpty, value);
         }
 
-        private volatile bool isSearchActive;
         public bool IsSearchActive {
             get => this.isSearchActive;
             set {
@@ -116,7 +117,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
             }
         }
 
-        private volatile bool isSearchBarEnabled;
         public bool IsSearchBarEnabled {
             get => this.isSearchBarEnabled;
             set {
@@ -143,7 +143,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
             this.isSearchTermEmpty = true;
             this.isSearchActive = false;
             this.isSearchBarEnabled = true;
-            this.CloseCommand = new RelayCommand(this.CloseDialogAction);
             this.FoundItems = new ObservableCollection<NBTMatchResult>();
             this.IdleEventService = new IdleEventService();
             this.IdleEventService.MinimumTimeSinceInput = TimeSpan.FromMilliseconds(200);
@@ -195,7 +194,7 @@ namespace MCNBTEditor.Views.NBT.Finding {
             FindFlags vf = FindFlags.None;
             if (this.isValueRegex) vf |= FindFlags.Regex;
             if (this.isValueSearchingWholeWord) vf |= FindFlags.Words;
-            if (this.isValueCaseSentsitive) vf |= FindFlags.Cases;
+            if (this.isValueCaseSensitive) vf |= FindFlags.Cases;
 
             string searchName = string.IsNullOrEmpty(this.SearchForNameText) ? null : this.SearchForNameText;
             string searchValue = string.IsNullOrEmpty(this.SearchForValueText) ? null : this.SearchForValueText;
@@ -329,10 +328,6 @@ namespace MCNBTEditor.Views.NBT.Finding {
 
         private Task AddItemAsync(NBTMatchResult result) {
             return IoC.Dispatcher.InvokeLaterAsync(() => this.FoundItems.Add(result), true);
-        }
-
-        public void CloseDialogAction() {
-            this.Window.CloseWindow();
         }
 
         public void Dispose() {

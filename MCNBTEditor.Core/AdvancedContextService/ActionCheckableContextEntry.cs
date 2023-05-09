@@ -13,12 +13,16 @@ namespace MCNBTEditor.Core.AdvancedContextService {
             }
         }
 
-        protected ActionCheckableContextEntry(object dataContext, string actionId, IEnumerable<IContextEntry> children = null) : base(dataContext, actionId, children) {
-
+        public ActionCheckableContextEntry(object dataContext, string actionId, string header, string description, IEnumerable<IContextEntry> children = null) : base(dataContext, actionId, header, description, children) {
         }
 
-        protected ActionCheckableContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) : this(dataContext, null, children) {
+        public ActionCheckableContextEntry(object dataContext, string actionId, string header, IEnumerable<IContextEntry> children = null) : base(dataContext, actionId, header, children) {
+        }
 
+        public ActionCheckableContextEntry(object dataContext, string actionId, IEnumerable<IContextEntry> children = null) : base(dataContext, actionId, children) {
+        }
+
+        public ActionCheckableContextEntry(object dataContext, IEnumerable<IContextEntry> children = null) : base(dataContext, children) {
         }
     }
 }

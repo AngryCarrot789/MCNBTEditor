@@ -1,18 +1,22 @@
 ﻿<Application x:Class="MCNBTEditor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:controls="clr-namespace:MCNBTEditor.Controls"
+             xmlns:resources="clr-namespace:MCNBTEditor.Resources"
+             xmlns:generic="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+             xmlns:core="clr-namespace:MCNBTEditor.Core;assembly=MCNBTEditor.Core"
+             xmlns:system="clr-namespace:System;assembly=System"
+             xmlns:mcnbtEditor="clr-namespace:MCNBTEditor"
              Startup="Application_Startup"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <ResourceDictionary>
-            <Style TargetType="{x:Type controls:ExtendedTreeView}" BasedOn="{StaticResource {x:Type TreeView}}"/>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/SoftDark.xaml"/>
+                <ResourceDictionary Source="Themes/ColourDictionaries/SoftDark.xaml"/>
                 <ResourceDictionary Source="Themes/ControlColours.xaml"/>
                 <ResourceDictionary Source="Themes/Controls.xaml"/>
                 <!--
                 -->
+
                 <ResourceDictionary Source="AdvancedContextService/ContextStyles.xaml"/>
                 <ResourceDictionary Source="Controls/ControlStyles.xaml"/>
                 <ResourceDictionary Source="Views/NBT/Finding/NBTFindingStyles.xaml"/>

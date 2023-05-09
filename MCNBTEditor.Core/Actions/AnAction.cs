@@ -10,28 +10,7 @@ namespace MCNBTEditor.Core.Actions {
     /// </para>
     /// </summary>
     public abstract class AnAction {
-        private static readonly Func<string> ProvideNullString = () => null;
-
-        /// <summary>
-        /// This action's header
-        /// </summary>
-        public Func<string> Header { get; }
-
-        /// <summary>
-        /// This action's description
-        /// </summary>
-        public Func<string> Description { get; }
-
-        protected AnAction(Func<string> header, Func<string> description) {
-            this.Header = header ?? ProvideNullString;
-            this.Description = description ?? ProvideNullString;
-        }
-
-        protected AnAction(string header, string description) : this(GetStringProvider(header), GetStringProvider(description)) {
-        }
-
-        protected static Func<string> GetStringProvider(string hardCoded) {
-            return hardCoded != null ? () => hardCoded : ProvideNullString;
+        protected AnAction() {
         }
 
         /// <summary>

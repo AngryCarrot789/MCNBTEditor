@@ -5,7 +5,7 @@ namespace MCNBTEditor.Core.Actions {
     public abstract class ToggleAction : AnAction {
         public const string IsToggledKey = "toggled";
 
-        protected ToggleAction(Func<string> header, Func<string> description) : base(header, description) {
+        protected ToggleAction(Func<string> header, Func<string> description) : base() {
 
         }
 

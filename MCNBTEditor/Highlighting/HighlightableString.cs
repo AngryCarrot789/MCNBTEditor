@@ -17,6 +17,7 @@ namespace MCNBTEditor.Highlighting {
         }
 
         public HighlightableString() : this(null, null) {
+
         }
 
         public HighlightableString(string text) : this(text, null) {

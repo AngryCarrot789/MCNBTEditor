@@ -4,12 +4,13 @@ using MCNBTEditor.AdvancedContextService;
 using MCNBTEditor.Core.Actions.Contexts;
 using MCNBTEditor.Core.AdvancedContextService;
 using MCNBTEditor.Core.Explorer.Actions;
+using MCNBTEditor.Core.Explorer.Context;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Views.NBT.Finding;
 
 namespace MCNBTEditor.ContextMenus {
-    public class FindResultContextGenerator : IWPFContextGenerator {
-        public static FindResultContextGenerator Instance { get; } = new FindResultContextGenerator();
+    public class WPFFindResultContextGenerator : FindResultContextGenerator, IWPFContextGenerator {
+        public static WPFFindResultContextGenerator Instance { get; } = new WPFFindResultContextGenerator();
 
         public void Generate(List<IContextEntry> list, DependencyObject sender, DependencyObject target, object context) {
             if (context is NBTMatchResult result) {
@@ -27,9 +28,9 @@ namespace MCNBTEditor.ContextMenus {
             list.Add(new CommandContextEntry("Navigate", result.NavigateToItemCommand));
             list.Add(SeparatorEntry.Instance);
             BaseTagViewModel tag = result.NBT;
-            if (tag is TagDataFileViewModel datFile) {
-                list.Add(new ShortcutCommandContextEntry("Copy file path", "Copies this .DAT file's file path to the system clipboard", "Application/EditorView/NBTTag/CopyFilePath", datFile.CopyFilePathToClipboardCommand));
-                list.Add(new ShortcutCommandContextEntry("Open in Explorer", "Opens the windows file explorer with this .DAT actual file's select", "Application/EditorView/NBTTag/OpenInExplorer", datFile.OpenInExplorerCommand));
+            if (tag is TagDataFileViewModel) {
+                list.Add(new ActionContextEntry(tag, "actions.item.CopyFilePath", "Copy file path", "Copies this .DAT file's file path to the system clipboard"));
+                list.Add(new ActionContextEntry(tag, "actions.item.OpenInExplorer", "Show in Explorer", "Opens the windows file explorer with this .DAT actual file's selected"));
                 list.Add(SeparatorEntry.Instance);
             }
 

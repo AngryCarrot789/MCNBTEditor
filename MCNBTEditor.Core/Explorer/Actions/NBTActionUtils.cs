@@ -17,7 +17,7 @@ namespace MCNBTEditor.Core.Explorer.Actions {
             BaseTreeItemViewModel firstTag = context.GetContext<BaseTreeItemViewModel>();
             if (context.TryGetContext(out IExtendedList list)) {
                 List<BaseTreeItemViewModel> selected = list.SelectedItems.ToList();
-                if (firstTag != null && selected.Contains(firstTag)) {
+                if (firstTag == null || selected.Contains(firstTag)) {
                     tags = selected;
                     return true;
                 }

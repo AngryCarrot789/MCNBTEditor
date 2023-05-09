@@ -12,6 +12,9 @@ namespace MCNBTEditor.Core.Explorer {
         public const string UnknownPathElementName = "<unknown>";
 
         private readonly ObservableCollectionEx<BaseTreeItemViewModel> children;
+        private BaseTreeItemViewModel parentItem;
+        private bool isValid;
+        private bool isReadOnly;
 
         /// <summary>
         /// A reference to the internal children collection. Only modify in exceptional circumstances
@@ -22,16 +25,24 @@ namespace MCNBTEditor.Core.Explorer {
 
         public ReadOnlyObservableCollection<BaseTreeItemViewModel> Children { get; }
 
-        private BaseTreeItemViewModel parentItem;
         public BaseTreeItemViewModel ParentItem {
             get => this.parentItem;
             private set => this.RaisePropertyChanged(ref this.parentItem, value);
         }
 
-        private bool isValid;
         public bool IsValid {
             get => this.isValid;
             private set => this.RaisePropertyChanged(ref this.isValid, value);
+        }
+
+
+        /// <summary>
+        /// This item is read only and cannot be modified, nor any of the children. Modifying children when
+        /// the item is read only may result in undesired results
+        /// </summary>
+        public bool IsReadOnly {
+            get => this.isReadOnly;
+            set => this.RaisePropertyChanged(ref this.isReadOnly, value);
         }
 
         /// <summary>
@@ -76,7 +87,7 @@ namespace MCNBTEditor.Core.Explorer {
         protected BaseTreeItemViewModel() {
             this.children = new ObservableCollectionEx<BaseTreeItemViewModel>();
             this.Children = new ReadOnlyObservableCollection<BaseTreeItemViewModel>(this.children);
-            this.children.CollectionChanged += this.OnChildListModified;
+            this.children.CollectionChanged += this.OnChildrenCollectionChanged;
         }
 
         public List<BaseTreeItemViewModel> GetParentChain(bool includeRoot = true) {
@@ -117,7 +128,7 @@ namespace MCNBTEditor.Core.Explorer {
             return this.GetParentAndNameChain().Select(x => x.Item2);
         }
 
-        protected virtual void OnChildListModified(object sender, NotifyCollectionChangedEventArgs e) {
+        protected virtual void OnChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
             this.RaisePropertyChanged(nameof(this.ChildrenCount));
             this.RaisePropertyChanged(nameof(this.IsEmpty));
         }
@@ -299,18 +310,18 @@ namespace MCNBTEditor.Core.Explorer {
             return list;
         }
 
-        public async Task<BaseTreeItemViewModel> GetChildAction(string path, int beginIndex, int endIndex, bool canShowUi) {
-            string name = path.JSubstring(beginIndex, endIndex);
+        public async Task<BaseTreeItemViewModel> GetChildAction(string path, int j, int i, bool canShowUi) {
             if (this.children.Count < 1) {
                 if (canShowUi) {
-                    await IoC.MessageDialogs.ShowMessageAsync("No children available", $"The child at {path.Substring(0, endIndex)} does not contain any children");
+                    await IoC.MessageDialogs.ShowMessageAsync("No children available", $"The item at '{path.Substring(0, j)}' does not contain any children");
                 }
 
                 return null;
             }
 
+            string name = path.JSubstring(j, i);
             if (string.IsNullOrEmpty(name)) {
-                return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Invalid element in path", $"The path {path.Substring(0, endIndex)} contains an element with an empty name. Select a suitable item to use instead:");
+                return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Invalid element in path", $"The path '{path.Substring(0, i)}' contains an element with an empty name. Select a suitable item to use instead:");
             }
 
             List<BaseTreeItemViewModel> items = new List<BaseTreeItemViewModel>();
@@ -327,14 +338,14 @@ namespace MCNBTEditor.Core.Explorer {
                         return this.children[index];
                     }
                     else {
-                        return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Invalid array element in path", $"{path.Substring(0, endIndex)} is an invalid array. Select a suitable item to use instead:");
+                        return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Invalid array element in path", $"{path.Substring(0, i)} is an invalid array. Select a suitable item to use instead:");
                     }
                 }
                 else if (name == UnknownPathElementName) {
-                    return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Unknown element in path", $"Path contains an unknown element in {path.Substring(0, beginIndex)}. Select a suitable item to use instead:");
+                    return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "Unknown element in path", $"Path contains an unknown element in {path.Substring(0, j)}. Select a suitable item to use instead:");
                 }
                 else {
-                    return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "No such item in path", $"Unknown child at path: {path.Substring(0, endIndex)}. Select a suitable item to use instead:");
+                    return !canShowUi ? null : await IoC.ItemSelectorService.SelectItemAsync(this.children, "No such item in path", $"Unknown child at path: {path.Substring(0, i)}. Select a suitable item to use instead:");
                 }
             }
             else if (items.Count == 1) {

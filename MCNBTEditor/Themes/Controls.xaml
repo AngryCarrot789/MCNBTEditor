@@ -461,12 +461,12 @@
                                 <ResizeGrip x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
                                 <DockPanel Height="30" x:Name="titlebar" Background="{TemplateBinding BorderBrush}" VerticalAlignment="Top" Margin="0">
                                     <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                                        <Button x:Name="btnMinimize" Background="Transparent" BorderBrush="Transparent" Width="40" VerticalContentAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Click="Minimize_Event">
+                                        <Button x:Name="btnMinimize" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40" VerticalContentAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Click="Minimize_Event">
                                             <Rectangle Width="10" VerticalAlignment="Center" Margin="1 -24 0 0" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
                                         </Button>
 
                                         <Grid x:Name="ThingButtons">
-                                            <Button x:Name="btnRestore" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                            <Button x:Name="btnRestore" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40"
                                                     WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
                                                 <Grid Width="12" Height="12">
                                                     <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="3,0,0,3" />
@@ -474,18 +474,18 @@
                                                 </Grid>
                                             </Button>
 
-                                            <Button x:Name="btnMaximize" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                            <Button x:Name="btnMaximize" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40"
                                                     WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
                                                 <Grid Width="12" Height="12">
                                                     <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
                                                 </Grid>
                                             </Button>
 
-                                            <Button x:Name="btnWtfEvenLolol" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                            <Button x:Name="btnWtfEvenLolol" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40"
                                                     WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event" Content="^"/>
                                         </Grid>
 
-                                        <Button x:Name="btnClose" Background="Transparent" BorderBrush="Transparent" Template="{DynamicResource CloseWindowButton}" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="CloseWindow_Event">
+                                        <Button x:Name="btnClose" Focusable="False" Background="Transparent" BorderBrush="Transparent" Template="{DynamicResource CloseWindowButton}" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="CloseWindow_Event">
                                             <Grid Margin="0 1 0 0">
                                                 <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
                                                 <Line X1="0" Y2="0" Y1="11" X2="11" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
@@ -572,12 +572,12 @@
                                 <ResizeGrip x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
                                 <DockPanel Height="30" x:Name="titlebar" Background="{TemplateBinding TitlebarBrush}" VerticalAlignment="Top" Margin="0">
                                     <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                                        <Button x:Name="btnMinimize" Background="Transparent" BorderBrush="Transparent" Width="40" VerticalContentAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Click="Minimize_Event">
+                                        <Button x:Name="btnMinimize" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40" VerticalContentAlignment="Bottom" WindowChrome.IsHitTestVisibleInChrome="True" Click="Minimize_Event">
                                             <Rectangle Width="10" VerticalAlignment="Center" Margin="1 -24 0 0" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
                                         </Button>
 
                                         <Grid x:Name="ThingButtons">
-                                            <Button x:Name="btnRestore" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                            <Button x:Name="btnRestore" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40"
                                                     WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
                                                 <Grid Width="12" Height="12">
                                                     <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="3,0,0,3" />
@@ -585,18 +585,18 @@
                                                 </Grid>
                                             </Button>
 
-                                            <Button x:Name="btnMaximize" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                            <Button x:Name="btnMaximize" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40"
                                                     WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event">
                                                 <Grid Width="12" Height="12">
                                                     <Rectangle StrokeThickness="2" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" Margin="0" />
                                                 </Grid>
                                             </Button>
 
-                                            <Button x:Name="btnWtfEvenLolol" Background="Transparent" BorderBrush="Transparent" Width="40" 
+                                            <Button x:Name="btnWtfEvenLolol" Focusable="False" Background="Transparent" BorderBrush="Transparent" Width="40"
                                                     WindowChrome.IsHitTestVisibleInChrome="True" Click="AutoMinimize_Event" Content="^"/>
                                         </Grid>
 
-                                        <Button x:Name="btnClose" Background="Transparent" BorderBrush="Transparent" Template="{DynamicResource CloseWindowButton}" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="CloseWindow_Event">
+                                        <Button x:Name="btnClose" Focusable="False" Background="Transparent" BorderBrush="Transparent" Template="{DynamicResource CloseWindowButton}" Width="40" WindowChrome.IsHitTestVisibleInChrome="True" Click="CloseWindow_Event">
                                             <Grid Margin="0 1 0 0">
                                                 <Line X1="0" Y1="0" X2="11" Y2="11" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
                                                 <Line X1="0" Y2="0" Y1="11" X2="11" Stroke="{DynamicResource AREghZyBrush.Glyph.Static}" StrokeThickness="2" />
@@ -2061,21 +2061,94 @@
             <Trigger Property="IsCheckable" Value="True">
                 <Setter Property="StaysOpenOnClick" Value="True"/>
             </Trigger>
-            <Trigger Property="Role" Value="SubmenuHeader">
-                <Setter Property="Template" Value="{DynamicResource SubLevelMenuItemWithChildrenControlTemplate}" />
-            </Trigger>
-            <Trigger Property="Role" Value="SubmenuItem">
-                <Setter Property="Template" Value="{DynamicResource SubLevelMenuItemControlTemplate}" />
-            </Trigger>
-            <Trigger Property="Role" Value="TopLevelItem">
-                <Setter Property="Template" Value="{DynamicResource TopLevelMenuItemControlTemplate}" />
-            </Trigger>
+
+            <!--
+
+            if (this.IsCheckable || !this.HasItems) {
+                Role = this.LogicalParent is Menu ? MenuItemRole.TopLevelItem : MenuItemRole.SubmenuItem;
+            }
+            else {
+                Role = this.LogicalParent is Menu ? MenuItemRole.TopLevelHeader : MenuItemRole.SubmenuHeader;
+            }
+
+            -->
+
+            <!-- Contained in Menu | has children -->
             <Trigger Property="Role" Value="TopLevelHeader">
                 <Setter Property="Template" Value="{DynamicResource TopLevelMenuItemControlTemplate}" />
             </Trigger>
+            <!-- Contained in Menu | is checkable or no children -->
+            <Trigger Property="Role" Value="TopLevelItem">
+                <Setter Property="Template" Value="{DynamicResource TopLevelMenuItemControlTemplate}" />
+            </Trigger>
+            <!-- Contained in MenuItem hierarchy | has children -->
+            <Trigger Property="Role" Value="SubmenuHeader">
+                <Setter Property="Template" Value="{DynamicResource SubLevelMenuItem_SubmenuHeader_ControlTemplate}" />
+            </Trigger>
+            <!-- Contained in MenuItem hierarchy | is checkable or no children -->
+            <Trigger Property="Role" Value="SubmenuItem">
+                <Setter Property="Template" Value="{DynamicResource SubLevelMenuItem_SubmenuItem_ControlTemplate}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
-    <ControlTemplate x:Key="SubLevelMenuItemWithChildrenControlTemplate" TargetType="{x:Type MenuItem}">
+
+    <ControlTemplate x:Key="TopLevelMenuItemControlTemplate" TargetType="{x:Type MenuItem}">
+        <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+            <Grid x:Name="Grid" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16" />
+                <Path x:Name="GlyphPanel" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="3" Visibility="Collapsed" VerticalAlignment="Center" />
+                <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}" Placement="Bottom">
+                    <Themes:SystemDropShadowChrome Name="Shdw_2" Color="#71000000" CornerRadius="0" SnapsToDevicePixels="True" Margin="0 0 5 5">
+                        <Border x:Name="SubMenuBorder" BorderBrush="{DynamicResource Popup.Static.Border}" BorderThickness="1" Background="{DynamicResource Popup.Static.Background}" Padding="0">
+                            <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                <Grid x:Name="Grid1" RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Stretch" Width="22">
+                                        <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=SubMenuBorder}" Height="{Binding ActualHeight, ElementName=SubMenuBorder}" Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
+                                    </Canvas>
+                                    <Border Background="{DynamicResource MenuItem.IconBar.Static.Background}"
+                                            BorderBrush="{DynamicResource MenuItem.IconBar.Static.Border}"
+                                            BorderThickness="0,0,1,0" Margin="0"
+                                            Width="23" HorizontalAlignment="Left"/>
+                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle" />
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Themes:SystemDropShadowChrome>
+                </Popup>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSuspendingPopupAnimation" Value="True">
+                <Setter Property="PopupAnimation" TargetName="PART_Popup" Value="None" />
+            </Trigger>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible" />
+                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter Property="Background" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Background}" />
+                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Border}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource AREghZyBrush.Foreground.Disabled}" />
+                <Setter Property="Background" Value="{DynamicResource MenuItem.Disabled.Background}" />
+            </Trigger>
+            <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
+                <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=SubMenuScrollViewer}" />
+                <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=SubMenuScrollViewer}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SubLevelMenuItem_SubmenuHeader_ControlTemplate" TargetType="{x:Type MenuItem}">
         <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
@@ -2087,22 +2160,24 @@
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16" />
-                <Border x:Name="GlyphPanel" BorderBrush="#FF26A0DA" BorderThickness="1" Background="#3D26A0DA" Height="22" Margin="-1,0,0,0" Visibility="Hidden" VerticalAlignment="Center" Width="22">
+                <Border Grid.Column="0" x:Name="GlyphPanel" Background="{DynamicResource MenuItem.Square.Static.Background}" BorderBrush="{DynamicResource MenuItem.Square.Static.Border}" BorderThickness="1" Height="22" Margin="-1,0,0,0" Visibility="Hidden" VerticalAlignment="Center" Width="22">
                     <Path x:Name="Glyph" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#FF212121" FlowDirection="LeftToRight" Height="11" Width="9" />
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" />
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center" />
                 <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Fill="{DynamicResource AREghZyBrush.Glyph.Static}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" />
-                <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-2" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="Fade" Placement="Right" VerticalOffset="-3">
-                    <Themes:SystemDropShadowChrome Name="MENU_ITEM_SHADOW" Themes:SystemDropShadowChrome.Color="#71000000" Themes:SystemDropShadowChrome.CornerRadius="0" SnapsToDevicePixels="True" Margin="0 0 5 5">
+                <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-2" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}" Placement="Right" VerticalOffset="-3">
+                    <Themes:SystemDropShadowChrome Name="MENU_ITEM_SHADOW" Color="#71000000" CornerRadius="0" SnapsToDevicePixels="True" Margin="0 0 5 5">
                         <Border x:Name="SubMenuBorder" BorderBrush="{DynamicResource Popup.Static.Border}" Background="{DynamicResource Popup.Static.Background}" BorderThickness="1" Padding="0">
                             <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                                 <Grid RenderOptions.ClearTypeHint="Enabled">
                                     <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Stretch" Width="22">
                                         <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=SubMenuBorder}" Height="{Binding ActualHeight, ElementName=SubMenuBorder}" Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                                     </Canvas>
-                                    <Rectangle x:Name="Rectangle" Fill="{DynamicResource MenuItem.Square.Static.Border}" HorizontalAlignment="Left" Margin="22,0,0,0" Width="1" />
-                                    <Rectangle Fill="{DynamicResource MenuItem.Square.Static.Background}" HorizontalAlignment="Left" Margin="0" Width="22" />
+                                    <Border Background="{DynamicResource MenuItem.IconBar.Static.Background}"
+                                            BorderBrush="{DynamicResource MenuItem.IconBar.Static.Border}"
+                                            BorderThickness="0,0,1,0" Margin="0"
+                                            Width="23" HorizontalAlignment="Left"/>
                                     <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle" />
                                 </Grid>
                             </ScrollViewer>
@@ -2138,60 +2213,8 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="TopLevelMenuItemControlTemplate" TargetType="{x:Type MenuItem}">
-        <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-            <Grid x:Name="Grid" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16" />
-                <Path x:Name="GlyphPanel" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="{TemplateBinding Foreground}" FlowDirection="LeftToRight" Margin="3" Visibility="Collapsed" VerticalAlignment="Center" />
-                <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="1" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}" Placement="Bottom">
-                    <Themes:SystemDropShadowChrome Name="Shdw_2" Themes:SystemDropShadowChrome.Color="#71000000" Themes:SystemDropShadowChrome.CornerRadius="0" SnapsToDevicePixels="True" Margin="0 0 5 5">
-                        <Border x:Name="SubMenuBorder" BorderBrush="{DynamicResource Popup.Static.Border}" BorderThickness="1" Background="{DynamicResource Popup.Static.Background}" Padding="0">
-                            <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
-                                <Grid x:Name="Grid1" RenderOptions.ClearTypeHint="Enabled">
-                                    <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Stretch" Width="22">
-                                        <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=SubMenuBorder}" Height="{Binding ActualHeight, ElementName=SubMenuBorder}" Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
-                                    </Canvas>
-                                    <Rectangle x:Name="Rectangle" Fill="{DynamicResource MenuItem.Square.Static.Border}" HorizontalAlignment="Left" Margin="22,0,0,0" Width="1" />
-                                    <Rectangle Fill="{DynamicResource MenuItem.Square.Static.Background}" HorizontalAlignment="Left" Margin="0" Width="22" />
-                                    <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle" />
-                                </Grid>
-                            </ScrollViewer>
-                        </Border>
-                    </Themes:SystemDropShadowChrome>
-                </Popup>
-            </Grid>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsSuspendingPopupAnimation" Value="True">
-                <Setter Property="PopupAnimation" TargetName="PART_Popup" Value="None" />
-            </Trigger>
-            <Trigger Property="Icon" Value="{x:Null}">
-                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Visibility" TargetName="GlyphPanel" Value="Visible" />
-                <Setter Property="Visibility" TargetName="Icon" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="IsHighlighted" Value="True">
-                <Setter Property="Background" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Background}" />
-                <Setter Property="BorderBrush" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Border}" />
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource AREghZyBrush.Foreground.Disabled}" />
-                <Setter Property="Background" Value="{DynamicResource MenuItem.Disabled.Background}" />
-            </Trigger>
-            <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
-                <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=SubMenuScrollViewer}" />
-                <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=SubMenuScrollViewer}" />
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-    <ControlTemplate x:Key="SubLevelMenuItemControlTemplate" TargetType="{x:Type MenuItem}">
+
+    <ControlTemplate x:Key="SubLevelMenuItem_SubmenuItem_ControlTemplate" TargetType="{x:Type MenuItem}">
         <Border x:Name="templateRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
             <Grid Margin="-1">
                 <Grid.ColumnDefinitions>
@@ -2203,21 +2226,23 @@
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16" />
-                <Border x:Name="GlyphPanel" BorderBrush="{DynamicResource MenuItem.Square.Static.Border}" BorderThickness="1" Background="{DynamicResource MenuItem.Square.Static.Background}" Height="20" Margin="0,1,0,1" Visibility="Hidden" VerticalAlignment="Center" Width="20">
+                <Border x:Name="GlyphPanel" Background="{DynamicResource MenuItem.Square.Static.Background}" BorderBrush="{DynamicResource MenuItem.Square.Static.Border}" BorderThickness="1" Height="20" Margin="0,1,0,1" Visibility="Hidden" VerticalAlignment="Center" Width="20">
                     <Path x:Name="Glyph" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="{DynamicResource MenuItem.Static.Glyph}" FlowDirection="LeftToRight" Height="9" Width="10" />
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" />
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center" />
                 <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Visibility="Hidden" Fill="{DynamicResource AREghZyBrush.Glyph.Static}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" />
-                <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-2" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="Fade" Placement="Right" VerticalOffset="-3">
+                <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-2" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}" Placement="Right" VerticalOffset="-3">
                     <Border x:Name="SubMenuBorder" BorderBrush="{DynamicResource Popup.Static.Border}" Background="{DynamicResource Popup.Static.Background}" BorderThickness="1" Padding="0">
                         <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
                             <Grid RenderOptions.ClearTypeHint="Enabled">
                                 <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Stretch" Width="22">
                                     <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=SubMenuBorder}" Height="{Binding ActualHeight, ElementName=SubMenuBorder}" Width="{Binding ActualWidth, ElementName=SubMenuBorder}" />
                                 </Canvas>
-                                <Rectangle x:Name="Rectangle" Fill="{DynamicResource MenuItem.Square.Static.Border}" HorizontalAlignment="Left" Margin="22,0,0,0" Width="1" />
-                                <Rectangle Fill="{DynamicResource MenuItem.Square.Static.Background}" HorizontalAlignment="Left" Margin="0" Width="22" />
+                                <Border Background="{DynamicResource MenuItem.IconBar.Static.Background}"
+                                        BorderBrush="{DynamicResource MenuItem.IconBar.Static.Border}"
+                                        BorderThickness="0,0,1,0" Margin="0"
+                                        Width="23" HorizontalAlignment="Left"/>
                                 <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle" Grid.IsSharedSizeScope="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle" />
                             </Grid>
                         </ScrollViewer>
@@ -3006,9 +3031,9 @@
         </Setter>
     </Style>
 
-    <Style x:Key="MenuItemSeparator" TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{DynamicResource MenuItem.Square.Static.Background}" />
-        <Setter Property="Margin" Value="0,2,0,2" />
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
+        <Setter Property="Background" Value="{DynamicResource MenuItem.IconBar.Static.Background}" />
+        <Setter Property="Margin" Value="23,2,0,2" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">
             <Setter.Value>
@@ -3191,7 +3216,7 @@
     </Style>
     <Style x:Key="{x:Static ToolBar.ButtonStyleKey}" BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type Button}" />
     <Style x:Key="{x:Static ToolBar.ToggleButtonStyleKey}" BasedOn="{StaticResource {x:Type ToggleButton}}" TargetType="{x:Type ToggleButton}" />
-    <Style x:Key="{x:Static ToolBar.CheckBoxStyleKey}" BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="{x:Type CheckBox}" />
+    <Style x:Key="{x:Static ToolBar.CheckBoxStyleKey}" BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="{x:Type CheckBox}"/>
     <Style x:Key="{x:Static ToolBar.RadioButtonStyleKey}" BasedOn="{StaticResource {x:Type RadioButton}}" TargetType="{x:Type RadioButton}" />
     <Style TargetType="{x:Type ToolBar}">
         <Setter Property="Background" Value="{DynamicResource ToolBarHorizontalBackground}"/>

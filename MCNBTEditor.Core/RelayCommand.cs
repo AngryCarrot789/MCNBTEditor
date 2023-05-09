@@ -37,7 +37,7 @@ namespace MCNBTEditor.Core {
 
         public bool ConvertParameter { get; set; }
 
-        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null, bool convertParameter = false) {
+        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null, bool convertParameter = true) {
             if (execute == null) {
                 throw new ArgumentNullException(nameof(execute), "Execute callback cannot be null");
             }

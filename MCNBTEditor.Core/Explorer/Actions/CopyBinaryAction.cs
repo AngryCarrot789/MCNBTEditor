@@ -9,8 +9,7 @@ using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    [ActionRegistration("actions.nbt.copy.binary.sysclipboard")]
-    public class CopyBinaryAction : ExtendedListActionBase {
+    public class CopyBinaryAction : MultiSelectionAction {
         public static readonly MessageDialog TypeDialog;
 
         static CopyBinaryAction() {

@@ -1,5 +1,4 @@
 using System;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -9,19 +8,28 @@ namespace MCNBTEditor.Core.Actions.Helpers {
     /// Creates a new action which invokes an <see cref="ICommand"/>
     /// </summary>
     /// <typeparam name="T">The type which contains the target command</typeparam>
-    public class ShortcutCommandAction<T> : AnAction {
+    public class CommandAction<T> : AnAction {
+        /// <summary>
+        /// The function that gets the <see cref="ICommand"/> instance from an object.
+        /// The function will not be null, but invoking it may return a null value
+        /// </summary>
         public Func<T, ICommand> CommandAccessor { get; }
 
-        public string ShortcutId { get; }
+        public bool ResultWhenNullCommand { get; set; } = false;
+        public bool ResultWhenCannotExecute { get; set; } = false;
+        public bool ResultWhenExecuteSuccess { get; set; } = true;
+
+        public Presentation PresentationWhenNullCommand { get; set; } = Presentation.VisibleAndDisabled;
+        public Presentation PresentationWhenCannotExecute { get; set; } = Presentation.VisibleAndDisabled;
+        public Presentation PresentationWhenCanExecute { get; set; } = Presentation.VisibleAndEnabled;
 
         /// <summary>
-        /// Constructor for <see cref="ShortcutCommandAction{T}"/>
+        /// Constructor for <see cref="CommandAction{T}"/>
         /// </summary>
-        /// <param name="shortcutId">The ID of the shortcut</param>
         /// <param name="propertyName">The name of the <see cref="ICommand"/> property in <see cref="T"/></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="Exception"></exception>
-        public ShortcutCommandAction(string shortcutId, string propertyName) : base((string) null, null) {
+        /// <exception cref="ArgumentNullException">Null property name</exception>
+        /// <exception cref="Exception">No such property in <see cref="T"/> named by <see cref="propertyName"/></exception>
+        public CommandAction(string propertyName) : base() {
             if (propertyName == null)
                 throw new ArgumentNullException(nameof(propertyName));
             PropertyInfo propertyInfo = typeof(T).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
@@ -30,23 +38,15 @@ namespace MCNBTEditor.Core.Actions.Helpers {
             }
 
             this.CommandAccessor = (Func<T, ICommand>) Delegate.CreateDelegate(typeof(Func<T, ICommand>), propertyInfo.GetMethod);
-            this.ShortcutId = shortcutId;
         }
 
         /// <summary>
-        /// Constructor for <see cref="ShortcutCommandAction{T}"/>
+        /// Constructor for <see cref="CommandAction{T}"/> which accepts a non-null function for getting an <see cref="ICommand"/> from an instance of <see cref="T"/>
         /// </summary>
-        /// <param name="shortcutId">The ID of the shortcut</param>
-        /// <param name="propertyName">The name of the <see cref="ICommand"/> property in <see cref="T"/></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="Exception"></exception>
-        public ShortcutCommandAction(string shortcutId, Func<T, ICommand> accessor) : base((string) null, null) {
+        /// <param name="accessor">The command getter function</param>
+        /// <exception cref="ArgumentNullException">Null function</exception>
+        public CommandAction(Func<T, ICommand> accessor) : base() {
             this.CommandAccessor = accessor ?? throw new ArgumentNullException(nameof(accessor));
-            this.ShortcutId = shortcutId;
-        }
-
-        public ICommand GetCommand(in T instance) {
-            return this.CommandAccessor(instance);
         }
 
         public override async Task<bool> ExecuteAsync(AnActionEventArgs e) {
@@ -54,9 +54,13 @@ namespace MCNBTEditor.Core.Actions.Helpers {
                 return false;
             }
 
-            ICommand cmd = this.GetCommand(instance);
-            if (cmd == null || !cmd.CanExecute(null)) {
-                return false;
+            ICommand cmd = this.CommandAccessor(instance);
+            if (cmd == null) {
+                return this.ResultWhenNullCommand;
+            }
+
+            if (!cmd.CanExecute(null)) {
+                return this.ResultWhenCannotExecute;
             }
 
             if (cmd is BaseAsyncRelayCommand asyncCmd) {
@@ -66,7 +70,7 @@ namespace MCNBTEditor.Core.Actions.Helpers {
                 cmd.Execute(null);
             }
 
-            return true;
+            return this.ResultWhenExecuteSuccess;
         }
 
         public override Presentation GetPresentation(AnActionEventArgs e) {
@@ -74,12 +78,16 @@ namespace MCNBTEditor.Core.Actions.Helpers {
                 return Presentation.Invisible;
             }
 
-            ICommand cmd = this.GetCommand(instance);
-            if (cmd == null || !cmd.CanExecute(null)) {
-                return Presentation.VisibleAndDisabled;
+            ICommand cmd = this.CommandAccessor(instance);
+            if (cmd == null) {
+                return this.PresentationWhenNullCommand;
             }
 
-            return Presentation.VisibleAndEnabled;
+            if (cmd.CanExecute(null)) {
+                return this.PresentationWhenCanExecute;
+            }
+
+            return this.PresentationWhenCannotExecute;
         }
     }
 }

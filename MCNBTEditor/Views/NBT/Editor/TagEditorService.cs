@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using MCNBTEditor.Core.Explorer.Dialog;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.NBT;
@@ -65,8 +66,24 @@ namespace MCNBTEditor.Views.NBT.Editor {
         }
 
         public async Task<TagPrimitiveViewModel> EditPrimitiveExAsync(string title, string message, NBTType type, TagCompoundViewModel targetOwningTag) {
-            if (!type.IsPrimitive())
-                throw new ArgumentException($"Type is not primitive: {type}", nameof(type));
+            string defValue;
+            switch (type) {
+                case NBTType.End:
+                case NBTType.Byte:
+                case NBTType.Short:
+                case NBTType.Int:
+                case NBTType.Long:
+                case NBTType.Float:
+                case NBTType.Double: defValue = "0"; break;
+                case NBTType.String: defValue = ""; break;
+                case NBTType.ByteArray:
+                case NBTType.IntArray:
+                case NBTType.LongArray:
+                case NBTType.List:
+                case NBTType.Compound:
+                    throw new ArgumentException($"Type is not primitive: {type}", nameof(type));
+                default: throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
 
             TagPrimitiveEditorViewModel editor = new TagPrimitiveEditorViewModel {
                 CanEditValue = true,
@@ -74,7 +91,7 @@ namespace MCNBTEditor.Views.NBT.Editor {
                 Title = title,
                 Message = message,
                 TagType = type,
-                Value = "",
+                Value = defValue,
                 NameValidator = targetOwningTag.NameValidator,
                 Name = $"My {type}"
             };

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -23,21 +24,30 @@ namespace MCNBTEditor.Core.Actions {
         /// </summary>
         /// <exception cref="Exception"></exception>
         public static void SearchAndRegisterActions(ActionManager manager) {
+            List<(TypeInfo, ActionRegistrationAttribute)> attributes = new List<(TypeInfo, ActionRegistrationAttribute)>();
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) {
                 foreach (TypeInfo typeInfo in assembly.DefinedTypes) {
                     ActionRegistrationAttribute attribute = typeInfo.GetCustomAttribute<ActionRegistrationAttribute>();
                     if (attribute != null) {
-                        AnAction action;
-                        try {
-                            action = (AnAction) Activator.CreateInstance(typeInfo, true);
-                        }
-                        catch (Exception e) {
-                            throw new Exception($"Failed to create an instance of the registered action '{typeInfo.FullName}'", e);
-                        }
-
-                        manager.Register(attribute.ActionId, action);
+                        attributes.Add((typeInfo, attribute));
                     }
                 }
+            }
+
+            foreach ((TypeInfo type, ActionRegistrationAttribute attribute) in attributes.OrderBy(x => x.Item2.RegistrationOrder)) {
+                AnAction action;
+                try {
+                    action = (AnAction) Activator.CreateInstance(type, true);
+                }
+                catch (Exception e) {
+                    throw new Exception($"Failed to create an instance of the registered action '{type.FullName}'", e);
+                }
+
+                if (attribute.OverrideExisting && manager.GetAction(attribute.ActionId) != null) {
+                    manager.Unregister(attribute.ActionId);
+                }
+
+                manager.Register(attribute.ActionId, action);
             }
         }
 

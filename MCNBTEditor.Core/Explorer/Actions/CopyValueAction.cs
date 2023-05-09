@@ -6,8 +6,7 @@ using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    [ActionRegistration("actions.nbt.copy.primitive_value")]
-    public class CopyValueAction : ExtendedListActionBase {
+    public class CopyValueAction : MultiSelectionAction {
         public CopyValueAction() : base("Copy Value", "Copies the primitive tag's value to the system clipboard") {
 
         }

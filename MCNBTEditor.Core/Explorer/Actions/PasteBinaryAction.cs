@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Explorer.NBT;
@@ -11,9 +9,8 @@ using MCNBTEditor.Core.Utils;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    [ActionRegistration("actions.nbt.paste.binary.sysclipboard")]
     public class PasteBinaryAction : AnAction {
-        public PasteBinaryAction() : base("Paste (Binary)", "Gets the system clipboard and deserialises it back into NBT data") {
+        public PasteBinaryAction() : base() {
 
         }
 

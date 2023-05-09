@@ -68,17 +68,11 @@ namespace MCNBTEditor.Core {
         /// <returns>An object which is an instance of T</returns>
         /// <exception cref="Exception">The value is not null and could not be converted to T</exception>
         protected static object GetConvertedParameter<T>(object value) {
-            if (value is T) {
-                return value;
-            }
-            else if (value is IConvertible convertible) {
-                return convertible.ToType(typeof(T), null);
-            }
-            else if (value == null) {
-                return null;
-            }
-            else {
-                throw new Exception($"Parameter (of type {value.GetType()}) could not be converted to {typeof(T)}");
+            switch (value) {
+                case null: return null;
+                case T _: return value;
+                case IConvertible c: return c.ToType(typeof(T), null);
+                default: throw new Exception($"Parameter (of type {value.GetType()}) could not be converted to {typeof(T)}");
             }
         }
     }

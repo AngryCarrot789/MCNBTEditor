@@ -6,8 +6,7 @@ using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    [ActionRegistration("actions.nbt.copy.name")]
-    public class CopyNameAction : ExtendedListActionBase {
+    public class CopyNameAction : MultiSelectionAction {
         public CopyNameAction() : base("Copy Name", "Copies the tag's name (if it has one) to the system clipboard") {
 
         }

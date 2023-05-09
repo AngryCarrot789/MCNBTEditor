@@ -17,9 +17,9 @@ namespace MCNBTEditor.Core.Explorer.NBT {
             set => this.RaisePropertyChanged(ref this.data, value);
         }
 
-        public ICommand CopyValueCommand { get; }
-        public ICommand EditValueCommand { get; }
-        public ICommand EditGeneralCommand { get; }
+        public AsyncRelayCommand CopyValueCommand { get; }
+        public AsyncRelayCommand EditValueCommand { get; }
+        public AsyncRelayCommand EditGeneralCommand { get; }
 
         private TagPrimitiveViewModel(string name, NBTType type, string data) : base(name, type) {
             this.CopyValueCommand = new AsyncRelayCommand(this.CopyValueAction);

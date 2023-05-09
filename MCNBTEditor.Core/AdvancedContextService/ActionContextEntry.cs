@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MCNBTEditor.Core.Actions;
+using MCNBTEditor.Core.Explorer.Actions;
 
 namespace MCNBTEditor.Core.AdvancedContextService {
     /// <summary>
@@ -14,6 +14,9 @@ namespace MCNBTEditor.Core.AdvancedContextService {
 
         public ActionContextEntry(object dataContext, string actionId, string header, string description, IEnumerable<IContextEntry> children = null) : base(dataContext, header, description, children) {
             this.actionId = actionId;
+            if (actionId != null) {
+                this.IconType = ActionIds.ResolveIcon(actionId);
+            }
         }
 
         public ActionContextEntry(object dataContext, string actionId, string header, IEnumerable<IContextEntry> children = null) : this(dataContext, actionId, header, null, children) {

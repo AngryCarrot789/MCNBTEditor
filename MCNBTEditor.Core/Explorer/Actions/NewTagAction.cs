@@ -6,11 +6,10 @@ using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.NBT;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
-    [ActionRegistration("actions.nbt.newtag")]
     public class NewTagAction : AnAction {
         public const string TypeKey = "NEW_TAG_TYPE";
 
-        public NewTagAction() : base("New tag", "Create a new tag") {
+        public NewTagAction() : base() {
 
         }
 

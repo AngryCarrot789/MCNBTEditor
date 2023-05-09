@@ -49,7 +49,7 @@ namespace MCNBTEditor.Core.Shortcuts.ViewModels {
             this.InputStrokes = new ObservableCollection<InputStrokeViewModel>();
             this.AddKeyStrokeCommand = new RelayCommand(this.AddKeyStrokeAction);
             this.AddMouseStrokeCommand = new RelayCommand(this.AddMouseStrokeAction);
-            this.RemoveStrokeCommand = new RelayCommand<InputStrokeViewModel>(this.RemoveStrokeAction);
+            this.RemoveStrokeCommand = new RelayCommand<InputStrokeViewModel>(this.RemoveStrokeAction, (x) => x != null);
             foreach (IInputStroke stroke in reference.Shortcut.InputStrokes) {
                 this.InputStrokes.Add(InputStrokeViewModel.CreateFrom(stroke));
             }

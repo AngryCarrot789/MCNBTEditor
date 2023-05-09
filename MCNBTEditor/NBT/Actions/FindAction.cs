@@ -6,13 +6,12 @@ using MCNBTEditor.Views.Main;
 using MCNBTEditor.Views.NBT.Finding;
 
 namespace MCNBTEditor.NBT.Actions {
-    [ActionRegistration("actions.nbt.find")]
     public class FindAction : AnAction {
         public const string GlobalFindKey = "IsGlobalFind";
 
         private FindNBTWindow currentWindow;
 
-        public FindAction() : base("Find", "Search for a tag") {
+        public FindAction() : base() {
 
         }
 

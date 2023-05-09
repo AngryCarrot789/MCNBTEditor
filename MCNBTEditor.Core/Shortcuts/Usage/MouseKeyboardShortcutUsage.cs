@@ -13,9 +13,9 @@ namespace MCNBTEditor.Core.Shortcuts.Usage {
 
         public IMouseShortcut MouseShortcut => this.shortcut;
 
-        public KeyStroke CurrentKeyStroke => this.currentStroke.Value is KeyStroke value ? value : default;
+        public KeyStroke CurrentKeyStroke => this.currentStroke?.Value is KeyStroke value ? value : default;
 
-        public MouseStroke CurrentMouseStroke => this.currentStroke.Value is MouseStroke value ? value : default;
+        public MouseStroke CurrentMouseStroke => this.currentStroke?.Value is MouseStroke value ? value : default;
 
         public IShortcut Shortcut {
             get => this.KeyboardShortcut;

@@ -73,10 +73,10 @@ namespace MCNBTEditor.Core.Shortcuts.Serialization {
         }
 
         protected void SerialiseContext(XmlDocument doc, XmlElement shortcutElement, DataContext context) {
-            if (context.CustomDataMap != null && context.CustomDataMap.Count > 0) {
+            if (context.InternalDataMap != null && context.InternalDataMap.Count > 0) {
                 List<string> flags = new List<string>();
                 List<KeyValuePair<string, string>> entries = new List<KeyValuePair<string, string>>();
-                foreach (KeyValuePair<string, object> pair in context.CustomDataMap) {
+                foreach (KeyValuePair<string, object> pair in context.InternalDataMap) {
                     if (string.IsNullOrWhiteSpace(pair.Key)) {
                         continue;
                     }
@@ -221,7 +221,7 @@ namespace MCNBTEditor.Core.Shortcuts.Serialization {
                                         }
                                     }
 
-                                    if (context.CustomDataMap == null || context.CustomDataMap.Count < 1) {
+                                    if (context.InternalDataMap == null || context.InternalDataMap.Count < 1) {
                                         context = null;
                                     }
 

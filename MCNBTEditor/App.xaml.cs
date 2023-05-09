@@ -9,8 +9,13 @@ using System.Windows.Media;
 using MCNBTEditor.Core;
 using MCNBTEditor.Core.Actions;
 using MCNBTEditor.Core.Actions.Helpers;
+using MCNBTEditor.Core.Explorer;
+using MCNBTEditor.Core.Explorer.Actions;
+using MCNBTEditor.Core.Explorer.NBT;
+using MCNBTEditor.Core.Explorer.Regions;
 using MCNBTEditor.Core.Shortcuts.Managing;
 using MCNBTEditor.Core.Shortcuts.ViewModels;
+using MCNBTEditor.NBT.Actions;
 using MCNBTEditor.Services;
 using MCNBTEditor.Shortcuts;
 using MCNBTEditor.Shortcuts.Converters;
@@ -30,6 +35,103 @@ namespace MCNBTEditor {
     /// </summary>
     public partial class App : Application {
         public ResourceDictionary ThemeDictionary { get; private set; }
+
+        public void RegisterActions() {
+            ActionManager.SearchAndRegisterActions(ActionManager.Instance);
+            ActionManager.Instance.Register<CopyBinaryAction>(ActionIds.CopyBinaryAction);
+            ActionManager.Instance.Register<PasteBinaryAction>(ActionIds.PasteBinaryAction);
+            ActionManager.Instance.Register<CopyNameAction>("actions.nbt.copy.name");
+            ActionManager.Instance.Register<CopyValueAction>("actions.nbt.copy.primitive_value");
+            ActionManager.Instance.Register<NewTagAction>("actions.nbt.newtag");
+            ActionManager.Instance.Register<RemoveFromParentAction>("actions.nbt.remove_from_parent");
+            ActionManager.Instance.Register<RenameTagAction>("actions.nbt.rename");
+            ActionManager.Instance.Register<FindAction>("actions.nbt.find");
+            ActionManager.Instance.Register("actions.item.Refresh", new CommandAction<BaseTreeItemViewModel>(t => {
+                switch (t) {
+                    case TagDataFileViewModel dat: return dat.RefreshDataCommand;
+                    case RegionFileViewModel rg: return rg.RefreshCommand;
+                    default: return null;
+                }
+            }));
+            ActionManager.Instance.Register("actions.main-window.OpenFile", new CommandAction<MainViewModel>(t => t.OpenFileCommand));
+            ActionManager.Instance.Register("actions.item.SaveFile", new CommandAction<BaseTreeItemViewModel>(t => {
+                switch (t) {
+                    case TagDataFileViewModel dat: return dat.SaveFileCommand;
+                    case RegionFileViewModel rg: return rg.SaveFileCommand;
+                    default: return null;
+                }
+            }));
+            ActionManager.Instance.Register("actions.item.SaveFileAs", new CommandAction<BaseTreeItemViewModel>(t => {
+                switch (t) {
+                    case TagDataFileViewModel dat: return dat.SaveFileAsCommand;
+                    case RegionFileViewModel rg: return rg.SaveFileAsCommand;
+                    default: return null;
+                }
+            }));
+            ActionManager.Instance.Register("actions.item.OpenInExplorer", new CommandAction<BaseTreeItemViewModel>(t => {
+                switch (t) {
+                    case TagDataFileViewModel dat: return dat.OpenInExplorerCommand;
+                    case RegionFileViewModel rg: return rg.OpenInExplorerCommand;
+                    default: return null;
+                }
+            }));
+            ActionManager.Instance.Register("actions.item.CopyFilePath", new CommandAction<BaseTreeItemViewModel>(t => {
+                switch (t) {
+                    case TagDataFileViewModel dat: return dat.CopyFilePathToClipboardCommand;
+                    case RegionFileViewModel rg: return rg.CopyFilePathToClipboardCommand;
+                    default: return null;
+                }
+            }));
+        }
+
+        public async Task InitApp() {
+            string[] envArgs = Environment.GetCommandLineArgs();
+            if (envArgs.Length > 0 && Path.GetDirectoryName(envArgs[0]) is string dir) {
+                Directory.SetCurrentDirectory(dir);
+            }
+
+            ShortcutManager.Instance = new WPFShortcutManager();
+            ActionManager.Instance = new ActionManager();
+            this.RegisterActions();
+
+            InputStrokeViewModel.KeyToReadableString = KeyStrokeStringConverter.ToStringFunction;
+            InputStrokeViewModel.MouseToReadableString = MouseStrokeStringConverter.ToStringFunction;
+            IoC.MessageDialogs = new MessageDialogService();
+            IoC.Dispatcher = new DispatcherDelegate(this.Dispatcher);
+            IoC.Clipboard = new ClipboardService();
+            IoC.FilePicker = new FilePickDialogService();
+            IoC.UserInput = new UserInputDialogService();
+            IoC.ItemSelectorService = new SelectorService();
+            IoC.TagEditorService = new TagEditorService();
+            IoC.ExplorerService = new WinExplorerService();
+            IoC.KeyboardDialogs = new KeyboardDialogService();
+            IoC.MouseDialogs = new MouseDialogService();
+            IoC.ShortcutManagerDialog = new ShortcutManagerDialogService();
+            IoC.OnShortcutModified = (x) => {
+                if (!string.IsNullOrWhiteSpace(x)) {
+                    ShortcutManager.Instance.InvalidateShortcutCache();
+                    GlobalUpdateShortcutGestureConverter.BroadcastChange();
+                    // UpdatePath(this.Resources, x);
+                }
+            };
+
+            IoC.BroadcastShortcutActivity = (x) => {
+                if (this.MainWindow is MainWindow mw) {
+                    mw.StatusBarTextBlock.Text = x;
+                }
+            };
+
+            string keymapFilePath = Path.GetFullPath(@"Keymap.xml");
+            if (File.Exists(keymapFilePath)) {
+                using (FileStream stream = File.OpenRead(keymapFilePath)) {
+                    ShortcutGroup group = WPFKeyMapSerialiser.Instance.Deserialise(stream);
+                    WPFShortcutManager.WPFInstance.SetRoot(group);
+                }
+            }
+            else {
+                await IoC.MessageDialogs.ShowMessageAsync("No keymap available", "Keymap file does not exist: " + keymapFilePath + $".\n{Directory.GetCurrentDirectory()}\n{String.Join("\n", Environment.GetCommandLineArgs())}");
+            }
+        }
 
         private async void Application_Startup(object sender, StartupEventArgs e) {
             this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
@@ -117,54 +219,6 @@ namespace MCNBTEditor {
             // }
             // text = Regex.Replace(text, "[ARGB]=\"(#..)\"", HexToDecimal);
             // File.WriteAllText(@"C:\Users\kettl\Desktop\test.txt", text);
-        }
-
-        public async Task InitApp() {
-            string[] envArgs = Environment.GetCommandLineArgs();
-            if (envArgs.Length > 0 && Path.GetDirectoryName(envArgs[0]) is string dir) {
-                Directory.SetCurrentDirectory(dir);
-            }
-
-            ShortcutManager.Instance = new WPFShortcutManager();
-            ActionManager.Instance = new ActionManager();
-            ActionManager.SearchAndRegisterActions(ActionManager.Instance);
-            ActionManager.Instance.Register("actions.main-window.OpenFile", new ShortcutActionCommand<MainViewModel>("Application/EditorView/OpenFile", nameof(MainViewModel.OpenFileCommand)));
-
-            InputStrokeViewModel.KeyToReadableString = KeyStrokeStringConverter.ToStringFunction;
-            InputStrokeViewModel.MouseToReadableString = MouseStrokeStringConverter.ToStringFunction;
-            IoC.MessageDialogs = new MessageDialogService();
-            IoC.Dispatcher = new DispatcherDelegate(this.Dispatcher);
-            IoC.Clipboard = new ClipboardService();
-            IoC.FilePicker = new FilePickDialogService();
-            IoC.UserInput = new UserInputDialogService();
-            IoC.ItemSelectorService = new SelectorService();
-            IoC.TagEditorService = new TagEditorService();
-            IoC.ExplorerService = new WinExplorerService();
-            IoC.KeyboardDialogs = new KeyboardDialogService();
-            IoC.MouseDialogs = new MouseDialogService();
-            IoC.ShortcutManagerDialog = new ShortcutManagerDialogService();
-            IoC.OnShortcutModified = (x) => {
-                if (!string.IsNullOrWhiteSpace(x)) {
-                    ShortcutManager.Instance.InvalidateShortcutCache();
-                    GlobalUpdateShortcutGestureConverter.BroadcastChange();
-                    // UpdatePath(this.Resources, x);
-                }
-            };
-
-            IoC.BroadcastShortcutActivity = (x) => {
-
-            };
-
-            string keymapFilePath = Path.GetFullPath(@"Keymap.xml");
-            if (File.Exists(keymapFilePath)) {
-                using (FileStream stream = File.OpenRead(keymapFilePath)) {
-                    ShortcutGroup group = WPFKeyMapSerialiser.Instance.Deserialise(stream);
-                    WPFShortcutManager.WPFInstance.SetRoot(group);
-                }
-            }
-            else {
-                await IoC.MessageDialogs.ShowMessageAsync("No keymap available", "Keymap file does not exist: " + keymapFilePath + $".\n{Directory.GetCurrentDirectory()}\n{String.Join("\n", Environment.GetCommandLineArgs())}");
-            }
         }
 
         private IEnumerable<(Style, string)> GetAllStyles(DependencyObject root) {

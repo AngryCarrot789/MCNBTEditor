@@ -22,14 +22,13 @@
                   Style="{DynamicResource CustomWindowStyleEx}" 
                   Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}"
                   TitlebarBrush="{DynamicResource AREghZyBrush.Tone4.Background.Static}"
-                  VisualTextRenderingMode="ClearType"
                   RenderOptions.EdgeMode="Unspecified">
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibleOrCollapsed" TrueValue="Visible" FalseValue="Collapsed"/>
         <ui:ListFallbackSourceConverter x:Key="FallbackConverter"/>
     </Window.Resources>
-    <Grid>
-        <Menu VerticalAlignment="Top">
+    <DockPanel UseLayoutRounding="True">
+        <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Create DAT Object" Command="{Binding CreateDatFileCommand, Mode=OneTime}"/>
                 <acs:AdvancedShortcutMenuItem Header="Open File" ShortcutId="Application/EditorView/OpenFile" Command="{Binding OpenFileCommand, Mode=OneTime}"/>
@@ -39,6 +38,22 @@
                 <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
                 <Separator/>
                 <MenuItem Header="Settings..." Command="{Binding ShowSettingsCommand}"/>
+                <MenuItem Header="Test">
+                    <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                    <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                    <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                    <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                    <MenuItem Header="Auto-sort NBTTagCompound" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                    <MenuItem Header="Auto-sort NBTTagCompound" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                    <MenuItem Header="Test">
+                        <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                        <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                        <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                        <MenuItem IsCheckable="True" Header="Auto-sort NBTTagCompound" IsChecked="{Binding SortTagCompoundByDefault, UpdateSourceTrigger=PropertyChanged}" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                        <MenuItem Header="Auto-sort NBTTagCompound" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                        <MenuItem Header="Auto-sort NBTTagCompound" ToolTip="Automatically sort compounds, because they are unsorted when minecraft saves them"/>
+                    </MenuItem>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Theme">
                 <MenuItem Header="Soft Dark" Click="MenuItem_Click" Tag="0"/>
@@ -46,13 +61,20 @@
                 <MenuItem Header="Dark And Red" Click="MenuItem_Click" Tag="3"/>
             </MenuItem>
         </Menu>
-        <Grid Margin="0,18,0,0">
+        <Border VerticalAlignment="Bottom" Height="23" DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource AREghZyBrush.Tone5.Border.Static}">
+            <DockPanel>
+                <TextBlock Text="{Binding SelectedFilePathable.FilePath}" DockPanel.Dock="Right" VerticalAlignment="Center" Padding="5,0"/>
+                <Separator Style="{StaticResource VerticalSeparator}" DockPanel.Dock="Right" Background="{DynamicResource AREghZyBrush.Tone5.Border.Static}"/>
+                <TextBlock x:Name="StatusBarTextBlock" VerticalAlignment="Center" Padding="5,0"/>
+            </DockPanel>
+        </Border>
+        <Grid Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="7"/>
+                <ColumnDefinition Width="9"/>
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.ColumnSpan="2" Margin="0,0,4,0">
+            <Grid Grid.ColumnSpan="2" Margin="0,0,6,0">
                 <c:ExtendedTreeView BorderThickness="0,1,1,0"
                                     ItemsSource="{Binding Path=Root.Children, Mode=OneTime}"
                                     ItemTemplateSelector="{StaticResource ExtendedTreeItemSelector}"
@@ -65,7 +87,7 @@
                                     VirtualizingStackPanel.VirtualizationMode="Recycling" 
                                     Background="{DynamicResource AREghZyBrush.Tone3.Background.Static}" 
                                     BorderBrush="{DynamicResource AREghZyBrush.Tone4.Border.Static}"
-                                    acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:TreeItemContextGenerator.Instance}"/>
+                                    acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:WPFTreeItemContextGenerator.Instance}"/>
                 <TextBlock Text="Drop NBT files here, or CTRL+O to open a file"
                     TextAlignment="Center"
                     VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" Padding="10,0" TextWrapping="Wrap"
@@ -89,7 +111,7 @@
                                        ScrollViewer.CanContentScroll="True"
                                        VirtualizingStackPanel.IsVirtualizing="True"
                                        VirtualizingStackPanel.VirtualizationMode="Recycling" Background="{DynamicResource AREghZyBrush.Tone2.Background.Static}"
-                                       acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:TreeItemContextGenerator.Instance}">
+                                       acs:AdvancedContextMenu.ContextGenerator="{x:Static contextual:WPFTreeItemContextGenerator.Instance}">
                         <ItemsControl.ItemsSource>
                             <MultiBinding Converter="{StaticResource FallbackConverter}">
                                 <Binding Path="CurrentFolderItem.Children" UpdateSourceTrigger="PropertyChanged"/>
@@ -101,5 +123,5 @@
             </Border>
             <GridSplitter VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Background="Transparent" BorderThickness="0,0,0,0" ResizeDirection="Columns" Margin="0,23,0,0"/>
         </Grid>
-    </Grid>
+    </DockPanel>
 </views:BaseWindow>

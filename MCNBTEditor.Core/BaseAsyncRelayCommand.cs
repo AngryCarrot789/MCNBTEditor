@@ -82,10 +82,10 @@ namespace MCNBTEditor.Core {
         }
 
         /// <summary>
-        /// The core method for attempting to executing this async command. If the command is already running, then this method will
-        /// return false and the command will not be executed. Otherwise, true will be returned once the command is finished executing
+        /// Attempts to executing this async command. If the command is already running, then this method will return
+        /// false and the command will not be executed. Otherwise, the command is executed and true is returned
         /// <para>
-        /// This does not query <see cref="CanExecute"/>
+        /// This will query <see cref="CanExecute"/>
         /// </para>
         /// </summary>
         /// <param name="parameter">The parameter passed to this command</param>

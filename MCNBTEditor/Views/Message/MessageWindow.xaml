@@ -27,7 +27,7 @@
         <Border DockPanel.Dock="Bottom" VerticalAlignment="Bottom" x:Name="ButtonBarBorder" Padding="10,0" Background="{DynamicResource AREghZyBrush.Tone4.Background.Static}">
             <DockPanel>
                 <ItemsControl DockPanel.Dock="Left" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0,5">
-                    <CheckBox IsEnabled="{Binding ShowAlwaysUseNextResultOption}" IsChecked="{Binding IsAlwaysUseNextResultChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,2">
+                    <CheckBox IsEnabled="{Binding ShowAlwaysUseNextResultOption, Mode=OneWay}" IsChecked="{Binding IsAlwaysUseNextResultChecked, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,2">
                         <TextBlock TextWrapping="Wrap" Text="Always use this option" TextAlignment="Center"/>
                     </CheckBox>
                     <!--
@@ -44,7 +44,7 @@
                             <MultiBinding Converter="{StaticResource BoolAND}">
                                 <Binding Path="ShowAlwaysUseNextResultOption"/>
                                 <Binding Path="IsAlwaysUseNextResultChecked"/>
-                                <Binding Path="CanShowAlwaysUseNextResultForCurrentQueueOption"/>
+                                <Binding Path="CanShowAlwaysUseNextResultForCurrentQueueOption" Mode="OneWay"/>
                             </MultiBinding>
                         </CheckBox.IsEnabled>
                     </CheckBox>

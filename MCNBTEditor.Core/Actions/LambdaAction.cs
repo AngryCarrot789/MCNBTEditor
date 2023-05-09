@@ -7,7 +7,7 @@ namespace MCNBTEditor.Core.Actions {
 
         public Func<AnActionEventArgs, Presentation> MyGetPresentation { get; }
 
-        public LambdaAction(Func<string> header, Func<string> description, Func<AnActionEventArgs, Task<bool>> action, Func<AnActionEventArgs, Presentation> getPresentation) : base(header, description) {
+        public LambdaAction(Func<string> header, Func<string> description, Func<AnActionEventArgs, Task<bool>> action, Func<AnActionEventArgs, Presentation> getPresentation) : base() {
             this.MyAction = action ?? throw new ArgumentNullException(nameof(action), "Action function cannot be null");
             this.MyGetPresentation = getPresentation;
         }

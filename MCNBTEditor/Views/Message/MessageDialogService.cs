@@ -13,15 +13,11 @@ namespace MCNBTEditor.Views.Message {
             });
         }
 
-        public async Task ShowMessageExAsync(string title, string header, string message) {
+        public async Task ShowMessageExAsync(string caption, string header, string message) {
             await DispatcherUtils.Invoke(async () => {
                 MessageWindow.DODGY_PRIMARY_SELECTION = "ok";
-                await Dialogs.OkDialog.ShowAsync(title, header, message);
+                await Dialogs.OkDialog.ShowAsync(caption, header, message);
             });
-        }
-
-        public Task ShowMessageAsync(string message) {
-            return this.ShowMessageAsync("Information", message);
         }
 
         public async Task<MsgDialogResult> ShowDialogAsync(string caption, string message, MsgDialogType type, MsgDialogResult defaultResult = MsgDialogResult.None) {
@@ -74,6 +70,8 @@ namespace MCNBTEditor.Views.Message {
 
             IDialog oldDialog = dialog.Dialog;
             dialog.Dialog = window;
+            dialog.UpdateButtons();
+
             try {
                 return window.ShowDialog();
             }

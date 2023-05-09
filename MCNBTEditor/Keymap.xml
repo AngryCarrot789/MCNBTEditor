@@ -12,47 +12,50 @@
         </Group>
         <Group Name="EditorView">
             <Group Name="NBTTag">
-                <Shortcut Name="CopyNameShortcut" DisplayName="Copy Name" ActionId="actions.nbt.copy.name">
+                <Shortcut Name="CopyNameShortcut" ActionId="actions.nbt.copy.name">
                     <KeyStroke Mods="CTRL+ALT" Key="C"/>
                 </Shortcut>
-                <Shortcut Name="CopyValueShortcut" DisplayName="Copy Value" ActionId="actions.nbt.copy.primitive_value">
+                <Shortcut Name="CopyValueShortcut" ActionId="actions.nbt.copy.primitive_value">
                     <KeyStroke Mods="CTRL+SHIFT" Key="C"/>
                 </Shortcut>
-                <Shortcut Name="CopyBinaryShortcut" DisplayName="Copy (Binary)" ActionId="actions.nbt.copy.binary.sysclipboard">
+                <Shortcut Name="CopyBinaryShortcut" ActionId="actions.nbt.copy.binary">
                     <KeyStroke Mods="CTRL" Key="C"/>
                 </Shortcut>
-                <Shortcut Name="PasteBinaryShortcut" DisplayName="Paste (Binary)" ActionId="actions.nbt.paste.binary.sysclipboard">
+                <Shortcut Name="PasteBinaryShortcut" ActionId="actions.nbt.paste.binary">
                     <KeyStroke Mods="CTRL" Key="V"/>
                 </Shortcut>
-                <Shortcut Name="RenameShortcut1" DisplayName="Rename" ActionId="actions.nbt.rename.tag">
+                <Shortcut Name="RenameShortcut1" ActionId="actions.nbt.rename">
                     <KeyStroke Mods="CTRL" Key="R"/>
                 </Shortcut>
-                <Shortcut Name="RenameShortcut2" DisplayName="Rename" ActionId="actions.nbt.rename.tag">
+                <Shortcut Name="RenameShortcut2" ActionId="actions.nbt.rename">
                     <KeyStroke Key="F2"/>
                 </Shortcut>
-                <Shortcut Name="RemoveFromParent" DisplayName="Remove tag" ActionId="actions.nbt.remove_from_parent">
+                <Shortcut Name="RemoveFromParent" ActionId="actions.nbt.remove_from_parent">
                     <KeyStroke Key="Delete"/>
                 </Shortcut>
-                <Shortcut Name="Save" DisplayName="Save">
+                <Shortcut Name="Save" ActionId="actions.item.SaveFile">
                     <KeyStroke Mods="CTRL" Key="S"/>
                 </Shortcut>
-                <Shortcut Name="SaveAs" DisplayName="Save as...">
+                <Shortcut Name="SaveAs" ActionId="actions.item.SaveFileAs">
                     <KeyStroke Mods="CTRL+SHIFT" Key="S"/>
                 </Shortcut>
-                <Shortcut Name="CopyFilePath" DisplayName="Copy file path">
+                <Shortcut Name="CopyFilePath" ActionId="actions.item.CopyFilePath">
                     <KeyStroke Mods="CTRL+ALT+SHIFT" Key="C"/>
                 </Shortcut>
-                <Shortcut Name="OpenInExplorer" DisplayName="Show in Explorer">
+                <Shortcut Name="OpenInExplorer" ActionId="actions.item.OpenInExplorer">
+                    <KeyStroke Mods="CTRL+SHIFT" Key="O"/>
+                </Shortcut>
+                <Shortcut Name="RefreshItem" ActionId="actions.item.Refresh">
                     <KeyStroke Mods="CTRL+SHIFT" Key="O"/>
                 </Shortcut>
             </Group>
-            <Shortcut Name="FindShortcut" DisplayName="Find..." ActionId="actions.nbt.find" Inherit="true">
+            <Shortcut Name="FindShortcut" ActionId="actions.nbt.find" Inherit="true">
                 <KeyStroke Mods="CTRL" Key="F"/>
             </Shortcut>
-            <Shortcut Name="OpenFile" DisplayName="Open File" Inherit="true" ActionId="actions.main-window.OpenFile">
+            <Shortcut Name="OpenFile" Inherit="true" ActionId="actions.main-window.OpenFile">
                 <KeyStroke Mods="CTRL" Key="O"/>
             </Shortcut>
-            <Shortcut Name="FindShortcutGlobal" DisplayName="Find everywhere..." ActionId="actions.nbt.find" Inherit="true">
+            <Shortcut Name="FindShortcutGlobal" ActionId="actions.nbt.find" Inherit="true">
                 <Shortcut.Context>
                     <Flag Key="IsGlobalFind" Value="True"/>
                 </Shortcut.Context>

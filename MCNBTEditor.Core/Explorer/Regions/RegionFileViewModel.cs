@@ -1,40 +1,45 @@
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MCNBTEditor.Core.Explorer.NBT;
 using MCNBTEditor.Core.NBT;
 using MCNBTEditor.Core.Regions;
 using MCNBTEditor.Core.Shortcuts;
+using MCNBTEditor.Core.Views.Dialogs.Message;
 
 namespace MCNBTEditor.Core.Explorer.Regions {
-    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IHaveTreePath, IDisposable, IShortcutToCommand {
+    public class RegionFileViewModel : BaseTreeItemViewModel, IHaveChildren, IHaveFilePath, IHaveTreePath, IDisposable, IShortcutToCommand, IRefreshable {
         private string filePath;
+        private string name;
+        private bool isBigEndian = true;
+        private volatile int isLoading;
+
         public string FilePath {
             get => this.filePath;
-            set {
+            private set {
                 this.RaisePropertyChanged(ref this.filePath, value);
-                this.Name = value == null ? "<unnamed region>" : Path.GetFileName(value);
+                this.Name = string.IsNullOrWhiteSpace(value) ? "<unnamed region>" : Path.GetFileName(value);
             }
         }
 
-        private string name;
         public string Name {
             get => this.name;
             set => this.RaisePropertyChanged(ref this.name, value);
         }
 
-        private bool isBigEndian = true;
         public bool IsBigEndian {
             get => this.isBigEndian;
             set => this.RaisePropertyChanged(ref this.isBigEndian, value);
         }
 
-        private volatile bool isLoading;
+
         public bool IsLoading {
-            get => this.isLoading;
-            set {
-                this.isLoading = value;
+            get => this.isLoading == 1;
+            private set {
+                this.isLoading = value ? 1 : 0;
                 this.RaisePropertyChanged();
             }
         }
@@ -47,18 +52,18 @@ namespace MCNBTEditor.Core.Explorer.Regions {
         public AsyncRelayCommand SaveFileCommand { get; }
         public AsyncRelayCommand SaveFileAsCommand { get; }
         public RelayCommand CopyFilePathToClipboardCommand { get; }
-        public AsyncRelayCommand ShowInExplorerCommand { get; }
+        public AsyncRelayCommand OpenInExplorerCommand { get; }
         public AsyncRelayCommand DeleteFileCommand { get; }
-        public ICommand RemoveFromParentCommand { get; }
+        public AsyncRelayCommand RemoveFromParentCommand { get; }
 
         public string TreePathPartName => this.Name;
 
-        public RegionFileViewModel() {
-            this.RemoveFromParentCommand = new RelayCommand(() => this.RemoveFromParentItem(), () => this.RemoveFromParentItem(true));
+        public RegionFileViewModel(string filePath = null) {
+            this.RemoveFromParentCommand = new AsyncRelayCommand(this.RemoveFromParentAction, () => this.ParentItem is IHaveChildren);
             this.RefreshCommand = new AsyncRelayCommand(this.RefreshAction, () => File.Exists(this.FilePath));
             this.SaveFileCommand = new AsyncRelayCommand(async () => await IoC.MessageDialogs.ShowMessageAsync("TODO", "Coming soon..."), () => false);
             this.SaveFileAsCommand = new AsyncRelayCommand(async () => await IoC.MessageDialogs.ShowMessageAsync("TODO", "Coming soon..."), () => false);
-            this.ShowInExplorerCommand = new AsyncRelayCommand(this.OpenInExplorerAction, () => IoC.ExplorerService != null && File.Exists(this.FilePath));
+            this.OpenInExplorerCommand = new AsyncRelayCommand(this.OpenInExplorerAction, () => IoC.ExplorerService != null && File.Exists(this.FilePath));
             this.DeleteFileCommand = new AsyncRelayCommand(this.DeleteFileAction, () => File.Exists(this.FilePath));
             this.CopyFilePathToClipboardCommand = new RelayCommand(() => {
                 if (!string.IsNullOrEmpty(this.FilePath)) {
@@ -67,22 +72,28 @@ namespace MCNBTEditor.Core.Explorer.Regions {
                     }
                 }
             }, () => IoC.Clipboard != null && !string.IsNullOrEmpty(this.FilePath));
+            this.FilePath = filePath;
         }
 
         public async Task DeleteFileAction() {
-            bool canRemove = false;
+            string result = await Dialogs.RemoveItemWhenDeletingDialog.ShowAsync("Remove file from tree?", "Do you want to also remove the DAT file from the tree/list?");
+            if (result == "cancel") {
+                return;
+            }
+
+            await this.TryDispose(); // required, because the file cannot be deleted when the file stream is open
             if (File.Exists(this.FilePath)) {
                 try {
                     File.Delete(this.FilePath);
-                    canRemove = true;
                 }
                 catch (Exception e) {
-                    await IoC.MessageDialogs.ShowMessageAsync("Failed to delete file", $"Failed to delete {this.filePath}:\n{e.Message}");
+                    result = "no";
+                    await IoC.MessageDialogs.ShowMessageExAsync("Failed to delete file", $"Failed to delete {this.filePath}", e.ToString());
                 }
             }
 
-            if (canRemove && await IoC.MessageDialogs.ShowYesNoDialogAsync("Remove dat file?", "Do you want to also remove the DAT file from the list?")) {
-                this.RemoveFromParentItem(false); // removes from root
+            if (result == "yes") {
+                this.RemoveFromParentItem(); // removes from root
             }
         }
 
@@ -96,9 +107,14 @@ namespace MCNBTEditor.Core.Explorer.Regions {
                 return;
             }
 
+            if (Interlocked.CompareExchange(ref this.isLoading, 1, 0) == 1) {
+                return;
+            }
+
+            this.RaisePropertyChanged(nameof(this.IsLoading));
+            this.IsReadOnly = true;
             this.Clear();
-            await Task.Run(() => {
-                this.IsLoading = true;
+            await Task.Run(async () => {
                 try {
                     this.Region = new RegionFile(this.filePath, this.IsBigEndian);
                     for (int x = 0; x < 32; x++) {
@@ -106,23 +122,52 @@ namespace MCNBTEditor.Core.Explorer.Regions {
                             NBTTagCompound chunk = ChunkLoader.ReadChunkTag(this.Region, x, z);
                             if (chunk != null) {
                                 TagCompoundViewModel tag = BaseTagViewModel.CreateFrom($"Chunk ({x}, {z})", chunk);
+
+                                // not awaiting because it's like 4x slower to load a region file
                                 IoC.Dispatcher.InvokeLaterAsync(() => this.Add(tag));
                             }
                         }
                     }
                 }
-                finally {
-                    this.IsLoading = false;
+                catch (Exception e) {
+                    await IoC.MessageDialogs.ShowMessageExAsync("Error reading region", "Error reading region file or chunks", e.ToString());
                 }
             });
+
+            this.IsLoading = false;
+            this.IsReadOnly = false;
         }
 
-        public bool RemoveFromParentItem(bool isFakeRemove = false) { // minecraft mod style of "doRemove parameter" functions ;)
-            return this.ParentItem is IHaveChildren parent && (isFakeRemove || parent.RemoveItem(this));
+        public virtual async Task<bool> RemoveFromParentAction() {
+            // minecraft mod style of "doRemove parameter" functions ;)
+            await this.TryDispose();
+            return this.ParentItem is IHaveChildren children && children.RemoveItem(this);
+        }
+
+        public bool RemoveFromParentItem() {
+            try {
+                this.Dispose();
+            }
+            catch (Exception e) {
+                Debug.WriteLine("Failed to dispose region file:\n" + e);
+            }
+
+            return this.ParentItem is IHaveChildren parent && parent.RemoveItem(this);
         }
 
         public void Dispose() {
             this.Region?.Dispose();
+        }
+
+        public async Task<bool> TryDispose() {
+            try {
+                this.Dispose();
+                return true;
+            }
+            catch (Exception e) {
+                await IoC.MessageDialogs.ShowMessageExAsync("Failed to dispose region", "Failed to dispose the resources used by the region", e.ToString());
+                return false;
+            }
         }
 
         public void AddItem(BaseTreeItemViewModel item) {
@@ -145,11 +190,14 @@ namespace MCNBTEditor.Core.Explorer.Regions {
         public virtual ICommand GetCommandForShortcut(string shortcutId) {
             switch (shortcutId) {
                 case "Application/EditorView/NBTTag/CopyFilePath": return this.CopyFilePathToClipboardCommand;
-                case "Application/EditorView/NBTTag/OpenInExplorer": return this.ShowInExplorerCommand;
                 case "Application/EditorView/NBTTag/RemoveFromParent": return this.RemoveFromParentCommand;
             }
 
             return null;
+        }
+
+        public Task RefreshAsync() {
+            return this.RefreshAction();
         }
     }
 }

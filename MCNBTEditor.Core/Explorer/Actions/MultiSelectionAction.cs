@@ -6,11 +6,11 @@ using MCNBTEditor.Core.Actions;
 
 namespace MCNBTEditor.Core.Explorer.Actions {
     public abstract class MultiSelectionAction : AnAction {
-        protected MultiSelectionAction(Func<string> header, Func<string> description) : base(header, description) {
+        protected MultiSelectionAction(Func<string> header, Func<string> description) : base() {
 
         }
 
-        protected MultiSelectionAction(string header, string description) : base(header, description) {
+        protected MultiSelectionAction(string header, string description) : base() {
 
         }
 

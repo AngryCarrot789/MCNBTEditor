@@ -34,8 +34,13 @@ namespace MCNBTEditor.Views.Main {
         /// </summary>
         public BaseTreeItemViewModel SelectedTreeItem {
             get => this.seletedTreeItem;
-            set => this.RaisePropertyChanged(ref this.seletedTreeItem, value);
+            set {
+                this.RaisePropertyChanged(ref this.seletedTreeItem, value);
+                this.RaisePropertyChanged(nameof(this.SelectedFilePathable));
+            }
         }
+
+        public IHaveFilePath SelectedFilePathable => this.SelectedTreeItem?.RootParent as IHaveFilePath;
 
         public IEnumerable<BaseTreeItemViewModel> SelectedFolderItems => this.ListView.SelectedItems;
 
@@ -132,11 +137,11 @@ namespace MCNBTEditor.Views.Main {
             };
 
             if (ofd.ShowDialog(FolderPicker.GetCurrentActiveWindow()) == true) {
-                await this.LoadFilesAction(ofd.FileNames, false);
+                await this.LoadFilesAction(ofd.FileNames, true);
             }
         }
 
-        public async Task LoadFilesAction(string[] paths, bool checkAlreadyAdded) {
+        public async Task LoadFilesAction(string[] paths, bool checkAlreadyAdded = true) {
             int endIndex = paths.Length - 1;
             if (endIndex < 0) {
                 return;
@@ -193,8 +198,7 @@ namespace MCNBTEditor.Views.Main {
                         string extension = Path.GetExtension(path);
                         switch (extension) {
                             case ".mca": {
-                                RegionFileViewModel vm = new RegionFileViewModel() {
-                                    FilePath = path,
+                                RegionFileViewModel vm = new RegionFileViewModel(path) {
                                     IsBigEndian = this.IsBigEndianDefault
                                 };
 

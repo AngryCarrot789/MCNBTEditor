@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MCNBTEditor.Core.Actions.Contexts;
 
@@ -20,6 +21,12 @@ namespace MCNBTEditor.Core.AdvancedContextService {
         public string Description {
             get => this.description;
             set => this.RaisePropertyChanged(ref this.description, value);
+        }
+
+        private IconType iconType;
+        public IconType IconType {
+            get => this.iconType;
+            set => this.RaisePropertyChanged(ref this.iconType, value);
         }
 
         public IEnumerable<IContextEntry> Children { get; }

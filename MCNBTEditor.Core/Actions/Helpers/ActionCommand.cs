@@ -11,17 +11,13 @@ namespace MCNBTEditor.Core.Actions.Helpers {
 
         public PropertyInfo Property { get; }
 
-        public ActionCommand(string propertyName, Func<string> header, Func<string> description) : base(header, description) {
+        public ActionCommand(string propertyName) : base() {
             this.PropertyName = propertyName ?? throw new ArgumentNullException(nameof(propertyName));
             this.TargetType = typeof(T);
             this.Property = this.TargetType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
             if (this.Property == null) {
                 throw new Exception($"No such property: {this.TargetType}.{propertyName}");
             }
-        }
-
-        public ActionCommand(string propertyName, string header, string description) : this(propertyName, GetStringProvider(header), GetStringProvider(description)) {
-
         }
 
         public ICommand GetCommand(object instance) {

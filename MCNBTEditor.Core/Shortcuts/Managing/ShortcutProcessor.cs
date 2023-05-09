@@ -363,11 +363,14 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
                 else if (obj is IShortcutToCommand converter) {
                     ICommand command = converter.GetCommandForShortcut(shortcut.FullPath);
                     if (command is BaseAsyncRelayCommand asyncCommand) {
+                        IoC.BroadcastShortcutActivity($"Activating shortcut: {shortcut} via command...");
                         if (await asyncCommand.TryExecuteAsync(null)) {
+                            IoC.BroadcastShortcutActivity($"Activating shortcut: {shortcut} via command... Complete!");
                             return true;
                         }
                     }
                     else if (command != null && command.CanExecute(null)) {
+                        IoC.BroadcastShortcutActivity($"Activated shortcut: {shortcut} via command... Complete!");
                         command.Execute(null);
                         return true;
                     }
@@ -385,11 +388,18 @@ namespace MCNBTEditor.Core.Shortcuts.Managing {
                 context = newCtx;
             }
 
-            return await ActionManager.Instance.Execute(shortcut.ActionId, context);
+            IoC.BroadcastShortcutActivity($"Activating shortcut action: {shortcut} -> {shortcut.ActionId}...");
+            if (await ActionManager.Instance.Execute(shortcut.ActionId, context)) {
+                IoC.BroadcastShortcutActivity($"Activating shortcut action: {shortcut} -> {shortcut.ActionId}... Complete!");
+                return true;
+            }
+
+            IoC.BroadcastShortcutActivity($"Activating shortcut action: {shortcut} -> {shortcut.ActionId}... Incomplete!");
+            return false;
         }
 
         /// <summary>
-        /// Whether to ignore the received key stroke. By default, this returns true if the current
+        /// Whether to ignore the received key stroke
         /// </summary>
         /// <param name="usage"></param>
         /// <param name="shortcut"></param>

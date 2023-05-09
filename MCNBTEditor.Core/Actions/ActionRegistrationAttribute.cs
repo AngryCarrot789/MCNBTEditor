@@ -9,9 +9,15 @@ namespace MCNBTEditor.Core.Actions {
     public class ActionRegistrationAttribute : Attribute {
         public string ActionId { get; }
 
-        public ActionRegistrationAttribute(string actionId) {
+        public int RegistrationOrder { get; }
+
+        public bool OverrideExisting { get; }
+
+        public ActionRegistrationAttribute(string actionId, int registrationOrder = 0, bool overrideExisting = false) {
             ActionManager.ValidateId(actionId);
             this.ActionId = actionId;
+            this.RegistrationOrder = registrationOrder;
+            this.OverrideExisting = overrideExisting;
         }
 
         public override bool Equals(object obj) {

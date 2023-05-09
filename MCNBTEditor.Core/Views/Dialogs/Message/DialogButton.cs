@@ -51,8 +51,8 @@ namespace MCNBTEditor.Core.Views.Dialogs.Message {
 
         public DialogButton(MessageDialog dialog, string actionType, string text, bool canUseAsAutomaticResult) {
             this.Dialog = dialog ?? throw new ArgumentNullException(nameof(dialog));
-            this.text = text ?? "";
             this.ActionType = actionType;
+            this.text = text ?? actionType ?? "<btn>";
             this.Command = new AsyncRelayCommand(this.OnClickedAction);
             this.canUseAsAutomaticResult = canUseAsAutomaticResult;
         }

@@ -4,23 +4,19 @@ using System.Linq;
 
 namespace MCNBTEditor.Core.Actions.Contexts {
     public class DataContext : IDataContext {
-        public Dictionary<string, object> CustomDataMap { get; set; }
-        public List<object> ContextList { get; }
+        public Dictionary<string, object> InternalDataMap { get; set; }
+        public List<object> InternalContext { get; }
 
-        public IEnumerable<object> Context => this.ContextList;
+        public IEnumerable<object> Context => this.InternalContext;
 
-        public IEnumerable<(string, object)> CustomData => this.CustomDataMap != null ? this.CustomDataMap.Select(x => (x.Key, x.Value)) : Enumerable.Empty<(string, object)>();
+        public IEnumerable<(string, object)> CustomData => this.InternalDataMap != null ? this.InternalDataMap.Select(x => (x.Key, x.Value)) : Enumerable.Empty<(string, object)>();
 
         public DataContext() {
-            this.ContextList = new List<object>();
+            this.InternalContext = new List<object>();
         }
 
         public DataContext(object primaryContext) : this() {
             this.AddContext(primaryContext);
-        }
-
-        public void AddContext(object context) {
-            this.ContextList.Add(context);
         }
 
         public T GetContext<T>() {
@@ -29,7 +25,7 @@ namespace MCNBTEditor.Core.Actions.Contexts {
         }
 
         public bool TryGetContext<T>(out T value) {
-            foreach (object obj in this.ContextList) {
+            foreach (object obj in this.InternalContext) {
                 if (obj is T t) {
                     value = t;
                     return true;
@@ -41,7 +37,7 @@ namespace MCNBTEditor.Core.Actions.Contexts {
         }
 
         public bool HasContext<T>() {
-            return this.ContextList.Any(x => x is T);
+            return this.InternalContext.Any(x => x is T);
         }
 
         public bool TryGet<T>(string key, out T value) {
@@ -49,7 +45,7 @@ namespace MCNBTEditor.Core.Actions.Contexts {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null");
             }
 
-            if (this.CustomDataMap != null && this.CustomDataMap.TryGetValue(key, out object data) && data is T t) {
+            if (this.InternalDataMap != null && this.InternalDataMap.TryGetValue(key, out object data) && data is T t) {
                 value = t;
                 return true;
             }
@@ -71,36 +67,40 @@ namespace MCNBTEditor.Core.Actions.Contexts {
             return value; // ValueType will be default, object will be null
         }
 
+        public void AddContext(object context) {
+            this.InternalContext.Add(context);
+        }
+
         public void Set(string key, object value) {
             if (key == null) {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null");
             }
 
             if (value == null) {
-                this.CustomDataMap?.Remove(key);
+                this.InternalDataMap?.Remove(key);
             }
             else {
-                if (this.CustomDataMap == null) {
-                    this.CustomDataMap = new Dictionary<string, object>();
+                if (this.InternalDataMap == null) {
+                    this.InternalDataMap = new Dictionary<string, object>();
                 }
 
-                this.CustomDataMap[key] = value;
+                this.InternalDataMap[key] = value;
             }
         }
 
         public void Merge(IDataContext ctx) {
             foreach (object value in ctx.Context) {
-                this.ContextList.Add(value);
+                this.InternalContext.Add(value);
             }
 
             if (ctx is DataContext ctxImpl) { // slight optimisation; no need to deconstruct KeyValuePairs into tuples
-                if (ctxImpl.CustomDataMap != null && ctxImpl.CustomDataMap.Count > 0) {
-                    if (this.CustomDataMap == null) {
-                        this.CustomDataMap = new Dictionary<string, object>(ctxImpl.CustomDataMap);
+                if (ctxImpl.InternalDataMap != null && ctxImpl.InternalDataMap.Count > 0) {
+                    if (this.InternalDataMap == null) {
+                        this.InternalDataMap = new Dictionary<string, object>(ctxImpl.InternalDataMap);
                     }
                     else {
-                        foreach (KeyValuePair<string, object> entry in ctxImpl.CustomDataMap) {
-                            this.CustomDataMap[entry.Key] = entry.Value;
+                        foreach (KeyValuePair<string, object> entry in ctxImpl.InternalDataMap) {
+                            this.InternalDataMap[entry.Key] = entry.Value;
                         }
                     }
                 }
@@ -111,7 +111,7 @@ namespace MCNBTEditor.Core.Actions.Contexts {
                     return;
                 }
 
-                Dictionary<string, object> map = this.CustomDataMap ?? (this.CustomDataMap = new Dictionary<string, object>());
+                Dictionary<string, object> map = this.InternalDataMap ?? (this.InternalDataMap = new Dictionary<string, object>());
                 foreach ((string a, object b) in list) {
                     map[a] = b;
                 }

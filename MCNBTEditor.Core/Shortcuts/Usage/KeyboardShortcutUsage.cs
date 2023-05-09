@@ -4,6 +4,7 @@ using MCNBTEditor.Core.Shortcuts.Inputs;
 namespace MCNBTEditor.Core.Shortcuts.Usage {
     public class KeyboardShortcutUsage : IKeyboardShortcutUsage {
         private LinkedListNode<KeyStroke> currentStroke;
+        private LinkedListNode<KeyStroke> previousStroke;
 
         public IKeyboardShortcut KeyboardShortcut { get; }
 

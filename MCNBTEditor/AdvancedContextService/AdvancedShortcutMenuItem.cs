@@ -113,11 +113,11 @@ namespace MCNBTEditor.AdvancedContextService {
         }
 
         protected bool IsValueUnset(DependencyProperty property) {
-            if (this.ReadLocalValue(property) == DependencyProperty.UnsetValue) {
-                return true;
+            if (this.GetValue(property) == null) {  // allow empty bound strings
+                return this.ReadLocalValue(property) == DependencyProperty.UnsetValue;
             }
 
-            return this.GetValue(property) == null; // allow empty bound strings
+            return false;
         }
     }
 }

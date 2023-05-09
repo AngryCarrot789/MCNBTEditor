@@ -5,9 +5,18 @@ using System.Threading.Tasks;
 using MCNBTEditor.Core.Actions.Contexts;
 
 namespace MCNBTEditor.Core.Actions {
+    /// <summary>
+    /// An async command that executes an action
+    /// </summary>
     public class ActionCommand : BaseAsyncRelayCommand {
-        public string ActionId { get; }
+        /// <summary>
+        /// The target action ID to execute
+        /// </summary>
+        public string ActionId { get; set; }
 
+        /// <summary>
+        /// Additional data context to
+        /// </summary>
         public DataContext Context { get; }
 
         public ActionCommand(string actionId, DataContext context = null) {
